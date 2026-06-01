@@ -1274,7 +1274,7 @@
 <h2 id="the-job-editor--designing-the-dag">The Job editor — designing the DAG<a class="headerlink" href="#the-job-editor--designing-the-dag" title="Permanent link">&para;</a></h2>
 <p><strong>Edit Workflow</strong> (or double-clicking a workflow) opens the editor. Layout:</p>
 <ul>
-<li><strong>Menu bar</strong> — <em>File</em> (Save · Save As · <strong>Save Locally…</strong> = export the canvas to a job-XML file on your machine, no server write · Exit), <em>Run</em> (Run · Stop), <em>Debug</em> (Check Mapping · View Runtime Log · <strong>Show Step Status</strong> = overlay each step's last run status).</li>
+<li><strong>Menu bar</strong> — <em>File</em> (Save · Save As · <strong>Save Locally…</strong> = export the canvas to a job-XML file on your machine, no server write · Exit), <em>Run</em> (Run · Stop), <em>Debug</em> (Check Mapping · View Runtime Log).</li>
 <li><strong>Toolbar</strong> — icon buttons for Save, Check Workflow, Run, Stop, Runtime CLI Configuration, and View Lineage, plus a <strong>zoom slider</strong>. A red <strong>lock indicator</strong> shows the workflow's lock state.</li>
 <li><strong>Step palette</strong> (left) — a scrollable, <strong>searchable</strong> list of every step type available for this job's platform: sources &amp; loaders (<code>Dataframe</code>, <code>Local_file</code>, <code>Onstagegroup</code>, <code>Jdbcsource</code>, <code>Datasource</code>, <code>Jdbctargethdfs</code>, …), transforms (<code>Aggregate</code>, <code>Aggregate2</code>, <code>Dedupe</code>, <code>Filter</code>, <code>Function2</code>, <code>Join</code>, <code>Datamask</code>, …), caches, and control steps. The exact list depends on the job type.</li>
 <li><strong>Designer canvas</strong> (centre, the <strong>Designer</strong> tab) — where you place and wire steps.</li>
@@ -1311,7 +1311,7 @@
 </ul>
 <h2 id="executing-a-workflow">Executing a workflow<a class="headerlink" href="#executing-a-workflow" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Run</strong> first <strong>saves</strong> the current design, then submits the job; the editor shows <strong>RUNNING</strong>, the window title reflects the run state, and a run number is assigned. Enable <strong>Show Step Status</strong> (Debug menu) to watch each step change state as it runs.</li>
+<li><strong>Run</strong> first <strong>saves</strong> the current design, then submits the job; the editor shows <strong>RUNNING</strong>, the window title reflects the run state, and a run number is assigned.</li>
 <li><strong>Stop</strong> requests a halt of the running workflow.</li>
 <li>You can also launch a run from the main <a href="../UG-GETTING-STARTED/#the-workflows-tab">Workflow(s) list</a>.</li>
 </ul>
