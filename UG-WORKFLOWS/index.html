@@ -1,0 +1,1394 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="User documentation for the ELTMaestro ELT/data-pipeline platform.">
+      
+      
+      
+        <link rel="canonical" href="https://zgurung.github.io/eltmaestro-docs/UG-WORKFLOWS/">
+      
+      
+        <link rel="prev" href="../UG-ADMIN/">
+      
+      
+        <link rel="next" href="../UG-STEPS/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>Workflows - ELTMaestro Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#workflows" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ELTMaestro Documentation" class="md-header__button md-logo" aria-label="ELTMaestro Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ELTMaestro Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Workflows
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ELTMaestro Documentation" class="md-nav__button md-logo" aria-label="ELTMaestro Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ELTMaestro Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Getting started
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../USER-GUIDE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-GETTING-STARTED/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-MENUS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Menus
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Admin & connections
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Admin & connections
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-ADMIN/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Administration & setup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Workflows & steps
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Workflows & steps
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Workflows
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Workflows
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#creating-a-workflow-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating a workflow (job)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-job-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring job metadata
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-job-editor--designing-the-dag" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Job editor — designing the DAG
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Job editor — designing the DAG">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adding-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding steps
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connecting-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Connecting steps
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-a-step--the-expression-builder" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring a step — the expression builder
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate--save" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validate &amp; save
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#executing-a-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executing a workflow
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monitoring
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tying-it-together" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tying it together
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-STEPS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Step reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Medallion design
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Medallion design
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION-BRONZE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bronze
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION-SILVER/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Silver
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION-GOLD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Gold
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Platform setup
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Platform setup
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../REDSHIFT-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redshift
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPARKSQL-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SparkSQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CLICKHOUSE-AUTH/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ClickHouse auth
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MPP-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MPP prerequisites
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Install & operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Install & operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INSTALL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Install
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UPGRADE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Upgrade
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../OPERATIONS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Operations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#creating-a-workflow-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating a workflow (job)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-job-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring job metadata
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-job-editor--designing-the-dag" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Job editor — designing the DAG
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Job editor — designing the DAG">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adding-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding steps
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connecting-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Connecting steps
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-a-step--the-expression-builder" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring a step — the expression builder
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate--save" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validate &amp; save
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#executing-a-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executing a workflow
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monitoring
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tying-it-together" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tying it together
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="workflows">Workflows<a class="headerlink" href="#workflows" title="Permanent link">&para;</a></h1>
+<p>Part 4 of the <a href="../USER-GUIDE/">ELTMaestro User Guide</a>. Building, running, and monitoring jobs (workflows). This is where the connections from <a href="../UG-ADMIN/">Administration &amp; Setup</a> get used.</p>
+<h2 id="creating-a-workflow-job">Creating a workflow (job)<a class="headerlink" href="#creating-a-workflow-job" title="Permanent link">&para;</a></h2>
+<p>The <strong>Workflow(s) tab</strong> is the home for all your jobs. Its action toolbar — <strong>New</strong>, <strong>Delete</strong>, <strong>Config</strong> (job metadata), <strong>Edit Workflow</strong>, and <strong>Unlock</strong> — sits above a searchable list whose columns (<code>job_name</code>, <code>job_type</code>, <code>job_description</code>, <code>job_platform</code>, <code>job_schedule</code>, tags, comments, service notes/URL, audit columns) summarize every workflow on the server:</p>
+<p><img alt="The Workflow(s) tab — action toolbar (New / Delete / Config / Edit / Unlock) and search box above the workflow list, showing the connected user and host in the top-right" src="../images/workflows-tab.png" /></p>
+<p>From this tab click <strong>New</strong> (or <strong>File ▸ Create Work Flow</strong>) to open the <strong>Create Job</strong> dialog:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Job Name</strong></td>
+<td>Name for the workflow (normalized to a proper name).</td>
+</tr>
+<tr>
+<td><strong>Job Type</strong></td>
+<td>The target platform / integrator: <code>SNOWFLAKE</code>, <code>REDSHIFT</code>, <code>NETEZZA</code>, <code>GREENPLUM</code>, <code>SPARKSQL</code>, <code>DATABRICKS</code>, <code>YELLOWBRICK</code>, <code>CLICKHOUSE</code>, <code>FIREBOLT</code>, <code>EXASOL</code>, <code>SYNAPSE</code>.</td>
+</tr>
+<tr>
+<td><strong>Platform Connection</strong></td>
+<td>The connection the job runs against — populated from the <a href="../UG-ADMIN/#database-connections-jdbc">JDBC connections you created in Administration</a> for that platform. <strong>Only valid MPP connections appear here</strong> — if yours is missing, it was created without the required <a href="../UG-ADMIN/#database-connections-jdbc"><code>MPP_Driver_*</code> jar</a>. (For <code>SPARKSQL</code> the list is HDFS connections instead.)</td>
+</tr>
+<tr>
+<td><strong>Job variables</strong></td>
+<td>Starter variables — <code>$STRLEN</code> (128), <code>$CHARLEN</code> (16), <code>$PRECISION</code> (16), <code>$SCALE</code> (4) — plus empty <code>$VAR_n</code> slots you can rename and fill. Referenced in step expressions as <code>$NAME</code>.</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="The Create Job dialog — Job Name, User Name, Create Time, Information (Description), Job Type dropdown, the starter Variables list with Change checkboxes and Add Variable, and the Target Platform Connection picker with OK" src="../images/create-job-dialog.png" /></p>
+<p>Click OK to create the workflow and open it in the <strong>Job editor</strong>.</p>
+<blockquote>
+<p>This is the moment the connection binds to the job: the selected platform connection's <strong>name is written into the job's XML</strong>, and the job's <strong>type is fixed</strong> by it — the editor title bar shows it in brackets, e.g. <code>MyJob [SPARKSQL]</code>. Renaming or deleting that connection later breaks the job — see the <a href="../UG-ADMIN/#database-connections-jdbc">connection note</a>.</p>
+</blockquote>
+<h2 id="configuring-job-metadata">Configuring job metadata<a class="headerlink" href="#configuring-job-metadata" title="Permanent link">&para;</a></h2>
+<p>Select a workflow on the Workflow(s) tab and click the <strong>Config</strong> button — the <strong>gear icon</strong> (tooltip <em>Set job metadata</em>) — to open the <strong>Job Metadata</strong> editor. This is <strong>descriptive metadata</strong> for documentation, discoverability, grouping, and support; it does <strong>not</strong> change how the job runs. Fill in what's useful and click <strong>Apply</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Description</strong></td>
+<td>What the workflow does.</td>
+</tr>
+<tr>
+<td><strong>Tag(s)</strong></td>
+<td>Labels for categorizing/grouping workflows and finding related ones.</td>
+</tr>
+<tr>
+<td><strong>Comment(s)</strong></td>
+<td>Free-form notes.</td>
+</tr>
+<tr>
+<td><strong>Service Note(s)</strong></td>
+<td>Support / operational notes — ownership, runbook steps, caveats.</td>
+</tr>
+<tr>
+<td><strong>Service URL(s)</strong></td>
+<td>Links to related resources — runbooks, tickets, dashboards, docs.</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Job Metadata editor (opened from the gear icon) for job RS_TEST — Description, Tag(s), Comment(s), Service Note(s), Service URL(s)" src="../images/job-metadata-editor.png" /></p>
+<p>Once you <strong>Apply</strong>, the metadata travels with the workflow and is shown alongside it in the <strong>Workflow(s) list</strong> on the main window — in the <code>job_description</code>, <code>job_tags</code>, <code>last_comment</code>, <code>service_notes</code>, and <code>service_url</code> columns:</p>
+<p><img alt="Main-window Workflow(s) list showing the RS_TEST row with its tags, comment, service notes, and service URL populated" src="../images/job-metadata-main-window.png" /></p>
+<h2 id="the-job-editor--designing-the-dag">The Job editor — designing the DAG<a class="headerlink" href="#the-job-editor--designing-the-dag" title="Permanent link">&para;</a></h2>
+<p><strong>Edit Workflow</strong> (or double-clicking a workflow) opens the editor. Layout:</p>
+<ul>
+<li><strong>Menu bar</strong> — <em>File</em> (Save · Save As · <strong>Save Locally…</strong> = export the canvas to a job-XML file on your machine, no server write · Exit), <em>Run</em> (Run · Stop), <em>Debug</em> (Check Mapping · View Runtime Log · <strong>Show Step Status</strong> = overlay each step's last run status).</li>
+<li><strong>Toolbar</strong> — icon buttons for Save, Check Workflow, Run, Stop, Runtime CLI Configuration, and View Lineage, plus a <strong>zoom slider</strong>. A red <strong>lock indicator</strong> shows the workflow's lock state.</li>
+<li><strong>Step palette</strong> (left) — a scrollable, <strong>searchable</strong> list of every step type available for this job's platform: sources &amp; loaders (<code>Dataframe</code>, <code>Local_file</code>, <code>Onstagegroup</code>, <code>Jdbcsource</code>, <code>Datasource</code>, <code>Jdbctargethdfs</code>, …), transforms (<code>Aggregate</code>, <code>Aggregate2</code>, <code>Dedupe</code>, <code>Filter</code>, <code>Function2</code>, <code>Join</code>, <code>Datamask</code>, …), caches, and control steps. The exact list depends on the job type.</li>
+<li><strong>Designer canvas</strong> (centre, the <strong>Designer</strong> tab) — where you place and wire steps.</li>
+<li><strong>Message tabs</strong> (bottom) — Messages, Latest Console Output, Run History, Recovery History, Metrics, and per-step Run Message(s). On open, the editor logs its initialization here (configurations/aggregates loaded, default SSH/engine connections, mapping check).</li>
+</ul>
+<p><img alt="The Job editor for a SPARKSQL job — title bar showing the job type in brackets, the toolbar (Save / Check / Run / Stop / Runtime CLI / Lineage + zoom), the searchable step palette down the left, the empty Designer canvas, and the initialization log in the message pane" src="../images/job-editor.png" /></p>
+<p>A finished workflow wires <strong>source</strong> steps through <strong>transforms</strong> into <strong>output</strong> tables. For example, two source tables joined and the result passed through a function step, plus a separate dedupe → filter branch:</p>
+<p><img alt="Example job DAG on the Designer canvas — Employee and EmployeeDepartmentHistory source tables feed a JOIN into employee_department_joined, which flows through a FUNCTION2 step to an output table; a separate DEDUPE → FILTER branch runs alongside" src="../images/job-dag-example.png" /></p>
+<h3 id="adding-steps">Adding steps<a class="headerlink" href="#adding-steps" title="Permanent link">&para;</a></h3>
+<p>Add a step either by picking it from the left <strong>step palette</strong> (type in the <strong>Search</strong> box to filter) or by <strong>right-clicking the canvas</strong> and choosing <strong>Insert Step ▸</strong> <em>type</em> — it drops at the click point (the same menu also offers <strong>Paste</strong>). Step types are grouped by purpose (sources/loaders, transforms, SQL, control, platform-specific, …). <strong>Double-click a step</strong> to open its configuration dialog, where you set its inputs, outputs, and column expressions.</p>
+<blockquote>
+<p>For what each step type does, its dialog, and its options, see the <strong><a href="../UG-STEPS/">Step reference</a></strong>.</p>
+</blockquote>
+<h3 id="connecting-steps">Connecting steps<a class="headerlink" href="#connecting-steps" title="Permanent link">&para;</a></h3>
+<p>Drag from one step to the next to draw an <strong>arrow</strong>. Arrows define the execution order and the success/failure branches of the DAG. Steps that hit the database use the <strong>platform connection</strong> bound at job creation; file steps use your <a href="../UG-ADMIN/#ssh-connections">SSH</a> / <a href="../UG-ADMIN/#general--cloud-connections-s3">cloud</a> connections.</p>
+<h3 id="configuring-a-step--the-expression-builder">Configuring a step — the expression builder<a class="headerlink" href="#configuring-a-step--the-expression-builder" title="Permanent link">&para;</a></h3>
+<p><strong>Double-click any step</strong> to open its configuration. Transform steps (<code>Function</code>/<code>Function2</code>, <code>Aggregate</code>/<code>Aggregate2</code>, <code>Filter</code>, <code>Join</code>, <code>Dedupe</code>, …) open an <strong>expression editor</strong> where you shape the step's output columns from its inputs:</p>
+<p><img alt="The Function (Function2) step's expression editor — a searchable Source Columns list with data types on the left, and output columns on the right, each with an Alias, Type, a Mode toggle (F(x) scalar vs Σ(x) aggregate) and an Expression such as Gender or COUNT(*)" src="../images/step-expression-builder.png" /></p>
+<ul>
+<li><strong>Source Columns</strong> (left) — the columns flowing in from upstream steps, with their data types. Searchable; <strong>Add F(x)</strong> promotes a source column to an output.</li>
+<li><strong>Output Column(s)</strong> (right) — each column the step emits, defined by:</li>
+<li><strong>Alias</strong> — the output column name (e.g. <code>Gender</code>, <code>row_count</code>).</li>
+<li><strong>Type</strong> — the output data type (e.g. <code>Nullable(String)</code>, <code>Int64</code>).</li>
+<li><strong>Mode</strong> — <strong>F(x)</strong> for a per-row scalar expression, or <strong>Σ(x)</strong> for an aggregate.</li>
+<li><strong>Expression</strong> — the formula: a passthrough like <code>`Gender`</code> or an aggregate like <code>COUNT(*)</code>. The pencil opens a larger expression editor.</li>
+<li><strong>Add F(x)</strong> / <strong>Add Σ(x)</strong> / <strong>Add F(F(x))</strong> add a scalar, aggregate, or nested-function output; <strong>Clear</strong> / <strong>Delete</strong> manage them. Functions, aggregates, constants, and operators come from the function catalog.</li>
+<li>The <strong>Filters</strong> tab adds row-level filter conditions (WHERE / HAVING) for the step.</li>
+</ul>
+<p>Click <strong>OK</strong> to save the mapping back into the job; <strong>Check Mapping</strong> then validates every step's columns across the DAG.</p>
+<h3 id="validate--save">Validate &amp; save<a class="headerlink" href="#validate--save" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Check Mapping</strong> validates each step's input/output column mappings and reports issues in the Messages pane.</li>
+<li><strong>Save</strong> writes the design to the server; <strong>Save As</strong> saves it under a new name; <strong>Save Locally…</strong> exports the job XML to disk.</li>
+</ul>
+<h2 id="executing-a-workflow">Executing a workflow<a class="headerlink" href="#executing-a-workflow" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Run</strong> first <strong>saves</strong> the current design, then submits the job; the editor shows <strong>RUNNING</strong>, the window title reflects the run state, and a run number is assigned. Enable <strong>Show Step Status</strong> (Debug menu) to watch each step change state as it runs.</li>
+<li><strong>Stop</strong> requests a halt of the running workflow.</li>
+<li>You can also launch a run from the main <a href="../UG-GETTING-STARTED/#the-workflows-tab">Workflow(s) list</a>.</li>
+</ul>
+<h2 id="monitoring">Monitoring<a class="headerlink" href="#monitoring" title="Permanent link">&para;</a></h2>
+<p>Within the Job editor (bottom tabs):</p>
+<ul>
+<li><strong>Run History</strong> / <strong>Recovery History</strong> — past runs and recovery points.</li>
+<li><strong>Step Run Message(s)</strong> — messages for the selected step.</li>
+<li><strong>Latest Console Output</strong> — tail of the latest step's console log (set the line count, then Refresh).</li>
+<li><strong>Metrics</strong> / <strong>Vertical Metrics</strong> — auto-collected run metrics.</li>
+<li><strong>View Runtime Log</strong> (Debug menu) — the run's engine log.</li>
+</ul>
+<p>Across all workflows, use the main window's <strong>Runtime &amp; Logs ▸ Logging ▸ Workflow Logs</strong> and the <strong>Analytics ▸ Batch Statistics</strong> tab. The detailed log and report viewers are covered in <a href="../UG-MENUS/">Menus in depth</a>.</p>
+<h2 id="tying-it-together">Tying it together<a class="headerlink" href="#tying-it-together" title="Permanent link">&para;</a></h2>
+<p>A workflow connects to the rest of ELTMaestro:</p>
+<table>
+<thead>
+<tr>
+<th>Want to…</th>
+<th>Where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>See a workflow's <strong>data lineage</strong> (column/step)</td>
+<td>Job editor <strong>View Lineage</strong> button, or <strong>Runtime &amp; Logs ▸ Reports ▸ Data Lineage Utility</strong> → LINEAGE.md</td>
+</tr>
+<tr>
+<td>Get <strong>emailed</strong> on success/failure</td>
+<td><strong>Administration ▸ Workflow Configuration ▸ Email Alerts</strong> → <a href="../UG-MENUS/#administration">UG-MENUS.md</a></td>
+</tr>
+<tr>
+<td>Run a workflow on a <strong>schedule</strong></td>
+<td><strong>Administration ▸ Scheduler</strong> (cron) → <a href="../UG-MENUS/#administration">UG-MENUS.md</a></td>
+</tr>
+<tr>
+<td>Manage <strong>incremental-load watermarks</strong></td>
+<td><strong>Administration ▸ Workflow Configuration ▸ Job Watermarks</strong></td>
+</tr>
+<tr>
+<td><strong>Move</strong> a workflow between servers</td>
+<td><strong>Administration ▸ Migration ▸ Export / Import Workflow(s)</strong></td>
+</tr>
+<tr>
+<td><strong>Document / tag</strong> a workflow</td>
+<td>the <a href="#configuring-job-metadata">Job Metadata</a> gear icon</td>
+</tr>
+<tr>
+<td><strong>Validate</strong> the data</td>
+<td><strong>Administration ▸ Metrics Configuration ▸ Control Test / Data Quality Management</strong></td>
+</tr>
+<tr>
+<td>Organize jobs into <strong>Bronze / Silver / Gold</strong> layers</td>
+<td><a href="../MEDALLION/">Medallion architecture</a> — layer <a href="#configuring-job-metadata">tags</a> + <code>JobStep</code> chaining</td>
+</tr>
+</tbody>
+</table>
+<p>That's the full loop: <strong><a href="../UG-GETTING-STARTED/">sign in</a> → <a href="../UG-ADMIN/">set up connections</a> → design &amp; run workflows → monitor → schedule &amp; alert.</strong></p>
+<p>For designing multi-layer pipelines (raw → cleaned → marts), see <strong><a href="../MEDALLION/">Medallion architecture with ELTMaestro</a></strong>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top", "navigation.instant", "navigation.tracking", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+    
+  </body>
+</html>

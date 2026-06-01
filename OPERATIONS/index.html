@@ -1,0 +1,1832 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="User documentation for the ELTMaestro ELT/data-pipeline platform.">
+      
+      
+      
+        <link rel="canonical" href="https://zgurung.github.io/eltmaestro-docs/OPERATIONS/">
+      
+      
+        <link rel="prev" href="../UPGRADE/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>Operations - ELTMaestro Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#operations-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ELTMaestro Documentation" class="md-header__button md-logo" aria-label="ELTMaestro Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ELTMaestro Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Operations
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ELTMaestro Documentation" class="md-nav__button md-logo" aria-label="ELTMaestro Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ELTMaestro Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Getting started
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../USER-GUIDE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-GETTING-STARTED/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-MENUS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Menus
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Admin & connections
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Admin & connections
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-ADMIN/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Administration & setup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Workflows & steps
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Workflows & steps
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-WORKFLOWS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Workflows
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-STEPS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Step reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Medallion design
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Medallion design
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION-BRONZE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bronze
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION-SILVER/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Silver
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION-GOLD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Gold
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Platform setup
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Platform setup
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../REDSHIFT-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redshift
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPARKSQL-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SparkSQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CLICKHOUSE-AUTH/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ClickHouse auth
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MPP-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MPP prerequisites
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Install & operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Install & operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INSTALL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Install
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UPGRADE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Upgrade
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Operations
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Operations
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#start--stop--restart" class="md-nav__link">
+    <span class="md-ellipsis">
+      Start / stop / restart
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#watching-the-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      Watching the stack
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-layout-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install layout reference
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-admin-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common admin tasks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common admin tasks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reset-a-users-password" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reset a user's password
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply-pending-migrations-manually" class="md-nav__link">
+    <span class="md-ellipsis">
+      Apply pending migrations manually
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#re-fetch-jdbc-drivers-eg-after-editing-jdbc_listjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      Re-fetch JDBC drivers (e.g. after editing jdbc_list.json)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reseed-an-empty-t_mpp_system--t_jdbc_metadata-one-off-older-deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reseed an empty t_mpp_system / t_jdbc_metadata (one-off, older deployments)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit-integrator-config-from-the-wpf-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      Edit integrator config from the WPF client
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connect-to-clickhouse-without-password-prompts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Connect to ClickHouse without password prompts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graceful-shutdown-of-the-whole-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      Graceful shutdown of the whole stack
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vm-full-backup-proxmox" class="md-nav__link">
+    <span class="md-ellipsis">
+      VM full backup (Proxmox)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jenkins-controller-daily-backup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Jenkins controller daily backup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inspect-whats-running" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inspect what's running
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installsh-fails-with-jq-not-on-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      install.sh fails with 'jq' not on PATH
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installsh-preflight-jdk-21-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      install.sh preflight: "JDK 21 not found"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wsdl-returns-http-503--connection-refused" class="md-nav__link">
+    <span class="md-ellipsis">
+      WSDL returns HTTP 503 / connection refused
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#https-works-on-localhost-but-not-from-another-host" class="md-nav__link">
+    <span class="md-ellipsis">
+      HTTPS works on localhost but not from another host
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#postgres-wont-start-database-files-are-incompatible-with-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Postgres won't start: "database files are incompatible with server"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#address-already-in-use-on-8181-or-5432" class="md-nav__link">
+    <span class="md-ellipsis">
+      "Address already in use" on 8181 or 5432
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wpf-administration--server-log-refresh-shows-nothing" class="md-nav__link">
+    <span class="md-ellipsis">
+      WPF Administration → Server Log Refresh shows nothing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upgrade-left-services-down" class="md-nav__link">
+    <span class="md-ellipsis">
+      Upgrade left services down
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#start--stop--restart" class="md-nav__link">
+    <span class="md-ellipsis">
+      Start / stop / restart
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#watching-the-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      Watching the stack
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-layout-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install layout reference
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-admin-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common admin tasks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common admin tasks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reset-a-users-password" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reset a user's password
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply-pending-migrations-manually" class="md-nav__link">
+    <span class="md-ellipsis">
+      Apply pending migrations manually
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#re-fetch-jdbc-drivers-eg-after-editing-jdbc_listjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      Re-fetch JDBC drivers (e.g. after editing jdbc_list.json)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reseed-an-empty-t_mpp_system--t_jdbc_metadata-one-off-older-deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reseed an empty t_mpp_system / t_jdbc_metadata (one-off, older deployments)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit-integrator-config-from-the-wpf-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      Edit integrator config from the WPF client
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connect-to-clickhouse-without-password-prompts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Connect to ClickHouse without password prompts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graceful-shutdown-of-the-whole-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      Graceful shutdown of the whole stack
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vm-full-backup-proxmox" class="md-nav__link">
+    <span class="md-ellipsis">
+      VM full backup (Proxmox)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jenkins-controller-daily-backup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Jenkins controller daily backup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inspect-whats-running" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inspect what's running
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installsh-fails-with-jq-not-on-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      install.sh fails with 'jq' not on PATH
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installsh-preflight-jdk-21-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      install.sh preflight: "JDK 21 not found"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wsdl-returns-http-503--connection-refused" class="md-nav__link">
+    <span class="md-ellipsis">
+      WSDL returns HTTP 503 / connection refused
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#https-works-on-localhost-but-not-from-another-host" class="md-nav__link">
+    <span class="md-ellipsis">
+      HTTPS works on localhost but not from another host
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#postgres-wont-start-database-files-are-incompatible-with-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Postgres won't start: "database files are incompatible with server"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#address-already-in-use-on-8181-or-5432" class="md-nav__link">
+    <span class="md-ellipsis">
+      "Address already in use" on 8181 or 5432
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wpf-administration--server-log-refresh-shows-nothing" class="md-nav__link">
+    <span class="md-ellipsis">
+      WPF Administration → Server Log Refresh shows nothing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upgrade-left-services-down" class="md-nav__link">
+    <span class="md-ellipsis">
+      Upgrade left services down
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="operations-reference">Operations reference<a class="headerlink" href="#operations-reference" title="Permanent link">&para;</a></h1>
+<p>Running, monitoring, and troubleshooting an installed <code>/data/iserver/</code> deployment. Assumes you've completed <a href="../INSTALL/">INSTALL.md</a>. Everything in this doc is run as the unprivileged user that owns the install (<code>maestro</code> in our convention) after sourcing <code>~/.env_integrator</code>.</p>
+<blockquote>
+<p><strong>Bare-metal vs container.</strong> Every command below is the <strong>bare-metal</strong> form, run from inside <code>/data/iserver/</code>. The canonical 192.168.1.201 deployment runs the same install layout inside the <code>eltmaestro</code> docker container — wrap each command with <code>docker exec eltmaestro &lt;cmd&gt;</code> to run it there. The paths, env vars, and <code>mstart-*</code> / <code>mstop-*</code> admin tools are identical inside and outside the container. See BACKUP.md for the host-vs-container map.</p>
+</blockquote>
+<h2 id="start--stop--restart">Start / stop / restart<a class="headerlink" href="#start--stop--restart" title="Permanent link">&para;</a></h2>
+<p><code>mstart-*</code> and <code>mstop-*</code> are the canonical admin commands. They're on PATH via <code>~/.env_integrator</code> and live in <code>/data/iserver/server/webserver/admin/</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mstart-all</code></td>
+<td>Start Postgres, meta-service, engine, Spark service, and any auxiliary services in the right order.</td>
+</tr>
+<tr>
+<td><code>mstop-all</code></td>
+<td>Reverse order stop.</td>
+</tr>
+<tr>
+<td><code>mrestart-all</code></td>
+<td>Stop + start everything.</td>
+</tr>
+<tr>
+<td><code>mstart-domain</code> / <code>mstop-domain</code> / <code>mrestart-domain</code></td>
+<td>Just the Spring Boot meta-service (the SOAP "domain"). Use when iterating on the meta-service jar without bouncing Postgres.</td>
+</tr>
+<tr>
+<td><code>mstart-database</code> / <code>mstop-database</code></td>
+<td>Just Postgres.</td>
+</tr>
+<tr>
+<td><code>mstart-spark-service</code> / <code>mstop-spark-service</code></td>
+<td>Optional long-running Spark driver (<code>ELTM_SPARK_DRIVER</code>) that hosts <code>org.maestro.meta.service.StartMetaService</code> via <code>spark-submit --master local[2]</code>. Used for streaming / online-query paths. The standalone Spark master + worker are started separately by <code>mstart-all</code>.</td>
+</tr>
+<tr>
+<td><code>mstart-gpfdist</code></td>
+<td>Greenplum gpfdist external-table reader (optional).</td>
+</tr>
+<tr>
+<td><code>mdeploy-service</code></td>
+<td>Re-deploy the meta-service from <code>server/engine/MaestroMetaDataProviderService.jar</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>PID files for each service live under <code>/data/iserver/transient/socket/</code>.</p>
+<h2 id="watching-the-stack">Watching the stack<a class="headerlink" href="#watching-the-stack" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>show-mprocess<span class="w">              </span><span class="c1"># list running BATCH WORKFLOWS (java -jar sqlm.jar --batch ...).</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">                           </span><span class="c1"># Format: PID|&lt;workflow&gt;|&lt;started&gt;|&lt;duration&gt;. Does NOT list</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">                           </span><span class="c1"># the meta-service, Postgres, Spark, or other long-running</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">                           </span><span class="c1"># services -- use the ps/ss snippets below for those.</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>kill-mprocess<span class="w"> </span>&lt;pid&gt;<span class="w">        </span><span class="c1"># kill a workflow by its show-mprocess PID (exact match).</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>show-webserver-log<span class="w">         </span><span class="c1"># tail -500 of the meta-service log</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">                           </span><span class="c1"># ($MAESTRO_CONSOLE_LOG_DIR/meta-service.log).</span>
+</code></pre></div>
+<p>Live logs:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>tail<span class="w"> </span>-F<span class="w"> </span>/data/iserver/data/log/console/*.log<span class="w">    </span><span class="c1"># service stdout/stderr</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>tail<span class="w"> </span>-F<span class="w"> </span>/data/iserver/data/log/load/*.log<span class="w">       </span><span class="c1"># data-load worker output</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>tail<span class="w"> </span>-F<span class="w"> </span>/data/iserver/server/pgsql/log/*.log<span class="w">    </span><span class="c1"># PostgreSQL server log</span>
+</code></pre></div>
+<p>Health check (WSDL endpoint should return HTTP 200):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>-sk<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;%{http_code}\n&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span>https://localhost:8181/MaestroMetaDataProviderService/MaestroMetaService?wsdl
+</code></pre></div>
+<h2 id="install-layout-reference">Install layout reference<a class="headerlink" href="#install-layout-reference" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>/data/iserver/
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>├── server/
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>│   ├── engine/
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>│   │   ├── MaestroMetaDataProviderService.jar    # Spring Boot fat-jar (SOAP meta-service)
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>│   │   ├── sqlm.jar                              # engine CLI
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>│   │   └── lib/                                  # engine deps
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>│   ├── pgsql/
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>│   │   ├── data/                                 # PG data dir (PRESERVED across upgrades)
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>│   │   └── log/                                  # PG server logs
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>│   ├── pgsql.factory/                            # initdb.sql + metadata + migrations (REPLACED on upgrade)
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>│   ├── utils/                                    # show-mprocess, kill-mprocess, ADMIN_* SOAP utils
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>│   ├── webserver/admin/                          # mstart-*, mstop-* (on PATH)
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>│   └── keystore.jks                              # TLS cert (PRESERVED across upgrades; SAN matches host)
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>├── library/
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>│   ├── JDBC/                                     # all bundled JDBC drivers (REPLACED on upgrade)
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>│   └── jdbc_list.json                            # manifest used by fetch-jdbc-drivers.sh
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>├── tools/
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>│   ├── spark/                                    # Spark 4.1.1 (downloaded by install.sh)
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>│   └── hadoop/                                   # Hadoop 3.4.3 (downloaded by install.sh)
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>├── data/
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>│   ├── log/{load,console}/                       # runtime logs
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>│   └── workflow/                                 # deployed jobs (PRESERVED across upgrades)
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>├── transient/
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>│   ├── socket/                                   # PID files
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>│   └── staging/                                  # transient staging area
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>├── bin/                                          # install.sh, update-server.sh, lib/ (REPLACED on upgrade)
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>├── env_integrator                                # template (the live copy is ~/.env_integrator)
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>└── VERSION                                       # built version + git SHA + build host + timestamp
+</code></pre></div>
+<p>Container ports of interest (per <code>source/Jenkinsfile</code>'s deploy block — host:container):</p>
+<table>
+<thead>
+<tr>
+<th>Host port</th>
+<th>Container port</th>
+<th>Service</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8181</td>
+<td>8181</td>
+<td>Meta-service HTTPS (WSDL endpoint, Spring Boot + Jetty 12)</td>
+</tr>
+<tr>
+<td>9080</td>
+<td>8080</td>
+<td>Spark UI</td>
+</tr>
+<tr>
+<td>5432</td>
+<td>5432</td>
+<td>PostgreSQL (audit DB + Marquez DB)</td>
+</tr>
+<tr>
+<td>7077</td>
+<td>7077</td>
+<td>Spark master</td>
+</tr>
+<tr>
+<td>10000</td>
+<td>10000</td>
+<td>Hive Thrift (Spark HiveServer2)</td>
+</tr>
+<tr>
+<td>3443</td>
+<td>3443</td>
+<td>Audit-analytics HTTPS</td>
+</tr>
+<tr>
+<td>3080</td>
+<td>3080</td>
+<td>Audit-analytics HTTP</td>
+</tr>
+<tr>
+<td>5050</td>
+<td>5000</td>
+<td>Marquez API (host port remapped because the docker registry owns :5000)</td>
+</tr>
+<tr>
+<td>3000</td>
+<td>3000</td>
+<td>Marquez Web UI</td>
+</tr>
+</tbody>
+</table>
+<p>The meta-service itself only binds <strong>8181</strong> (HTTPS only — there is no HTTP→HTTPS redirect). The other ports are bound by supervisord-managed sidecars (Spark, audit-analytics, Marquez) and by postgres directly.</p>
+<h2 id="common-admin-tasks">Common admin tasks<a class="headerlink" href="#common-admin-tasks" title="Permanent link">&para;</a></h2>
+<h3 id="reset-a-users-password">Reset a user's password<a class="headerlink" href="#reset-a-users-password" title="Permanent link">&para;</a></h3>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>mset-password-md5<span class="w"> </span>&lt;USER_ID_UPPERCASE&gt;<span class="w"> </span><span class="s1">&#39;&lt;new-password&gt;&#39;</span>
+</code></pre></div>
+<code>USER_ID</code> in <code>t_user</code> is stored uppercased — <code>INTEGRATOR</code>, not <code>integrator</code>.</p>
+<h3 id="apply-pending-migrations-manually">Apply pending migrations manually<a class="headerlink" href="#apply-pending-migrations-manually" title="Permanent link">&para;</a></h3>
+<p>Normally <code>update-server.sh</code> runs them as part of the upgrade. If you need to apply them mid-life:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>mstop-domain
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>.<span class="w"> </span>~/.env_integrator
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>psql<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>-U<span class="w"> </span>maestro<span class="w"> </span>-d<span class="w"> </span>sqlmaestro<span class="w"> </span>-f<span class="w"> </span>/data/iserver/server/pgsql.factory/migrations/&lt;file&gt;.sql
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>mstart-domain
+</code></pre></div></p>
+<h3 id="re-fetch-jdbc-drivers-eg-after-editing-jdbc_listjson">Re-fetch JDBC drivers (e.g. after editing <code>jdbc_list.json</code>)<a class="headerlink" href="#re-fetch-jdbc-drivers-eg-after-editing-jdbc_listjson" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>/data/iserver/bin/fetch-jdbc-drivers.sh<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span>/data/iserver/library/jdbc_list.json<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span>/data/iserver/library/JDBC
+</code></pre></div>
+<p>(Dockerized .201 deploy: <code>library/JDBC/</code> lives inside the image at <code>/opt/iserver/library/JDBC/</code> and is populated at image-build time by the Dockerfile's <code>fetch-jdbc-drivers.sh</code> invocation. To pick up new drivers you must rebuild + redeploy the image — hot-swap only covers <code>sqlm.jar</code> and does NOT update this directory.)</p>
+<h3 id="reseed-an-empty-t_mpp_system--t_jdbc_metadata-one-off-older-deployments">Reseed an empty <code>t_mpp_system</code> / <code>t_jdbc_metadata</code> (one-off, older deployments)<a class="headerlink" href="#reseed-an-empty-t_mpp_system--t_jdbc_metadata-one-off-older-deployments" title="Permanent link">&para;</a></h3>
+<p>Deployments built before commit <code>3064076d5</code> (2026-05-27) silently end up with these two seed dictionaries empty because the <code>initdb.sql</code> COPY block for <code>t_mpp_system</code> declared 3 columns but the data carried 2 fields, and <code>platform_license_string</code> was <code>NOT NULL</code> with no default. Symptom: the WPF connection editor's "platform default" dropdown is unpopulated. The audit DB on a fresh post-fix deploy populates both correctly; an EXISTING deploy needs the one-time manual reseed below.</p>
+<p>Detect:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>eltmaestro<span class="w"> </span>mpsql<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;select &#39;t_mpp_system&#39; as tbl, count(*) from t_mpp_system</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="s2">                                  union all select &#39;t_jdbc_metadata&#39;, count(*) from t_jdbc_metadata;&quot;</span>
+</code></pre></div>
+If either count is 0, reseed by re-running the canonical COPY blocks from <code>source/root-engine-install/db/initdb.sql</code> (search for <code>^COPY t_mpp_system</code> and <code>^COPY t_jdbc_metadata</code>). One-shot recipe:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Run from the repo root on a host that can reach the audit DB</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-i<span class="w"> </span>eltmaestro<span class="w"> </span>mpsql<span class="w"> </span>-d<span class="w"> </span>sqlmaestro<span class="w"> </span><span class="s">&lt;&lt;&#39;SQL&#39;</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="s">BEGIN;</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="s">TRUNCATE t_mpp_system, t_jdbc_metadata;</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="s">\copy t_mpp_system (platform_name, platform_class) FROM PROGRAM &#39;awk &#39;&#39;/^COPY t_mpp_system/,/^\\\\\\.$/&#39;&#39; source/root-engine-install/db/initdb.sql | sed &#39;&#39;1d;$d&#39;&#39;&#39;</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="s">\copy t_jdbc_metadata (...) FROM PROGRAM &#39;...&#39;   -- mirror for the t_jdbc_metadata COPY block</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="s">COMMIT;</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="s">SQL</span>
+</code></pre></div>
+<p>In practice the 192.168.1.201 reseed on 2026-05-27 was done by SSH'ing to the host, copying the relevant COPY block out of the deployed <code>initdb.sql</code> (inside the container at <code>/data/iserver/server/pgsql.factory/initdb.sql</code>), and <code>\copy</code>-ing it via <code>mpsql</code>. Either approach works; the in-container variant avoids shipping the SQL out and back in.</p>
+<h3 id="edit-integrator-config-from-the-wpf-client">Edit integrator config from the WPF client<a class="headerlink" href="#edit-integrator-config-from-the-wpf-client" title="Permanent link">&para;</a></h3>
+<p>Admin-only path that avoids SSH for routine knob changes (hostnames, ports, <code>$STAGE_COMMAND</code>, env_integrator operator variables):</p>
+<ol>
+<li>WPF → Administration → Maestro Server → <strong>Integrator Config</strong> tab.</li>
+<li><em>Reload</em> — fetches the live <code>~/.env_integrator</code> plus every file under <code>$MAESTRO_ENGINE_HOME/server/pgsql/metadata/integrators/&lt;vendor&gt;/</code>. Each file appears as a <strong>separate row</strong> in the list (collapsed by default — just the file path + chevron + a <code>● modified</code> marker that lights up when you edit).</li>
+<li>(Optional) Type into the <strong>Filter</strong> box above the list to narrow ~357 rows by file-path substring (case-insensitive). Example: typing <code>clickhouse</code> shows just the ~20 clickhouse rows; <code>system.cfg</code> shows all 39 vendors' system.cfg files. Clear the box to see all rows again. Edits hidden by a filter are not lost — Save still picks them up.</li>
+<li>Click a row to expand → multi-line Consolas editor for that one file. Edit in place. Files you don't touch are left alone (the server's <code>applyJson</code> treats absent keys as "leave alone").</li>
+<li><em>Show Edits</em> — local-only sanity check; status bar reports the dirty count + first 5 file paths so you can confirm you're about to save what you think.</li>
+<li><em>Save</em> — server writes only the rows you actually edited. Writes to the <strong>live</strong> tree first (immediate effect for engine batches), then <strong>mirrors to factory</strong> (<code>pgsql.factory/</code>) so <code>update-server.sh</code> won't revert your edits. Pre-existing files are renamed to <code>&lt;file&gt;.bak.yyyyMMddHHmm</code> (one shared timestamp per Save operation, so <code>find -name '*.bak.&lt;stamp&gt;'</code> lists the whole change set for rollback). A typical single-file edit reports <code>written: 2</code> (1 live + 1 factory mirror) — way less noise than the older "rewrite everything" flow.</li>
+</ol>
+<p><strong>Caveats:</strong>
+- env_integrator changes do <strong>not</strong> take effect until the meta-service is restarted (<code>mrestart-domain</code> bare-metal, <code>docker restart eltmaestro</code> containers). Integrator <code>*.cfg</code> / SQL templates / <code>launcher.sh</code> are read per-batch and take effect on the next workflow run.
+- The Save response summarises <code>{written, skipped, backupSuffix}</code>; skipped entries name the path + reason (factory dir missing, illegal filename, no existing file to overwrite for non-<code>system.cfg</code> names).
+- Rollback for a bad save: SSH to the service host and <code>for f in $(docker exec eltmaestro find /data/iserver -name '*.bak.&lt;stamp&gt;'); do docker exec eltmaestro mv "$f" "${f%.bak.&lt;stamp&gt;}"; done</code> — replace <code>&lt;stamp&gt;</code> with the suffix the WPF reported. (Bare-metal: drop the <code>docker exec eltmaestro</code> wrapper.)
+- The action is audit-logged in <code>meta-service.log</code> as <code>setIntegratorConfigJson</code> (greppable).
+- Backup files (<code>&lt;name&gt;.bak.yyyyMMddHHmm</code>) live alongside the originals in each vendor dir but are <strong>filtered out</strong> of subsequent Reload responses (fix in <code>2a07573e0</code>) so the JSON tree doesn't bloat over repeated Save cycles. Backups stay on disk indefinitely until an operator cleans them — <code>docker exec eltmaestro find /data/iserver -name '*.bak.*' -mtime +30 -delete</code> is the rough housekeeping pattern (or skip the <code>docker exec</code> wrapper bare-metal).</p>
+<h3 id="connect-to-clickhouse-without-password-prompts">Connect to ClickHouse without password prompts<a class="headerlink" href="#connect-to-clickhouse-without-password-prompts" title="Permanent link">&para;</a></h3>
+<p><code>clickhouse-client</code> ships in the image (apt <strong><code>lts</code></strong> channel — tracks the same LTS minor as the <code>clickhouse/clickhouse-server:24.8</code> image the operator runs). To avoid the password prompt on every invocation:</p>
+<p><strong>One-time, server-side</strong> (host <code>192.168.1.201</code>, in <code>/home/jenkins/dev-dockers/clickhouse/users.d/maestro_etl.xml</code>):
+- <code>&lt;password&gt;welcome123&lt;/password&gt;</code> plaintext for the <code>maestro_etl</code> user.
+- Remove any <code>&lt;ssh_keys&gt;</code> or <code>&lt;password_sha256_hex&gt;</code> blocks if present — keep the file simple.
+- ClickHouse hot-reloads <code>users.d/</code> automatically; no restart.</p>
+<p><strong>Bootstrap once on the host</strong> (then survives every destructive deploy via a bind-mount in the Jenkinsfile Deploy stage — <code>/root/.clickhouse-client/config.xml</code> inside the container is mounted read-only from <code>/home/jenkins/maestro-ch-client/config.xml</code> on the host):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># On 192.168.1.201, as the jenkins user:</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>sudo<span class="w"> </span>install<span class="w"> </span>-d<span class="w"> </span>-o<span class="w"> </span>jenkins<span class="w"> </span>-g<span class="w"> </span>jenkins<span class="w"> </span>-m<span class="w"> </span><span class="m">0700</span><span class="w"> </span>/home/jenkins/maestro-ch-client
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>cat<span class="w"> </span>&gt;<span class="w"> </span>/home/jenkins/maestro-ch-client/config.xml<span class="w"> </span><span class="s">&lt;&lt;&#39;XML&#39;</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="s">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="s">&lt;config&gt;</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="s">  &lt;host&gt;192.168.1.201&lt;/host&gt;</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="s">  &lt;port&gt;9100&lt;/port&gt;</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="s">  &lt;user&gt;maestro_etl&lt;/user&gt;</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="s">  &lt;password&gt;welcome123&lt;/password&gt;</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="s">&lt;/config&gt;</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="s">XML</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/home/jenkins/maestro-ch-client/config.xml
+</code></pre></div>
+<p>(Replace <code>welcome123</code> with the password you actually use. Native TCP on host <code>:9100</code> — see <code>reference_clickhouse_host.md</code> for why it's remapped from 9000. For TLS use <code>&lt;port&gt;9440&lt;/port&gt;</code> + <code>&lt;secure&gt;true&lt;/secure&gt;</code>; for HTTP use <code>&lt;port&gt;8123&lt;/port&gt;</code>. The Jenkinsfile Deploy stage's destructive block refuses to run if this file is missing — see <a href="../CLICKHOUSE-AUTH/#22-bootstrap-configxml-on-the-host-one-time-per-host">CLICKHOUSE-AUTH.md § 2.2</a> for the precondition.)</p>
+<p><strong>Verify</strong> (single one-liner, no <code>docker exec -it</code>):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>eltmaestro<span class="w"> </span>clickhouse-client<span class="w"> </span>--query<span class="w"> </span><span class="s2">&quot;SELECT version(), currentUser()&quot;</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1"># expected (no prompt):</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="c1"># 24.8.x.x   maestro_etl</span>
+</code></pre></div>
+<p>Full design context, common-error mapping, SHA256/SSH-key hardening notes: <strong><a href="../CLICKHOUSE-AUTH/">CLICKHOUSE-AUTH.md</a></strong>.</p>
+<h3 id="graceful-shutdown-of-the-whole-stack">Graceful shutdown of the whole stack<a class="headerlink" href="#graceful-shutdown-of-the-whole-stack" title="Permanent link">&para;</a></h3>
+<p>For maintenance windows, host moves, or planned power events. Brings down all four containers (<code>eltmaestro</code> + <code>clickhouse</code> + <code>sql1</code> + <code>registry</code>) in shutdown-safe order so PG checkpoints, HDFS flushes its fsimage, Marquez drains pending writes, ClickHouse flushes its WAL, and SQL Server flushes its log — none of which finish inside <code>docker stop</code>'s default 10s.</p>
+<p>Canonical script: <code>source/root-engine-install/bin/eltm-shutdown.sh</code>. Runs on the docker host, not inside any container.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Containers only (host stays up). Aborts if any ELTMaestro batches are running:</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>sudo<span class="w"> </span>/path/to/eltm-shutdown.sh
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1"># Force container stop even with active batches (the docker stop --time 60 on</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="c1"># eltmaestro propagates SIGTERM through supervisord, which forwards SIGINT to</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="c1"># any running engine JVM — batches get a chance to land mid-step, then die):</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>sudo<span class="w"> </span>/path/to/eltm-shutdown.sh<span class="w"> </span>--force
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="c1"># Containers AND host poweroff. SSH session drops when the host goes down:</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>sudo<span class="w"> </span>/path/to/eltm-shutdown.sh<span class="w"> </span>--poweroff
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="c1"># Print actions without executing (use this first if you&#39;ve never run it):</span>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>/path/to/eltm-shutdown.sh<span class="w"> </span>--dry-run
+</code></pre></div>
+<p>What it does:</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>docker exec eltmaestro show-mprocess</code></td>
+<td>Detect in-flight batches. Aborts with exit 3 unless <code>--force</code>.</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>docker stop --time 60 eltmaestro</code></td>
+<td>Supervisord forwards SIGTERM to its 11 subprocesses in reverse-priority order. PG checkpoint (<code>stopsignal=INT</code> per supervisord.conf), HDFS fsimage flush, Marquez API + Web drain, meta-service shut. 60s is empirically enough on the .201 stack.</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>docker stop --time 15 clickhouse</code></td>
+<td>WAL flush.</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>docker stop --time 15 sql1</code></td>
+<td>SQL Server log flush.</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>docker stop --time 5 registry</code></td>
+<td>Stateless cache; trivially fast.</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>docker ps</code></td>
+<td>Verify nothing's still running. Exit 4 if anything is.</td>
+</tr>
+<tr>
+<td>4 (optional)</td>
+<td><code>sudo systemctl poweroff</code></td>
+<td>Host poweroff, only with <code>--poweroff</code>. Needs <code>NOPASSWD: ALL</code> for the invoking user or interactive sudo.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>From a Windows shell with the SSH setup</strong> (<a href="../memory/reference_jenkins_helper.md">Jenkins helper memory</a>): <code>Invoke-EltmaestroShutdown [-Force] [-Poweroff] [-DryRun]</code> scp's the script + execs it via the same SSH path as <code>Invoke-EltmaestroHotswapViaSsh</code>.</p>
+<p><strong>Coming back up after the shutdown:</strong> docker daemon starts containers with <code>restart-policy=always</code> automatically, but ours are all <code>unless-stopped</code> — they stay stopped until <code>docker start eltmaestro clickhouse sql1 registry</code> (or <code>docker start $(docker ps -aq)</code>). Supervisord brings the eltmaestro internals up in priority order on container start.</p>
+<p><strong>What NOT to do:</strong> <code>docker kill</code> instead of <code>docker stop</code> (SIGKILL — no chance for PG checkpoint, HDFS flush, Marquez commit; risks WAL corruption). <code>sudo poweroff</code> before stopping containers (docker daemon gets ~10s default before host force-stops). <code>docker compose down</code> is not applicable — these four containers are docker-run-managed, no compose file orchestrates them.</p>
+<h3 id="vm-full-backup-proxmox">VM full backup (Proxmox)<a class="headerlink" href="#vm-full-backup-proxmox" title="Permanent link">&para;</a></h3>
+<p>The whole <code>192.168.1.201</code> VM (eltmaestro + clickhouse + sql1 + registry + jenkins + every named volume) gets backed up via Proxmox <code>vzdump --mode stop</code> — a single command that gracefully shuts the VM down, snapshots the disk, and starts it back up.</p>
+<p>One-off (before a risky change):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>ssh<span class="w"> </span>root@&lt;proxmox-host&gt;
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>vzdump<span class="w"> </span><span class="nv">$VMID</span><span class="w"> </span>--mode<span class="w"> </span>stop<span class="w"> </span>--storage<span class="w"> </span>&lt;storage-id&gt;<span class="w"> </span>--compress<span class="w"> </span>zstd
+</code></pre></div>
+<p>Recurring weekly job — paste into <code>/etc/pve/jobs.cfg</code> on the Proxmox host:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="na">vzdump</span><span class="o">:</span><span class="w"> </span><span class="s">eltmaestro-vm-weekly</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">        </span><span class="na">enabled 1</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">        </span><span class="na">schedule sun 02</span><span class="o">:</span><span class="s">00</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">        </span><span class="na">vmid &lt;VMID&gt;</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">        </span><span class="na">storage &lt;storage-id&gt;</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">        </span><span class="na">mode stop</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">        </span><span class="na">compress zstd</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">        </span><span class="na">prune-backups keep-last</span><span class="o">=</span><span class="s">4,keep-monthly=2</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">        </span><span class="na">mailnotification failure</span>
+</code></pre></div>
+<p>Downtime is <strong>15–30 min</strong> during the run — Jenkins / eltmaestro / ClickHouse / SQL Server all unreachable. Schedule outside business hours.</p>
+<p>Full procedure (QEMU Guest Agent setup, backup-storage registration with <code>pvesm add</code>, restore commands, restore-drill recipe, verification one-liners): <strong>BACKUP.md</strong>.</p>
+<h3 id="jenkins-controller-daily-backup">Jenkins controller daily backup<a class="headerlink" href="#jenkins-controller-daily-backup" title="Permanent link">&para;</a></h3>
+<p>Between the weekly <code>vzdump</code>s, the Jenkins controller's <code>$JENKINS_HOME</code> is snapshotted off-host every night via rsync with hardlinked rotation — no downtime, incremental, separate <code>rrsync</code>-restricted receiver. Use this for fast restore of config drift, accidentally-deleted jobs, or credential rotation rollback without waiting for the next weekly VM snapshot.</p>
+<p>Full procedure (apt-install rsync on both ends, <code>rrsync</code> forced-command setup, <code>--link-dest</code> rotation, BKHOST <code>current</code> symlink + retention cron, restore-in-place + single-job + drill recipes): <strong>JENKINS-BACKUP.md</strong>.</p>
+<h3 id="inspect-whats-running">Inspect what's running<a class="headerlink" href="#inspect-whats-running" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># Inside the container (or bare-metal):</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>ps<span class="w"> </span>-ef<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;[j]ava.*maestro|[p]ostgres&#39;</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="c1"># Host-side listener check (matches the Jenkinsfile port table):</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>ss<span class="w"> </span>-lntp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;:(8181|9080|5432|7077|10000|3443|3080|5050|3000)&#39;</span>
+</code></pre></div>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<h3 id="installsh-fails-with-jq-not-on-path"><code>install.sh</code> fails with <code>'jq' not on PATH</code><a class="headerlink" href="#installsh-fails-with-jq-not-on-path" title="Permanent link">&para;</a></h3>
+<p>You're running an ad-hoc <code>publish.sh</code> invocation on the build host, not <code>install.sh</code> on a target host. <code>install.sh</code> does not need <code>jq</code>. If this triggers from inside <code>install.sh</code>, you're hitting <code>fetch-jdbc-drivers.sh</code> — install <code>jq</code> (<code>sudo dnf install jq</code> / <code>sudo apt install jq</code>) and re-run.</p>
+<h3 id="installsh-preflight-jdk-21-not-found"><code>install.sh</code> preflight: "JDK 21 not found"<a class="headerlink" href="#installsh-preflight-jdk-21-not-found" title="Permanent link">&para;</a></h3>
+<p>The preflight looks under <code>/usr/lib/jvm/</code>. If you installed JDK 21 to a non-standard path, set <code>JAVA_HOME</code> in the environment before running <code>install.sh</code> and the script will respect it.</p>
+<h3 id="wsdl-returns-http-503--connection-refused">WSDL returns HTTP 503 / connection refused<a class="headerlink" href="#wsdl-returns-http-503--connection-refused" title="Permanent link">&para;</a></h3>
+<p>Service didn't fully start. Check in order:
+1. <code>show-mprocess</code> — is the domain listed as running?
+2. <code>tail -n 200 /data/iserver/data/log/console/meta-service.log</code> — look for stack traces. Most common: PG didn't come up first, or <code>keystore.jks</code> is missing/wrong-permission.
+3. Postgres up? <code>pg_isready -h localhost -p 5432</code>
+4. Keystore readable by the maestro user? <code>ls -l /data/iserver/server/keystore.jks</code> (must be 600 or 644, owned by the install user)</p>
+<h3 id="https-works-on-localhost-but-not-from-another-host">HTTPS works on <code>localhost</code> but not from another host<a class="headerlink" href="#https-works-on-localhost-but-not-from-another-host" title="Permanent link">&para;</a></h3>
+<p><code>install.sh</code> generates the keystore with <code>SAN=DNS:$(hostname -f),DNS:localhost,IP:$(hostname -I),IP:127.0.0.1</code>. If the host's FQDN or IP changed after install, regenerate:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>mstop-domain
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>rm<span class="w"> </span>/data/iserver/server/keystore.jks
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>/data/iserver/install.sh<span class="w">         </span><span class="c1"># idempotent; only the keystore step will run</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>mstart-domain
+</code></pre></div></p>
+<h3 id="postgres-wont-start-database-files-are-incompatible-with-server">Postgres won't start: "database files are incompatible with server"<a class="headerlink" href="#postgres-wont-start-database-files-are-incompatible-with-server" title="Permanent link">&para;</a></h3>
+<p>The PG version installed on the host doesn't match the data dir's catalog version. The bundled <code>initdb.sql</code> requires PG 16; if the host has PG 15 or PG 17 installed, point <code>PGBIN</code> in <code>~/.env_integrator.paths</code> at the right <code>/usr/{pgsql-16,lib/postgresql/16}/bin/</code> directory.</p>
+<h3 id="address-already-in-use-on-8181-or-5432">"Address already in use" on 8181 or 5432<a class="headerlink" href="#address-already-in-use-on-8181-or-5432" title="Permanent link">&para;</a></h3>
+<p>Another service is binding the port. <code>ss -lntp | grep :8181</code> to identify; usually a leftover meta-service or a system Postgres. <code>mstop-all</code> then start; if the system Postgres is interfering, <code>sudo systemctl disable --now postgresql</code> (the bundled PG runs from <code>/data/iserver/server/pgsql/</code>).</p>
+<h3 id="wpf-administration--server-log-refresh-shows-nothing">WPF Administration → Server Log Refresh shows nothing<a class="headerlink" href="#wpf-administration--server-log-refresh-shows-nothing" title="Permanent link">&para;</a></h3>
+<p>Two-link chain: WPF's <code>ADMIN_SHOW_WEBSERVER_LOG</code> SOAP op invokes
+<code>show-webserver-log</code> on the service host; the script <code>tail -500
+$MAESTRO_CONSOLE_LOG_DIR/meta-service.log</code>. If the textbox is empty:
+1. <strong>Reader present?</strong> <code>which show-webserver-log</code> from inside the service process's environment. Lives in <code>MAESTRO_UTILS_DIR</code> (= <code>…/server/utils/</code>), which <code>env_integrator</code> appends to <code>PATH</code>. If missing, the service was launched without sourcing <code>env_integrator</code>.
+2. <strong>Writer and reader agree?</strong> Verify <code>$MAESTRO_CONSOLE_LOG_DIR/meta-service.log</code> is the file Spring Boot is actually writing to. On bare-metal <code>mstart-domain</code> redirects to that exact path. On Docker <code>start-meta-service.sh</code> exports <code>LOGGING_FILE_NAME=$MAESTRO_CONSOLE_LOG_DIR/meta-service.log</code> (08e2f3093 — older images hard-coded <code>/opt/iserver/data/log/meta-service.log</code>, missing the <code>console/</code> subdir, which made the reader exit 1 silently).
+3. <strong>File exists and non-empty?</strong> <code>docker exec eltmaestro ls -la /opt/iserver/data/log/console/meta-service.log</code> (Docker) or <code>ls -la $MAESTRO_CONSOLE_LOG_DIR/meta-service.log</code> (bare-metal). If the file is missing, the launcher didn't set <code>LOGGING_FILE_NAME</code> or the directory wasn't created — see <code>MaestroMeta.ADMIN_SHOW_WEBSERVER_LOG</code> which now surfaces stderr to the WPF caller on empty stdout (08e2f3093), so future drift of the same shape shows the diagnostic in the textbox itself.</p>
+<h3 id="upgrade-left-services-down">Upgrade left services down<a class="headerlink" href="#upgrade-left-services-down" title="Permanent link">&para;</a></h3>
+<p><code>update-server.sh</code> runs <code>mstop-all</code> then <code>mstart-all</code>. If the start phase failed, services stay down. Look at:
+- <code>tail -n 500 /data/iserver/data/log/console/*.log</code>
+- <code>cat /data/iserver/VERSION</code> to confirm which release is actually in place
+- The <code>update-server.sh</code> console output — it logs each step</p>
+<p>If the new release is unhealthy, see UPGRADE.md "Rollback" for the recovery path.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top", "navigation.instant", "navigation.tracking", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+    
+  </body>
+</html>

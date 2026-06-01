@@ -1,0 +1,1504 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="User documentation for the ELTMaestro ELT/data-pipeline platform.">
+      
+      
+      
+        <link rel="canonical" href="https://zgurung.github.io/eltmaestro-docs/UG-ADMIN/">
+      
+      
+        <link rel="prev" href="../UG-MENUS/">
+      
+      
+        <link rel="next" href="../UG-WORKFLOWS/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>Administration & setup - ELTMaestro Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#administration--setup" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ELTMaestro Documentation" class="md-header__button md-logo" aria-label="ELTMaestro Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ELTMaestro Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Administration & setup
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ELTMaestro Documentation" class="md-nav__button md-logo" aria-label="ELTMaestro Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ELTMaestro Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Getting started
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../USER-GUIDE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-GETTING-STARTED/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-MENUS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Menus
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Admin & connections
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Admin & connections
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Administration & setup
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Administration & setup
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-the-admin-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening the Admin Interface
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Workflows & steps
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Workflows & steps
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-WORKFLOWS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Workflows
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-STEPS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Step reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Medallion design
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Medallion design
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION-BRONZE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bronze
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION-SILVER/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Silver
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION-GOLD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Gold
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Platform setup
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Platform setup
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../REDSHIFT-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redshift
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPARKSQL-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SparkSQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CLICKHOUSE-AUTH/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ClickHouse auth
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MPP-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MPP prerequisites
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Install & operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Install & operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INSTALL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Install
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UPGRADE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Upgrade
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../OPERATIONS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Operations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#opening-the-admin-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening the Admin Interface
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="administration--setup">Administration &amp; Setup<a class="headerlink" href="#administration--setup" title="Permanent link">&para;</a></h1>
+<p>Part 2 of the <a href="../USER-GUIDE/">ELTMaestro User Guide</a>. This is the administrator's <strong>first-time setup / initialization</strong> guide. After <a href="../UG-GETTING-STARTED/#signing-in">signing in</a>, the first thing to do is create your <strong>connections</strong> — the databases, SSH hosts, and cloud/object-storage endpoints your workflows read from and write to. Everything you create here becomes a picker in the <a href="../UG-WORKFLOWS/">Job editor</a> later.</p>
+<h2 id="opening-the-admin-interface">Opening the Admin Interface<a class="headerlink" href="#opening-the-admin-interface" title="Permanent link">&para;</a></h2>
+<p><strong>Administration ▸ Configure Maestro Server</strong> (on the main window's menu bar). The menu item is enabled only for <strong>admin-role</strong> users — if it's greyed out, your account isn't an administrator.</p>
+<p>It opens a tabbed window:</p>
+<table>
+<thead>
+<tr>
+<th>Tab</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>System</td>
+<td>Server-level system settings (read-only grid + Edit).</td>
+</tr>
+<tr>
+<td><strong>Database Connections</strong></td>
+<td>JDBC connections — <em>see below</em>.</td>
+</tr>
+<tr>
+<td><strong>SSH Connections</strong></td>
+<td>SSH/SFTP hosts — <em>see below</em>.</td>
+</tr>
+<tr>
+<td><strong>General/Cloud Config</strong></td>
+<td>Cloud / object-storage (S3, …) connections — <em>see below</em>.</td>
+</tr>
+<tr>
+<td>Users · User-Permissions</td>
+<td>Accounts and access (covered later in this guide).</td>
+</tr>
+<tr>
+<td>Maestro Machine Learning</td>
+<td>Feature engineering + model config.</td>
+</tr>
+<tr>
+<td>Integrator Config</td>
+<td>Live per-integrator config editor.</td>
+</tr>
+<tr>
+<td>Vendor tabs (Netezza, …)</td>
+<td>Platform-specific settings.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="connections--create-these-first">Connections — create these first<a class="headerlink" href="#connections--create-these-first" title="Permanent link">&para;</a></h1>
+<p>Three connection types, one tab each. All follow the same <strong>Create / Edit / Delete</strong> pattern; once saved, a connection is selectable by name in the Job editor.</p>
+<h2 id="database-connections-jdbc">Database connections (JDBC)<a class="headerlink" href="#database-connections-jdbc" title="Permanent link">&para;</a></h2>
+<p>Tab: <strong>Database Connections</strong>. Toolbar: <strong>Create</strong>, <strong>Edit</strong>, <strong>Duplicate</strong>, <strong>Delete</strong>.</p>
+<p>Click <strong>Create</strong> to open the JDBC connection editor:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Connection name</strong></td>
+<td>Your label for the connection.</td>
+</tr>
+<tr>
+<td><strong>Driver class</strong></td>
+<td>Pick the platform's JDBC driver class — e.g. <code>com.amazon.redshift.Driver</code>, <code>net.snowflake.client.jdbc.SnowflakeDriver</code>, <code>org.postgresql.Driver</code>, <code>cc.blynk.clickhouse.ClickHouseDriver</code>, <code>com.firebolt.FireboltDriver</code>, plus Oracle / SQL Server / MySQL / MariaDB / DB2 / Hive / Spark.</td>
+</tr>
+<tr>
+<td><strong>Driver jar</strong></td>
+<td>The installed driver jar to use. <strong>For MPP / integrator platforms you must pick the <code>MPP_Driver_*</code> jar — see the warning below.</strong></td>
+</tr>
+<tr>
+<td><strong>Connection string</strong></td>
+<td>A JDBC URL template with <code>$HOST</code> / <code>$PORT</code> / <code>$DATABASE</code> placeholders — e.g. <code>jdbc:redshift://$HOST:$PORT/$DATABASE</code> (a TLS variant is offered for Redshift).</td>
+</tr>
+<tr>
+<td><strong>User / Password</strong></td>
+<td>DB credentials (password stored encrypted).</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<h3 id="-pick-the-mpp_-driver-jar-for-mpp--integrator-platforms">⚠️ Pick the <code>MPP_</code> driver jar for MPP / integrator platforms<a class="headerlink" href="#-pick-the-mpp_-driver-jar-for-mpp--integrator-platforms" title="Permanent link">&para;</a></h3>
+<p>For an MPP target — <strong>Redshift, ClickHouse, Synapse, Snowflake, Exasol, Firebolt, Netezza, Greenplum, Databricks, DashDB, Yellowbrick, XtremeData</strong> — you <strong>must</strong> select the matching <strong><code>MPP_Driver_&lt;Platform&gt;_*.jar</code></strong>, not the plain base driver jar. The <code>MPP_</code> jar is what tells the engine to treat the connection as an <strong>integrator/MPP</strong> connection (it wires the default database/schema from the integrator's <a href="../REDSHIFT-SETUP/#integrator-config-systemcfg"><code>system.cfg</code></a>). If you pick the plain jar instead, the connection can browse metadata but <strong>you cannot create a job against it</strong> — only <code>MPP_Driver_*</code> connections are valid job targets.</p>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Driver jar to select</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Redshift</td>
+<td><code>MPP_Driver_Redshift_RSJDBC.jar</code></td>
+</tr>
+<tr>
+<td>ClickHouse</td>
+<td><code>MPP_Driver_Clickhouse_JDBC.jar</code></td>
+</tr>
+<tr>
+<td>Synapse</td>
+<td><code>MPP_Driver_Synapse_JDBC.jar</code></td>
+</tr>
+<tr>
+<td>Snowflake</td>
+<td><code>MPP_Driver_SnowFlake_JDBC.jar</code></td>
+</tr>
+<tr>
+<td>Exasol</td>
+<td><code>MPP_Driver_Exasol_JDBC.jar</code></td>
+</tr>
+<tr>
+<td>Firebolt</td>
+<td><code>MPP_Driver_Firebolt_JDBC.jar</code></td>
+</tr>
+<tr>
+<td>Netezza</td>
+<td><code>MPP_Driver_Netezza_NZJDBC.jar</code></td>
+</tr>
+<tr>
+<td>Greenplum</td>
+<td><code>MPP_Driver_Greenplum_PGJDBC.jar</code></td>
+</tr>
+<tr>
+<td>DashDB (DB2)</td>
+<td><code>MPP_Driver_DashDB_DB2JDBC.jar</code></td>
+</tr>
+<tr>
+<td>Databricks</td>
+<td><code>MPP_Driver_Databricks.jar</code></td>
+</tr>
+<tr>
+<td>Yellowbrick</td>
+<td><code>MPP_Driver_Yellowbrick_PGJDBC.jar</code></td>
+</tr>
+<tr>
+<td>XtremeData</td>
+<td><code>MPP_Driver_XtremeData_PGJDBC.jar</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>The connection's name is embedded in each job's XML</strong> — jobs reference the connection <em>by name</em>, so renaming or deleting a connection that jobs use will break those jobs.</p>
+</blockquote>
+<p>Saved to the audit DB (<code>t_jdbc</code>).</p>
+<ul>
+<li><strong>Duplicate</strong> copies the selected connection (handy for dev/prod variants).</li>
+</ul>
+<blockquote>
+<p>Platform-specific setup (drivers, quirks, prerequisites) lives in the per-platform guides — e.g. <a href="../REDSHIFT-SETUP/">REDSHIFT-SETUP.md</a>, <a href="../CLICKHOUSE-AUTH/">CLICKHOUSE-AUTH.md</a>.</p>
+</blockquote>
+<h2 id="ssh-connections">SSH connections<a class="headerlink" href="#ssh-connections" title="Permanent link">&para;</a></h2>
+<p>Tab: <strong>SSH Connections</strong>. Toolbar: <strong>Create</strong>, <strong>Edit</strong>, <strong>Delete</strong>. Used for SFTP file sources/landing and remote shell commands.</p>
+<p><strong>Create</strong> opens the SSH editor:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Connection name</strong></td>
+<td>Label (normalized to a proper name).</td>
+</tr>
+<tr>
+<td><strong>Host / Port</strong></td>
+<td>SSH host and port.</td>
+</tr>
+<tr>
+<td><strong>User / Password</strong></td>
+<td>Login user; password stored encrypted.</td>
+</tr>
+<tr>
+<td><strong>Use PEM key</strong></td>
+<td>Authenticate with a key file instead of a password.</td>
+</tr>
+<tr>
+<td><strong>Use SFTP</strong></td>
+<td>Use SFTP for file transfer (vs plain SSH).</td>
+</tr>
+<tr>
+<td><strong>PEM path</strong></td>
+<td>Path to the key file when <em>Use PEM key</em> is on.</td>
+</tr>
+</tbody>
+</table>
+<p>(The key/SFTP choices are stored as a compact <code>key|raw : sftp|ssh : &lt;pem-path&gt;</code> setting.)</p>
+<h2 id="general--cloud-connections-s3">General / Cloud connections (S3)<a class="headerlink" href="#general--cloud-connections-s3" title="Permanent link">&para;</a></h2>
+<p>Tab: <strong>General/Cloud Config</strong>. Toolbar: <strong>Create</strong>, <strong>Edit</strong>, <strong>Delete</strong>. This is where object-storage / cloud endpoints live — e.g. the <strong>S3 connection</strong> the Redshift file loader stages to.</p>
+<p><strong>Create</strong> opens the Cloud connection editor:</p>
+<ol>
+<li><strong>Connection name</strong> (normalized to upper case).</li>
+<li><strong>Connection type</strong> — pick the storage/provider type: <strong>Aws S3</strong>, <strong>Azure Blob</strong>, <strong>HDFS</strong>, <strong>LocalFS</strong>, or <strong>JDBC</strong>. The type drives the parameter rows below.</li>
+<li><strong>Parameters</strong> — fill the type-specific name/value rows.</li>
+</ol>
+<h3 id="setting-up-an-aws-s3-connection">Setting up an Aws S3 connection<a class="headerlink" href="#setting-up-an-aws-s3-connection" title="Permanent link">&para;</a></h3>
+<p>Go to <strong>Administration ▸ General/Cloud Config ▸ Create</strong>, then:</p>
+<ol>
+<li><strong>Configuration Name</strong> — must be <strong><code>S3_CONNECTION</code></strong> (see the name note below).</li>
+<li><strong>Configuration Type</strong> — <strong>Aws S3</strong>.</li>
+<li>Fill the parameters and <strong>Save</strong>:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bucket.name</code></td>
+<td>The S3 bucket the loader stages files to / reads from.</td>
+</tr>
+<tr>
+<td><code>access.key</code></td>
+<td>AWS access key ID.</td>
+</tr>
+<tr>
+<td><code>secret.key</code></td>
+<td>AWS secret access key.</td>
+</tr>
+<tr>
+<td><code>aws.region</code></td>
+<td>Bucket region (default <code>us-east-1</code>).</td>
+</tr>
+<tr>
+<td><code>iam.role</code></td>
+<td>IAM role ARN used for Redshift <code>COPY</code> / Spectrum, e.g. <code>arn:aws:iam::&lt;acct&gt;:role/&lt;role&gt;</code>.</td>
+</tr>
+<tr>
+<td><code>dir.data</code></td>
+<td>Server-side staging directory (default <code>/tmp/maestro.data</code>).</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="S3 connection editor — Configuration Name S3_CONNECTION, Type Aws S3, with bucket.name/access.key/secret.key/dir.data/aws.region/iam.role parameters" src="../images/s3-connection-editor.png" /></p>
+<p>The saved connection then appears in the <strong>General/Cloud Config</strong> list (its values are stored base64-encoded):</p>
+<p><img alt="Administration General/Cloud Config list showing the S3_CONNECTION entry of type AWS S3" src="../images/s3-connection-list.png" /></p>
+<p>Saved to the audit DB (<code>t_connection_general</code>); the parameters become <code>$cloud.S3_CONNECTION.&lt;param&gt;</code> variables usable in jobs.</p>
+<blockquote>
+<p><strong>Name it exactly <code>S3_CONNECTION</code>.</strong> The integrator's <code>system.cfg</code> <code>$OBJECT_STORAGE</code> variable must resolve to this connection's name; the repo ships <code>$OBJECT_STORAGE=S3_CONNECTION</code> (redshift + sparksql + snowflake). Synapse stages to Azure Blob, so name its connection <strong><code>BLOB_CONNECTION</code></strong> to match <code>$OBJECT_STORAGE=BLOB_CONNECTION</code>. The Redshift file-loader <code>COPY</code> stages through this connection.</p>
+<p><strong>Credentials for a Redshift load:</strong> the <strong>S3 connection</strong> above carries <code>access.key</code> / <code>secret.key</code> / <code>iam.role</code>; the <code>COPY</code> defaults to the connection's <strong>IAM role</strong> (<code>iam_role '$iam.role'</code>), with access-key/secret as the fallback. The engine host also needs the <strong>AWS CLI installed and configured</strong> (<code>aws configure</code>), since the loader runs <code>aws s3 cp</code>/<code>rm</code> to stage files. See <a href="../REDSHIFT-SETUP/#2-create-the-s3-connection--aws-credentials">REDSHIFT-SETUP.md</a>.</p>
+<p><em>(Azure Blob, LocalFS, and JDBC types expose their own parameter sets — e.g. Azure Blob: <code>account.name</code> / <code>account.key</code> / <code>container.name</code> / <code>sas.token</code>.)</em></p>
+</blockquote>
+<h3 id="the-spark--hdfs-connection-eltm_spark_driver">The Spark / HDFS connection (<code>ELTM_SPARK_DRIVER</code>)<a class="headerlink" href="#the-spark--hdfs-connection-eltm_spark_driver" title="Permanent link">&para;</a></h3>
+<p><strong>SparkSQL / Spark jobs require an <code>HDFS</code> cloud connection named exactly <code>ELTM_SPARK_DRIVER</code></strong> — it must be present before you can build or run a Spark job. (A SparkSQL job's <em>Platform Connection</em> dropdown is populated from <code>HDFS</code> connections, and <code>ELTM_SPARK_DRIVER</code> is the name the Spark service itself runs under — see <code>admin.commands/mstart-spark-service</code>.)</p>
+<p>Create it via <strong>Administration ▸ General/Cloud Config ▸ Create</strong>, Configuration Type <strong>HDFS</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fs.prefix</code></td>
+<td>HDFS namenode URI, e.g. <code>hdfs://localhost:9000/</code>.</td>
+</tr>
+<tr>
+<td><code>file.hdfs.site.xml.path</code></td>
+<td><strong>Actual</strong> path to <code>hdfs-site.xml</code>, e.g. <code>/opt/iserver/tools/hadoop/etc/hadoop/hdfs-site.xml</code>.</td>
+</tr>
+<tr>
+<td><code>file.core.site.xml.path</code></td>
+<td><strong>Actual</strong> path to <code>core-site.xml</code>.</td>
+</tr>
+<tr>
+<td><code>dir.data</code></td>
+<td>Staging directory (default <code>/tmp/maestro.data</code>).</td>
+</tr>
+<tr>
+<td><code>thrift.hive2.db</code> / <code>thrift.hive2.schema</code> / <code>thrift.hive2.connection.name</code></td>
+<td>Hive (thrift) catalog target — e.g. <code>dwh</code> / <code>iext</code> / <code>HIVE_EMBEDDED</code>. All three are overridable per-integrator via the <code>system.cfg</code> variables <strong><code>$HIVE_DATABASE</code></strong> / <strong><code>$HIVE_SCHEMA</code></strong> / <strong><code>$HIVE_CONNECTION</code></strong> (see note below); when a variable is unset the corresponding arg here is the fallback.</td>
+</tr>
+<tr>
+<td><code>fs.s3a.access.key</code> / <code>fs.s3a.secret.key</code> / <code>fs.s3a.endpoint</code></td>
+<td>S3A credentials + endpoint (<code>s3.amazonaws.com</code>) for Spark to read/write S3.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong><code>$HIVE_CONNECTION</code> / <code>$HIVE_DATABASE</code> / <code>$HIVE_SCHEMA</code> (system.cfg overrides).</strong> SparkSQL onstage jobs register their staged tables in a Hive/Thrift external catalog. The engine resolves the catalog <strong>connection</strong>, <strong>database</strong>, and <strong>schema</strong> from these <code>system.cfg</code> variables first, each falling back to the corresponding <code>thrift.hive2.*</code> arg on this HDFS connection (defaults <code>HIVE_EMBEDDED</code> / <code>dwh</code> / <code>iext</code>) when unset. The repo ships all three in <strong><code>sparksql/system.cfg</code> only</strong> (the SparkSQL integrator is the sole consumer); change them per environment via the <a href="#system-config--models">Integrator Config tab</a>. See <a href="../SPARKSQL-SETUP/#4-overriding-the-thrift-catalog-per-integrator-hive_connection--hive_database--hive_schema">SPARKSQL-SETUP.md</a>.</p>
+<p>Enter the <strong>actual filesystem paths</strong> for the Hadoop XMLs (not the <code>$MAESTRO_ENGINE_HOME</code> variable — this field is taken literally). On the standard image that's <code>/opt/iserver/tools/hadoop/etc/hadoop/…</code>.</p>
+</blockquote>
+<p><img alt="General Configuration editor — HDFS connection ELTM_SPARK_DRIVER with fs.prefix, actual hdfs/core-site paths, Hive thrift db/schema/connection, and S3A keys" src="../images/hdfs-connection-spark-driver.png" /></p>
+<blockquote>
+<p><strong>The Hive catalog connection.</strong> <code>thrift.hive2.connection.name</code> (e.g. <code>HIVE_EMBEDDED</code>) refers to a <strong>JDBC connection</strong> to HiveServer2. Create it like any <a href="#database-connections-jdbc">database connection</a>: driver class <code>org.apache.hive.jdbc.HiveDriver</code>, driver jar <strong><code>hive-jdbc-3.1.3-standalone.jar</code></strong> (the Apache standalone uber jar; alias <strong><code>MPP_Driver_Hive_JDBC.jar</code></strong>, shipped via the deployment's <code>jdbc_list.json</code>), and connection string <code>jdbc:hive2://&lt;host&gt;:10000/&lt;db&gt;</code> — e.g. <code>jdbc:hive2://192.168.1.201:10000/default</code> (the same URL DBeaver uses).</p>
+</blockquote>
+<hr />
+<h2 id="how-connections-feed-workflows">How connections feed workflows<a class="headerlink" href="#how-connections-feed-workflows" title="Permanent link">&para;</a></h2>
+<p>What you create here is exactly what appears in the <a href="../UG-WORKFLOWS/">Job editor</a>:</p>
+<table>
+<thead>
+<tr>
+<th>Connection type</th>
+<th>Used by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Database (JDBC)</td>
+<td>The source/target of SQL and load steps.</td>
+</tr>
+<tr>
+<td>SSH</td>
+<td>SFTP file-source / file-landing steps and remote shell.</td>
+</tr>
+<tr>
+<td>General/Cloud (S3)</td>
+<td>File-loader staging (e.g. flat file → S3 → Redshift <code>COPY</code>).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="connection-recipes--sparksql--redshift-jobs">Connection recipes — SparkSQL &amp; Redshift jobs<a class="headerlink" href="#connection-recipes--sparksql--redshift-jobs" title="Permanent link">&para;</a></h2>
+<p>The exact set of connections each platform needs (and what to recreate after a fresh/destructive deploy, which wipes them). Create them in the order below.</p>
+<h3 id="sparksql-jobs">SparkSQL jobs<a class="headerlink" href="#sparksql-jobs" title="Permanent link">&para;</a></h3>
+<p>A SparkSQL job stages source data into HDFS as Parquet and registers it as Hive external tables, so it needs <strong>three</strong> connections (a fourth if you stage via S3). Full walk-through: <a href="../SPARKSQL-SETUP/">SPARKSQL-SETUP.md</a>.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Connection</th>
+<th>Tab / Type</th>
+<th>Key fields</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>HDFS / Spark</strong> (e.g. <code>ELTM_SPARK_DRIVER</code>)</td>
+<td>General/Cloud Config → <strong>HDFS</strong></td>
+<td><code>fs.prefix</code> (<code>hdfs://&lt;host&gt;:9000/</code>), <code>file.hdfs.site.xml.path</code> + <code>file.core.site.xml.path</code> (actual paths on the engine host), <code>dir.data</code>, <code>thrift.hive2.db</code>=<code>dwh</code>, <code>thrift.hive2.schema</code>=<code>iext</code>, <code>thrift.hive2.connection.name</code>=<code>HIVE_EMBEDDED</code>, optional <code>fs.s3a.*</code>. <strong>Create exactly one</strong> — the engine auto-discovers it by type (first HDFS row).</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong><code>HIVE_EMBEDDED</code></strong> (Hive2 JDBC)</td>
+<td>Database Connections (JDBC)</td>
+<td>Driver class <code>org.apache.hive.jdbc.HiveDriver</code>, jar <code>hive-jdbc-3.1.3-standalone.jar</code>, string <code>jdbc:hive2://&lt;host&gt;:10000/dwh</code>. <strong>Name must match</strong> <code>thrift.hive2.connection.name</code> / <code>$HIVE_CONNECTION</code> (default <code>HIVE_EMBEDDED</code>). Used to register external tables.</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Source(s)</strong></td>
+<td>Database Connections (JDBC)</td>
+<td>One per source you ingest from (SQL Server, ClickHouse, Postgres, …) — normal JDBC connection.</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong><code>S3_CONNECTION</code></strong> <em>(only if staging via S3)</em></td>
+<td>General/Cloud Config → <strong>Aws S3</strong></td>
+<td>See the <a href="#setting-up-an-aws-s3-connection">S3 recipe</a>; resolves <code>$OBJECT_STORAGE</code>.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>$HIVE_CONNECTION</code> / <code>$HIVE_DATABASE</code> / <code>$HIVE_SCHEMA</code> in <code>sparksql/system.cfg</code> override the connection's <code>thrift.hive2.*</code> args (<a href="#system-config--models">details</a>); leave them at the shipped <code>HIVE_EMBEDDED</code> / <code>dwh</code> / <code>iext</code> unless your environment differs.</p>
+</blockquote>
+<h3 id="redshift-jobs">Redshift jobs<a class="headerlink" href="#redshift-jobs" title="Permanent link">&para;</a></h3>
+<p>A Redshift job loads <strong>flat file → S3 → <code>COPY</code></strong>, so it needs a JDBC connection <strong>plus</strong> the S3 connection. Full walk-through: <a href="../REDSHIFT-SETUP/">REDSHIFT-SETUP.md</a>.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Connection</th>
+<th>Tab / Type</th>
+<th>Key fields</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Redshift JDBC</strong></td>
+<td>Database Connections (JDBC)</td>
+<td><strong>Pick the <code>MPP_Driver_Redshift_RSJDBC.jar</code></strong> (not the plain jar — otherwise you can't create a job against it); driver class <code>com.amazon.redshift.Driver</code>; string <code>jdbc:redshift://$HOST:$PORT/$DATABASE</code> (TLS variant offered); user (e.g. <code>rsadmin</code>). <strong>Redshift Serverless</strong> uses the same driver/string — point <code>$HOST</code> at the workgroup endpoint (<a href="../REDSHIFT-SETUP/#running-on-redshift-serverless">REDSHIFT-SETUP ▸ Running on Redshift Serverless</a>).</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong><code>S3_CONNECTION</code></strong></td>
+<td>General/Cloud Config → <strong>Aws S3</strong></td>
+<td>Name exactly <code>S3_CONNECTION</code> (resolves <code>$OBJECT_STORAGE</code>); <code>bucket.name</code> / <code>access.key</code> / <code>secret.key</code> / <code>aws.region</code> / <code>iam.role</code> / <code>dir.data</code>. The file-loader <code>COPY</code> defaults to the connection's <strong>IAM role</strong>. See the <a href="#setting-up-an-aws-s3-connection">S3 recipe</a>.</td>
+</tr>
+</tbody>
+</table>
+<p>Other <strong>non-connection</strong> notes for Redshift (one-time per environment, not wiped by a deploy):
+- <strong>AWS CLI configured on the engine host</strong> (<code>aws configure</code>) — the loader runs <code>aws s3 cp</code>/<code>rm</code> there.
+- <strong>base64 decode is native</strong> — <code>$B64EXPRESSION</code> uses Redshift <code>FROM_VARBYTE(TO_VARBYTE(…,'base64'),'utf-8')</code>; <strong>no UDF to install</strong> (<a href="../REDSHIFT-SETUP/#3-base64-decode-native-no-udf">REDSHIFT-SETUP §3</a>).</p>
+<h1 id="users--access">Users &amp; access<a class="headerlink" href="#users--access" title="Permanent link">&para;</a></h1>
+<h2 id="users">Users<a class="headerlink" href="#users" title="Permanent link">&para;</a></h2>
+<p>Tab: <strong>Users</strong>. Toolbar: <strong>Create</strong>, <strong>Edit</strong>, <strong>Delete</strong>. (Backed by <code>t_user</code>.)</p>
+<blockquote>
+<p><strong>Delete is not supported</strong> from the UI — the Delete button returns <em>"Not Supported."</em> Restrict an account by lowering its role or revoking component permissions instead.</p>
+</blockquote>
+<p><strong>Create</strong> / <strong>Edit</strong> opens the user editor:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>User ID</strong></td>
+<td>Username — min 4 characters; stored upper-cased.</td>
+</tr>
+<tr>
+<td><strong>Password</strong></td>
+<td>Min 8 characters; stored as an MD5 hash. On <strong>Edit</strong>, leave it as-is to keep the current password, or type a new one to reset it.</td>
+</tr>
+<tr>
+<td><strong>Role</strong></td>
+<td>Access level <strong>0–3</strong> (higher = more privileged). An admin-level role is what unlocks <strong>Administration ▸ Configure Maestro Server</strong> (this Admin Interface).</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚠️ <strong>Restart required:</strong> after you create or edit a user, the dialog warns that <strong>the ELTMaestro messaging (meta-)service must be restarted</strong> before the new/changed account takes effect — see <a href="../OPERATIONS/">OPERATIONS.md</a>.</p>
+</blockquote>
+<h2 id="user-permissions">User-Permissions<a class="headerlink" href="#user-permissions" title="Permanent link">&para;</a></h2>
+<p>Tab: <strong>User-Permissions</strong>. Fine-grained, per-component access layered on top of the role.</p>
+<ol>
+<li>Pick a user from the <strong>drop-down</strong>.</li>
+<li>The grid lists each tracked component — <strong>Component Type</strong>, <strong>Component Name</strong>, and <strong>Can Access</strong>.</li>
+<li>Select a row and click <strong>Toggle Access</strong> to grant or revoke that user's access to that component.</li>
+</ol>
+<p>(Backed by <code>t_component_role_permission</code>, surfaced via <code>v_component_role_permission</code>.)</p>
+<h1 id="system-config--models">System, config &amp; models<a class="headerlink" href="#system-config--models" title="Permanent link">&para;</a></h1>
+<h2 id="system">System<a class="headerlink" href="#system" title="Permanent link">&para;</a></h2>
+<p>Tab: <strong>System</strong>. Server-level settings (key/value) from <code>t_system_settings</code>. It's a read-only grid — select a row and click <strong>Edit</strong> to change a value (no create/delete).</p>
+<h2 id="integrator-config">Integrator Config<a class="headerlink" href="#integrator-config" title="Permanent link">&para;</a></h2>
+<p>Tab: <strong>Integrator Config</strong> — a <strong>live editor for the per-integrator config files</strong> on the server (<code>system.cfg</code>, the <code>get_*</code> introspection templates, <code>static_*</code> lists, etc.). This is how you change integrator configuration <strong>without a redeploy</strong>.</p>
+<ul>
+<li><strong>Reload</strong> — fetch the live config from the server into a per-file list. Use the <strong>filter</strong> box to find a file.</li>
+<li>Expand a file row and edit its contents inline.</li>
+<li><strong>Show Edits</strong> — list just the files you've changed.</li>
+<li><strong>Save</strong> — write your edits back to the live server config (a minimal, surgical save of only what changed).</li>
+</ul>
+<blockquote>
+<p>This is the tab where the <a href="../MPP-SETUP/">MPP <code>system.cfg</code> adoption</a> edits are applied.</p>
+</blockquote>
+<h2 id="maestro-machine-learning">Maestro Machine Learning<a class="headerlink" href="#maestro-machine-learning" title="Permanent link">&para;</a></h2>
+<p>Tab: <strong>Maestro Machine Learning</strong>, with two sub-tabs:</p>
+<ul>
+<li><strong>Feature Engineering</strong> — Create / Modify / Delete feature transformations (StringIndexer, VectorIndexer, QuantileDiscretizer, Bucketizer, …).</li>
+<li><strong>Classification/Regression/Clustering Models</strong> — Create / Modify / Delete ML models.</li>
+</ul>
+<p>These define the reusable feature transforms + models that ML steps in workflows consume.</p>
+<h2 id="vendor-tabs-netezza-">Vendor tabs (Netezza, …)<a class="headerlink" href="#vendor-tabs-netezza-" title="Permanent link">&para;</a></h2>
+<p>Platform-specific settings tabs (e.g. <strong>Netezza</strong> → <code>t_netezza_settings</code>). Same pattern as System: a read-only key/value grid with <strong>Edit</strong> to change a value.</p>
+<hr />
+<p>That completes the Administration &amp; Setup guide. Next: <a href="../UG-MENUS/">Menus in depth</a> · <a href="../UG-WORKFLOWS/">Workflows</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top", "navigation.instant", "navigation.tracking", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+    
+  </body>
+</html>

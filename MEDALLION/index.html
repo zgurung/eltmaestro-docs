@@ -1,0 +1,1431 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="User documentation for the ELTMaestro ELT/data-pipeline platform.">
+      
+      
+      
+        <link rel="canonical" href="https://zgurung.github.io/eltmaestro-docs/MEDALLION/">
+      
+      
+        <link rel="prev" href="../UG-STEPS/">
+      
+      
+        <link rel="next" href="../MEDALLION-BRONZE/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>Overview - ELTMaestro Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#building-medallion-pipelines-with-eltmaestro" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ELTMaestro Documentation" class="md-header__button md-logo" aria-label="ELTMaestro Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ELTMaestro Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Overview
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ELTMaestro Documentation" class="md-nav__button md-logo" aria-label="ELTMaestro Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ELTMaestro Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Getting started
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../USER-GUIDE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-GETTING-STARTED/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-MENUS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Menus
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Admin & connections
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Admin & connections
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-ADMIN/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Administration & setup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Workflows & steps
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Workflows & steps
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-WORKFLOWS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Workflows
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-STEPS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Step reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Medallion design
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Medallion design
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-medallion-means-here" class="md-nav__link">
+    <span class="md-ellipsis">
+      What "medallion" means here
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layer--step-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Layer → step mapping
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Layer → step mapping">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-bronze--raw-landing--ingestion" class="md-nav__link">
+    <span class="md-ellipsis">
+      🥉 Bronze — raw landing / ingestion
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-silver--cleaned-conformed-validated" class="md-nav__link">
+    <span class="md-ellipsis">
+      🥈 Silver — cleaned, conformed, validated
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-gold--business-marts--serving" class="md-nav__link">
+    <span class="md-ellipsis">
+      🥇 Gold — business marts / serving
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-orchestration-spine" class="md-nav__link">
+    <span class="md-ellipsis">
+      The orchestration spine
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-silver-quality-gate" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Silver quality gate
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#governance--observability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Governance &amp; observability
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-principles-the-conventions-to-enforce" class="md-nav__link">
+    <span class="md-ellipsis">
+      Design principles (the conventions to enforce)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-worked-example--hr-headcount-mart" class="md-nav__link">
+    <span class="md-ellipsis">
+      A worked example — HR headcount mart
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-to-build-a-runnable-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Where to build a runnable reference
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related" class="md-nav__link">
+    <span class="md-ellipsis">
+      Related
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION-BRONZE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bronze
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION-SILVER/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Silver
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION-GOLD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Gold
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Platform setup
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Platform setup
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../REDSHIFT-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redshift
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPARKSQL-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SparkSQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CLICKHOUSE-AUTH/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ClickHouse auth
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MPP-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MPP prerequisites
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Install & operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Install & operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INSTALL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Install
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UPGRADE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Upgrade
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../OPERATIONS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Operations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-medallion-means-here" class="md-nav__link">
+    <span class="md-ellipsis">
+      What "medallion" means here
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layer--step-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Layer → step mapping
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Layer → step mapping">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-bronze--raw-landing--ingestion" class="md-nav__link">
+    <span class="md-ellipsis">
+      🥉 Bronze — raw landing / ingestion
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-silver--cleaned-conformed-validated" class="md-nav__link">
+    <span class="md-ellipsis">
+      🥈 Silver — cleaned, conformed, validated
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-gold--business-marts--serving" class="md-nav__link">
+    <span class="md-ellipsis">
+      🥇 Gold — business marts / serving
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-orchestration-spine" class="md-nav__link">
+    <span class="md-ellipsis">
+      The orchestration spine
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-silver-quality-gate" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Silver quality gate
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#governance--observability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Governance &amp; observability
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-principles-the-conventions-to-enforce" class="md-nav__link">
+    <span class="md-ellipsis">
+      Design principles (the conventions to enforce)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-worked-example--hr-headcount-mart" class="md-nav__link">
+    <span class="md-ellipsis">
+      A worked example — HR headcount mart
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-to-build-a-runnable-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Where to build a runnable reference
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related" class="md-nav__link">
+    <span class="md-ellipsis">
+      Related
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="building-medallion-pipelines-with-eltmaestro">Building Medallion pipelines with ELTMaestro<a class="headerlink" href="#building-medallion-pipelines-with-eltmaestro" title="Permanent link">&para;</a></h1>
+<p>How to design Bronze → Silver → Gold ("medallion") data pipelines in ELTMaestro, mapped to the actual step types you place on the <a href="../UG-WORKFLOWS/">Job editor</a> canvas. Part of the <a href="../USER-GUIDE/">User Guide</a>.</p>
+<h2 id="what-medallion-means-here">What "medallion" means here<a class="headerlink" href="#what-medallion-means-here" title="Permanent link">&para;</a></h2>
+<p>The medallion pattern organizes a data platform into three quality tiers:</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Purpose</th>
+<th>Grain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🥉 <strong>Bronze</strong></td>
+<td>Raw landing — capture source data <strong>as-is</strong>, append-only</td>
+<td>Source-shaped, untransformed</td>
+</tr>
+<tr>
+<td>🥈 <strong>Silver</strong></td>
+<td>Cleaned, conformed, deduplicated, <strong>validated</strong></td>
+<td>Conformed/entity-level</td>
+</tr>
+<tr>
+<td>🥇 <strong>Gold</strong></td>
+<td>Business marts &amp; serving aggregates</td>
+<td>Business-grain, read-ready</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>ELTMaestro implements medallion by <em>convention</em>, not as an enforced construct.</strong> The engine has no built-in notion of layers — you impose the discipline through <strong>job naming / <a href="../UG-WORKFLOWS/#configuring-job-metadata">tags</a></strong>, <strong>schema-per-layer</strong> naming, and <strong><a href="#the-orchestration-spine">JobStep</a> chaining</strong>. Each layer is one (or more) workflow; the tiers are how you organize and promote between them.</p>
+</blockquote>
+<h2 id="layer--step-mapping">Layer → step mapping<a class="headerlink" href="#layer--step-mapping" title="Permanent link">&para;</a></h2>
+<p>Every item below is a real step type from the <a href="../UG-WORKFLOWS/#adding-steps">step palette</a>.</p>
+<h3 id="-bronze--raw-landing--ingestion">🥉 Bronze — raw landing / ingestion<a class="headerlink" href="#-bronze--raw-landing--ingestion" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Need</th>
+<th>Steps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Pull / extract</strong></td>
+<td><code>Jdbcsource</code>, <code>Datasource</code> (Corelli streaming source), <code>Local_file</code>, <code>Sftp</code> / <code>Sftp2S3</code>, <code>Pullfile</code>; connector extracts (Mongo / Salesforce)</td>
+</tr>
+<tr>
+<td><strong>Land to the lake</strong></td>
+<td><code>FileStage</code> / <code>File_Stage</code>, <code>Jdbctargethdfs</code> (HDFS/S3 via <code>$OBJECT_STORAGE</code>), <code>Onstagegroup</code> (registers Spark external tables in the Hive catalog)</td>
+</tr>
+<tr>
+<td><strong>Arrival triggers</strong></td>
+<td><code>FileWatch</code>, <code>FileScanner</code>, <code>RemoteFileScanner</code>, <code>JdbcWatch</code></td>
+</tr>
+<tr>
+<td><strong>Incremental capture</strong></td>
+<td><code>Watermark</code> + the <code>isCDC</code> / <code>$QUERY_CDC_*</code> delta primitive</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Principle:</strong> capture faithfully, transform minimally, <strong>append-only</strong>. Use a <code>Watermark</code> so each run lands only new data; write to insert-only targets so Bronze stays immutable.</p>
+<p>→ <strong>Deep dive:</strong> <a href="../MEDALLION-BRONZE/">Bronze — ingestion &amp; landing</a></p>
+<h3 id="-silver--cleaned-conformed-validated">🥈 Silver — cleaned, conformed, validated<a class="headerlink" href="#-silver--cleaned-conformed-validated" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Need</th>
+<th>Steps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Clean / shape</strong></td>
+<td><code>Filter</code>, <code>Dedupe</code>, <code>Function</code> / <code>Function2</code> (derivations), <code>Datamask</code> (PII), <code>View</code>, <code>Pivot</code></td>
+</tr>
+<tr>
+<td><strong>Conform / integrate</strong></td>
+<td><code>Join</code>, <code>Union</code>, <code>Minus</code>, <code>Transformer</code>, <code>SparkDataCache</code></td>
+</tr>
+<tr>
+<td><strong>Historize dimensions</strong></td>
+<td><code>SCD1</code>, <code>SCD2</code></td>
+</tr>
+<tr>
+<td><strong>Merge / upsert</strong></td>
+<td><code>OnstageDelta</code>, <code>ParallelJdbcProcessorNode</code> (delete-then-insert CDC)</td>
+</tr>
+<tr>
+<td><strong>Quality gate</strong></td>
+<td><code>ControlTest</code>, <code>SQLMetrics</code>, <code>MetaProfile</code>, <code>WriteIncident</code> (quarantine bad rows)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Principle:</strong> Silver is <strong>idempotent and re-runnable</strong> — dedupe, conform to canonical types/keys, and <strong>gate promotion on data quality</strong> (see <a href="#the-silver-quality-gate">the Silver quality gate</a>). Column work happens in each step's <a href="../UG-WORKFLOWS/#configuring-a-step--the-expression-builder">expression builder</a>.</p>
+<p>→ <strong>Deep dive:</strong> <a href="../MEDALLION-SILVER/">Silver — clean, conform, validate</a></p>
+<h3 id="-gold--business-marts--serving">🥇 Gold — business marts / serving<a class="headerlink" href="#-gold--business-marts--serving" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Need</th>
+<th>Steps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Aggregate / model</strong></td>
+<td><code>Aggregate</code>, <code>Aggregate2</code>, <code>Table</code> (GeneralSQLTable), group loaders</td>
+</tr>
+<tr>
+<td><strong>Publish to serving MPP</strong></td>
+<td><code>JdbcTarget{Redshift,Snowflake,Synapse,Clickhouse,Greenplum,Netezza,Yellowbrick,Exasol,Databricks}</code>, <code>WriteJdbc</code>, <code>WriteFile</code>, <code>Export</code></td>
+</tr>
+<tr>
+<td><strong>ML feature/serving</strong></td>
+<td><code>MLFeatureEngineer</code>, <code>MLFeatureTrainer</code>, <code>MLFeaturePredictor</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Principle:</strong> Gold is <strong>business-grain and serving-optimized</strong> — pre-aggregated facts/marts the BI and ML layers read directly.</p>
+<p>→ <strong>Deep dive:</strong> <a href="../MEDALLION-GOLD/">Gold — aggregate &amp; serve</a></p>
+<h2 id="the-orchestration-spine">The orchestration spine<a class="headerlink" href="#the-orchestration-spine" title="Permanent link">&para;</a></h2>
+<p>What turns three layers into one end-to-end pipeline:</p>
+<ul>
+<li><strong>Chaining layers</strong> — <code>JobStep</code> lets a Bronze workflow invoke Silver, which invokes Gold (one orchestrating DAG, or three workflows wired by JobStep). <code>Switch</code> / <code>SetVariable</code> / <code>Sync</code> handle conditional flow and barriers.</li>
+<li><strong>Scheduling per layer</strong> — <strong>Administration ▸ Scheduler</strong> (cron): e.g. Bronze hourly, Silver/Gold on completion. See <a href="../UG-MENUS/#administration">Menus</a>.</li>
+<li><strong>Alerting</strong> — <strong>Email Alerts</strong> on success/failure per layer.</li>
+<li><strong>Layer labeling</strong> — <a href="../UG-WORKFLOWS/#configuring-job-metadata">Job Metadata</a> <strong>tags</strong> (<code>bronze</code> / <code>silver</code> / <code>gold</code>) so the Workflow(s) list organizes by tier.</li>
+</ul>
+<h2 id="the-silver-quality-gate">The Silver quality gate<a class="headerlink" href="#the-silver-quality-gate" title="Permanent link">&para;</a></h2>
+<p>The Bronze → Silver promotion is where you enforce quality — the medallion pattern's core discipline:</p>
+<ul>
+<li><strong><code>ControlTest</code></strong> — assert row counts, key uniqueness, referential rules before promoting.</li>
+<li><strong><code>WriteIncident</code></strong> — route failing rows to a quarantine/incident table instead of silently dropping or poisoning Silver.</li>
+<li><strong><code>SQLMetrics</code> / <code>MetaProfile</code></strong> — capture column profiles and run metrics for observability.</li>
+<li><strong><code>Watermark</code></strong> — drive incremental Silver builds so only new/changed Bronze rows are reprocessed.</li>
+</ul>
+<h2 id="governance--observability">Governance &amp; observability<a class="headerlink" href="#governance--observability" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Lineage</strong> — the OpenLineage emitter → <strong>Marquez</strong> gives <strong>column-level lineage spanning all three layers</strong> automatically; open it from the Job editor's <strong>View Lineage</strong> button. This is medallion's strongest built-in story: Bronze → Silver → Gold provenance for free. See LINEAGE.md.</li>
+<li><strong>Metrics</strong> — <strong>Analytics ▸ Batch Statistics</strong> + per-step <code>SQLMetrics</code>.</li>
+</ul>
+<h2 id="design-principles-the-conventions-to-enforce">Design principles (the conventions to enforce)<a class="headerlink" href="#design-principles-the-conventions-to-enforce" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Append-only Bronze.</strong> Insert-only targets + watermarks; never mutate raw.</li>
+<li><strong>One layer per job, chained by <code>JobStep</code></strong>; tag each job by layer.</li>
+<li><strong>Gate Silver on quality</strong> (<code>ControlTest</code> + <code>WriteIncident</code> quarantine) before promoting.</li>
+<li><strong>Idempotent, re-runnable steps</strong> — watermarks + upsert (<code>OnstageDelta</code> / SCD) so re-runs converge.</li>
+<li><strong>Schema-per-layer naming</strong> (e.g. <code>bronze_*</code> / <code>silver_*</code> / <code>gold_*</code> schemas or databases) to keep tiers separable.</li>
+<li><strong>Honest gap:</strong> ELTMaestro enforces none of this — there is no first-class "medallion" object. It's design discipline, and these conventions are how you keep the tiers clean.</li>
+</ol>
+<h2 id="a-worked-example--hr-headcount-mart">A worked example — HR headcount mart<a class="headerlink" href="#a-worked-example--hr-headcount-mart" title="Permanent link">&para;</a></h2>
+<p>A small end-to-end medallion pipeline, built as <strong>three workflows chained by <code>JobStep</code></strong>:</p>
+<p><strong>1. Bronze — land raw HR data</strong> (<code>bronze_hr</code>, tagged <code>bronze</code>)
+- <code>Jdbcsource</code> (or <code>Datasource</code>) pulls <code>Employee</code> and <code>EmployeeDepartmentHistory</code> from the source system.
+- <code>Watermark</code> scopes each run to new/changed rows; targets are insert-only (<code>Jdbctargethdfs</code> / <code>Onstagegroup</code>), so Bronze stays append-only.</p>
+<p><strong>2. Silver — conform &amp; validate</strong> (<code>silver_hr</code>, tagged <code>silver</code>)
+- <code>Join</code> the two Bronze tables into a conformed <code>employee_department_joined</code>; <code>Dedupe</code> removes duplicates; a <code>Function2</code> step derives/cleans columns; <code>SCD2</code> historizes the department dimension.
+- A <code>ControlTest</code> asserts key uniqueness and row counts; <code>WriteIncident</code> quarantines failing rows rather than letting them into Silver.
+- This is exactly the shape of the join → dedupe → function transform DAG shown in <a href="../UG-WORKFLOWS/#the-job-editor--designing-the-dag">Designing the DAG</a>:</p>
+<p><img alt="Silver-layer transform DAG — Employee + EmployeeDepartmentHistory joined into employee_department_joined, passed through a FUNCTION2 step, with a parallel dedupe → filter branch" src="../images/job-dag-example.png" /></p>
+<p><strong>3. Gold — build the mart</strong> (<code>gold_hr</code>, tagged <code>gold</code>)
+- <code>Aggregate2</code> rolls Silver up to headcount-by-department; <code>Table</code> (or a group loader) writes the <code>gold_headcount</code> mart; <code>JdbcTargetClickhouse</code> (or your serving MPP) publishes it for BI.</p>
+<p><strong>Spine:</strong> a master workflow uses <code>JobStep</code> to run <code>bronze_hr → silver_hr → gold_hr</code> in order; the <strong>Scheduler</strong> runs Bronze hourly and triggers the rest on completion; <strong>Email Alerts</strong> notify on failure. The whole chain's column lineage is visible end-to-end in the <strong>Lineage Viewer</strong>.</p>
+<h2 id="where-to-build-a-runnable-reference">Where to build a runnable reference<a class="headerlink" href="#where-to-build-a-runnable-reference" title="Permanent link">&para;</a></h2>
+<p>The local <strong><code>.201</code></strong> stack (ClickHouse + Spark/HDFS + Postgres) supports an end-to-end medallion demo today: files → Bronze (lake external tables) → Silver (conform in ClickHouse/Spark, gated) → Gold (<code>Aggregate2</code> + <code>JdbcTargetClickhouse</code>), chained by <code>JobStep</code>, scheduled + alerted, with the whole chain visible in the Lineage Viewer.</p>
+<h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../UG-WORKFLOWS/">Workflows — building &amp; running jobs</a> · <a href="../UG-ADMIN/">Administration &amp; connections</a> · <a href="../UG-MENUS/">Menus</a></li>
+<li>Lineage · Function catalog</li>
+<li>Per-platform setup: <a href="../REDSHIFT-SETUP/">Redshift</a> · <a href="../SPARKSQL-SETUP/">SparkSQL</a> · <a href="../CLICKHOUSE-AUTH/">ClickHouse</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top", "navigation.instant", "navigation.tracking", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2726 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="User documentation for the ELTMaestro ELT/data-pipeline platform.">
+      
+      
+      
+        <link rel="canonical" href="https://zgurung.github.io/eltmaestro-docs/UG-STEPS/">
+      
+      
+        <link rel="prev" href="../UG-WORKFLOWS/">
+      
+      
+        <link rel="next" href="../MEDALLION/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>Step reference - ELTMaestro Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#step-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ELTMaestro Documentation" class="md-header__button md-logo" aria-label="ELTMaestro Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ELTMaestro Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Step reference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ELTMaestro Documentation" class="md-nav__button md-logo" aria-label="ELTMaestro Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ELTMaestro Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Getting started
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../USER-GUIDE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-GETTING-STARTED/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-MENUS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Menus
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Admin & connections
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Admin & connections
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-ADMIN/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Administration & setup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Workflows & steps
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Workflows & steps
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-WORKFLOWS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Workflows
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Step reference
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Step reference
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#common-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common steps
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common steps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sources--input" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sources &amp; input
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sources & input">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jdbcsource" class="md-nav__link">
+    <span class="md-ellipsis">
+      Jdbcsource
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#onstagegroup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Onstagegroup
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transforms
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Transforms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#function2--aggregate2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Function2 &amp; Aggregate2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#join" class="md-nav__link">
+    <span class="md-ellipsis">
+      Join
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pivot" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pivot
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-quality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data quality
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Control
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#switch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Switch
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#watermark" class="md-nav__link">
+    <span class="md-ellipsis">
+      Watermark
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-variable" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set Variable
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-watch" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Watch
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jdbc-watch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Jdbc Watch
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#script-watch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Script Watch
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transfer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transfer
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Transfer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#file-scanner" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Scanner
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remote-file-scanner" class="md-nav__link">
+    <span class="md-ellipsis">
+      Remote File Scanner
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#push-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Push File
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pull-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pull File
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sftp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sftp
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scripting--jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scripting &amp; jobs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scripting & jobs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sql-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sql Script
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ssh
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#job-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job Step
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#export" class="md-nav__link">
+    <span class="md-ellipsis">
+      Export
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Export">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#write-jdbc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Write Jdbc
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mpp-common-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      MPP-common steps
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#platform-specific-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Platform-specific steps
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Platform-specific steps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#redshift" class="md-nav__link">
+    <span class="md-ellipsis">
+      Redshift
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Redshift">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jdbc-target-redshift" class="md-nav__link">
+    <span class="md-ellipsis">
+      Jdbc Target Redshift
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#snowflake" class="md-nav__link">
+    <span class="md-ellipsis">
+      Snowflake
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clickhouse" class="md-nav__link">
+    <span class="md-ellipsis">
+      ClickHouse
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sparksql" class="md-nav__link">
+    <span class="md-ellipsis">
+      SparkSQL
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tie-back-to-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tie-back to architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tie-back to architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-bronze--raw-landing--ingestion" class="md-nav__link">
+    <span class="md-ellipsis">
+      🥉 Bronze — raw landing / ingestion
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-silver--cleaned-conformed-validated" class="md-nav__link">
+    <span class="md-ellipsis">
+      🥈 Silver — cleaned, conformed, validated
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-gold--business-marts--serving" class="md-nav__link">
+    <span class="md-ellipsis">
+      🥇 Gold — business marts / serving
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-orchestration-spine-cross-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      The orchestration spine (cross-layer)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Medallion design
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Medallion design
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION-BRONZE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bronze
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION-SILVER/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Silver
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION-GOLD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Gold
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Platform setup
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Platform setup
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../REDSHIFT-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redshift
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPARKSQL-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SparkSQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CLICKHOUSE-AUTH/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ClickHouse auth
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MPP-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MPP prerequisites
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Install & operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Install & operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INSTALL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Install
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UPGRADE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Upgrade
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../OPERATIONS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Operations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#common-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common steps
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common steps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sources--input" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sources &amp; input
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sources & input">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jdbcsource" class="md-nav__link">
+    <span class="md-ellipsis">
+      Jdbcsource
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#onstagegroup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Onstagegroup
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transforms
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Transforms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#function2--aggregate2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Function2 &amp; Aggregate2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#join" class="md-nav__link">
+    <span class="md-ellipsis">
+      Join
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pivot" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pivot
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-quality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data quality
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Control
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#switch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Switch
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#watermark" class="md-nav__link">
+    <span class="md-ellipsis">
+      Watermark
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-variable" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set Variable
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-watch" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Watch
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jdbc-watch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Jdbc Watch
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#script-watch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Script Watch
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transfer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transfer
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Transfer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#file-scanner" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Scanner
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remote-file-scanner" class="md-nav__link">
+    <span class="md-ellipsis">
+      Remote File Scanner
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#push-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Push File
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pull-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pull File
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sftp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sftp
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scripting--jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scripting &amp; jobs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scripting & jobs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sql-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sql Script
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ssh
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#job-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job Step
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#export" class="md-nav__link">
+    <span class="md-ellipsis">
+      Export
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Export">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#write-jdbc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Write Jdbc
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mpp-common-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      MPP-common steps
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#platform-specific-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Platform-specific steps
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Platform-specific steps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#redshift" class="md-nav__link">
+    <span class="md-ellipsis">
+      Redshift
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Redshift">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jdbc-target-redshift" class="md-nav__link">
+    <span class="md-ellipsis">
+      Jdbc Target Redshift
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#snowflake" class="md-nav__link">
+    <span class="md-ellipsis">
+      Snowflake
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clickhouse" class="md-nav__link">
+    <span class="md-ellipsis">
+      ClickHouse
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sparksql" class="md-nav__link">
+    <span class="md-ellipsis">
+      SparkSQL
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tie-back-to-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tie-back to architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tie-back to architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-bronze--raw-landing--ingestion" class="md-nav__link">
+    <span class="md-ellipsis">
+      🥉 Bronze — raw landing / ingestion
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-silver--cleaned-conformed-validated" class="md-nav__link">
+    <span class="md-ellipsis">
+      🥈 Silver — cleaned, conformed, validated
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-gold--business-marts--serving" class="md-nav__link">
+    <span class="md-ellipsis">
+      🥇 Gold — business marts / serving
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-orchestration-spine-cross-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      The orchestration spine (cross-layer)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="step-reference">Step reference<a class="headerlink" href="#step-reference" title="Permanent link">&para;</a></h1>
+<p>Catalog of every step you can place on the <a href="../UG-WORKFLOWS/">Job editor</a> canvas, derived from <code>JobEditor.populateListItems()</code>. Part of the <a href="../USER-GUIDE/">User Guide</a>.</p>
+<blockquote>
+<p><strong>Status: complete</strong> — all in-scope steps documented. Three remain open: <code>Datasource</code> and <code>Meta Profile</code> are placeholders pending input, and <code>Write Incident</code> is deferred. (Living doc — update as the UI evolves.)</p>
+</blockquote>
+<p><strong>Scope.</strong> This reference covers the actively-documented platforms: <strong>Redshift, Snowflake, ClickHouse, SparkSQL</strong>. (All other platforms — Netezza, Yellowbrick, Greenplum, DashDB, Firebolt, Databricks, SQLWarehouse, Exasol, Synapse — are out of scope.)</p>
+<p>Steps fall into three tiers:
+- <strong><a href="#common-steps">Common steps</a></strong> — available on <strong>all</strong> documented platforms.
+- <strong><a href="#mpp-common-steps">MPP-common steps</a></strong> — on every MPP platform (all of the above <strong>except SparkSQL</strong>).
+- <strong><a href="#platform-specific-steps">Platform-specific steps</a></strong> — only on one platform (mostly the per-platform load target).</p>
+<p>Legend: 🟢 documented · 🟡 placeholder (to expand) · ⬜ to do.</p>
+<hr />
+<h2 id="common-steps">Common steps<a class="headerlink" href="#common-steps" title="Permanent link">&para;</a></h2>
+<p>Present on <strong>all</strong> documented platforms (the global control/transfer/script set is added to every job type; the data/transform/DQ items below are common to both the MPP and SparkSQL palettes).</p>
+<h3 id="sources--input">Sources &amp; input<a class="headerlink" href="#sources--input" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>⬜</th>
+<th>Step (palette label)</th>
+<th>Type</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🟢</td>
+<td><a href="#jdbcsource">Jdbcsource</a></td>
+<td><code>JDBCSOURCE</code></td>
+<td>Parallel JDBC extractor — pulls source data into staged flat files for a <code>JdbcTarget</code>; auto-partitioned parallel reads + watermark-based incremental.</td>
+</tr>
+<tr>
+<td>🟡</td>
+<td>Datasource</td>
+<td><code>DATASOURCE</code></td>
+<td><strong>Placeholder.</strong> Corelli pipeline source for <strong>non-JDBC</strong> sources via a <em>general connection</em> (MongoDB, Salesforce, other connectors). Like <code>Jdbcsource</code>, it stages data for a downstream <code>JdbcTarget</code> — the engine requires the data-provider step to be a <code>Jdbcsource</code> or <code>Datasource</code>. Full details TBD.</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td><a href="#onstagegroup">Onstagegroup</a></td>
+<td><code>ONSTAGEGROUP</code></td>
+<td>Bulk schema/group loader — loads <strong>multiple source tables</strong> into a target schema in one step, staged through object storage, with per-table watermark/key incremental merge. Platform-specific dialog.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="jdbcsource">Jdbcsource<a class="headerlink" href="#jdbcsource" title="Permanent link">&para;</a></h4>
+<p><strong>Type</strong> <code>JDBCSOURCE</code> · <strong>WPF</strong> <code>Steps/Pipeline/JdbcSource.cs</code> → <code>JdbcSourceWindow.xaml</code> ("Corelli Parallel Jdbc Extractor") · pairs with a <code>JdbcTarget&lt;Platform&gt;</code></p>
+<p>Extracts data from a source database and writes it to <strong>staged flat files</strong> that a platform-specific <strong><code>JdbcTarget…</code></strong> step then loads (<a href="#jdbc-target-redshift"><code>JdbcTargetRedshift</code></a>, <code>JdbcTargetClickhouse</code>, <code>JdbcTargetSnowflake</code>, …). On its own it only extracts and stages — it must be wired to a <code>JdbcTarget</code>.</p>
+<p><strong>Parallel extraction (auto-partitioning).</strong> Turn on <strong>Auto</strong> partitioning over a numeric or timestamp <em>incrementing</em> column. Maestro runs a MIN/MAX query and generates multiple <code>WHERE</code>-condition "buckets" — e.g. 100 rows with <strong>Rows/Partition = 10</strong> → 10 buckets — and runs <strong>Threads</strong> of them at a time (default <strong>4</strong> = the parallelism factor). Leave <strong>Delim</strong> as pipe (<code>|</code>). Use <strong>Meta Data</strong> / <strong>Preview</strong> to inspect the dataset first.</p>
+<p><img alt="Jdbcsource — Source tab (Auto partitioning): connection, partition columns, key columns, and the Delta Column for incremental loads" src="../images/step-jdbcsource-source.png" /></p>
+<p><strong>Source SQL tab</strong> — the <code>SELECT</code> that runs on the source; <code>$EXTRACT_CONDITION</code> is filled in at runtime (the incremental watermark filter).</p>
+<p><img alt="Jdbcsource — Source SQL tab showing the generated SELECT with the $EXTRACT_CONDITION placeholder" src="../images/step-jdbcsource-sql.png" /></p>
+<p><strong>Incremental loads.</strong> After the initial full parallel load, set a <strong>Delta Column</strong> (e.g. <code>log_ts</code>). On each scheduled run, the target's <a href="#jdbc-target-redshift">Delta Watermark</a> MAX value is pushed back as the source's <code>$EXTRACT_CONDITION</code>, so only new rows are pulled.</p>
+<ul>
+<li><strong>Auto Partitioning Reference tab</strong> — for very large tables where MIN/MAX is slow, point partition sampling at a smaller reference table; leave "ref table same as source" checked if not needed.</li>
+<li><strong>Manual Partitions tab</strong> — when <strong>Manual</strong> partitioning is selected you <strong>must</strong> supply the extraction-criteria conditions here (the per-bucket <code>WHERE</code> expressions — one partition per condition); in Auto mode, any expressions added here override the auto-partitioning logic.</li>
+<li><strong>Performance &amp; Quality tab</strong> — date/timestamp formats, fetch size, optional SAP zero-padding, <strong>Standardize Data</strong> (strip CR/LF/delimiter/quotes), and an <strong>Encode</strong> list that <strong>base64-encodes</strong> selected columns so special characters survive the flat file — the target decodes them with the platform's base64 function.</li>
+</ul>
+<p><img alt="Jdbcsource — Performance &amp; Quality tab: formats, Standardize Data, and the base64 Encode column list" src="../images/step-jdbcsource-quality.png" /></p>
+<h4 id="onstagegroup">Onstagegroup<a class="headerlink" href="#onstagegroup" title="Permanent link">&para;</a></h4>
+<p><strong>Type</strong> <code>ONSTAGEGROUP</code> · <em>"Onstage Schema Loader"</em> · platform-specific class/dialog:</p>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>WPF</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Redshift</td>
+<td><code>Steps/Redshift/RSGroupLoader.cs</code> → <code>RSGroupLoaderWindow.xaml</code></td>
+</tr>
+<tr>
+<td>Snowflake</td>
+<td><code>Steps/Snowflake/SnowGroupLoader.cs</code> → <code>SnowGroupLoaderWindow.xaml</code></td>
+</tr>
+<tr>
+<td>ClickHouse</td>
+<td><code>Steps/Clickhouse/CHGroupLoader.cs</code> → <code>CHGroupLoaderWindow.xaml</code></td>
+</tr>
+<tr>
+<td>SparkSQL / Synapse</td>
+<td><code>Steps/Spark/SparkGroupLoader.cs</code> → <code>SparkGroupLoaderWindow.xaml</code></td>
+</tr>
+</tbody>
+</table>
+<p>Loads <strong>multiple tables</strong> from a source schema into a target schema in a single step. The dialog (shown here for Redshift) has two tabs.</p>
+<p><strong>Schema tab</strong> — set the <strong>Source</strong> (connection, catalog/database, schema) and <strong>Target</strong> (catalog/database, schema), plus platform-specific <strong>Configurations</strong>. For Redshift those are the <strong>S3 Connection</strong> (Maestro staging), <strong>Initial Refresh Partitions</strong>, <strong>Yearly Data Growth Factor</strong>, and the <strong>S3 Upload / S3 Clean / Copy-Load</strong> commands. (Configurations differ by platform.)</p>
+<p><img alt="Onstagegroup — Schema tab (Redshift): source &amp; target schema plus S3 staging configuration" src="../images/step-onstagegroup-schema.png" /></p>
+<p><strong>Table(s) tab</strong> — select one or more tables from <strong>Available Source Table(s)</strong> on the left and click <strong><code>&gt;</code></strong> to add them. Each target table is named <strong><code>database/schema/table</code></strong>. For each table set:
+- <strong>Watermark(s)</strong> — a timestamp, date, or incrementing numeric column (e.g. a sequence). The watermark value drives <strong>incremental loads</strong> — only rows past the last watermark are pulled and <strong>merged</strong> into the target.
+- <strong>Key(s)</strong> — the column(s) the incremental merge keys on.</p>
+<p>If the Watermark/Key dropdowns are empty, click <strong>Refresh Metadata</strong>.</p>
+<p><img alt="Onstagegroup — Table(s) tab: source tables added to targets, each with Watermark(s) and Key(s)" src="../images/step-onstagegroup-tables.png" /></p>
+<p><strong>Static Filter Condition (per table)</strong> — <strong>overrides</strong> the delta filter that runs on the source. Use it for a custom delta window (e.g. <code>modified_date &gt; current_date - 3</code>) or a <strong>full load</strong> with <code>1=1</code> (you still pick a watermark/key, but the static filter forces a full extract).</p>
+<p><img alt="Onstagegroup — Static Filter Condition tab for a table (1=1 forces a full load)" src="../images/step-onstagegroup-filter.png" /></p>
+<blockquote>
+<p><strong>Caveat:</strong> a source <strong>table whose name contains special characters will not load</strong>.</p>
+</blockquote>
+<p><strong>SparkSQL variant — "Onstage Schema Loader for Spark".</strong> On SparkSQL the <strong>target is an HDFS folder</strong>, not a database schema. Pre-create the destination directory on HDFS, e.g.:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>hdfs dfs -mkdir -p /ingest/adventureworks/hr
+</code></pre></div>
+<p>Then on the <strong>Schema</strong> tab the <strong>Target</strong> group shows <strong>Catalog = none</strong> (disabled) and a <strong>Folder</strong> field — click <strong>Browse</strong> to pick that directory from the HDFS tree (browsed over the Spark driver connection, e.g. <code>ELTM_SPARK_DRIVER</code>). The <strong>Source</strong> group and the <strong>Table(s)</strong> tab work the same as the other platforms. <strong>Load Configurations</strong>: Initial Load Partitions · Initial Load Threads · Attributes Quoting · Run Count Metrics · Data Growth Rate <em>(Beta)</em>.</p>
+<p><img alt="Onstage Schema Loader for Spark — Schema tab: Source schema + HDFS Folder target + Load Configurations" src="../images/step-onstagegroup-spark-schema.png" /></p>
+<p><img alt="Browse — picking the target HDFS folder from the Spark driver connection tree" src="../images/step-onstagegroup-spark-browse.png" /></p>
+<p>On run, the loader pulls the selected source tables into the target folder, creating <strong>one subdirectory per table</strong> and writing the data as <strong>Parquet</strong> files (e.g. <code>/ingest/adventureworks/hr/&lt;table&gt;/…</code>). A separate <strong>Parquet Exports</strong> tab can additionally push that output to S3 / Azure Blob via a CLI command.</p>
+<h3 id="transforms">Transforms<a class="headerlink" href="#transforms" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>⬜</th>
+<th>Step</th>
+<th>Type</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🟢</td>
+<td>Datamask</td>
+<td><code>DATAMASK</code></td>
+<td>Masks/obfuscates PII columns — applies the platform hash function (<code>$HASH_TEMPLATE</code> → <code>$HASH_RETURNS</code> type) to columns you tag <em>mask</em>, with an optional name postfix. 1 input. (PII / GDPR / HIPAA redaction.)</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td>Dedupe</td>
+<td><code>DEDUPE</code></td>
+<td>Removes duplicate rows — pick <strong>key column(s)</strong> + a <strong>sort/order expression</strong>; keeps one row per key (the first by the sort order) via <code>ROW_NUMBER() OVER (PARTITION BY keys ORDER BY sort)</code>. 1 input.</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td>Filter</td>
+<td><code>FILTER</code></td>
+<td>Row filter — keeps only rows matching a boolean condition built in the expression editor ("Filter Condition"). 1 input → same columns out.</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td><a href="#function2--aggregate2">Aggregate2</a></td>
+<td><code>AGGREGATE2</code></td>
+<td>Same dialog as <code>Function2</code> (aggregate emphasis) — group-by + aggregate output columns. 1 input.</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td><a href="#function2--aggregate2">Function2</a></td>
+<td><code>FUNCTION2</code></td>
+<td>Column <strong>expression editor</strong> — define output columns as scalar <code>F(x)</code> or aggregate <code>Σ(x)</code> with alias/type/expression, plus <code>WHERE</code>/<code>HAVING</code>. 1 input.</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td><a href="#join">Join</a></td>
+<td><code>JOIN</code></td>
+<td>Joins <strong>multiple</strong> sources (<code>$N</code> aliases) — pick the first source, add INNER/LEFT/… conditions + <code>ON</code> expressions, define aliased output columns. Multi-input.</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td>Minus</td>
+<td><code>MINUS</code></td>
+<td>Set <strong>difference</strong> — outputs rows in source A that are <em>not</em> in source B (you pick which input is A). 2 inputs.</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td>Union</td>
+<td><code>UNION</code></td>
+<td>Combines <strong>two</strong> sources — toggle <strong>Union</strong> (distinct) vs <strong>Union All</strong> (keep duplicates); map the output columns. 2 inputs.</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td><a href="#pivot">Pivot</a></td>
+<td><code>PIVOT</code></td>
+<td>Pivots rows → columns — distinct values of the pivot column become new columns, aggregated from a value column. <strong>Needs a Key column marked on the source.</strong> Output table drop-and-created each run in <code>$SYSTEM_DEFAULT_SCHEMA</code>. 1 input.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="function2--aggregate2">Function2 &amp; Aggregate2<a class="headerlink" href="#function2--aggregate2" title="Permanent link">&para;</a></h4>
+<p><strong>Type</strong> <code>FUNCTION2</code> / <code>AGGREGATE2</code> · <strong>WPF</strong> <code>Steps/CommonTransform/Function2.cs</code> → <code>Function2Window.xaml</code> ("Function Expression Version 2.0") · 1 input</p>
+<p>The column <strong>expression editor</strong> — both palette entries open the <strong>same</strong> dialog (<code>Aggregate2</code> is the same step surfaced with aggregate emphasis). For each output column pick a <strong>Mode</strong>:
+- <strong>F(x)</strong> — a per-row scalar expression (these columns form the <code>GROUP BY</code> when any aggregate is present);
+- <strong>Σ(x)</strong> — an aggregate (e.g. <code>COUNT(*)</code>, <code>SUM(...)</code>),</p>
+<p>…each with an <strong>Alias</strong>, <strong>Type</strong>, and <strong>Expression</strong>. Functions / operators / constants come from the function catalog; the <strong>Filters</strong> tab adds <code>WHERE</code> / <code>HAVING</code> conditions. Full walkthrough: <a href="../UG-WORKFLOWS/#configuring-a-step--the-expression-builder">Configuring a step — the expression builder</a>.</p>
+<p><img alt="Function2 / Aggregate2 — the Function Expression editor: source columns plus scalar F(x) and aggregate Σ(x) output columns with alias/type/expression" src="../images/step-expression-builder.png" /></p>
+<h4 id="join">Join<a class="headerlink" href="#join" title="Permanent link">&para;</a></h4>
+<p><strong>Type</strong> <code>JOIN</code> · <strong>WPF</strong> <code>Steps/CommonTransform/MPPJoin.cs</code> → <code>MPPJoinWindow.xaml</code> · multi-input</p>
+<p>Joins multiple input sources into one output. Each inbound source is referenced by a <strong><code>$N</code> alias</strong>, where <code>N</code> is the inbound arrow's step ID (e.g. <code>$4</code> = Employee, <code>$5</code> = EmployeeDepartmentHistory).
+- <strong>Input</strong> — <em>Sources</em> lists the connected steps by alias; <em>Columns</em> lists their columns (<strong>Add To Output</strong> to emit one).
+- <strong>Join Condition(s)</strong> — pick the <strong>First Join Source</strong>, then add conditions: <strong>Type</strong> (INNER / LEFT / …), <strong>Join With</strong> (<code>$N</code>), and the <strong>ON</strong> expression (e.g. <code>$4.`BusinessEntityID` = $5.`BusinessEntityID`</code>).
+- <strong>Output Columns</strong> — each output's Name (<code>$N.column</code>), Type, and <strong>Alias</strong>; <strong>Fix Alias</strong> repairs broken <code>$N</code> references.</p>
+<p><strong>Check Mapping</strong> validates that every join / output / input alias resolves to a connected source.</p>
+<p><img alt="Join — input sources by $N alias, an INNER JOIN ON $4.BusinessEntityID = $5.BusinessEntityID, and aliased output columns" src="../images/step-join.png" /></p>
+<h4 id="pivot">Pivot<a class="headerlink" href="#pivot" title="Permanent link">&para;</a></h4>
+<p><strong>Type</strong> <code>PIVOT</code> · <strong>WPF</strong> <code>Steps/CommonTransform/Pivot.cs</code> → <code>PivotWindow.xaml</code> ("Pivot Transformation") · 1 input</p>
+<p>Pivots rows into columns — the distinct values of the <strong>Pivot ON</strong> column become new output columns, populated by an <strong>aggregate</strong> of the <strong>Pivot Value</strong> column. In the dialog:
+- <strong>Pivot Table Name</strong> — unique name for the generated pivot table.
+- <strong>Pivot ON Column or Expression</strong> — the column whose distinct values become new columns (e.g. <code>jobtitle</code>).
+- <strong>Pivot Value Column or Expression</strong> — the value to aggregate (e.g. <code>businessentityid</code>).
+- <strong>Aggregate function</strong> — applied to each generated column (e.g. <code>count($COLUMN)</code>, <code>sum</code>).
+- <strong>Pivot-Output Column Name Prefix</strong> and <strong>Max Generated Column(s)</strong> (default 256).</p>
+<p><img alt="Pivot Transformation dialog — Pivot ON jobtitle, value businessentityid, count aggregate, max 256 columns" src="../images/step-pivot-dialog.png" /></p>
+<p><strong>Requires a Key on the source.</strong> The upstream source/<code>Table</code> step must have a <strong>Key</strong> column checked (e.g. <code>businessentityid</code> marked Key on the <code>employee</code> Table step) — the pivot groups on that key.</p>
+<p><img alt="The upstream Table step with businessentityid marked as Key" src="../images/step-pivot-source-key.png" /></p>
+<p>The result turns each distinct pivot value into its own column (one row per key):</p>
+<p><img alt="Pivoted output — one row per businessentityid, a column per job title" src="../images/step-pivot-output.png" /></p>
+<blockquote>
+<p><strong>⚠️ Output table is drop-and-created on every run</strong> in the system default schema (<code>$SYSTEM_DEFAULT_SCHEMA</code> in <code>system.cfg</code>, e.g. <code>integrator</code>), so newly-arriving pivot values can add columns.</p>
+</blockquote>
+<h3 id="data-quality">Data quality<a class="headerlink" href="#data-quality" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>⬜</th>
+<th>Step</th>
+<th>Type</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🟢</td>
+<td>Control Test</td>
+<td><code>CONTROLTEST</code></td>
+<td>Data-quality test — measures correctness/reasonableness of data. <strong>Defined first</strong> in <strong>Administration ▸ Metrics Configuration ▸ Control Test</strong> (name, type, tolerance, an <strong>expected-value query</strong> vs an <strong>actual-value query</strong> → pass/fail), then selected in the workflow. Test type <strong><code>M</code></strong> = a <em>measurement</em> probe for trending (DB-size growth, counts, …) rather than pass/fail.</td>
+</tr>
+<tr>
+<td>🟡</td>
+<td>Meta Profile</td>
+<td><code>METAPROFILE</code></td>
+<td><strong>Placeholder.</strong> Profiles column <strong>metadata / statistics</strong> (types, distributions, counts) for data observability. Full details TBD.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="control">Control<a class="headerlink" href="#control" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>⬜</th>
+<th>Step</th>
+<th>Type</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🟢</td>
+<td>Sync</td>
+<td><code>SYNC</code></td>
+<td>A <strong>barrier / sync point</strong> (aka <em>dummy step</em>) — does nothing itself. Use it to <strong>control parallelism</strong>: point arrows from N parallel steps/threads into one Sync step so it acts as a <strong>stopper</strong> that waits for all N to finish, then the next steps fire from its output. No config.</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td><a href="#switch">Switch</a></td>
+<td><code>SWITCH</code></td>
+<td>Routes flow on the <strong>success/failure status</strong> of the incoming pipeline — assign downstream steps to a success path vs a failure/<strong>recovery</strong> path. 1 input, ≥2 outputs.</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td><a href="#file-watch">File Watch</a></td>
+<td><code>FILEWATCH</code></td>
+<td>File <strong>sensor</strong> — watches an SSH server's directory for a file to arrive, polling until found or timeout.</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td><a href="#jdbc-watch">Jdbc Watch</a></td>
+<td><code>JDBCWATCH</code></td>
+<td>Database <strong>sensor</strong> — re-runs a SQL query until its result matches a value (success) or times out (failure unless enforced).</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td><a href="#script-watch">Script Watch</a></td>
+<td><code>SCRIPTWATCH</code></td>
+<td>Script <strong>sensor</strong> — re-runs a shell/script until its output matches a value (success) or times out (configurable state).</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td><a href="#set-variable">Set Variable</a></td>
+<td><code>SETVARIABLE</code></td>
+<td>Sets a job variable (<code>$VAR_n</code>) from a <strong>Fixed</strong> value, a <strong>SQL</strong> query result, or the <strong>first line</strong> of a <strong>Shell</strong> script's output.</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td><a href="#watermark">Watermark</a></td>
+<td><code>WATERMARK</code></td>
+<td>Persists a <strong>high/low</strong> watermark at <strong>Job</strong> or <strong>Batch</strong> scope; the next run picks the values up automatically for incremental delta logic.</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td>Smart Script</td>
+<td><code>SMARTSCRIPT</code></td>
+<td>An <strong>item-list processor</strong>: <strong>INPUT</strong> = a list of values from a shell script (stdout split by newline) or SQL (first-column rows); <strong>DECLARATIONS</strong> = <code>echo</code>-based per-item transforms; <strong>ACTIONS</strong> = run a SQL/shell script per item with a <strong>parallel-call count</strong> (e.g. list files → gzip them 8-way). Variables use a <code>$</code> prefix.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="switch">Switch<a class="headerlink" href="#switch" title="Permanent link">&para;</a></h4>
+<p><strong>Type</strong> <code>SWITCH</code> · <strong>WPF</strong> <code>Steps/Common/SWITCH.cs</code> → <code>SwitchWindow.xaml</code> ("Switch Process Flow") · 1 input, ≥2 outputs</p>
+<p>Routes the pipeline flow based on the <strong>success/failure status</strong> of the pipeline leading into it. Assign each connected downstream step to <strong>Run Following On Success</strong> or <strong>Run Following On Failure</strong> (use <code>&gt;</code> to move a step between the lists). Typical use is a <strong>recovery path</strong> — e.g. a <code>Jdbcsource → JdbcTarget</code> pipeline; if it fails, the Switch fires a recovery step (a <code>SqlScript</code> or any other step) instead of just failing the job.</p>
+<p><img alt="Switch — Run Following On Success vs Run Following On Failure (recovery) path lists" src="../images/step-switch.png" /></p>
+<h4 id="watermark">Watermark<a class="headerlink" href="#watermark" title="Permanent link">&para;</a></h4>
+<p><strong>Type</strong> <code>WATERMARK</code> · <strong>WPF</strong> <code>Steps/Common/Watermark.cs</code> → <code>WatermarkWindow.xaml</code> ("Update Watermark") ·</p>
+<p>Persists a <strong>High</strong> and/or <strong>Low</strong> watermark value at <strong>Job</strong> or <strong>Batch</strong> scope. The values come from variables set during a successful run; on the <strong>next</strong> run of the same job/batch they're <strong>picked up automatically</strong>, so you can build incremental <strong>delta expressions</strong> and other pipeline logic from them. Set either High or Low (or both).</p>
+<p><img alt="Set Watermark — Job/Batch type with a High Value of $VAR_5" src="../images/step-watermark.png" /></p>
+<h4 id="set-variable">Set Variable<a class="headerlink" href="#set-variable" title="Permanent link">&para;</a></h4>
+<p><strong>Type</strong> <code>SETVARIABLE</code> · <strong>WPF</strong> <code>Steps/Common/SetVariable.cs</code> → <code>SetVariableWindow.xaml</code> ("Set Variable") ·</p>
+<p>Sets a job <strong>variable</strong> (<code>$VAR_n</code>) from one of three <strong>Value Type</strong> sources:
+- <strong>Fixed</strong> — a static value (or another variable);
+- <strong>SQL</strong> — the result of a SQL query on a connection (e.g. <code>SELECT current_timestamp::date</code>);
+- <strong>Shell</strong> — the <strong>first line</strong> of a shell script's output.</p>
+<p><img alt="Set Variable — SQL mode setting $VAR_5 to SELECT current_timestamp::date" src="../images/step-setvariable.png" /></p>
+<h4 id="file-watch">File Watch<a class="headerlink" href="#file-watch" title="Permanent link">&para;</a></h4>
+<p><strong>Type</strong> <code>FILEWATCH</code> · <strong>WPF</strong> <code>Steps/Common/FileWatch.cs</code> → <code>FileWatchWindow.xaml</code> ("File Watch") ·</p>
+<p>A <strong>file sensor</strong> — watches an <strong>SSH</strong> server for a file to arrive. Supply the <strong>SSH Connection</strong>, <strong>Directory</strong>, and <strong>File Name</strong>; the step polls every <strong>File Check Interval</strong> minutes up to the <strong>Max Wait Timeout</strong>, succeeding when the file appears (or timing out). Options: <strong>Enforce SUCCESS after Timeout</strong> and <strong>DELETE File On Normal Success</strong>.</p>
+<p><img alt="File Watch — SSH connection, directory, file name, timeout + check interval" src="../images/step-filewatch.png" /></p>
+<h4 id="jdbc-watch">Jdbc Watch<a class="headerlink" href="#jdbc-watch" title="Permanent link">&para;</a></h4>
+<p><strong>Type</strong> <code>JDBCWATCH</code> · <strong>WPF</strong> <code>Steps/Common/JDBCWatch.cs</code> → <code>JdbcWatchWindow.xaml</code> ("Watch JDBC Data State") ·</p>
+<p>A <strong>database sensor</strong> — runs a <strong>SQL query</strong> on a connection and waits until the <strong>first column</strong> of the result matches one of the <strong>Match Values</strong> (e.g. <code>1, SUCCESS, COMPLETED, READY, LOADED</code>). The query (often a data-quality check returning a count/status) re-runs every <strong>Check Interval</strong> minutes until either a match → <strong>success</strong> (the step completes and flow continues), or <strong>Max Wait Timeout</strong> → <strong>failure</strong> by default (unless <strong>Enforce SUCCESS after Timeout</strong> is checked). First-column match limit 100K rows.</p>
+<p><img alt="Jdbc Watch — database connection, match values, SQL query, timeout + check interval" src="../images/step-jdbcwatch.png" /></p>
+<h4 id="script-watch">Script Watch<a class="headerlink" href="#script-watch" title="Permanent link">&para;</a></h4>
+<p><strong>Type</strong> <code>SCRIPTWATCH</code> · <strong>WPF</strong> <code>Steps/Common/ScriptWatch.cs</code> → <code>ScriptWatchWindow.xaml</code> ("Watch Script Output") ·</p>
+<p>A <strong>script sensor</strong> — runs a <strong>shell script</strong> on the local engine server (it can invoke bash, Python, etc.) and waits until its standard output matches one of the comma-separated <strong>Value to watch for</strong> entries. Re-runs every <strong>Check Interval</strong> minutes until a match → <strong>success</strong>, or <strong>Timeout</strong> → the configurable <strong>State After Timeout</strong> (default <code>FAILED</code>).</p>
+<p><img alt="Script Watch — shell script, watch values, timeout + check interval + state-after-timeout" src="../images/step-scriptwatch.png" /></p>
+<h3 id="transfer">Transfer<a class="headerlink" href="#transfer" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>⬜</th>
+<th>Step</th>
+<th>Type</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🟢</td>
+<td><a href="#sftp">Sftp</a></td>
+<td><code>SFTP</code></td>
+<td>Downloads files from an <strong>SFTP/SSH</strong> server to the local Maestro server (paths can use variables); supports watermark + caches the downloaded-file list.</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td><a href="#file-scanner">File Scanner</a></td>
+<td><code>FILESCANNER</code></td>
+<td>Scans the <strong>Maestro server</strong> for files via a Linux <code>find</code> command → outputs an <strong>array of files</strong> to the next step; optional last-modified <strong>watermark</strong> (skip already-scanned) + an <strong>ignore-list</strong> DB diff.</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td><a href="#push-file">Push File</a></td>
+<td><code>PUSHFILE</code></td>
+<td>Pushes locally-scanned files <strong>up to a cloud/general connection</strong>. Wire a <strong>File Scanner</strong> → Push File.</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td><a href="#remote-file-scanner">Remote File Scanner</a></td>
+<td><code>REMOTEFILESCANNER</code></td>
+<td>Cloud equivalent of File Scanner — scans a <strong>cloud connection</strong> (e.g. S3) under a prefix → outputs an <strong>array of files</strong>; same last-modified watermark behavior.</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td><a href="#pull-file">Pull File</a></td>
+<td><code>PULLFILE</code></td>
+<td>Pulls files <strong>down from a cloud/general connection to local</strong>. Wire a <strong>Remote File Scanner</strong> → Pull File.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="file-scanner">File Scanner<a class="headerlink" href="#file-scanner" title="Permanent link">&para;</a></h4>
+<p><strong>Type</strong> <code>FILESCANNER</code> · <strong>WPF</strong> <code>Steps/Common/FileScanner.cs</code> → <code>FileScannerWindow.xaml</code> ("Local File Scanner") ·</p>
+<p>Scans the <strong>Maestro engine server</strong> for files by running a <strong>Linux <code>find</code> command</strong> (editable; <strong>Test</strong> previews the result), and outputs the matched <strong>array of file paths</strong> to the next step.
+- <strong>File Scanner tab</strong> — the <strong>Find Command</strong> (bash), a <strong>Watermark Name</strong>, and <strong>Use File-Last-Modified value as watermark</strong>: when checked, Maestro tracks the scanned files' last-modified timestamps so it <strong>won't rescan the same files</strong> next run — each successful run returns only <strong>new</strong> files.</p>
+<p><img alt="File Scanner — the bash find command, watermark name, and use-last-modified-as-watermark" src="../images/step-filescanner.png" /></p>
+<ul>
+<li><strong>Ignore List tab</strong> — optionally diff against an external "already-loaded" registry: pick a <strong>Connection</strong> and a <strong>Query</strong> that returns loaded file names, choose a match <strong>Condition</strong> (Matches / Contains / Starts With / Ends With), and Maestro <strong>removes</strong> files already in that list from the output (toggle with <strong>Ignore File(s)</strong>).</li>
+</ul>
+<p><img alt="File Scanner — Ignore List tab: a connection + query of loaded files, diffed against the scan" src="../images/step-filescanner-ignore.png" /></p>
+<h4 id="remote-file-scanner">Remote File Scanner<a class="headerlink" href="#remote-file-scanner" title="Permanent link">&para;</a></h4>
+<p><strong>Type</strong> <code>REMOTEFILESCANNER</code> · <strong>WPF</strong> <code>Steps/Common/RemoteFileScanner.cs</code> → <code>RemoteFileScannerWindow.xaml</code> ("Remote File(s) Scanner") ·</p>
+<p>The <strong>cloud</strong> equivalent of <a href="#file-scanner">File Scanner</a> — scans a <strong>cloud connection</strong> (e.g. an <strong>S3</strong> connection) under a <strong>Scan Prefix [key]</strong> (path) and outputs an <strong>array of files</strong> to the next step. Same <strong>Use File-Last-Modified value as watermark</strong> behavior (only new files on the next run). <strong>Browse</strong> opens the connection to pick/preview the prefix and its files.</p>
+<p><img alt="Remote File Scanner — S3 connection, scan prefix, and last-modified watermark" src="../images/step-remotefilescanner.png" /></p>
+<p><img alt="Browsing an S3_CONNECTION prefix to preview the matched files" src="../images/step-remotefilescanner-browse.png" /></p>
+<h4 id="push-file">Push File<a class="headerlink" href="#push-file" title="Permanent link">&para;</a></h4>
+<p><strong>Type</strong> <code>PUSHFILE</code> · <strong>WPF</strong> <code>Steps/Common/PushFile.cs</code> → <code>PushFileWindow.xaml</code> ("Push/Upload File(s)") · <strong>requires a <a href="#file-scanner">File Scanner</a></strong> (or Sftp / Write File) upstream</p>
+<p>Pushes the locally-scanned files <strong>up to a cloud/general connection</strong>.</p>
+<p><img alt="A File Scanner feeding a Push File step" src="../images/step-pushfile-dag.png" /></p>
+<ul>
+<li><strong>Destination tab</strong> — the target <strong>Connection</strong> (e.g. <code>S3_CONNECTION</code>) and <strong>Destination Path</strong>, with <strong>Auto-Clean at destination on success/failure</strong>.</li>
+<li><strong>Flag Options tab</strong> — optionally send a <strong>flag file</strong> after the upload.</li>
+</ul>
+<p><img alt="Push File — Destination tab: S3 connection + destination path + auto-clean" src="../images/step-pushfile.png" /></p>
+<h4 id="pull-file">Pull File<a class="headerlink" href="#pull-file" title="Permanent link">&para;</a></h4>
+<p><strong>Type</strong> <code>PULLFILE</code> · <strong>WPF</strong> <code>Steps/Common/PullFile.cs</code> → <code>PullFileWindow.xaml</code> ("Pull/Download File(s)") · <strong>requires a <a href="#remote-file-scanner">Remote File Scanner</a></strong> (or Sftp) upstream</p>
+<p>Pulls files <strong>down from a cloud/general connection to the local server</strong>.</p>
+<p><img alt="A Remote File Scanner feeding a Pull File step" src="../images/step-pullfile-dag.png" /></p>
+<ul>
+<li><strong>Server Folder Path</strong> — the local destination folder, with <strong>Auto-Clean at destination on success/failure</strong>.</li>
+</ul>
+<p><img alt="Pull File — Server Folder Path destination" src="../images/step-pullfile.png" /></p>
+<h4 id="sftp">Sftp<a class="headerlink" href="#sftp" title="Permanent link">&para;</a></h4>
+<p><strong>Type</strong> <code>SFTP</code> · <strong>WPF</strong> <code>Steps/Common/Sftp.cs</code> → <code>SftpWindow.xaml</code> ("SFTP Pull/Download File(s)") ·</p>
+<p>Downloads files from an <strong>SFTP/SSH</strong> server to the local Maestro server, and <strong>caches the list of downloaded files</strong> for downstream file-ordering steps; supports <strong>watermark</strong> downloads (only new files next run).
+- <strong>Source</strong> — the SSH <strong>Connection</strong>, <strong>Directory1</strong> (and an optional <strong>Directory2</strong>), and <strong>File/Pattern</strong> (e.g. <code>*.csv</code>). Paths can use <strong>variables</strong>: set <code>$VAR_5</code>/<code>$VAR_6</code> to (say) a date pattern via a <a href="#set-variable">Set Variable</a> step and reference them in the directory (<code>/data/$VAR_5</code>) so the scan targets a date-driven path.
+- <strong>Target Directory (Maestro Server)</strong> — the local folder, with <strong>Create directory if not exists</strong>.
+- <strong>Other Options</strong> — <strong>Use Watermark</strong> (<code>$JOB_LOW_WATERMARK_VALUE</code>), <strong>Update File Time</strong>, <strong>Auto-Clean</strong>, <strong>Auto-Archive</strong>.</p>
+<p><img alt="Sftp — source directories using $VAR_5/$VAR_6, target dir, and watermark options" src="../images/step-sftp.png" /></p>
+<h3 id="scripting--jobs">Scripting &amp; jobs<a class="headerlink" href="#scripting--jobs" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>⬜</th>
+<th>Step</th>
+<th>Type</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🟢</td>
+<td><a href="#sql-script">Sql Script</a></td>
+<td><code>SQLSCRIPT</code></td>
+<td>Runs <strong>SQL/DML</strong> statements (truncate/insert/update/…) on a connection, each ending with <code>;</code>. Not for large SELECTs (no output written).</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td><a href="#ssh">Ssh</a></td>
+<td><code>SSH</code></td>
+<td>Runs a <strong>shell script</strong> (bash/Python/Perl/…) on an SSH connection; success by exit code or by scanning output for a normal/abnormal string.</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td><a href="#job-step">Job Step</a></td>
+<td><code>JOBSTEP</code></td>
+<td>Runs <strong>another workflow (job)</strong> as a step — orchestration, repetition, recovery. Nests to any depth (no loops). Actions: DO_NOTHING / RESTART / RUN_LIMIT_LOOP / RUN_FOREVER.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sql-script">Sql Script<a class="headerlink" href="#sql-script" title="Permanent link">&para;</a></h4>
+<p><strong>Type</strong> <code>SQLSCRIPT</code> · <strong>WPF</strong> <code>Steps/Common/SQLScript.cs</code> → <code>SQLScriptWindow.xaml</code> ("SQL Script") ·</p>
+<p>Runs <strong>SQL / DML</strong> statements (truncate / delete / insert / update / vacuum …) on a selected database connection. Paste any number of statements, each ending with a <strong>semicolon <code>;</code></strong>. <strong>Not</strong> for large <code>SELECT</code>s — the output isn't written anywhere.</p>
+<p><img alt="Sql Script — DML statements (truncate/insert/vacuum) separated by semicolons on a Redshift connection" src="../images/step-sqlscript.png" /></p>
+<blockquote>
+<p><strong>⚠️ Known caveat:</strong> Maestro splits the script on <code>;</code>, so <strong>every statement must end with <code>;</code></strong> — and a <code>;</code> embedded <em>inside</em> a statement (e.g. in a string literal) can break the split.</p>
+</blockquote>
+<h4 id="ssh">Ssh<a class="headerlink" href="#ssh" title="Permanent link">&para;</a></h4>
+<p><strong>Type</strong> <code>SSH</code> · <strong>WPF</strong> <code>Steps/Common/SSH.cs</code> → <code>SSHWindow.xaml</code> ("Execute Shell Command (SSH)") ·</p>
+<p>Runs a <strong>shell script</strong> on an SSH connection — you can invoke bash, Python, Ruby, Perl, etc. (Maestro writes the script to a temporary <code>.sh</code> file and runs it with <code>bash</code>).
+- <strong>Shell Script tab</strong> — the SSH <strong>Connection</strong> and the script.
+- <strong>Exit Status tab</strong> — how the step decides success:
+  - <strong>Use script return value</strong> — exit code <code>0</code> = success, non-zero = failure;
+  - <strong>Scan normal value in script output</strong> — success when the output contains the <strong>Scan Following Text</strong> (e.g. <code>COMPLETED SUCCESSFULLY</code>);
+  - <strong>Scan abnormal value in script output</strong> — failure when the output contains the text (e.g. <code>CRITICAL ERROR</code>).</p>
+<p><img alt="Ssh — Shell Script tab with the script and SSH connection" src="../images/step-ssh.png" /></p>
+<p><img alt="Ssh — Exit Status tab: scan the script output for a normal-success string" src="../images/step-ssh-exit.png" /></p>
+<h4 id="job-step">Job Step<a class="headerlink" href="#job-step" title="Permanent link">&para;</a></h4>
+<p><strong>Type</strong> <code>JOBSTEP</code> · <strong>WPF</strong> <code>Steps/Common/JobStep.cs</code> → <code>JobStepWindow.xaml</code> ("Run Workflow (Job)") ·</p>
+<p>Runs <strong>another workflow (job)</strong> as a step — the basis for <strong>orchestration, repetition, and recovery</strong>. Pick a job from <strong>Available Jobs</strong>; one Job Step runs one job, and that job can itself contain Job Steps, so jobs nest to <strong>any depth</strong> (parent → children → grandchildren).</p>
+<blockquote>
+<p><strong>No loops.</strong> Maestro forbids recursive job graphs — a child (or any descendant) cannot point a Job Step back at an ancestor.</p>
+</blockquote>
+<p><strong>Automatic Recovery Options</strong> — the <strong>ACTION</strong> controls how the sub-job runs:</p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Behavior</th>
+<th>Requires</th>
+<th>Terminates when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DO_NOTHING</strong></td>
+<td>Runs once in default mode and returns (no recovery).</td>
+<td>—</td>
+<td>automatically</td>
+</tr>
+<tr>
+<td><strong>RESTART</strong></td>
+<td>Re-runs until the expected outcome is reached.</td>
+<td><strong>UNTIL</strong> state, Max Run Count, Sleep Interval</td>
+<td>parent terminated manually · <strong>or</strong> max run count reached · <strong>or</strong> last run state matches the <strong>UNTIL</strong> value (e.g. <code>COMPLETE</code>)</td>
+</tr>
+<tr>
+<td><strong>RUN_LIMIT_LOOP</strong></td>
+<td>Loops a fixed number of times.</td>
+<td>Max Run Count, Sleep Interval</td>
+<td>parent terminated manually · <strong>or</strong> max run count reached</td>
+</tr>
+<tr>
+<td><strong>RUN_FOREVER</strong></td>
+<td>Runs perpetually.</td>
+<td>Sleep Interval</td>
+<td>parent terminated manually</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Run Workflow (Job) — select a job, ACTION, UNTIL state, Max Run Count + Sleep Interval" src="../images/step-jobstep.png" /></p>
+<h3 id="export">Export<a class="headerlink" href="#export" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>⬜</th>
+<th>Step</th>
+<th>Type</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🟢</td>
+<td><a href="#write-jdbc">Write Jdbc</a></td>
+<td><code>WRITEJDBC</code></td>
+<td>Exports the input rows to an <strong>existing</strong> table on another JDBC database (does <strong>not</strong> create the table — use the DDL Template to build it first). 1 input.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="write-jdbc">Write Jdbc<a class="headerlink" href="#write-jdbc" title="Permanent link">&para;</a></h4>
+<p><strong>Type</strong> <code>WRITEJDBC</code> · <strong>WPF</strong> <code>Steps/CommonTransform/WriteJdbc.cs</code> → <code>WriteJdbcWindow.xaml</code> ("Write to JDBC Target") · 1 input</p>
+<p>Exports the incoming rows into <strong>another database</strong> over JDBC. It needs an upstream <strong>data source</strong> (a <code>Table</code> step or the output of any transform) and writes to an <strong>existing</strong> target table.</p>
+<blockquote>
+<p><strong>The target table must already exist</strong> — Write Jdbc does <strong>not</strong> create it. Click <strong>DDL Template</strong> to preview a <code>CREATE TABLE</code> for the incoming columns, create that table manually on the target connection (adjusting types per the template's notes — e.g. <code>timestamp</code> → <code>datetime</code> for SQL Server), then <strong>Browse</strong> to select it.</p>
+</blockquote>
+<ul>
+<li><strong>Target Load Options</strong> — <strong>Records per batch commit</strong>, <strong>Print verbose message on batch count</strong>, <strong>Attribute enclosed by</strong> (quote char), and the <strong>DDL Template</strong> preview button.</li>
+<li><strong>Target Table (Existing)</strong> — <strong>Connection</strong>, <strong>Catalog</strong>, <strong>Schema</strong>, <strong>Table</strong> (via <strong>Browse</strong>), and <strong>Truncate Target Table</strong>.</li>
+</ul>
+<p><img alt="Write to JDBC Target — batch options, DDL Template, and the existing target-table selection" src="../images/step-writejdbc.png" /></p>
+<p><img alt="DDL Template — a CREATE TABLE preview of the incoming columns, used to build the target table" src="../images/step-writejdbc-ddl.png" /></p>
+<blockquote>
+<p><strong>⚠️ Tested targets:</strong> export is validated against <strong>SQL Server</strong>, <strong>Postgres</strong>, and <strong>Oracle</strong> targets; other JDBC targets are not yet tested.</p>
+</blockquote>
+<hr />
+<h2 id="mpp-common-steps">MPP-common steps<a class="headerlink" href="#mpp-common-steps" title="Permanent link">&para;</a></h2>
+<p>On the in-scope MPP platforms (Redshift, Snowflake, ClickHouse) but <strong>not</strong> SparkSQL.</p>
+<table>
+<thead>
+<tr>
+<th>⬜</th>
+<th>Step</th>
+<th>Type</th>
+<th>What it does</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🟢</td>
+<td>Table</td>
+<td><code>TABLE</code></td>
+<td>Reads from / writes to a referenced table. <strong>Construct</strong>: Existing · Create · Temp. <strong>Load Options</strong>: Truncate · Run Statistics (<code>GENERATE STATISTICS</code>) · Run Vacuum (<code>GROOM</code>) · <strong>Upsert</strong> (update+insert by Key). <strong>Column flags</strong>: Cluster/Dist/Sort · <strong>Key</strong> (needed for Upsert) · <strong>Ident</strong>.</td>
+<td>Add/remove columns only for Create/Temp</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td>View</td>
+<td><code>VIEW</code></td>
+<td>References an existing database <strong>view</strong> (database / schema / view) and brings its columns into the pipeline as a <strong>read source</strong> — no input; output columns = the view's columns.</td>
+<td></td>
+</tr>
+<tr>
+<td>🟢</td>
+<td>Sql Metrics</td>
+<td><code>SQLMETRICS</code></td>
+<td>Runs a selected set of <strong>data-quality / rowcount metrics</strong> (from the metrics catalog — <code>metrics.dq_definition</code>) against the <strong>source</strong> and/or <strong>target</strong>. Pick the metric list and toggle <strong>Run Source</strong> / <strong>Run Target</strong>.</td>
+<td>DQ / observability</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td>Write File</td>
+<td><code>WRITEFILE</code></td>
+<td>Exports a <strong>SQL query result</strong> (on the platform connection) to <strong>delimited flat files</strong> on the server — set the <strong>SQL</strong>, output <strong>directory</strong>, file <strong>prefix</strong> / <strong>extension</strong> (default <code>.psv</code>), <strong>delimiter</strong> (<code>\|</code>), per-file <strong>size MB</strong> (split, default 128), <strong>gzip</strong>, <strong>auto-clean</strong>, <strong>sanitize</strong>, and <strong>fetch size</strong>.</td>
+<td>Export</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td>SCD1</td>
+<td><code>SCD1</code></td>
+<td><strong>Slowly Changing Dimension Type-1</strong> — upserts into a target dimension, <strong>overwriting</strong> changed attributes in place (no history, unlike <code>SCD2</code>). Set target catalog / schema / table and mark each column <strong>Match</strong> / <strong>Change</strong> / <strong>Ignore</strong>. 1 input.</td>
+<td>All MPP <strong>except ClickHouse</strong></td>
+</tr>
+<tr>
+<td>🟢</td>
+<td>SCD2</td>
+<td><code>SCD2</code></td>
+<td><strong>Slowly Changing Dimension Type-2</strong> — keeps history via <strong>effective/expiration timestamps</strong> (current row's exp_ts = <code>9999-12-31</code>). Mark each column <strong>M</strong> (match/identity) · <strong>C</strong> (track change) · <strong>X</strong> (ignore), and designate the dim-id / eff-ts / exp-ts columns. On a change it expires the old row and inserts a new current row.</td>
+<td>All MPP (ClickHouse included)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="platform-specific-steps">Platform-specific steps<a class="headerlink" href="#platform-specific-steps" title="Permanent link">&para;</a></h2>
+<p>Each platform has its own <strong>load target</strong> (<code>JdbcTarget&lt;Platform&gt;</code>) and, in some cases, a staging/file step. Same <em>pattern</em>, per-platform implementation.</p>
+<h3 id="redshift">Redshift<a class="headerlink" href="#redshift" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>⬜</th>
+<th>Step</th>
+<th>Type</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🟢</td>
+<td><a href="#jdbc-target-redshift">Jdbc Target Redshift</a></td>
+<td><code>JDBCTARGETREDSHIFT</code></td>
+<td>Corelli loader — loads a <code>Jdbcsource</code>'s staged files into Redshift via S3 + <code>COPY</code>; incremental delta-watermark.</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td>Redshift Stage</td>
+<td><code>REDSHIFTSTAGE</code></td>
+<td>Stages a <strong>Local File</strong>'s parquet output to S3, creates a temp Redshift table, bulk-loads the staged files, then cleans them up. Used in the <strong>Local File → Redshift Stage → Table</strong> pipeline; pick the <strong>S3 Connection</strong> + <strong>IAM</strong> or <strong>KEY</strong> auth.</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td>Local File</td>
+<td><code>LOCAL_FILE</code></td>
+<td>Reads flat files from the local filesystem into the pipeline (a file source).</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td>Dataframe</td>
+<td><code>DATAFRAME</code></td>
+<td>Reads HDFS file(s)/folder into a <strong>Spark data frame</strong> + a temp global view (Parquet/Orc/Csv/Json/Text); reader or writer per the arrow direction. <strong>Write Option</strong>: truncate / append / <strong>upsert-append</strong>. <strong>Output Mode</strong>: All Rows · <strong>Delta Passthrough</strong> (rows from this run) · <strong>Last Inserted Version</strong> (needs key columns).</td>
+</tr>
+</tbody>
+</table>
+<h4 id="jdbc-target-redshift">Jdbc Target Redshift<a class="headerlink" href="#jdbc-target-redshift" title="Permanent link">&para;</a></h4>
+<p><strong>Type</strong> <code>JDBCTARGETREDSHIFT</code> · <strong>WPF</strong> <code>Steps/Pipeline/JdbcTargetRedShift.cs</code> → <code>JdbcTargetRedShiftWindow.xaml</code> ("Redshift Target — Corelli Parallel Loader") · <strong>requires an upstream <a href="#jdbcsource"><code>Jdbcsource</code></a></strong></p>
+<p>The <strong>target</strong> half of the Corelli pipeline: it loads the flat files staged by a <code>Jdbcsource</code> into Redshift. It only works downstream of a <code>Jdbcsource</code> (not other step types).</p>
+<p><img alt="A Corelli pipeline — SRC.t_step_run_detail (a Jdbcsource) feeding a JDBCTARGETREDSHIFT step" src="../images/step-corelli-pipeline-dag.png" /></p>
+<p><strong>Target Table tab</strong> — connection, catalog/db, schema, table. Check <strong>Table Exists</strong> if the target already exists; leave it unchecked to have Maestro create it. <strong>Truncate</strong> and <strong>Loader Threads</strong> as needed.</p>
+<p><img alt="Jdbc Target Redshift — Target Table tab" src="../images/step-jdbctargetredshift-target.png" /></p>
+<p><strong>Source Column(s) tab</strong> — click <strong>Refresh</strong> to pull the incoming columns; use the <strong>pencil</strong> icon to correct any data types that look wrong.</p>
+<p><img alt="Jdbc Target Redshift — Source Column(s) tab with Refresh and the pencil data-type editor" src="../images/step-jdbctargetredshift-columns.png" /></p>
+<p><strong>Mapping Columns(s) tab</strong> — click <strong>Reset</strong> to auto-map source → target columns, then adjust as needed.</p>
+<p><strong>Load Options tab</strong> — the staging commands (under <code>$OBJECTSTORAGE</code>): <strong>S3 Upload</strong> (<code>aws s3 cp</code> to S3), <strong>S3 Clean</strong> (<code>aws s3 rm --recursive</code> after load), and <strong>Copy/Load</strong> (Redshift <code>COPY … iam_role … gzip</code>). Maestro runs the AWS CLI to push the files to S3, runs <code>COPY</code>, then removes the staged files on success. Don't change the <code>$VARIABLE</code> placeholders.</p>
+<p><img alt="Jdbc Target Redshift — Load Options tab: S3 upload / clean / copy-load commands" src="../images/step-jdbctargetredshift-load.png" /></p>
+<p><strong>Delta Watermark tab</strong> — a query that runs <strong>on the target</strong> (<code>SELECT MAX($COLUMN) FROM $TARGET</code>). When a watermark/Delta column is set on the <code>Jdbcsource</code> and the job runs on a schedule (e.g. hourly), this MAX value becomes the source's <code>$EXTRACT_CONDITION</code> filter, so data loads incrementally.</p>
+<p><img alt="Jdbc Target Redshift — Delta Watermark tab: SELECT MAX($COLUMN) FROM $TARGET" src="../images/step-jdbctargetredshift-watermark.png" /></p>
+<h3 id="snowflake">Snowflake<a class="headerlink" href="#snowflake" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>⬜</th>
+<th>Step</th>
+<th>Type</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🟢</td>
+<td>File Loader</td>
+<td><code>FILELOADER</code></td>
+<td>Loads flat files into an <strong>existing</strong> table whose structure <strong>matches</strong> the file (output → a <code>Table</code> step). Source files come from an <strong>Onstage Group</strong> step, <strong>SFTP</strong>, or the ELT Maestro server; external-table load options are customizable.</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td>Jdbc Target Snowflake</td>
+<td><code>JDBCTARGETSNOWFLAKE</code></td>
+<td>Corelli loader — the Snowflake target half of a <code>Jdbcsource → JdbcTargetSnowflake</code> pipeline (<strong>requires an upstream <code>Jdbcsource</code></strong>); same shape as the other <code>JdbcTarget*</code> loaders. Loads the source's staged files into Snowflake via <strong><code>COPY INTO $TARGET FROM $STAGEPATH</code></strong> with the <code>CORELLI_FORMAT_PIPE0</code> file format. Tabs: <strong>Target Table</strong> (connection / catalog / schema / table · Truncate · Loader Threads) · <strong>Source Column(s)</strong> · <strong>Mapping Column(s)</strong> · <strong>Load Options</strong> (the COPY command) · <strong>Delta Watermark</strong> (<code>SELECT MAX($COLUMN) FROM $TARGET</code>, incremental).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="clickhouse">ClickHouse<a class="headerlink" href="#clickhouse" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>⬜</th>
+<th>Step</th>
+<th>Type</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🟢</td>
+<td>Jdbc Target Clickhouse</td>
+<td><code>JDBCTARGETCLICKHOUSE</code></td>
+<td>Corelli loader — the ClickHouse target half of a <code>Jdbcsource → JdbcTargetClickhouse</code> pipeline (<strong>requires an upstream <code>Jdbcsource</code></strong>); same shape as the other <code>JdbcTarget*</code> loaders. <strong>Difference:</strong> it loads files <strong>directly to the ClickHouse server via <code>clickhouse-client</code></strong> (<code>… INSERT INTO $TARGET FORMAT CSV &lt; $LOCALFILE</code>) rather than staging through S3 — so the ELT Maestro host must have <strong><code>clickhouse-client</code> installed and the load command configured</strong> (the <code>$MPP_HOST</code> / <code>$DELIMITER</code> / <code>$TARGET</code> placeholders come from the integrator's <code>system.cfg</code>; see <a href="../CLICKHOUSE-AUTH/">CLICKHOUSE-AUTH.md</a>). Tabs: <strong>Target Table</strong> (connection / catalog / schema / table · Truncate · Loader Threads) · <strong>Source Column(s)</strong> · <strong>Mapping Column(s)</strong> · <strong>Load Options</strong> · <strong>Delta Watermark</strong> (<code>SELECT MAX($COLUMN) FROM $TARGET</code>, incremental).</td>
+</tr>
+<tr>
+<td>⬜</td>
+<td>Write Incident</td>
+<td><code>WRITEINCIDENT</code></td>
+<td><em>TBD</em></td>
+</tr>
+<tr>
+<td>🟢</td>
+<td>Dataframe</td>
+<td><code>DATAFRAME</code></td>
+<td>Reads HDFS file(s)/folder into a <strong>Spark data frame</strong> + a temp global view (Parquet/Orc/Csv/Json/Text); reader or writer per the arrow direction. <strong>Write Option</strong>: truncate / append / <strong>upsert-append</strong>. <strong>Output Mode</strong>: All Rows · <strong>Delta Passthrough</strong> (rows from this run) · <strong>Last Inserted Version</strong> (needs key columns).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sparksql">SparkSQL<a class="headerlink" href="#sparksql" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>⬜</th>
+<th>Step</th>
+<th>Type</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🟢</td>
+<td>Dataframe</td>
+<td><code>DATAFRAME</code></td>
+<td>Reads HDFS file(s)/folder into a <strong>Spark data frame</strong> + a temp global view (Parquet/Orc/Csv/Json/Text); reader or writer per the arrow direction. <strong>Write Option</strong>: truncate / append / <strong>upsert-append</strong>. <strong>Output Mode</strong>: All Rows · <strong>Delta Passthrough</strong> (rows from this run) · <strong>Last Inserted Version</strong> (needs key columns).</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td>Local File</td>
+<td><code>LOCAL_FILE</code></td>
+<td>Reads flat files from the local filesystem into the pipeline (a file source).</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td>Jdbc Target HDFS</td>
+<td><code>JDBCTARGETHDFS</code></td>
+<td>Corelli <strong>HDFS Spark DataFrame</strong> loader — the SparkSQL target half of a <code>Jdbcsource → JdbcTargetHDFS</code> pipeline (<strong>requires an upstream <code>Jdbcsource</code></strong>). Writes the source's rows to an HDFS <strong>Target Path</strong> as <strong>snappy-compressed Parquet</strong>. <strong>Loader Threads</strong> · <strong>Truncate</strong> · <strong>Source Column(s)</strong> refresh (typed for SparkSQL) · <strong>Mapping Column(s)</strong> auto-map (Reset / Check).</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td>Spark Data Cache</td>
+<td><code>SPARKDATACACHE</code></td>
+<td>Caches a data frame to disk/memory — a Spark <strong><code>persist</code></strong> (same output as input). Storage levels: <code>DISK_ONLY</code>, <code>MEMORY_AND_DISK</code>, <code>MEMORY_ONLY</code>(<code>_SER</code>/<code>_2</code>), …</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td>Aggregate</td>
+<td><code>AGGREGATE</code></td>
+<td>Performs <strong>aggregations</strong> — pick <strong>Group</strong> column(s) and <strong>f(Agg)</strong> column(s) (sum/avg/…); the UI suggests output names/types. (Spark's classic aggregate; the expression-builder equivalent is <code>Aggregate2</code>.)</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td>Onstage Delta</td>
+<td><code>ONSTAGEDELTA</code></td>
+<td><strong>Continuous loop delta loader</strong> (SparkSQL-only) — runs in a perpetual loop, polling a source <strong>Table/View</strong> every <strong>Delay (Seconds)</strong> (default 60) and merging only rows past a <strong>watermark</strong> (<code>WM Col/Expr</code>) into the target, starting from a configurable <strong>StartWM Value</strong>. Source + Target each take connection / database / schema / table + watermark expression (<strong>DummySQL</strong> = a placeholder query); <strong>Mapping Column(s)</strong> maps source→target.</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td>Export</td>
+<td><code>EXPORT</code></td>
+<td>Exports the incoming <strong>Spark data frame</strong> to a <strong>local destination folder</strong> on the ELT Maestro server in a chosen <strong>File Format</strong> (default Parquet). 1 input; the column list lets you mark <strong>Key</strong> column(s).</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td>ML Feature Trainer</td>
+<td><code>MLFEATURETRAINER</code></td>
+<td>Trains one or more <strong>Spark MLlib models</strong> on the input data frame — pick <strong>ID</strong>, <strong>Feature</strong>, and <strong>Label</strong> column(s), add the <strong>model(s)</strong> to train, and name the <strong>Model Topic</strong>. 1 input. (Step label: <em>"Train &lt;topic&gt; with N model(s)"</em>.)</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td>ML Feature Predictor</td>
+<td><code>MLFEATUREPREDICTOR</code></td>
+<td>Scores the input data frame with previously-trained <strong>Spark MLlib</strong> models — pick the <strong>Topic Path</strong>, the <strong>Model(s)</strong>, <strong>Feature</strong> + <strong>ID</strong> column(s), and output <strong>file parts</strong> (default 4). Emits the ID columns plus <code>features</code>, <code>rawPrediction</code>, <code>probability</code>, <code>topicDistribution</code>, <code>prediction</code>, <code>ml_model_name</code>, <code>ml_timestamp</code>.</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td>ML Feature Engineer</td>
+<td><code>MLFEATUREENGINEER</code></td>
+<td>Builds engineered feature columns via a list of <strong>actions</strong> — each applies a <strong>Spark MLlib transform</strong> (action type) to an <strong>input column</strong>, producing a new <strong>output column</strong>. Output = input columns + the new engineered columns.</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td>ML Poly Feature Engineer</td>
+<td><code>MLPOLYFEATUREENGINEER</code></td>
+<td>Like <strong>ML Feature Engineer</strong>, but applies a single <strong>Spark MLlib</strong> feature-engineering rule (<code>transName</code>/<code>transType</code>) across <strong>multiple input columns</strong> at once, producing the corresponding <strong>output column(s)</strong> appended to the input data frame.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="tie-back-to-architecture">Tie-back to architecture<a class="headerlink" href="#tie-back-to-architecture" title="Permanent link">&para;</a></h2>
+<p>The steps above aren't an undifferentiated toolbox — each one belongs to a stage of a <strong>Bronze → Silver → Gold</strong> medallion pipeline. This is the <strong>step → layer</strong> view (the reverse of <a href="../MEDALLION/#layer--step-mapping">MEDALLION.md</a>, which goes layer → step); use it to decide <em>where</em> a step belongs when you build a workflow. Scoped to the documented platforms (Redshift, Snowflake, ClickHouse, SparkSQL).</p>
+<h3 id="-bronze--raw-landing--ingestion">🥉 Bronze — raw landing / ingestion<a class="headerlink" href="#-bronze--raw-landing--ingestion" title="Permanent link">&para;</a></h3>
+<p><em>Capture faithfully, transform minimally, append-only.</em></p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Steps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Pull / extract</strong></td>
+<td><code>Jdbcsource</code>, <code>Datasource</code>, <code>Local File</code>, <code>Sftp</code>, <code>Pull File</code></td>
+</tr>
+<tr>
+<td><strong>Land to the lake / target</strong></td>
+<td><code>Jdbc Target HDFS</code> (Parquet to HDFS), <code>Onstage Group</code> (multi-table → parquet/external tables), <code>Onstage Delta</code> (continuous-loop landing)</td>
+</tr>
+<tr>
+<td><strong>Arrival triggers</strong></td>
+<td><code>File Watch</code>, <code>JDBC Watch</code>, <code>Script Watch</code>, <code>File Scanner</code>, <code>Remote File Scanner</code></td>
+</tr>
+<tr>
+<td><strong>Incremental capture</strong></td>
+<td><code>Watermark</code> (+ the <code>isCDC</code> delta primitive), <code>Set Variable</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="-silver--cleaned-conformed-validated">🥈 Silver — cleaned, conformed, validated<a class="headerlink" href="#-silver--cleaned-conformed-validated" title="Permanent link">&para;</a></h3>
+<p><em>Idempotent and re-runnable; gate promotion on data quality.</em></p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Steps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Clean / shape</strong></td>
+<td><code>Filter</code>, <code>Dedupe</code>, <code>Function2</code> (derivations), <code>Datamask</code> (PII), <code>View</code>, <code>Pivot</code></td>
+</tr>
+<tr>
+<td><strong>Conform / integrate</strong></td>
+<td><code>Join</code>, <code>Union</code>, <code>Minus</code>, <code>Spark Data Cache</code></td>
+</tr>
+<tr>
+<td><strong>Historize dimensions</strong></td>
+<td><code>SCD1</code>, <code>SCD2</code></td>
+</tr>
+<tr>
+<td><strong>Quality gate</strong> (Bronze→Silver)</td>
+<td><code>Control Test</code>, <code>Sql Metrics</code>, <code>Meta Profile</code>, <code>Write Incident</code> (quarantine bad rows)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-gold--business-marts--serving">🥇 Gold — business marts / serving<a class="headerlink" href="#-gold--business-marts--serving" title="Permanent link">&para;</a></h3>
+<p><em>Business-grain, serving-optimized.</em></p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Steps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Aggregate / model</strong></td>
+<td><code>Aggregate</code>, <code>Aggregate2</code>, <code>Table</code> (+ <code>Onstage Group</code> loaders)</td>
+</tr>
+<tr>
+<td><strong>Publish to serving MPP</strong></td>
+<td><code>Jdbc Target Redshift</code> / <code>Snowflake</code> / <code>Clickhouse</code> / <code>HDFS</code>, <code>Redshift Stage</code>, <code>File Loader</code>, <code>Write Jdbc</code>, <code>Write File</code>, <code>Export</code></td>
+</tr>
+<tr>
+<td><strong>ML feature / serving</strong></td>
+<td><code>ML Feature Engineer</code>, <code>ML Poly Feature Engineer</code>, <code>ML Feature Trainer</code>, <code>ML Feature Predictor</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="the-orchestration-spine-cross-layer">The orchestration spine (cross-layer)<a class="headerlink" href="#the-orchestration-spine-cross-layer" title="Permanent link">&para;</a></h3>
+<p>These don't belong to one layer — they <strong>wire the layers together</strong> into one end-to-end pipeline: <code>Job Step</code> (chain Bronze→Silver→Gold workflows), <code>Switch</code> / <code>Set Variable</code> / <code>Sync</code> (conditional flow + barriers), <code>SQL Script</code> / <code>SSH</code> / <code>Smart Script</code> (custom logic + maintenance), and <code>Push File</code> / <code>Pull File</code> / <code>Sftp</code> (movement between systems). See <a href="../MEDALLION/#the-orchestration-spine">the orchestration spine</a> and <a href="../MEDALLION/#the-silver-quality-gate">the Silver quality gate</a> for how scheduling, alerting, and DQ gating stitch a tiered pipeline together.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top", "navigation.instant", "navigation.tracking", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+    
+  </body>
+</html>
