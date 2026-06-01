@@ -16,7 +16,7 @@
         <link rel="prev" href="../MPP-SETUP/">
       
       
-        <link rel="next" href="../UPGRADE/">
+        <link rel="next" href="../DOCKER-INSTALL/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -921,6 +921,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#step-25---download-the-release-from-s3-as-maestro" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2.5 - download the release from S3 (as maestro)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#step-3---extract-the-tarball-as-maestro" class="md-nav__link">
     <span class="md-ellipsis">
       Step 3 - extract the tarball (as maestro)
@@ -969,6 +978,27 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DOCKER-INSTALL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker image install
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1101,6 +1131,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#step-25---download-the-release-from-s3-as-maestro" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2.5 - download the release from S3 (as maestro)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#step-3---extract-the-tarball-as-maestro" class="md-nav__link">
     <span class="md-ellipsis">
       Step 3 - extract the tarball (as maestro)
@@ -1197,15 +1236,48 @@
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>sudo<span class="w"> </span>chown<span class="w"> </span>maestro:maestro<span class="w"> </span>/data
 </code></pre></div>
 <p><code>install.sh</code> will refuse to run as root and recommend you switch to a regular user. The <code>maestro</code> user does not need sudo.</p>
-<h2 id="step-3---extract-the-tarball-as-maestro">Step 3 - extract the tarball (as maestro)<a class="headerlink" href="#step-3---extract-the-tarball-as-maestro" title="Permanent link">&para;</a></h2>
+<h2 id="step-25---download-the-release-from-s3-as-maestro">Step 2.5 - download the release from S3 (as maestro)<a class="headerlink" href="#step-25---download-the-release-from-s3-as-maestro" title="Permanent link">&para;</a></h2>
+<p>ELTMaestro releases are published for public download to <code>https://eltmaestro.s3.amazonaws.com/docker/</code> by the <code>eltmaestro-ci</code> Jenkins job (ACTION <code>publish-s3</code>). Two artifacts are available, each named with the release <code>&lt;VERSION&gt;</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>eltm-portable-&lt;VERSION&gt;.tar.gz</code></td>
+<td>the portable <strong>Linux installer</strong> — used by this guide</td>
+</tr>
+<tr>
+<td><code>eltmaestro-&lt;VERSION&gt;.tar.gz</code></td>
+<td>the <strong>Docker image</strong> export — alternative to a bare-metal install</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Linux installer</strong> (then continue with Step 3):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>su<span class="w"> </span>-<span class="w"> </span>maestro
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">cd</span><span class="w"> </span>/data
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>tar<span class="w"> </span>-xzf<span class="w"> </span>/path/to/eltm-portable-&lt;VERSION&gt;.tar.gz
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>ls<span class="w"> </span>-d<span class="w"> </span>iserver<span class="w">        </span><span class="c1"># produces /data/iserver/...</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>curl<span class="w"> </span>-fLO<span class="w"> </span>https://eltmaestro.s3.amazonaws.com/docker/eltm-portable-&lt;VERSION&gt;.tar.gz
+</code></pre></div>
+<p><strong>Docker image</strong> (alternative path — instead of the bare-metal Steps 3-5): download and load the image rather than extracting the tarball:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl<span class="w"> </span>-fLO<span class="w"> </span>https://eltmaestro.s3.amazonaws.com/docker/eltmaestro-&lt;VERSION&gt;.tar.gz
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>docker<span class="w"> </span>load<span class="w"> </span>&lt;<span class="w"> </span>eltmaestro-&lt;VERSION&gt;.tar.gz<span class="w">            </span><span class="c1"># registers eltmaestro:&lt;VERSION&gt;</span>
+</code></pre></div>
+<p>Then load and run it per <a href="../DOCKER-INSTALL/">Install from the Docker image</a> (the full <code>docker load</code> → <code>docker run</code> → verify recipe). The image is large — it bundles Spark, Hadoop, Marquez, the JDK, and Postgres — so the bare-metal tarball is the lighter option for a single host, while the image export suits container or air-gapped deployments.</p>
+<blockquote>
+<p>Substitute the release you want for <code>&lt;VERSION&gt;</code> (e.g. <code>17.0.4.268</code>); browse <code>https://eltmaestro.s3.amazonaws.com/docker/</code> for what's available.</p>
+</blockquote>
+<h2 id="step-3---extract-the-tarball-as-maestro">Step 3 - extract the tarball (as maestro)<a class="headerlink" href="#step-3---extract-the-tarball-as-maestro" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>su<span class="w"> </span>-<span class="w"> </span>maestro
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nb">cd</span><span class="w"> </span>/data
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>tar<span class="w"> </span>-xzf<span class="w"> </span>/path/to/eltm-portable-&lt;VERSION&gt;.tar.gz
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>ls<span class="w"> </span>-d<span class="w"> </span>iserver<span class="w">        </span><span class="c1"># produces /data/iserver/...</span>
 </code></pre></div>
 <p>The tarball stages a tree under <code>iserver/</code> mirroring the runtime layout. Nothing is started yet.</p>
 <h2 id="step-4---run-installsh-as-maestro">Step 4 - run install.sh (as maestro)<a class="headerlink" href="#step-4---run-installsh-as-maestro" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>/data/iserver/install.sh
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>/data/iserver/install.sh
 </code></pre></div>
 <p>This is the convenience symlink to <code>/data/iserver/bin/install.sh</code>. It runs idempotently — re-running skips steps that are already done. What it does, in order:</p>
 <ol>
@@ -1219,18 +1291,18 @@
 </ol>
 <p>Expect 3-10 minutes depending on network speed (the Spark + Hadoop downloads dominate).</p>
 <h2 id="step-5---load-the-env-and-start-everything">Step 5 - load the env and start everything<a class="headerlink" href="#step-5---load-the-env-and-start-everything" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>.<span class="w"> </span>~/.env_integrator
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>mstart-all
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>.<span class="w"> </span>~/.env_integrator
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>mstart-all
 </code></pre></div>
 <p><code>mstart-all</code> starts Postgres, the Spring Boot meta-service, the engine, and any auxiliary services in the right order. PID files land under <code>/data/iserver/transient/socket/</code>.</p>
 <p>Verify:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>show-mprocess<span class="w">           </span><span class="c1"># lists all running maestro processes</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>curl<span class="w"> </span>-k<span class="w"> </span>https://localhost:8181/MaestroMetaDataProviderService/MaestroMetaService?wsdl
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>show-mprocess<span class="w">           </span><span class="c1"># lists all running maestro processes</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>curl<span class="w"> </span>-k<span class="w"> </span>https://localhost:8181/MaestroMetaDataProviderService/MaestroMetaService?wsdl
 </code></pre></div></p>
 <p>The WSDL should return HTTP 200 with the SOAP contract.</p>
 <h2 id="step-6---default-credentials">Step 6 - default credentials<a class="headerlink" href="#step-6---default-credentials" title="Permanent link">&para;</a></h2>
 <p>The seed loads a single bootstrap user named <code>integrator</code> (uppercased to <code>INTEGRATOR</code> in <code>t_user.user_id</code>). Reset the password before connecting any real client:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>mset-password-md5<span class="w"> </span>INTEGRATOR<span class="w"> </span><span class="s1">&#39;&lt;new-password&gt;&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>mset-password-md5<span class="w"> </span>INTEGRATOR<span class="w"> </span><span class="s1">&#39;&lt;new-password&gt;&#39;</span>
 </code></pre></div>
 <h2 id="where-to-go-next">Where to go next<a class="headerlink" href="#where-to-go-next" title="Permanent link">&para;</a></h2>
 <ul>

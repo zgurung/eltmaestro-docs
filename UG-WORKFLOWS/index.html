@@ -981,6 +981,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../DOCKER-INSTALL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker image install
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../UPGRADE/" class="md-nav__link">
         
   
@@ -1239,7 +1260,7 @@
 <li><strong>Toolbar</strong> — icon buttons for Save, Check Workflow, Run, Stop, Runtime CLI Configuration, and View Lineage, plus a <strong>zoom slider</strong>. A red <strong>lock indicator</strong> shows the workflow's lock state.</li>
 <li><strong>Step palette</strong> (left) — a scrollable, <strong>searchable</strong> list of every step type available for this job's platform: sources &amp; loaders (<code>Dataframe</code>, <code>Local_file</code>, <code>Onstagegroup</code>, <code>Jdbcsource</code>, <code>Datasource</code>, <code>Jdbctargethdfs</code>, …), transforms (<code>Aggregate</code>, <code>Aggregate2</code>, <code>Dedupe</code>, <code>Filter</code>, <code>Function2</code>, <code>Join</code>, <code>Datamask</code>, …), caches, and control steps. The exact list depends on the job type.</li>
 <li><strong>Designer canvas</strong> (centre, the <strong>Designer</strong> tab) — where you place and wire steps.</li>
-<li><strong>Message tabs</strong> (bottom) — Messages, Latest Console Output, Run History, Recovery History, Metrics, and per-step Run Message(s). On open, the editor logs its initialization here (configurations/aggregates loaded, default SSH/engine connections, mapping check).</li>
+<li><strong>Message tabs</strong> (bottom) — Messages, Runtime Information, and Latest Console Output. On open, the editor logs its initialization here (configurations/aggregates loaded, default SSH/engine connections, mapping check).</li>
 </ul>
 <p><img alt="The Job editor for a SPARKSQL job — title bar showing the job type in brackets, the toolbar (Save / Check / Run / Stop / Runtime CLI / Lineage + zoom), the searchable step palette down the left, the empty Designer canvas, and the initialization log in the message pane" src="../images/job-editor.png" /></p>
 <p>A finished workflow wires <strong>source</strong> steps through <strong>transforms</strong> into <strong>output</strong> tables. For example, two source tables joined and the result passed through a function step, plus a separate dedupe → filter branch:</p>
@@ -1279,13 +1300,12 @@
 <h2 id="monitoring">Monitoring<a class="headerlink" href="#monitoring" title="Permanent link">&para;</a></h2>
 <p>Within the Job editor (bottom tabs):</p>
 <ul>
-<li><strong>Run History</strong> / <strong>Recovery History</strong> — past runs and recovery points.</li>
-<li><strong>Step Run Message(s)</strong> — messages for the selected step.</li>
+<li><strong>Messages</strong> — the editor's initialization and action log.</li>
+<li><strong>Runtime Information</strong> — the runtime URL and details for the open job (Refresh).</li>
 <li><strong>Latest Console Output</strong> — tail of the latest step's console log (set the line count, then Refresh).</li>
-<li><strong>Metrics</strong> / <strong>Vertical Metrics</strong> — auto-collected run metrics.</li>
 <li><strong>View Runtime Log</strong> (Debug menu) — the run's engine log.</li>
 </ul>
-<p>Across all workflows, use the main window's <strong>Runtime &amp; Logs ▸ Logging ▸ Workflow Logs</strong> and the <strong>Analytics ▸ Batch Statistics</strong> tab. The detailed log and report viewers are covered in <a href="../UG-MENUS/">Menus in depth</a>.</p>
+<p>Across all workflows, use the main window's <strong>Runtime &amp; Logs ▸ Logging ▸ Workflow Logs</strong> for run history and detailed logs. The log and report viewers are covered in <a href="../UG-MENUS/">Menus in depth</a>.</p>
 <h2 id="tying-it-together">Tying it together<a class="headerlink" href="#tying-it-together" title="Permanent link">&para;</a></h2>
 <p>A workflow connects to the rest of ELTMaestro:</p>
 <table>

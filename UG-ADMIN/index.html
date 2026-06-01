@@ -894,6 +894,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../DOCKER-INSTALL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker image install
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../UPGRADE/" class="md-nav__link">
         
   
@@ -1278,7 +1299,7 @@
 </blockquote>
 <p><img alt="General Configuration editor — HDFS connection ELTM_SPARK_DRIVER with fs.prefix, actual hdfs/core-site paths, Hive thrift db/schema/connection, and S3A keys" src="../images/hdfs-connection-spark-driver.png" /></p>
 <blockquote>
-<p><strong>The Hive catalog connection.</strong> <code>thrift.hive2.connection.name</code> (e.g. <code>HIVE_EMBEDDED</code>) refers to a <strong>JDBC connection</strong> to HiveServer2. Create it like any <a href="#database-connections-jdbc">database connection</a>: driver class <code>org.apache.hive.jdbc.HiveDriver</code>, driver jar <strong><code>hive-jdbc-3.1.3-standalone.jar</code></strong> (the Apache standalone uber jar; alias <strong><code>MPP_Driver_Hive_JDBC.jar</code></strong>, shipped via the deployment's <code>jdbc_list.json</code>), and connection string <code>jdbc:hive2://&lt;host&gt;:10000/&lt;db&gt;</code> — e.g. <code>jdbc:hive2://192.168.1.201:10000/default</code> (the same URL DBeaver uses).</p>
+<p><strong>The Hive catalog connection.</strong> <code>thrift.hive2.connection.name</code> (e.g. <code>HIVE_EMBEDDED</code>) refers to a <strong>JDBC connection</strong> to HiveServer2. Create it like any <a href="#database-connections-jdbc">database connection</a>: driver class <code>org.apache.hive.jdbc.HiveDriver</code>, driver jar <strong><code>hive-jdbc-3.1.3-standalone.jar</code></strong> (the Apache standalone uber jar; alias <strong><code>MPP_Driver_Hive_JDBC.jar</code></strong>, shipped via the deployment's <code>jdbc_list.json</code>), and connection string <code>jdbc:hive2://&lt;host&gt;:10000/&lt;db&gt;</code> — e.g. <code>jdbc:hive2://&lt;server_ip&gt;:10000/default</code> (the same URL DBeaver uses).</p>
 </blockquote>
 <hr />
 <h2 id="how-connections-feed-workflows">How connections feed workflows<a class="headerlink" href="#how-connections-feed-workflows" title="Permanent link">&para;</a></h2>

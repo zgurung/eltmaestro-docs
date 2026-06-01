@@ -1305,6 +1305,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../DOCKER-INSTALL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker image install
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../UPGRADE/" class="md-nav__link">
         
   
@@ -1896,7 +1917,7 @@
 </tbody>
 </table>
 <p>Loads <strong>multiple tables</strong> from a source schema into a target schema in a single step. The dialog (shown here for Redshift) has two tabs.</p>
-<p><strong>Schema tab</strong> — set the <strong>Source</strong> (connection, catalog/database, schema) and <strong>Target</strong> (catalog/database, schema), plus platform-specific <strong>Configurations</strong>. For Redshift those are the <strong>S3 Connection</strong> (Maestro staging), <strong>Initial Refresh Partitions</strong>, <strong>Yearly Data Growth Factor</strong>, and the <strong>S3 Upload / S3 Clean / Copy-Load</strong> commands. (Configurations differ by platform.)</p>
+<p><strong>Schema tab</strong> — set the <strong>Source</strong> (connection, catalog/database, schema) and <strong>Target</strong> (catalog/database, schema), plus platform-specific <strong>Configurations</strong>. For Redshift those are the <strong>S3 Connection</strong> (Maestro staging), <strong>Initial Refresh Partitions</strong>, and the <strong>S3 Upload / S3 Clean / Copy-Load</strong> commands. (Configurations differ by platform.)</p>
 <p><img alt="Onstagegroup — Schema tab (Redshift): source &amp; target schema plus S3 staging configuration" src="../images/step-onstagegroup-schema.png" /></p>
 <p><strong>Table(s) tab</strong> — select one or more tables from <strong>Available Source Table(s)</strong> on the left and click <strong><code>&gt;</code></strong> to add them. Each target table is named <strong><code>database/schema/table</code></strong>. For each table set:
 - <strong>Watermark(s)</strong> — a timestamp, date, or incrementing numeric column (e.g. a sequence). The watermark value drives <strong>incremental loads</strong> — only rows past the last watermark are pulled and <strong>merged</strong> into the target.
@@ -1911,7 +1932,7 @@
 <p><strong>SparkSQL variant — "Onstage Schema Loader for Spark".</strong> On SparkSQL the <strong>target is an HDFS folder</strong>, not a database schema. Pre-create the destination directory on HDFS, e.g.:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>hdfs dfs -mkdir -p /ingest/adventureworks/hr
 </code></pre></div>
-<p>Then on the <strong>Schema</strong> tab the <strong>Target</strong> group shows <strong>Catalog = none</strong> (disabled) and a <strong>Folder</strong> field — click <strong>Browse</strong> to pick that directory from the HDFS tree (browsed over the Spark driver connection, e.g. <code>ELTM_SPARK_DRIVER</code>). The <strong>Source</strong> group and the <strong>Table(s)</strong> tab work the same as the other platforms. <strong>Load Configurations</strong>: Initial Load Partitions · Initial Load Threads · Attributes Quoting · Run Count Metrics · Data Growth Rate <em>(Beta)</em>.</p>
+<p>Then on the <strong>Schema</strong> tab the <strong>Target</strong> group shows <strong>Catalog = none</strong> (disabled) and a <strong>Folder</strong> field — click <strong>Browse</strong> to pick that directory from the HDFS tree (browsed over the Spark driver connection, e.g. <code>ELTM_SPARK_DRIVER</code>). The <strong>Source</strong> group and the <strong>Table(s)</strong> tab work the same as the other platforms. <strong>Load Configurations</strong>: Initial Load Partitions · Initial Load Threads · Run Count Metrics.</p>
 <p><img alt="Onstage Schema Loader for Spark — Schema tab: Source schema + HDFS Folder target + Load Configurations" src="../images/step-onstagegroup-spark-schema.png" /></p>
 <p><img alt="Browse — picking the target HDFS folder from the Spark driver connection tree" src="../images/step-onstagegroup-spark-browse.png" /></p>
 <p>On run, the loader pulls the selected source tables into the target folder, creating <strong>one subdirectory per table</strong> and writing the data as <strong>Parquet</strong> files (e.g. <code>/ingest/adventureworks/hr/&lt;table&gt;/…</code>). A separate <strong>Parquet Exports</strong> tab can additionally push that output to S3 / Azure Blob via a CLI command.</p>
@@ -2205,7 +2226,7 @@
 <p>Downloads files from an <strong>SFTP/SSH</strong> server to the local Maestro server, and <strong>caches the list of downloaded files</strong> for downstream file-ordering steps; supports <strong>watermark</strong> downloads (only new files next run).
 - <strong>Source</strong> — the SSH <strong>Connection</strong>, <strong>Directory1</strong> (and an optional <strong>Directory2</strong>), and <strong>File/Pattern</strong> (e.g. <code>*.csv</code>). Paths can use <strong>variables</strong>: set <code>$VAR_5</code>/<code>$VAR_6</code> to (say) a date pattern via a <a href="#set-variable">Set Variable</a> step and reference them in the directory (<code>/data/$VAR_5</code>) so the scan targets a date-driven path.
 - <strong>Target Directory (Maestro Server)</strong> — the local folder, with <strong>Create directory if not exists</strong>.
-- <strong>Other Options</strong> — <strong>Use Watermark</strong> (<code>$JOB_LOW_WATERMARK_VALUE</code>), <strong>Update File Time</strong>, <strong>Auto-Clean</strong>, <strong>Auto-Archive</strong>.</p>
+- <strong>Other Options</strong> — <strong>Use Watermark</strong> (<code>$JOB_LOW_WATERMARK_VALUE</code>) and <strong>Auto-Clean</strong>.</p>
 <p><img alt="Sftp — source directories using $VAR_5/$VAR_6, target dir, and watermark options" src="../images/step-sftp.png" /></p>
 <h3 id="scripting--jobs">Scripting &amp; jobs<a class="headerlink" href="#scripting--jobs" title="Permanent link">&para;</a></h3>
 <table>

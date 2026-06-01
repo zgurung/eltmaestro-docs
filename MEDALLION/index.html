@@ -617,6 +617,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#where-the-layers-live--your-target-data-warehouse" class="md-nav__link">
+    <span class="md-ellipsis">
+      Where the layers live — your target data warehouse
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#layer--step-mapping" class="md-nav__link">
     <span class="md-ellipsis">
       Layer → step mapping
@@ -999,6 +1008,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../DOCKER-INSTALL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker image install
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../UPGRADE/" class="md-nav__link">
         
   
@@ -1071,6 +1101,15 @@
   <a href="#what-medallion-means-here" class="md-nav__link">
     <span class="md-ellipsis">
       What "medallion" means here
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-the-layers-live--your-target-data-warehouse" class="md-nav__link">
+    <span class="md-ellipsis">
+      Where the layers live — your target data warehouse
     </span>
   </a>
   
@@ -1229,6 +1268,17 @@
 <blockquote>
 <p><strong>ELTMaestro implements medallion by <em>convention</em>, not as an enforced construct.</strong> The engine has no built-in notion of layers — you impose the discipline through <strong>job naming / <a href="../UG-WORKFLOWS/#configuring-job-metadata">tags</a></strong>, <strong>schema-per-layer</strong> naming, and <strong><a href="#the-orchestration-spine">JobStep</a> chaining</strong>. Each layer is one (or more) workflow; the tiers are how you organize and promote between them.</p>
 </blockquote>
+<h2 id="where-the-layers-live--your-target-data-warehouse">Where the layers live — your target data warehouse<a class="headerlink" href="#where-the-layers-live--your-target-data-warehouse" title="Permanent link">&para;</a></h2>
+<p><strong>All three layers — Bronze, Silver, and Gold — live inside the chosen target ("vendor") data-warehouse platform:</strong> Redshift, Snowflake, ClickHouse, SparkSQL (HDFS/Hive), Synapse, Databricks, Greenplum, and the rest. ELTMaestro does not host the medallion itself — it <strong>builds and orchestrates it on the warehouse</strong>, typically as a <strong>schema or database per layer</strong> (<code>bronze_*</code> / <code>silver_*</code> / <code>gold_*</code>) all within that one platform. You pick the platform per workflow via its <strong>Job Type + platform connection</strong> (<a href="../UG-WORKFLOWS/#creating-a-workflow-job">Creating a workflow</a>).</p>
+<p>ELTMaestro's job is the movement and the logic on top of it:</p>
+<ol>
+<li><strong>Land (Bronze / ingest).</strong> Extraction steps pull from heterogeneous sources and <strong>land the raw data into an ingest / landing area on the warehouse</strong>, as-is and append-only:</li>
+<li><strong><code>Jdbcsource</code></strong> — extract from any JDBC source database;</li>
+<li><strong><code>Onstagegroup</code></strong> — stage files and register them as external tables in the warehouse catalog (Spark/Hive);</li>
+<li><strong>General-connection extracts</strong> — <code>Datasource</code> (Corelli streaming) and the connector extracts (Mongo, Salesforce, SFTP, local/remote files) that reach a source through a <a href="../UG-ADMIN/">General / Cloud connection</a>. For MPP targets the landing typically stages through object storage (<code>$OBJECT_STORAGE</code>) and loads into the warehouse.</li>
+<li><strong>Build up (Silver → Gold).</strong> From that landing area you run the <strong>data-quality gates</strong> and the <strong>upper layers entirely inside the warehouse</strong> — conform/clean/validate into Silver, aggregate into Gold — using ELTMaestro's transform + load steps, which push the SQL/Spark work down to the platform.</li>
+</ol>
+<p>So the shape is always: <strong>extract → land on the warehouse → build DQ + Silver + Gold there.</strong> Per-platform wiring is in <a href="../REDSHIFT-SETUP/">Redshift</a> / <a href="../SPARKSQL-SETUP/">SparkSQL</a> / <a href="../CLICKHOUSE-AUTH/">ClickHouse</a> / <a href="../MPP-SETUP/">MPP setup</a>.</p>
 <h2 id="layer--step-mapping">Layer → step mapping<a class="headerlink" href="#layer--step-mapping" title="Permanent link">&para;</a></h2>
 <p>Every item below is a real step type from the <a href="../UG-WORKFLOWS/#adding-steps">step palette</a>.</p>
 <h3 id="-bronze--raw-landing--ingestion">🥉 Bronze — raw landing / ingestion<a class="headerlink" href="#-bronze--raw-landing--ingestion" title="Permanent link">&para;</a></h3>
@@ -1242,11 +1292,11 @@
 <tbody>
 <tr>
 <td><strong>Pull / extract</strong></td>
-<td><code>Jdbcsource</code>, <code>Datasource</code> (Corelli streaming source), <code>Local_file</code>, <code>Sftp</code> / <code>Sftp2S3</code>, <code>Pullfile</code>; connector extracts (Mongo / Salesforce)</td>
+<td><code>Jdbcsource</code>, <code>Datasource</code> (Corelli streaming source), <code>Local_file</code>, <code>Sftp</code>, <code>Pullfile</code>; connector extracts (Mongo / Salesforce)</td>
 </tr>
 <tr>
-<td><strong>Land to the lake</strong></td>
-<td><code>FileStage</code> / <code>File_Stage</code>, <code>Jdbctargethdfs</code> (HDFS/S3 via <code>$OBJECT_STORAGE</code>), <code>Onstagegroup</code> (registers Spark external tables in the Hive catalog)</td>
+<td><strong>Land into the warehouse</strong></td>
+<td><code>Onstagegroup</code> (stages files → external tables in the Spark/Hive catalog), <code>FileStage</code> / <code>File_Stage</code>, <code>Jdbctargethdfs</code> (object-storage staging via <code>$OBJECT_STORAGE</code>); for MPP targets the staged data is then loaded into the warehouse's landing area</td>
 </tr>
 <tr>
 <td><strong>Arrival triggers</strong></td>
@@ -1283,7 +1333,7 @@
 </tr>
 <tr>
 <td><strong>Merge / upsert</strong></td>
-<td><code>OnstageDelta</code>, <code>ParallelJdbcProcessorNode</code> (delete-then-insert CDC)</td>
+<td><code>OnstageDelta</code>; onstage group loaders with the <code>isCDC</code> / <code>$QUERY_CDC_DELETE</code> + <code>$QUERY_CDC_INSERT</code> delete-then-insert primitive</td>
 </tr>
 <tr>
 <td><strong>Quality gate</strong></td>
@@ -1337,7 +1387,7 @@
 <h2 id="governance--observability">Governance &amp; observability<a class="headerlink" href="#governance--observability" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Lineage</strong> — the OpenLineage emitter → <strong>Marquez</strong> gives <strong>column-level lineage spanning all three layers</strong> automatically; open it from the Job editor's <strong>View Lineage</strong> button. This is medallion's strongest built-in story: Bronze → Silver → Gold provenance for free. See LINEAGE.md.</li>
-<li><strong>Metrics</strong> — <strong>Analytics ▸ Batch Statistics</strong> + per-step <code>SQLMetrics</code>.</li>
+<li><strong>Metrics</strong> — per-step <code>SQLMetrics</code>, surfaced through <strong>Runtime &amp; Logs ▸ Logging ▸ Workflow Logs</strong>.</li>
 </ul>
 <h2 id="design-principles-the-conventions-to-enforce">Design principles (the conventions to enforce)<a class="headerlink" href="#design-principles-the-conventions-to-enforce" title="Permanent link">&para;</a></h2>
 <ol>
@@ -1362,7 +1412,7 @@
 - <code>Aggregate2</code> rolls Silver up to headcount-by-department; <code>Table</code> (or a group loader) writes the <code>gold_headcount</code> mart; <code>JdbcTargetClickhouse</code> (or your serving MPP) publishes it for BI.</p>
 <p><strong>Spine:</strong> a master workflow uses <code>JobStep</code> to run <code>bronze_hr → silver_hr → gold_hr</code> in order; the <strong>Scheduler</strong> runs Bronze hourly and triggers the rest on completion; <strong>Email Alerts</strong> notify on failure. The whole chain's column lineage is visible end-to-end in the <strong>Lineage Viewer</strong>.</p>
 <h2 id="where-to-build-a-runnable-reference">Where to build a runnable reference<a class="headerlink" href="#where-to-build-a-runnable-reference" title="Permanent link">&para;</a></h2>
-<p>The local <strong><code>.201</code></strong> stack (ClickHouse + Spark/HDFS + Postgres) supports an end-to-end medallion demo today: files → Bronze (lake external tables) → Silver (conform in ClickHouse/Spark, gated) → Gold (<code>Aggregate2</code> + <code>JdbcTargetClickhouse</code>), chained by <code>JobStep</code>, scheduled + alerted, with the whole chain visible in the Lineage Viewer.</p>
+<p>A local <strong>ClickHouse + Spark/HDFS + Postgres</strong> stack supports an end-to-end medallion demo: files → Bronze (lake external tables) → Silver (conform in ClickHouse/Spark, gated) → Gold (<code>Aggregate2</code> + <code>JdbcTargetClickhouse</code>), chained by <code>JobStep</code>, scheduled + alerted, with the whole chain visible in the Lineage Viewer.</p>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../UG-WORKFLOWS/">Workflows — building &amp; running jobs</a> · <a href="../UG-ADMIN/">Administration &amp; connections</a> · <a href="../UG-MENUS/">Menus</a></li>

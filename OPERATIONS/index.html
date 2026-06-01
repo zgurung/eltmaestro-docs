@@ -843,6 +843,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../DOCKER-INSTALL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker image install
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../UPGRADE/" class="md-nav__link">
         
   
@@ -1704,7 +1725,7 @@ If either count is 0, reseed by re-running the canonical COPY blocks from <code>
 </tr>
 </tbody>
 </table>
-<p><strong>From a Windows shell with the SSH setup</strong> (<a href="../memory/reference_jenkins_helper.md">Jenkins helper memory</a>): <code>Invoke-EltmaestroShutdown [-Force] [-Poweroff] [-DryRun]</code> scp's the script + execs it via the same SSH path as <code>Invoke-EltmaestroHotswapViaSsh</code>.</p>
+<p><strong>From a Windows shell with the SSH helper configured</strong>: <code>Invoke-EltmaestroShutdown [-Force] [-Poweroff] [-DryRun]</code> scp's the script + execs it via the same SSH path as <code>Invoke-EltmaestroHotswapViaSsh</code>.</p>
 <p><strong>Coming back up after the shutdown:</strong> docker daemon starts containers with <code>restart-policy=always</code> automatically, but ours are all <code>unless-stopped</code> — they stay stopped until <code>docker start eltmaestro clickhouse sql1 registry</code> (or <code>docker start $(docker ps -aq)</code>). Supervisord brings the eltmaestro internals up in priority order on container start.</p>
 <p><strong>What NOT to do:</strong> <code>docker kill</code> instead of <code>docker stop</code> (SIGKILL — no chance for PG checkpoint, HDFS flush, Marquez commit; risks WAL corruption). <code>sudo poweroff</code> before stopping containers (docker daemon gets ~10s default before host force-stops). <code>docker compose down</code> is not applicable — these four containers are docker-run-managed, no compose file orchestrates them.</p>
 <h3 id="vm-full-backup-proxmox">VM full backup (Proxmox)<a class="headerlink" href="#vm-full-backup-proxmox" title="Permanent link">&para;</a></h3>

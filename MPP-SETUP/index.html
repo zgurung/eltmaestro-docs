@@ -990,6 +990,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../DOCKER-INSTALL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker image install
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../UPGRADE/" class="md-nav__link">
         
   
@@ -1263,7 +1284,7 @@
 <h3 id="d-b64expression--native-varbyte-decode--no-install-asset">D. <code>$B64EXPRESSION</code> → native VARBYTE decode — <strong>no install asset</strong><a class="headerlink" href="#d-b64expression--native-varbyte-decode--no-install-asset" title="Permanent link">&para;</a></h3>
 <p>Redshift decodes base64 natively (<code>FROM_VARBYTE(TO_VARBYTE($COLUMN,'base64'),'utf-8')::$DATATYPE</code>) — no Python UDF, so there's nothing to install on the cluster. See <a href="../REDSHIFT-SETUP/#3-base64-decode-native-no-udf">REDSHIFT-SETUP §3</a>.</p>
 <h3 id="e-system_name-integratorredshift--safe">E. <code>$SYSTEM_NAME</code> INTEGRATOR→REDSHIFT — <strong>safe</strong><a class="headerlink" href="#e-system_name-integratorredshift--safe" title="Permanent link">&para;</a></h3>
-<p>Defined in every integrator's <code>system.cfg</code> but <strong>read by no engine / service / WPF code</strong> (grep clean). Cosmetic. (After the 2026-05-31 destructive redeploy, live <code>.201</code> is reseeded from the image, so its <code>system.cfg</code>s match the repo — no drift.)</p>
+<p>Defined in every integrator's <code>system.cfg</code> but <strong>read by no engine / service / WPF code</strong> (grep clean). Cosmetic. (After a destructive redeploy, the live server is reseeded from the image, so its <code>system.cfg</code>s match the repo — no drift.)</p>
 <h3 id="f-wpf-cloud-connection-name--s3_connection--blob_connection">F. WPF cloud connection name — <strong><code>S3_CONNECTION</code> / <code>BLOB_CONNECTION</code></strong><a class="headerlink" href="#f-wpf-cloud-connection-name--s3_connection--blob_connection" title="Permanent link">&para;</a></h3>
 <p><code>$OBJECT_STORAGE=S3_CONNECTION</code> and <code>RedshiftStage.{java,cs}</code> default <code>connection = "S3_CONNECTION"</code>, so the AWS-S3 General/Cloud connection must be named exactly <code>S3_CONNECTION</code>. Synapse stages to Azure Blob, so its connection must be named <strong><code>BLOB_CONNECTION</code></strong> (<code>$OBJECT_STORAGE=BLOB_CONNECTION</code>).</p>
 <h3 id="not-affected">Not affected<a class="headerlink" href="#not-affected" title="Permanent link">&para;</a></h3>
@@ -1276,7 +1297,7 @@
 <li>[x] <strong>WPF</strong>: same fallback in <code>SparkGroupLoader.cs</code>, <code>JdbcTargetRedShiftWindow.xaml</code>; <code>RSFileLoaderWindow</code> no longer hard-requires <code>$AWS_CREDENTIALS_FILE_OUTPUT_COMMAND</code>.</li>
 <li>[x] <strong>install</strong>: <code>$OBJECT_STORAGE</code> rolled into all four integrators' <code>system.cfg</code> (<code>61fbc7805</code> / <code>68251f540</code> / <code>f940cc04a</code>). (base64 decode is native — no UDF asset.)</li>
 <li>[x] <strong>build/deploy</strong>: engine-core jar hotswapped (#294/#295); WPF rebuilt via <code>build-portable</code>. Meta-service unaffected.</li>
-<li>[ ] <strong>operator (per environment)</strong>: create the <code>S3_CONNECTION</code> (or <code>BLOB_CONNECTION</code>) cloud connection, the <code>integrator</code> schema (create/drop temp-table rights), and push the live <code>system.cfg</code> via the WPF Integrator Config admin tab. (Live <code>.201</code> redshift cfg push is still operator-driven — <code>system.cfg</code> has no hotswap path.)</li>
+<li>[ ] <strong>operator (per environment)</strong>: create the <code>S3_CONNECTION</code> (or <code>BLOB_CONNECTION</code>) cloud connection, the <code>integrator</code> schema (create/drop temp-table rights), and push the live <code>system.cfg</code> via the WPF Integrator Config admin tab. (The live redshift cfg push is still operator-driven — <code>system.cfg</code> has no hotswap path.)</li>
 </ul>
 
 

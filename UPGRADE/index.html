@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://zgurung.github.io/eltmaestro-docs/UPGRADE/">
       
       
-        <link rel="prev" href="../INSTALL/">
+        <link rel="prev" href="../DOCKER-INSTALL/">
       
       
         <link rel="next" href="../OPERATIONS/">
@@ -842,6 +842,27 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../DOCKER-INSTALL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker image install
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -1263,7 +1284,7 @@
 </table>
 <p>After the swap, any newly-bundled <code>migrations/*.sql</code> is applied against the live audit DB, idempotently via the <code>schema_version</code> tracking table (same pattern as the Docker entrypoint).</p>
 <h2 id="before-you-upgrade">Before you upgrade<a class="headerlink" href="#before-you-upgrade" title="Permanent link">&para;</a></h2>
-<p>Take a one-off backup of the host so you have a clean rollback target. See BACKUP.md § One-off manual backup — <code>vzdump --mode stop</code> is the canonical recipe for the <code>192.168.1.201</code> VM. If you only care about the audit DB + workflows + keystore, the in-place <code>update-server.sh</code> already preserves them (see "What is preserved" above), so a full VM snapshot is the belt-and-braces option.</p>
+<p>Take a one-off backup of the host so you have a clean rollback target. See BACKUP.md § One-off manual backup — <code>vzdump --mode stop</code> is the canonical recipe for the host VM. If you only care about the audit DB + workflows + keystore, the in-place <code>update-server.sh</code> already preserves them (see "What is preserved" above), so a full VM snapshot is the belt-and-braces option.</p>
 <h2 id="procedure">Procedure<a class="headerlink" href="#procedure" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>su<span class="w"> </span>-<span class="w"> </span>maestro
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>.<span class="w"> </span>~/.env_integrator

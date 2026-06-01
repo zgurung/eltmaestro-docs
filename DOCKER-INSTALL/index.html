@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://zgurung.github.io/eltmaestro-docs/MEDALLION-BRONZE/">
+        <link rel="canonical" href="https://zgurung.github.io/eltmaestro-docs/DOCKER-INSTALL/">
       
       
-        <link rel="prev" href="../MEDALLION/">
+        <link rel="prev" href="../INSTALL/">
       
       
-        <link rel="next" href="../MEDALLION-SILVER/">
+        <link rel="next" href="../UPGRADE/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>Bronze - ELTMaestro Documentation</title>
+        <title>Docker image install - ELTMaestro Documentation</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#-bronze-layer--ingestion--landing" class="md-skip">
+        <a href="#install-from-the-docker-image-download-from-s3" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Bronze
+              Docker image install
             
           </span>
         </div>
@@ -517,8 +517,6 @@
       
   
   
-    
-  
   
   
     
@@ -530,11 +528,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
@@ -548,7 +546,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Medallion design
@@ -580,30 +578,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Bronze
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../MEDALLION-BRONZE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -612,71 +590,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#ingestion-patterns" class="md-nav__link">
-    <span class="md-ellipsis">
-      Ingestion patterns
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#landing-targets" class="md-nav__link">
-    <span class="md-ellipsis">
-      Landing targets
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#append-only-discipline" class="md-nav__link">
-    <span class="md-ellipsis">
-      Append-only discipline
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gotchas" class="md-nav__link">
-    <span class="md-ellipsis">
-      Gotchas
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#next" class="md-nav__link">
-    <span class="md-ellipsis">
-      Next
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -866,8 +779,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -877,11 +792,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
         
           
           <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
@@ -895,7 +810,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             Install & operations
@@ -927,10 +842,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../DOCKER-INSTALL/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Docker image install
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -939,6 +874,89 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-1---download-and-load-the-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1 - download and load the image
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2---run-the-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2 - run the container
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3---wait-for-startup-and-verify" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3 - wait for startup and verify
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4---default-credentials" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4 - default credentials
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5---connect-the-desktop-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 5 - connect the desktop client
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upgrading" class="md-nav__link">
+    <span class="md-ellipsis">
+      Upgrading
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1020,45 +1038,63 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#ingestion-patterns" class="md-nav__link">
+  <a href="#prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
-      Ingestion patterns
+      Prerequisites
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#landing-targets" class="md-nav__link">
+  <a href="#step-1---download-and-load-the-image" class="md-nav__link">
     <span class="md-ellipsis">
-      Landing targets
+      Step 1 - download and load the image
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#append-only-discipline" class="md-nav__link">
+  <a href="#step-2---run-the-container" class="md-nav__link">
     <span class="md-ellipsis">
-      Append-only discipline
+      Step 2 - run the container
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#gotchas" class="md-nav__link">
+  <a href="#step-3---wait-for-startup-and-verify" class="md-nav__link">
     <span class="md-ellipsis">
-      Gotchas
+      Step 3 - wait for startup and verify
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#next" class="md-nav__link">
+  <a href="#step-4---default-credentials" class="md-nav__link">
     <span class="md-ellipsis">
-      Next
+      Step 4 - default credentials
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5---connect-the-desktop-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 5 - connect the desktop client
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upgrading" class="md-nav__link">
+    <span class="md-ellipsis">
+      Upgrading
     </span>
   </a>
   
@@ -1079,103 +1115,106 @@
                   
 
 
-<h1 id="-bronze-layer--ingestion--landing">🥉 Bronze layer — ingestion &amp; landing<a class="headerlink" href="#-bronze-layer--ingestion--landing" title="Permanent link">&para;</a></h1>
-<p>Deep-dive companion to <a href="../MEDALLION/">Medallion architecture with ELTMaestro</a>. The Bronze layer <strong>captures source data as-is</strong> and lands it for downstream processing. Goal: faithful, append-only, replayable raw history — minimal transformation.</p>
-<h2 id="ingestion-patterns">Ingestion patterns<a class="headerlink" href="#ingestion-patterns" title="Permanent link">&para;</a></h2>
-<p>Pick the pattern that matches the source and the change rate:</p>
-<table>
-<thead>
-<tr>
-<th>Pattern</th>
-<th>Steps</th>
-<th>When</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Full / snapshot load</strong></td>
-<td><code>Jdbcsource</code> / <code>Datasource</code> → land</td>
-<td>Small/reference tables, or sources with no reliable change marker.</td>
-</tr>
-<tr>
-<td><strong>Incremental (watermark)</strong></td>
-<td><code>Watermark</code> + <code>Jdbcsource</code>/<code>Datasource</code></td>
-<td>Source has a monotonic column (id / updated_at). The <code>Watermark</code> step persists the last position between runs and pulls only newer rows.</td>
-</tr>
-<tr>
-<td><strong>CDC / upsert</strong></td>
-<td><code>isCDC</code> + <code>$QUERY_CDC_DELETE</code> / <code>$QUERY_CDC_INSERT</code></td>
-<td>Source emits inserts/updates/deletes you want to apply as a delete-then-insert merge.</td>
-</tr>
-<tr>
-<td><strong>File drop</strong></td>
-<td><code>Local_file</code>, <code>Sftp</code>, <code>Pullfile</code></td>
-<td>Files delivered to a folder / SFTP / S3.</td>
-</tr>
-<tr>
-<td><strong>Event-driven</strong></td>
-<td><code>FileWatch</code>, <code>FileScanner</code>, <code>RemoteFileScanner</code>, <code>JdbcWatch</code>, <code>ScriptWatch</code></td>
-<td>Trigger a landing run when a file appears or a source condition is met.</td>
-</tr>
-<tr>
-<td><strong>Connector extract</strong></td>
-<td>Mongo / Salesforce extract paths</td>
-<td>NoSQL / SaaS sources.</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p><strong>Incremental is the default for Bronze.</strong> A <code>Watermark</code> keeps each run cheap and the lake append-only. Reserve full loads for small/reference data.</p>
-</blockquote>
-<h2 id="landing-targets">Landing targets<a class="headerlink" href="#landing-targets" title="Permanent link">&para;</a></h2>
-<p>Where raw data comes to rest:</p>
-<table>
-<thead>
-<tr>
-<th>Target</th>
-<th>Step</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Object storage</strong> (S3 / Azure Blob)</td>
-<td>staged via <code>$OBJECT_STORAGE</code> (<code>S3_CONNECTION</code> / <code>BLOB_CONNECTION</code>)</td>
-<td>The lake. See <a href="../UG-ADMIN/#general--cloud-connections-s3">Administration ▸ cloud connections</a>.</td>
-</tr>
-<tr>
-<td><strong>HDFS</strong></td>
-<td><code>Jdbctargethdfs</code></td>
-<td>On-cluster lake storage.</td>
-</tr>
-<tr>
-<td><strong>Hive external tables</strong></td>
-<td><code>Onstagegroup</code></td>
-<td>Registers landed files as Spark/Hive external tables (<code>$HIVE_CONNECTION</code>/<code>$HIVE_DATABASE</code>/<code>$HIVE_SCHEMA</code>) so Silver can query them as tables.</td>
-</tr>
-<tr>
-<td><strong>Onstage staging tables</strong></td>
-<td><code>Onstagegroup</code> / file loaders</td>
-<td>Staging tables in the MPP for the next merge.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="append-only-discipline">Append-only discipline<a class="headerlink" href="#append-only-discipline" title="Permanent link">&para;</a></h2>
-<p>Bronze must stay <strong>immutable and replayable</strong>:</p>
-<ol>
-<li><strong>Insert-only targets</strong> — never update/delete in Bronze; corrections happen in Silver.</li>
-<li><strong>Watermark every incremental source</strong> so reruns don't double-land and only new rows arrive.</li>
-<li><strong>Keep raw fidelity</strong> — land columns as-received (string/raw types are fine); defer type-casting and cleaning to Silver. Base64-encode awkward payloads if a staging format needs it (decoded later via <code>$B64EXPRESSION</code>).</li>
-<li><strong>Partition by load time / batch</strong> (<code>$GUID</code> scopes a run's staged objects) so you can replay or audit a specific landing.</li>
-</ol>
-<h2 id="gotchas">Gotchas<a class="headerlink" href="#gotchas" title="Permanent link">&para;</a></h2>
+<h1 id="install-from-the-docker-image-download-from-s3">Install from the Docker image (download from S3)<a class="headerlink" href="#install-from-the-docker-image-download-from-s3" title="Permanent link">&para;</a></h1>
+<p>The container alternative to the <a href="../INSTALL/">bare-metal install</a>: download one self-contained ELTMaestro image from the public release bucket, load it into Docker, and run it. Everything — PostgreSQL, the engine, the SOAP meta-service, Spark/Hadoop, and Marquez — runs inside the single container.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Late-arriving data</strong> — a high-water mark on <code>updated_at</code> can skip rows committed out of order; prefer an id-based or overlap-window watermark when the source allows.</li>
-<li><strong>Idempotency</strong> — a rerun of the same window must not duplicate rows; rely on the <code>Watermark</code> position, not wall-clock.</li>
-<li><strong>Schema drift</strong> — new/renamed source columns should land without breaking; keep Bronze permissive and resolve shape in Silver.</li>
+<li>A host with <strong>Docker</strong> installed and running (Linux recommended).</li>
+<li>~6 GB free disk for the image, plus room for the data volumes.</li>
+<li>Outbound HTTPS to download the image (or copy the tarball in for an air-gapped host).</li>
 </ul>
-<h2 id="next">Next<a class="headerlink" href="#next" title="Permanent link">&para;</a></h2>
-<p>Promote to <a href="../MEDALLION-SILVER/">🥈 Silver — clean, conform, validate</a>. Back to the <a href="../MEDALLION/">Medallion overview</a>.</p>
+<h2 id="step-1---download-and-load-the-image">Step 1 - download and load the image<a class="headerlink" href="#step-1---download-and-load-the-image" title="Permanent link">&para;</a></h2>
+<p>Releases are published to <code>https://eltmaestro.s3.amazonaws.com/docker/</code>. Download the image tarball for the version you want and load it into Docker:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>curl<span class="w"> </span>-fLO<span class="w"> </span>https://eltmaestro.s3.amazonaws.com/docker/eltmaestro-&lt;VERSION&gt;.tar.gz
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>docker<span class="w"> </span>load<span class="w"> </span>&lt;<span class="w"> </span>eltmaestro-&lt;VERSION&gt;.tar.gz
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>docker<span class="w"> </span>images<span class="w"> </span>eltmaestro
+</code></pre></div>
+<p><code>docker load</code> registers <code>eltmaestro:&lt;VERSION&gt;</code> locally. Browse <code>https://eltmaestro.s3.amazonaws.com/docker/</code> for the available versions (e.g. <code>17.0.4.268</code>).</p>
+<h2 id="step-2---run-the-container">Step 2 - run the container<a class="headerlink" href="#step-2---run-the-container" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>eltmaestro<span class="w"> </span>--restart<span class="w"> </span>unless-stopped<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span>-p<span class="w"> </span><span class="m">8181</span>:8181<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span>-p<span class="w"> </span><span class="m">5432</span>:5432<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span>-p<span class="w"> </span><span class="m">10000</span>:10000<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span>-p<span class="w"> </span><span class="m">9080</span>:8080<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span>-p<span class="w"> </span><span class="m">7077</span>:7077<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span>-p<span class="w"> </span><span class="m">3443</span>:3443<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span>-p<span class="w"> </span><span class="m">3080</span>:3080<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span>-v<span class="w"> </span>eltm-pgdata:/opt/iserver/server/pgsql/data<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">  </span>-v<span class="w"> </span>eltm-hdfs:/root/hdmaestro<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">  </span>-v<span class="w"> </span>eltm-data:/opt/iserver/data<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">  </span>eltmaestro:&lt;VERSION&gt;
+</code></pre></div>
+<p>What the ports are for (only <strong>8181</strong> is required — the rest are optional, by feature):</p>
+<table>
+<thead>
+<tr>
+<th>Port</th>
+<th>Service</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>8181</strong></td>
+<td>SOAP meta-service over HTTPS — <strong>the desktop client connects here</strong></td>
+</tr>
+<tr>
+<td>5432</td>
+<td>PostgreSQL audit DB</td>
+</tr>
+<tr>
+<td>10000</td>
+<td>Spark Thrift / HiveServer2</td>
+</tr>
+<tr>
+<td>9080</td>
+<td>Spark master UI (container 8080)</td>
+</tr>
+<tr>
+<td>7077</td>
+<td>Spark master RPC</td>
+</tr>
+<tr>
+<td>3443 / 3080</td>
+<td>audit-analytics web (HTTPS / HTTP)</td>
+</tr>
+</tbody>
+</table>
+<p>Two things to know:</p>
+<ul>
+<li><strong>TLS works out of the box.</strong> The image bakes a self-signed keystore and starts the meta-service on HTTPS (<code>SSL_ENABLED=true</code> by default) — no keystore mount needed, and the desktop client accepts the self-signed cert automatically. To override: <code>-e SSL_ENABLED=false</code> for plain HTTP, or <code>-e KEYSTORE_PATH=… -e KEYSTORE_PASSWORD=…</code> for your own certificate.</li>
+<li><strong>The three named volumes hold all durable state</strong> — the audit DB, the HDFS warehouse, and deployed workflows + logs. Keep the same volume names across upgrades and your data persists. Use the exact container paths shown (PostgreSQL lives at <code>/opt/iserver/server/pgsql/data</code>, not the usual <code>/var/lib/postgresql/data</code>).</li>
+</ul>
+<h2 id="step-3---wait-for-startup-and-verify">Step 3 - wait for startup and verify<a class="headerlink" href="#step-3---wait-for-startup-and-verify" title="Permanent link">&para;</a></h2>
+<p>First start initializes the database (a minute or two). Watch for readiness, then confirm the services and the SOAP endpoint:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>eltmaestro<span class="w">                       </span><span class="c1"># wait for &quot;Audit database ready&quot;</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>eltmaestro<span class="w"> </span>supervisorctl<span class="w"> </span>status<span class="w">     </span><span class="c1"># services should be RUNNING</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>curl<span class="w"> </span>-sk<span class="w"> </span>https://&lt;server_ip&gt;:8181/MaestroMetaDataProviderService/MaestroMetaService?wsdl<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-2
+</code></pre></div>
+<p>The WSDL request should return its XML header (HTTP 200).</p>
+<h2 id="step-4---default-credentials">Step 4 - default credentials<a class="headerlink" href="#step-4---default-credentials" title="Permanent link">&para;</a></h2>
+<p>A bootstrap user is seeded on first start:</p>
+<ul>
+<li><strong>User:</strong> <code>integrator</code></li>
+<li><strong>Password:</strong> <code>integrator123</code></li>
+</ul>
+<p>Change it before connecting any real client:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>eltmaestro<span class="w"> </span>mset-password-md5<span class="w"> </span>INTEGRATOR<span class="w"> </span><span class="s1">&#39;&lt;new-password&gt;&#39;</span>
+</code></pre></div>
+<h2 id="step-5---connect-the-desktop-client">Step 5 - connect the desktop client<a class="headerlink" href="#step-5---connect-the-desktop-client" title="Permanent link">&para;</a></h2>
+<p>Point the ELTMaestro desktop client's <strong>Server</strong> / <strong>Port</strong> at <code>&lt;server_ip&gt;</code> / <code>8181</code> and sign in as <code>integrator</code> with your new password. From here the <a href="../USER-GUIDE/">User Guide</a> covers connections, workflows, and the rest.</p>
+<h2 id="upgrading">Upgrading<a class="headerlink" href="#upgrading" title="Permanent link">&para;</a></h2>
+<p>Download the new image tarball, load it, then recreate the container with the <strong>same volume names</strong> — your data carries over and pending migrations apply automatically on start:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl<span class="w"> </span>-fLO<span class="w"> </span>https://eltmaestro.s3.amazonaws.com/docker/eltmaestro-&lt;NEW_VERSION&gt;.tar.gz
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>docker<span class="w"> </span>load<span class="w"> </span>&lt;<span class="w"> </span>eltmaestro-&lt;NEW_VERSION&gt;.tar.gz
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>docker<span class="w"> </span>stop<span class="w"> </span>eltmaestro<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>docker<span class="w"> </span>rm<span class="w"> </span>eltmaestro
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>eltmaestro<span class="w"> </span>--restart<span class="w"> </span>unless-stopped<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span>-p<span class="w"> </span><span class="m">8181</span>:8181<span class="w"> </span>-p<span class="w"> </span><span class="m">5432</span>:5432<span class="w"> </span>-p<span class="w"> </span><span class="m">10000</span>:10000<span class="w"> </span>-p<span class="w"> </span><span class="m">9080</span>:8080<span class="w"> </span>-p<span class="w"> </span><span class="m">7077</span>:7077<span class="w"> </span>-p<span class="w"> </span><span class="m">3443</span>:3443<span class="w"> </span>-p<span class="w"> </span><span class="m">3080</span>:3080<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span>-v<span class="w"> </span>eltm-pgdata:/opt/iserver/server/pgsql/data<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span>-v<span class="w"> </span>eltm-hdfs:/root/hdmaestro<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">  </span>-v<span class="w"> </span>eltm-data:/opt/iserver/data<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">  </span>eltmaestro:&lt;NEW_VERSION&gt;
+</code></pre></div>
+<p>See <a href="../OPERATIONS/">OPERATIONS.md</a> for day-to-day start/stop, logs, and admin tasks.</p>
 
 
 
