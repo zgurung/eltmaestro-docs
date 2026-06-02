@@ -1276,7 +1276,7 @@
 </tbody>
 </table>
 <h2 id="1-create-the-redshift-jdbc-connection">1. Create the Redshift JDBC connection<a class="headerlink" href="#1-create-the-redshift-jdbc-connection" title="Permanent link">&para;</a></h2>
-<p>In the WPF client, open the JDBC connection editor (<code>SysJdbcSetting</code>) and create a connection. It is persisted to the audit DB table <code>t_jdbc</code> (<code>connection_name</code>, <code>connection_string</code>, <code>jdbc_driver_name</code>, <code>user_name</code>, <code>password64</code> (base64), <code>jdbc_driver_jar</code>).</p>
+<p>In the WPF client, navigate <strong>Administration ▸ Configure Maestro Server</strong> to open the <a href="../UG-ADMIN/#opening-the-admin-interface">Admin Interface</a> (admin-role users only), select the <strong><a href="../UG-ADMIN/#database-connections-jdbc">Database Connections</a></strong> tab, then click <strong>Create</strong> (or select a row and <strong>Edit</strong>) to open the JDBC connection editor (<code>SysJdbcSetting</code>). Fill in the fields below — including the SSL connection string from the gotcha. The connection is persisted to the audit DB table <code>t_jdbc</code> (<code>connection_name</code>, <code>connection_string</code>, <code>jdbc_driver_name</code>, <code>user_name</code>, <code>password64</code> (base64), <code>jdbc_driver_jar</code>).</p>
 <table>
 <thead>
 <tr>
