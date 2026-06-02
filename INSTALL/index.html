@@ -1281,7 +1281,7 @@
 </code></pre></div>
 <p><strong>Docker image</strong> (alternative path — instead of the bare-metal Steps 3-5): download and load the image rather than extracting the tarball:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl<span class="w"> </span>-fLO<span class="w"> </span>https://eltmaestro.s3.amazonaws.com/docker/eltmaestro-&lt;VERSION&gt;.tar.gz
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>docker<span class="w"> </span>load<span class="w"> </span>&lt;<span class="w"> </span>eltmaestro-&lt;VERSION&gt;.tar.gz<span class="w">            </span><span class="c1"># registers eltmaestro:&lt;VERSION&gt;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>docker<span class="w"> </span>load<span class="w"> </span>-i<span class="w"> </span>eltmaestro-&lt;VERSION&gt;.tar.gz<span class="w">            </span><span class="c1"># registers eltmaestro:&lt;VERSION&gt;</span>
 </code></pre></div>
 <p>Then load and run it per <a href="../DOCKER-INSTALL/">Install from the Docker image</a> (the full <code>docker load</code> → <code>docker run</code> → verify recipe). The image is large — it bundles Spark, Hadoop, Marquez, the JDK, and Postgres — so the bare-metal tarball is the lighter option for a single host, while the image export suits container or air-gapped deployments.</p>
 <blockquote>
