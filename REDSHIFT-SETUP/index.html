@@ -1295,7 +1295,7 @@
 </tr>
 <tr>
 <td>Connection string</td>
-<td><code>jdbc:redshift://$HOST:$PORT/$DATABASE</code> — or, for TLS, <code>jdbc:redshift://$HOST:$PORT/$DATABASE?ssl=true&amp;sslfactory=com.amazon.redshift.ssl.NonValidatingFactory</code></td>
+<td><strong>Recommended:</strong> <code>jdbc:redshift://$HOST:$PORT/$DATABASE?ssl=true&amp;sslfactory=com.amazon.redshift.ssl.NonValidatingFactory</code>. The bare <code>jdbc:redshift://$HOST:$PORT/$DATABASE</code> only works where SSL isn't enforced.</td>
 </tr>
 <tr>
 <td>User / Password</td>
@@ -1305,6 +1305,7 @@
 </table>
 <blockquote>
 <p><strong>Gotcha — driver class:</strong> use <strong><code>com.amazon.redshift.Driver</code></strong> (the single class the modern 2.x driver registers). The legacy <code>…jdbc41.Driver</code> / <code>…jdbc42.Driver</code> class names only exist in pre-1.2 jars and throw <code>ClassNotFoundException</code> against the shipped <code>redshift-jdbc42-2.1.0.33.jar</code>.</p>
+<p><strong>Gotcha — use <code>NonValidatingFactory</code>:</strong> Redshift requires TLS, so when creating the JDBC job append <strong><code>?ssl=true&amp;sslfactory=com.amazon.redshift.ssl.NonValidatingFactory</code></strong> to the connection string. <code>NonValidatingFactory</code> skips server-certificate-chain validation, which avoids SSL handshake / <em>"unable to find valid certification path to requested target"</em> failures without having to import the Redshift CA into the engine host's Java truststore.</p>
 </blockquote>
 <p>A new JDBC driver jar (if you swap versions) must be added to <code>root-engine-install/jdbc_list.json</code> and the image rebuilt / tarball republished — see CONVENTIONS.md.</p>
 <h2 id="2-create-the-s3-connection--aws-credentials">2. Create the S3 connection + AWS credentials<a class="headerlink" href="#2-create-the-s3-connection--aws-credentials" title="Permanent link">&para;</a></h2>
