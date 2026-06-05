@@ -1045,8 +1045,10 @@
 <p>Public download links for the latest ELTMaestro packages. All links are direct
 (no login). The release bucket is <strong>not</strong> directory-browsable, so use the links
 on this page.</p>
-<p><strong>Current release line: <code>17.0.4</code></strong> (engine / server). The <code>-17.0.4</code> links below
-always point at the latest build of that line.</p>
+<p><strong>Current release line: <code>17.0.4</code></strong> (engine / server) — latest validated build
+<strong><code>17.0.4.345</code></strong> (clean destructive deploy verified: 108 tables + integrator user).
+The <code>-17.0.4</code> links below always point at the latest build of that line (refreshed
+on each publish — they currently serve <code>17.0.4.345</code>).</p>
 <table>
 <thead>
 <tr>
@@ -1080,13 +1082,13 @@ always point at the latest build of that line.</p>
 <h2 id="what-to-do-with-each">What to do with each<a class="headerlink" href="#what-to-do-with-each" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Docker image</strong> — <code>curl -fLO &lt;image-url&gt;</code> then <code>docker load -i eltmaestro-17.0.4.tar.gz</code>. Full walkthrough: <strong><a href="../DOCKER-INSTALL/">Install from the Docker image</a></strong>.</li>
-<li><strong>Linux installer</strong> — <code>curl -fLO &lt;installer-url&gt;</code>, extract, run <code>install.sh</code>. Full walkthrough: <strong><a href="../INSTALL/">Install</a></strong>.</li>
+<li><strong>Linux installer</strong> — <code>curl -fLO &lt;installer-url&gt;</code>, extract, run <code>install.sh</code>. Full walkthrough: <strong><a href="../INSTALL/">Install</a></strong>. The <strong>same</strong> tarball also installs an <strong>engine-only edge node</strong> — run <code>install-engine.sh</code> instead of <code>install.sh</code> to add a remote execution server that connects to the central audit DB: <strong>Edge node setup</strong>.</li>
 <li><strong>Windows desktop client</strong> — download the <code>.zip</code>, unzip, run <code>ELTMAESTRO.exe</code>, and point <strong>Server / Port</strong> at your ELTMaestro host (<code>8181</code>). See <strong><a href="../UG-GETTING-STARTED/">Getting started</a></strong>.</li>
 </ul>
 <h2 id="versions">Versions<a class="headerlink" href="#versions" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The <code>-17.0.4</code> filenames track the <strong>current release line</strong> and are refreshed on each publish — use these for "the latest".</li>
-<li>Specific <strong>pinned builds</strong> may also be present (e.g. <code>eltmaestro-17.0.4.268.tar.gz</code>) for reproducible installs. Substitute the exact build number in the filename if you need to pin.</li>
+<li>Specific <strong>pinned builds</strong> may also be present (e.g. <code>eltmaestro-17.0.4.345.tar.gz</code>) for reproducible installs. Substitute the exact build number in the filename if you need to pin.</li>
 </ul>
 <blockquote>
 <p>Tip: the server (Docker image / Linux installer, version <code>17.0.4</code>) and the
