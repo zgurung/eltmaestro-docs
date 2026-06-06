@@ -1047,11 +1047,11 @@
 on this page.</p>
 <p><strong>Current release line: <code>17.0.4</code></strong> (engine / server). The <code>-17.0.4</code> links below always
 point at the <strong>latest build of that line</strong> (refreshed on each publish). <strong>Refreshed
-2026-06-06</strong> from <code>master-claude-base</code> — this build adds the Snowflake Java-21 hardening
+2026-06-06 from build <code>17.0.4.354</code></strong> (<code>master-claude-base</code>), via a clean destructive
+rebuild + redeploy (WSDL verified live). Includes the Snowflake Java-21 hardening
 (<code>--add-opens</code> for the JDBC Arrow reader, javax <code>jaxb-api</code>, snowsql key-pair PUT), the
-integrator-metadata install fix (server / edge node / upgrade), and the WPF main-window
-cron-schedule column. (Prior destructive-deploy-verified build: <code>17.0.4.345</code> — 108 tables
-+ integrator user.)</p>
+integrator-metadata install fix (server / edge node / upgrade), the meta-service
+webservice-log read fix, and the WPF job-editor work (Run History + Runtime Status diagram).</p>
 <table>
 <thead>
 <tr>
