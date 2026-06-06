@@ -1045,10 +1045,13 @@
 <p>Public download links for the latest ELTMaestro packages. All links are direct
 (no login). The release bucket is <strong>not</strong> directory-browsable, so use the links
 on this page.</p>
-<p><strong>Current release line: <code>17.0.4</code></strong> (engine / server) — latest validated build
-<strong><code>17.0.4.345</code></strong> (clean destructive deploy verified: 108 tables + integrator user).
-The <code>-17.0.4</code> links below always point at the latest build of that line (refreshed
-on each publish — they currently serve <code>17.0.4.345</code>).</p>
+<p><strong>Current release line: <code>17.0.4</code></strong> (engine / server). The <code>-17.0.4</code> links below always
+point at the <strong>latest build of that line</strong> (refreshed on each publish). <strong>Refreshed
+2026-06-06</strong> from <code>master-claude-base</code> — this build adds the Snowflake Java-21 hardening
+(<code>--add-opens</code> for the JDBC Arrow reader, javax <code>jaxb-api</code>, snowsql key-pair PUT), the
+integrator-metadata install fix (server / edge node / upgrade), and the WPF main-window
+cron-schedule column. (Prior destructive-deploy-verified build: <code>17.0.4.345</code> — 108 tables
++ integrator user.)</p>
 <table>
 <thead>
 <tr>
@@ -1062,7 +1065,7 @@ on each publish — they currently serve <code>17.0.4.345</code>).</p>
 <tr>
 <td><strong>Docker image</strong></td>
 <td><a href="https://eltmaestro.s3.amazonaws.com/docker/eltmaestro-17.0.4.tar.gz">https://eltmaestro.s3.amazonaws.com/docker/eltmaestro-17.0.4.tar.gz</a></td>
-<td>~2.4 GB</td>
+<td>~2.5 GB</td>
 <td>Run the full ELTMaestro server as a container.</td>
 </tr>
 <tr>
