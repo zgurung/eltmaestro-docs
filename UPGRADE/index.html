@@ -1315,6 +1315,7 @@
 <li>Wait briefly (3 s) for processes to settle</li>
 <li>Extract the new tarball into a <code>mktemp -d</code> staging area</li>
 <li><code>rsync</code>-style swap of the "replaced" paths from the staging tree into <code>/data/iserver/</code></li>
+<li><strong>Refresh the runtime integrator metadata</strong> — copy the new <code>metadata/integrators</code> into <code>$PGDIR/metadata</code> (the engine reads the <strong>runtime</strong> copy, not the factory), so updated <code>system.cfg</code> / new <code>$SYSTEM_*</code> vars take effect instead of stale config surviving the upgrade</li>
 <li>Restart Postgres alone</li>
 <li>Apply any newly-bundled migrations from <code>server/pgsql.factory/migrations/</code></li>
 <li>Start the rest of the stack via <code>mstart-all</code></li>

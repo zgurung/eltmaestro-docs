@@ -1311,6 +1311,7 @@
 <li><strong>Downloads Spark 4.1.1 + Hadoop 3.4.3</strong> from the Apache archive into <code>tools/</code> (~600 MB combined, one-time)</li>
 <li><strong>Generates <code>server/keystore.jks</code></strong> with the hostname-correct SAN (<code>DNS:$(hostname -f),DNS:localhost,IP:$(hostname -I),IP:127.0.0.1</code>) so the Spring Boot meta-service's HTTPS works without the legacy <code>relaxSniHostCheck</code> workaround</li>
 <li><strong>Initializes Postgres</strong>: <code>initdb</code> → start temporary → <code>createdb sqlmaestro</code> → load <code>initdb.sql</code> + <code>postload-fixups.sql</code> + <code>seed-system-user.sql</code> + any pending <code>migrations/*.sql</code> → stop</li>
+<li><strong>Installs the integrator metadata</strong> — copies <code>metadata/integrators/&lt;jobType&gt;/</code> (<code>system.cfg</code>, <code>get_*</code>, <code>static_*</code>, <code>launcher.sh</code>) from the factory into <code>$PGDIR/metadata</code>, the runtime path the engine reads each target platform's config from. Snowflake/MPP DDL depends on the <code>$SYSTEM_*</code> vars defined there (e.g. <code>$SYSTEM_TOKEN_ENCLOSER</code>).</li>
 </ol>
 <p>Expect 3-10 minutes depending on network speed (the Spark + Hadoop downloads dominate).</p>
 <h2 id="step-5---load-the-env-and-start-everything">Step 5 - load the env and start everything<a class="headerlink" href="#step-5---load-the-env-and-start-everything" title="Permanent link">&para;</a></h2>
