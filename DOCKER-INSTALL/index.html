@@ -1134,7 +1134,7 @@
 
 
 <h1 id="install-from-the-docker-image-download-from-s3">Install from the Docker image (download from S3)<a class="headerlink" href="#install-from-the-docker-image-download-from-s3" title="Permanent link">&para;</a></h1>
-<p>The container alternative to the <a href="../INSTALL/">bare-metal install</a>: download one self-contained ELTMaestro image from the public release bucket, load it into Docker, and run it. Everything — PostgreSQL, the engine, the SOAP meta-service, Spark/Hadoop, and Marquez — runs inside the single container.</p>
+<p>The container alternative to the <a href="../INSTALL/">bare-metal install</a>: download one self-contained ELTMaestro image from the public release bucket, load it into Docker, and run it. Everything — PostgreSQL, the engine, the SOAP meta-service, and Spark/Hadoop — runs inside the single container.</p>
 <h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <ul>
 <li>A host with <strong>Docker</strong> installed and running (Linux recommended).</li>
@@ -1157,17 +1157,14 @@
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span>-p<span class="w"> </span><span class="m">7077</span>:7077<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span>-p<span class="w"> </span><span class="m">3443</span>:3443<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span>-p<span class="w"> </span><span class="m">3080</span>:3080<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span><span class="sb">`</span><span class="c1"># optional diagnostic / lineage UIs — add only if you need them` \</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span><span class="sb">`</span><span class="c1"># optional diagnostic UIs — add only if you need them` \</span>
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">  </span>-p<span class="w"> </span><span class="m">9870</span>:9870<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">  </span>-p<span class="w"> </span><span class="m">9000</span>:9000<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">  </span>-p<span class="w"> </span><span class="m">8081</span>:8081<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">  </span>-p<span class="w"> </span><span class="m">3000</span>:3000<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">  </span>-p<span class="w"> </span><span class="m">5000</span>:5000<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">  </span>-p<span class="w"> </span><span class="m">5001</span>:5001<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">  </span>-v<span class="w"> </span>eltm-pgdata:/opt/iserver/server/pgsql/data<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">  </span>-v<span class="w"> </span>eltm-hdfs:/root/hdmaestro<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">  </span>-v<span class="w"> </span>eltm-data:/opt/iserver/data<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">  </span>eltmaestro:&lt;VERSION&gt;
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">  </span>-v<span class="w"> </span>eltm-pgdata:/opt/iserver/server/pgsql/data<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">  </span>-v<span class="w"> </span>eltm-hdfs:/root/hdmaestro<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">  </span>-v<span class="w"> </span>eltm-data:/opt/iserver/data<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">  </span>eltmaestro:&lt;VERSION&gt;
 </code></pre></div>
 <p>What the ports are for (only <strong>8181</strong> is required — the rest are optional, by feature):</p>
 <table>
@@ -1214,18 +1211,10 @@
 <td>8081</td>
 <td>Spark worker UI</td>
 </tr>
-<tr>
-<td>3000</td>
-<td>Marquez lineage web UI</td>
-</tr>
-<tr>
-<td>5000 / 5001</td>
-<td>Marquez (OpenLineage) API / admin</td>
-</tr>
 </tbody>
 </table>
 <blockquote>
-<p>The image <code>EXPOSE</code>s all of the above; the <code>docker run</code> above publishes them to the host. The six optional ports drive diagnostic and lineage UIs only — omit their <code>-p</code> flags for a minimal install (the desktop client needs just <strong>8181</strong>). The <code>`# ...`</code> line is a shell no-op comment, safe to keep or drop.</p>
+<p>The image <code>EXPOSE</code>s all of the above; the <code>docker run</code> above publishes them to the host. The three optional ports drive diagnostic UIs only — omit their <code>-p</code> flags for a minimal install (the desktop client needs just <strong>8181</strong>). The <code>`# ...`</code> line is a shell no-op comment, safe to keep or drop.</p>
 </blockquote>
 <p>Two things to know:</p>
 <ul>
@@ -1257,7 +1246,7 @@
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>docker<span class="w"> </span>stop<span class="w"> </span>eltmaestro<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>docker<span class="w"> </span>rm<span class="w"> </span>eltmaestro
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>eltmaestro<span class="w"> </span>--restart<span class="w"> </span>unless-stopped<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span>-p<span class="w"> </span><span class="m">8181</span>:8181<span class="w"> </span>-p<span class="w"> </span><span class="m">5432</span>:5432<span class="w"> </span>-p<span class="w"> </span><span class="m">10000</span>:10000<span class="w"> </span>-p<span class="w"> </span><span class="m">9080</span>:8080<span class="w"> </span>-p<span class="w"> </span><span class="m">7077</span>:7077<span class="w"> </span>-p<span class="w"> </span><span class="m">3443</span>:3443<span class="w"> </span>-p<span class="w"> </span><span class="m">3080</span>:3080<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span>-p<span class="w"> </span><span class="m">9870</span>:9870<span class="w"> </span>-p<span class="w"> </span><span class="m">9000</span>:9000<span class="w"> </span>-p<span class="w"> </span><span class="m">8081</span>:8081<span class="w"> </span>-p<span class="w"> </span><span class="m">3000</span>:3000<span class="w"> </span>-p<span class="w"> </span><span class="m">5000</span>:5000<span class="w"> </span>-p<span class="w"> </span><span class="m">5001</span>:5001<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span>-p<span class="w"> </span><span class="m">9870</span>:9870<span class="w"> </span>-p<span class="w"> </span><span class="m">9000</span>:9000<span class="w"> </span>-p<span class="w"> </span><span class="m">8081</span>:8081<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span>-v<span class="w"> </span>eltm-pgdata:/opt/iserver/server/pgsql/data<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">  </span>-v<span class="w"> </span>eltm-hdfs:/root/hdmaestro<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">  </span>-v<span class="w"> </span>eltm-data:/opt/iserver/data<span class="w"> </span><span class="se">\</span>

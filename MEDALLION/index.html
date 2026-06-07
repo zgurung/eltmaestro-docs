@@ -1404,7 +1404,6 @@
 </ul>
 <h2 id="governance--observability">Governance &amp; observability<a class="headerlink" href="#governance--observability" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Lineage</strong> — the OpenLineage emitter → <strong>Marquez</strong> gives <strong>column-level lineage spanning all three layers</strong> automatically; open it from the Job editor's <strong>View Lineage</strong> button. This is medallion's strongest built-in story: Bronze → Silver → Gold provenance for free. See LINEAGE.md.</li>
 <li><strong>Metrics</strong> — per-step <code>SQLMetrics</code>, surfaced through <strong>Runtime &amp; Logs ▸ Logging ▸ Workflow Logs</strong>.</li>
 </ul>
 <h2 id="design-principles-the-conventions-to-enforce">Design principles (the conventions to enforce)<a class="headerlink" href="#design-principles-the-conventions-to-enforce" title="Permanent link">&para;</a></h2>
@@ -1428,13 +1427,13 @@
 <p><img alt="Silver-layer transform DAG — Employee + EmployeeDepartmentHistory joined into employee_department_joined, passed through a FUNCTION2 step, with a parallel dedupe → filter branch" src="../images/job-dag-example.png" /></p>
 <p><strong>3. Gold — build the mart</strong> (<code>gold_hr</code>, tagged <code>gold</code>)
 - <code>Aggregate2</code> rolls Silver up to headcount-by-department; <code>Table</code> (or a group loader) writes the <code>gold_headcount</code> mart; <code>JdbcTargetClickhouse</code> (or your serving MPP) publishes it for BI.</p>
-<p><strong>Spine:</strong> a master workflow uses <code>JobStep</code> to run <code>bronze_hr → silver_hr → gold_hr</code> in order; the <strong>Scheduler</strong> runs Bronze hourly and triggers the rest on completion; <strong>Email Alerts</strong> notify on failure. The whole chain's column lineage is visible end-to-end in the <strong>Lineage Viewer</strong>.</p>
+<p><strong>Spine:</strong> a master workflow uses <code>JobStep</code> to run <code>bronze_hr → silver_hr → gold_hr</code> in order; the <strong>Scheduler</strong> runs Bronze hourly and triggers the rest on completion; <strong>Email Alerts</strong> notify on failure.</p>
 <h2 id="where-to-build-a-runnable-reference">Where to build a runnable reference<a class="headerlink" href="#where-to-build-a-runnable-reference" title="Permanent link">&para;</a></h2>
-<p>A local <strong>ClickHouse + Spark/HDFS + Postgres</strong> stack supports an end-to-end medallion demo: files → Bronze (lake external tables) → Silver (conform in ClickHouse/Spark, gated) → Gold (<code>Aggregate2</code> + <code>JdbcTargetClickhouse</code>), chained by <code>JobStep</code>, scheduled + alerted, with the whole chain visible in the Lineage Viewer.</p>
+<p>A local <strong>ClickHouse + Spark/HDFS + Postgres</strong> stack supports an end-to-end medallion demo: files → Bronze (lake external tables) → Silver (conform in ClickHouse/Spark, gated) → Gold (<code>Aggregate2</code> + <code>JdbcTargetClickhouse</code>), chained by <code>JobStep</code>, scheduled + alerted.</p>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../UG-WORKFLOWS/">Workflows — building &amp; running jobs</a> · <a href="../UG-ADMIN/">Administration &amp; connections</a> · <a href="../UG-MENUS/">Menus</a></li>
-<li>Lineage · Function catalog</li>
+<li>Function catalog</li>
 <li>Per-platform setup: <a href="../REDSHIFT-SETUP/">Redshift</a> · <a href="../SPARKSQL-SETUP/">SparkSQL</a> · <a href="../CLICKHOUSE-AUTH/">ClickHouse</a></li>
 </ul>
 

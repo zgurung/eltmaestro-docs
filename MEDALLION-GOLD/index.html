@@ -1201,7 +1201,7 @@
 <ul>
 <li><strong>Grain discipline</strong> — every Gold table has exactly one declared grain; mixing grains breaks aggregations downstream.</li>
 <li><strong>Refresh atomicity</strong> — swap/rebuild so consumers never read a half-loaded mart (load to a temp, then publish).</li>
-<li><strong>Don't transform in Gold</strong> — cleaning/conforming belongs in <a href="../MEDALLION-SILVER/">Silver</a>; Gold only aggregates and serves, so lineage and trust stay clear.</li>
+<li><strong>Don't transform in Gold</strong> — cleaning/conforming belongs in <a href="../MEDALLION-SILVER/">Silver</a>; Gold only aggregates and serves, so trust stays clear.</li>
 </ul>
 <h2 id="back">Back<a class="headerlink" href="#back" title="Permanent link">&para;</a></h2>
 <p><a href="../MEDALLION-SILVER/">🥈 Silver</a> · <a href="../MEDALLION-BRONZE/">🥉 Bronze</a> · <a href="../MEDALLION/">Medallion overview</a></p>

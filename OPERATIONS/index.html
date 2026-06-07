@@ -1564,7 +1564,7 @@
 <tr>
 <td>5432</td>
 <td>5432</td>
-<td>PostgreSQL (audit DB + Marquez DB)</td>
+<td>PostgreSQL (audit DB)</td>
 </tr>
 <tr>
 <td>7077</td>
@@ -1586,19 +1586,9 @@
 <td>3080</td>
 <td>Audit-analytics HTTP</td>
 </tr>
-<tr>
-<td>5050</td>
-<td>5000</td>
-<td>Marquez API (host port remapped because the docker registry owns :5000)</td>
-</tr>
-<tr>
-<td>3000</td>
-<td>3000</td>
-<td>Marquez Web UI</td>
-</tr>
 </tbody>
 </table>
-<p>The meta-service itself only binds <strong>8181</strong> (HTTPS only — there is no HTTP→HTTPS redirect). The other ports are bound by supervisord-managed sidecars (Spark, audit-analytics, Marquez) and by postgres directly.</p>
+<p>The meta-service itself only binds <strong>8181</strong> (HTTPS only — there is no HTTP→HTTPS redirect). The other ports are bound by supervisord-managed sidecars (Spark, audit-analytics) and by postgres directly.</p>
 <h2 id="common-admin-tasks">Common admin tasks<a class="headerlink" href="#common-admin-tasks" title="Permanent link">&para;</a></h2>
 <h3 id="reset-a-users-password">Reset a user's password<a class="headerlink" href="#reset-a-users-password" title="Permanent link">&para;</a></h3>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>mset-password-md5<span class="w"> </span>&lt;USER_ID_UPPERCASE&gt;<span class="w"> </span><span class="s1">&#39;&lt;new-password&gt;&#39;</span>
@@ -1680,7 +1670,7 @@ If either count is 0, reseed by re-running the canonical COPY blocks from <code>
 </code></pre></div>
 <p>Full design context, common-error mapping, SHA256/SSH-key hardening notes: <strong><a href="../CLICKHOUSE-AUTH/">CLICKHOUSE-AUTH.md</a></strong>.</p>
 <h3 id="graceful-shutdown-of-the-whole-stack">Graceful shutdown of the whole stack<a class="headerlink" href="#graceful-shutdown-of-the-whole-stack" title="Permanent link">&para;</a></h3>
-<p>For maintenance windows, host moves, or planned power events. Brings down all four containers (<code>eltmaestro</code> + <code>clickhouse</code> + <code>sql1</code> + <code>registry</code>) in shutdown-safe order so PG checkpoints, HDFS flushes its fsimage, Marquez drains pending writes, ClickHouse flushes its WAL, and SQL Server flushes its log — none of which finish inside <code>docker stop</code>'s default 10s.</p>
+<p>For maintenance windows, host moves, or planned power events. Brings down all four containers (<code>eltmaestro</code> + <code>clickhouse</code> + <code>sql1</code> + <code>registry</code>) in shutdown-safe order so PG checkpoints, HDFS flushes its fsimage, ClickHouse flushes its WAL, and SQL Server flushes its log — none of which finish inside <code>docker stop</code>'s default 10s.</p>
 <p>Canonical script: <code>source/root-engine-install/bin/eltm-shutdown.sh</code>. Runs on the docker host, not inside any container.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Containers only (host stays up). Aborts if any ELTMaestro batches are running:</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>sudo<span class="w"> </span>/path/to/eltm-shutdown.sh
@@ -1714,7 +1704,7 @@ If either count is 0, reseed by re-running the canonical COPY blocks from <code>
 <tr>
 <td>2</td>
 <td><code>docker stop --time 60 eltmaestro</code></td>
-<td>Supervisord forwards SIGTERM to its 11 subprocesses in reverse-priority order. PG checkpoint (<code>stopsignal=INT</code> per supervisord.conf), HDFS fsimage flush, Marquez API + Web drain, meta-service shut. 60s is empirically enough on the .201 stack.</td>
+<td>Supervisord forwards SIGTERM to its 11 subprocesses in reverse-priority order. PG checkpoint (<code>stopsignal=INT</code> per supervisord.conf), HDFS fsimage flush, meta-service shut. 60s is empirically enough on the .201 stack.</td>
 </tr>
 <tr>
 <td>2</td>
@@ -1745,7 +1735,7 @@ If either count is 0, reseed by re-running the canonical COPY blocks from <code>
 </table>
 <p><strong>From a Windows shell with the SSH helper configured</strong>: <code>Invoke-EltmaestroShutdown [-Force] [-Poweroff] [-DryRun]</code> scp's the script + execs it via the same SSH path as <code>Invoke-EltmaestroHotswapViaSsh</code>.</p>
 <p><strong>Coming back up after the shutdown:</strong> docker daemon starts containers with <code>restart-policy=always</code> automatically, but ours are all <code>unless-stopped</code> — they stay stopped until <code>docker start eltmaestro clickhouse sql1 registry</code> (or <code>docker start $(docker ps -aq)</code>). Supervisord brings the eltmaestro internals up in priority order on container start.</p>
-<p><strong>What NOT to do:</strong> <code>docker kill</code> instead of <code>docker stop</code> (SIGKILL — no chance for PG checkpoint, HDFS flush, Marquez commit; risks WAL corruption). <code>sudo poweroff</code> before stopping containers (docker daemon gets ~10s default before host force-stops). <code>docker compose down</code> is not applicable — these four containers are docker-run-managed, no compose file orchestrates them.</p>
+<p><strong>What NOT to do:</strong> <code>docker kill</code> instead of <code>docker stop</code> (SIGKILL — no chance for PG checkpoint, HDFS flush; risks WAL corruption). <code>sudo poweroff</code> before stopping containers (docker daemon gets ~10s default before host force-stops). <code>docker compose down</code> is not applicable — these four containers are docker-run-managed, no compose file orchestrates them.</p>
 <h3 id="vm-full-backup-proxmox">VM full backup (Proxmox)<a class="headerlink" href="#vm-full-backup-proxmox" title="Permanent link">&para;</a></h3>
 <p>The whole <code>192.168.1.201</code> VM (eltmaestro + clickhouse + sql1 + registry + jenkins + every named volume) gets backed up via Proxmox <code>vzdump --mode stop</code> — a single command that gracefully shuts the VM down, snapshots the disk, and starts it back up.</p>
 <p>One-off (before a risky change):</p>
@@ -1772,7 +1762,7 @@ If either count is 0, reseed by re-running the canonical COPY blocks from <code>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># Inside the container (or bare-metal):</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>ps<span class="w"> </span>-ef<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;[j]ava.*maestro|[p]ostgres&#39;</span>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="c1"># Host-side listener check (matches the Jenkinsfile port table):</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>ss<span class="w"> </span>-lntp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;:(8181|9080|5432|7077|10000|3443|3080|5050|3000)&#39;</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>ss<span class="w"> </span>-lntp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;:(8181|9080|5432|7077|10000|3443|3080)&#39;</span>
 </code></pre></div>
 <h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
 <h3 id="installsh-fails-with-jq-not-on-path"><code>install.sh</code> fails with <code>'jq' not on PATH</code><a class="headerlink" href="#installsh-fails-with-jq-not-on-path" title="Permanent link">&para;</a></h3>

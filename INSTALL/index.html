@@ -1288,7 +1288,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl<span class="w"> </span>-fLO<span class="w"> </span>https://eltmaestro.s3.amazonaws.com/docker/eltmaestro-&lt;VERSION&gt;.tar.gz
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>docker<span class="w"> </span>load<span class="w"> </span>-i<span class="w"> </span>eltmaestro-&lt;VERSION&gt;.tar.gz<span class="w">            </span><span class="c1"># registers eltmaestro:&lt;VERSION&gt;</span>
 </code></pre></div>
-<p>Then load and run it per <a href="../DOCKER-INSTALL/">Install from the Docker image</a> (the full <code>docker load</code> → <code>docker run</code> → verify recipe). The image is large — it bundles Spark, Hadoop, Marquez, the JDK, and Postgres — so the bare-metal tarball is the lighter option for a single host, while the image export suits container or air-gapped deployments.</p>
+<p>Then load and run it per <a href="../DOCKER-INSTALL/">Install from the Docker image</a> (the full <code>docker load</code> → <code>docker run</code> → verify recipe). The image is large — it bundles Spark, Hadoop, the JDK, and Postgres — so the bare-metal tarball is the lighter option for a single host, while the image export suits container or air-gapped deployments.</p>
 <blockquote>
 <p>See <strong><a href="../DOWNLOADS/">Downloads</a></strong> for the exact download URLs (current release line <code>17.0.4</code>; the bucket isn't directory-browsable).</p>
 </blockquote>
@@ -1331,7 +1331,6 @@
 <h2 id="where-to-go-next">Where to go next<a class="headerlink" href="#where-to-go-next" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Day-to-day operation: see <a href="../OPERATIONS/">OPERATIONS.md</a></li>
-<li>Data lineage (Marquez + Node — not in the bare-metal install by default): see LINEAGE-BAREMETAL.md</li>
 <li>Add a remote execution server: see EDGE-NODE-SETUP.md (run <code>install-engine.sh</code> instead of <code>install.sh</code>)</li>
 <li>Upgrading later: see <a href="../UPGRADE/">UPGRADE.md</a> (run a one-off backup first per BACKUP.md)</li>
 <li>Layout reference: see <a href="../OPERATIONS/#install-layout-reference">OPERATIONS.md § Install layout reference</a> for the full <code>/data/iserver/</code> tree</li>

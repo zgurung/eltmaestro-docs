@@ -1275,12 +1275,12 @@
 <p><strong>Edit Workflow</strong> (or double-clicking a workflow) opens the editor. Layout:</p>
 <ul>
 <li><strong>Menu bar</strong> — <em>File</em> (Save · Save As · <strong>Save Locally…</strong> = export the canvas to a job-XML file on your machine, no server write · Exit), <em>Run</em> (Run · Stop), <em>Debug</em> (Check Mapping · View Runtime Log).</li>
-<li><strong>Toolbar</strong> — icon buttons for Save, Check Workflow, Run, Stop, Runtime CLI Configuration, and View Lineage, plus a <strong>zoom slider</strong>. A red <strong>lock indicator</strong> shows the workflow's lock state.</li>
+<li><strong>Toolbar</strong> — icon buttons for Save, Check Workflow, Run, Stop, and Runtime CLI Configuration, plus a <strong>zoom slider</strong>. A red <strong>lock indicator</strong> shows the workflow's lock state.</li>
 <li><strong>Step palette</strong> (left) — a scrollable, <strong>searchable</strong> list of every step type available for this job's platform: sources &amp; loaders (<code>Dataframe</code>, <code>Local_file</code>, <code>Onstagegroup</code>, <code>Jdbcsource</code>, <code>Datasource</code>, <code>Jdbctargethdfs</code>, …), transforms (<code>Aggregate</code>, <code>Aggregate2</code>, <code>Dedupe</code>, <code>Filter</code>, <code>Function2</code>, <code>Join</code>, <code>Datamask</code>, …), caches, and control steps. The exact list depends on the job type.</li>
 <li><strong>Designer canvas</strong> (centre, the <strong>Designer</strong> tab) — where you place and wire steps.</li>
 <li><strong>Message tabs</strong> (bottom) — Messages, Runtime Information, and Latest Console Output. On open, the editor logs its initialization here (configurations/aggregates loaded, default SSH/engine connections, mapping check).</li>
 </ul>
-<p><img alt="The Job editor for a SPARKSQL job — title bar showing the job type in brackets, the toolbar (Save / Check / Run / Stop / Runtime CLI / Lineage + zoom), the searchable step palette down the left, the empty Designer canvas, and the initialization log in the message pane" src="../images/job-editor.png" /></p>
+<p><img alt="The Job editor for a SPARKSQL job — title bar showing the job type in brackets, the toolbar (Save / Check / Run / Stop / Runtime CLI + zoom), the searchable step palette down the left, the empty Designer canvas, and the initialization log in the message pane" src="../images/job-editor.png" /></p>
 <p>A finished workflow wires <strong>source</strong> steps through <strong>transforms</strong> into <strong>output</strong> tables. For example, two source tables joined and the result passed through a function step, plus a separate dedupe → filter branch:</p>
 <p><img alt="Example job DAG on the Designer canvas — Employee and EmployeeDepartmentHistory source tables feed a JOIN into employee_department_joined, which flows through a FUNCTION2 step to an output table; a separate DEDUPE → FILTER branch runs alongside" src="../images/job-dag-example.png" /></p>
 <h3 id="adding-steps">Adding steps<a class="headerlink" href="#adding-steps" title="Permanent link">&para;</a></h3>
@@ -1334,10 +1334,6 @@
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>See a workflow's <strong>data lineage</strong> (column/step)</td>
-<td>Job editor <strong>View Lineage</strong> button, or <strong>Runtime &amp; Logs ▸ Reports ▸ Data Lineage Utility</strong> → LINEAGE.md</td>
-</tr>
 <tr>
 <td>Get <strong>emailed</strong> on success/failure</td>
 <td><strong>Administration ▸ Workflow Configuration ▸ Email Alerts</strong> → <a href="../UG-MENUS/#administration">UG-MENUS.md</a></td>
