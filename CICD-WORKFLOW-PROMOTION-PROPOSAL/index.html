@@ -10,13 +10,11 @@
       
       
       
-        <link rel="canonical" href="https://zgurung.github.io/eltmaestro-docs/MEDALLION/">
+        <link rel="canonical" href="https://zgurung.github.io/eltmaestro-docs/CICD-WORKFLOW-PROMOTION-PROPOSAL/">
       
       
-        <link rel="prev" href="../UG-STEPS/">
+        <link rel="prev" href="../OPERATIONS/">
       
-      
-        <link rel="next" href="../MEDALLION-BRONZE/">
       
       
       <link rel="icon" href="../assets/elt-maestro-logo.png">
@@ -24,7 +22,7 @@
     
     
       
-        <title>Overview - ELTMaestro Documentation</title>
+        <title>Workflow promotion (CI/CD) - ELTMaestro Documentation</title>
       
     
     
@@ -76,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#building-medallion-pipelines-with-eltmaestro" class="md-skip">
+        <a href="#proposal-cicd-pipeline-for-eltmaestro-workflow-version-tracking--promotion" class="md-skip">
           Skip to content
         </a>
       
@@ -111,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Overview
+              Workflow promotion (CI/CD)
             
           </span>
         </div>
@@ -535,8 +533,6 @@
       
   
   
-    
-  
   
   
     
@@ -548,11 +544,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
@@ -566,7 +562,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Medallion design
@@ -577,30 +573,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Overview
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../MEDALLION/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -609,149 +585,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#what-medallion-means-here" class="md-nav__link">
-    <span class="md-ellipsis">
-      What "medallion" means here
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#where-the-layers-live--your-target-data-warehouse" class="md-nav__link">
-    <span class="md-ellipsis">
-      Where the layers live — your target data warehouse
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#layer--step-mapping" class="md-nav__link">
-    <span class="md-ellipsis">
-      Layer → step mapping
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Layer → step mapping">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#-bronze--raw-landing--ingestion" class="md-nav__link">
-    <span class="md-ellipsis">
-      🥉 Bronze — raw landing / ingestion
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#-silver--cleaned-conformed-validated" class="md-nav__link">
-    <span class="md-ellipsis">
-      🥈 Silver — cleaned, conformed, validated
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#-gold--business-marts--serving" class="md-nav__link">
-    <span class="md-ellipsis">
-      🥇 Gold — business marts / serving
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-orchestration-spine" class="md-nav__link">
-    <span class="md-ellipsis">
-      The orchestration spine
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-silver-quality-gate" class="md-nav__link">
-    <span class="md-ellipsis">
-      The Silver quality gate
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#governance--observability" class="md-nav__link">
-    <span class="md-ellipsis">
-      Governance &amp; observability
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#design-principles-the-conventions-to-enforce" class="md-nav__link">
-    <span class="md-ellipsis">
-      Design principles (the conventions to enforce)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#a-worked-example--hr-headcount-mart" class="md-nav__link">
-    <span class="md-ellipsis">
-      A worked example — HR headcount mart
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#where-to-build-a-runnable-reference" class="md-nav__link">
-    <span class="md-ellipsis">
-      Where to build a runnable reference
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#related" class="md-nav__link">
-    <span class="md-ellipsis">
-      Related
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1093,8 +926,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -1104,11 +939,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
         
           
           <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
@@ -1122,7 +957,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             Proposals
@@ -1133,10 +968,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../CICD-WORKFLOW-PROMOTION-PROPOSAL/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Workflow promotion (CI/CD)
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -1145,6 +1000,176 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#executive-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executive Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-statement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem Statement
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Goals
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#non-goals-this-phase" class="md-nav__link">
+    <span class="md-ellipsis">
+      Non-Goals (this phase)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-already-exists-reused-not-rebuilt" class="md-nav__link">
+    <span class="md-ellipsis">
+      What Already Exists (reused, not rebuilt)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proposed-solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Proposed Solution
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Proposed Solution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-git-as-the-source-of-truth" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Git as the source of truth
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-capture-job-jenkins-dev--git--automated" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Capture job (Jenkins: DEV → Git) — automated
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-promote-job-jenkins-git--prod--gated" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Promote job (Jenkins: Git → PROD) — gated
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-connection-strategy-identical-names-per-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Connection Strategy (identical names per environment)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pipeline-flow-end-to-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pipeline Flow (end to end)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#components-to-build-after-approval" class="md-nav__link">
+    <span class="md-ellipsis">
+      Components to Build (after approval)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phased-roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phased Roadmap
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#risks--mitigations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Risks &amp; Mitigations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#open-items-to-confirm-with-stakeholders" class="md-nav__link">
+    <span class="md-ellipsis">
+      Open Items to Confirm with Stakeholders
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why This Approach
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1184,55 +1209,91 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-medallion-means-here" class="md-nav__link">
+  <a href="#executive-summary" class="md-nav__link">
     <span class="md-ellipsis">
-      What "medallion" means here
+      Executive Summary
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#where-the-layers-live--your-target-data-warehouse" class="md-nav__link">
+  <a href="#problem-statement" class="md-nav__link">
     <span class="md-ellipsis">
-      Where the layers live — your target data warehouse
+      Problem Statement
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#layer--step-mapping" class="md-nav__link">
+  <a href="#goals" class="md-nav__link">
     <span class="md-ellipsis">
-      Layer → step mapping
+      Goals
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Layer → step mapping">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#non-goals-this-phase" class="md-nav__link">
+    <span class="md-ellipsis">
+      Non-Goals (this phase)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-already-exists-reused-not-rebuilt" class="md-nav__link">
+    <span class="md-ellipsis">
+      What Already Exists (reused, not rebuilt)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proposed-solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Proposed Solution
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Proposed Solution">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#-bronze--raw-landing--ingestion" class="md-nav__link">
+  <a href="#1-git-as-the-source-of-truth" class="md-nav__link">
     <span class="md-ellipsis">
-      🥉 Bronze — raw landing / ingestion
+      1. Git as the source of truth
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#-silver--cleaned-conformed-validated" class="md-nav__link">
+  <a href="#2-capture-job-jenkins-dev--git--automated" class="md-nav__link">
     <span class="md-ellipsis">
-      🥈 Silver — cleaned, conformed, validated
+      2. Capture job (Jenkins: DEV → Git) — automated
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#-gold--business-marts--serving" class="md-nav__link">
+  <a href="#3-promote-job-jenkins-git--prod--gated" class="md-nav__link">
     <span class="md-ellipsis">
-      🥇 Gold — business marts / serving
+      3. Promote job (Jenkins: Git → PROD) — gated
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-connection-strategy-identical-names-per-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Connection Strategy (identical names per environment)
     </span>
   </a>
   
@@ -1244,63 +1305,54 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-orchestration-spine" class="md-nav__link">
+  <a href="#pipeline-flow-end-to-end" class="md-nav__link">
     <span class="md-ellipsis">
-      The orchestration spine
+      Pipeline Flow (end to end)
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-silver-quality-gate" class="md-nav__link">
+  <a href="#components-to-build-after-approval" class="md-nav__link">
     <span class="md-ellipsis">
-      The Silver quality gate
+      Components to Build (after approval)
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#governance--observability" class="md-nav__link">
+  <a href="#phased-roadmap" class="md-nav__link">
     <span class="md-ellipsis">
-      Governance &amp; observability
+      Phased Roadmap
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#design-principles-the-conventions-to-enforce" class="md-nav__link">
+  <a href="#risks--mitigations" class="md-nav__link">
     <span class="md-ellipsis">
-      Design principles (the conventions to enforce)
+      Risks &amp; Mitigations
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#a-worked-example--hr-headcount-mart" class="md-nav__link">
+  <a href="#open-items-to-confirm-with-stakeholders" class="md-nav__link">
     <span class="md-ellipsis">
-      A worked example — HR headcount mart
+      Open Items to Confirm with Stakeholders
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#where-to-build-a-runnable-reference" class="md-nav__link">
+  <a href="#why-this-approach" class="md-nav__link">
     <span class="md-ellipsis">
-      Where to build a runnable reference
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#related" class="md-nav__link">
-    <span class="md-ellipsis">
-      Related
+      Why This Approach
     </span>
   </a>
   
@@ -1321,188 +1373,269 @@
                   
 
 
-<h1 id="building-medallion-pipelines-with-eltmaestro">Building Medallion pipelines with ELTMaestro<a class="headerlink" href="#building-medallion-pipelines-with-eltmaestro" title="Permanent link">&para;</a></h1>
-<p>How to design Bronze → Silver → Gold ("medallion") data pipelines in ELTMaestro, mapped to the actual step types you place on the <a href="../UG-WORKFLOWS/">Job editor</a> canvas. Part of the <a href="../USER-GUIDE/">User Guide</a>.</p>
-<h2 id="what-medallion-means-here">What "medallion" means here<a class="headerlink" href="#what-medallion-means-here" title="Permanent link">&para;</a></h2>
-<p>The medallion pattern organizes a data platform into three quality tiers:</p>
+<h1 id="proposal-cicd-pipeline-for-eltmaestro-workflow-version-tracking--promotion">Proposal: CI/CD Pipeline for ELTMAESTRO Workflow Version Tracking &amp; Promotion<a class="headerlink" href="#proposal-cicd-pipeline-for-eltmaestro-workflow-version-tracking--promotion" title="Permanent link">&para;</a></h1>
+<p><strong>Audience:</strong> Engineering / platform stakeholders
+<strong>Status:</strong> Proposal for review
+<strong>Scope:</strong> Automate version tracking and controlled promotion of Maestro workflow XML
+definitions from a lower environment to production, using Jenkins, GitHub, and the existing
+ELTMAESTRO meta-service.</p>
+<hr />
+<h2 id="executive-summary">Executive Summary<a class="headerlink" href="#executive-summary" title="Permanent link">&para;</a></h2>
+<p>Today an ELTMAESTRO workflow definition exists <strong>only inside the environment it was authored
+in</strong>. There is no version history outside the live database and no controlled path to move a
+workflow from a lower environment to production — so the only way to change production is to
+edit it directly, which is precisely the practice we want to eliminate.</p>
+<p>This proposal introduces a <strong>Git-backed, Jenkins-automated promotion pipeline</strong>. Developers
+continue to author and test workflows in a lower (DEV) environment exactly as they do today. A
+Jenkins job automatically <strong>captures</strong> each workflow's XML into a GitHub repository (giving us
+full version history, diffs, and rollback), and a separate <strong>gated promotion</strong> job carries an
+approved version into production after a dry-run preview and a manual approval.</p>
+<p>Crucially, this <strong>reuses machinery that already exists</strong> in the product — the meta-service
+already exposes SOAP operations to export, validate, and deploy workflow definitions. The only
+genuinely new element is placing the workflow <code>.xml</code> artifacts under Git version control and
+orchestrating the existing operations from Jenkins.</p>
+<hr />
+<h2 id="problem-statement">Problem Statement<a class="headerlink" href="#problem-statement" title="Permanent link">&para;</a></h2>
+<p>A workflow definition is a single <code>&lt;job&gt;</code> XML document. In each running environment it lives:</p>
+<ul>
+<li><strong>On disk</strong>, one <code>.xml</code> file per job, under <code>$MAESTRO_DEPLOYED_FILES_DIR</code> (named after the
+  job), and</li>
+<li><strong>In Postgres</strong>, with metadata in <code>t_job_meta</code> / <code>t_job_meta_history</code>.</li>
+</ul>
+<p>The gaps this creates:</p>
+<ol>
+<li><strong>No version history</strong> of a workflow outside the live database — no diffs, no blame, no
+   easy rollback to a known-good version.</li>
+<li><strong>No controlled promotion path</strong> from a lower environment to production. Moving a workflow
+   means either re-authoring it in the target or a manual, error-prone export/import by hand.</li>
+<li><strong>Direct production editing</strong> becomes the path of least resistance — the opposite of safe
+   change control.</li>
+</ol>
+<h2 id="goals">Goals<a class="headerlink" href="#goals" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Every workflow <code>.xml</code> is <strong>version-tracked in Git</strong>: full history, diffs, blame, rollback.</li>
+<li><strong>Developers never edit production directly</strong>; promotion is a controlled pipeline action.</li>
+<li>Promotion is <strong>previewable (dry-run)</strong> and <strong>gated by human approval</strong> before it touches
+  production.</li>
+<li>Clear visibility into <strong>which version of each workflow is live in each environment</strong>.</li>
+</ul>
+<h2 id="non-goals-this-phase">Non-Goals (this phase)<a class="headerlink" href="#non-goals-this-phase" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Migrating connections/credentials</strong> between environments. Connections are pre-created per
+  environment with identical names (see <em>Connection Strategy</em>).</li>
+<li><strong>Promoting non-workflow assets</strong> (integrator <code>system.cfg</code>, JDBC drivers, engine images) —
+  these already have their own delivery paths and are out of scope here.</li>
+<li><strong>Replacing the WPF authoring experience</strong> — developers keep authoring in DEV as they do
+  now.</li>
+</ul>
+<hr />
+<h2 id="what-already-exists-reused-not-rebuilt">What Already Exists (reused, not rebuilt)<a class="headerlink" href="#what-already-exists-reused-not-rebuilt" title="Permanent link">&para;</a></h2>
+<p>The product already provides every primitive operation this pipeline needs. We orchestrate
+them; we do not reimplement them.</p>
 <table>
 <thead>
 <tr>
-<th>Layer</th>
-<th>Purpose</th>
-<th>Grain</th>
+<th>Capability</th>
+<th>Where it lives</th>
+<th>Role in the pipeline</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>🥉 <strong>Bronze</strong></td>
-<td>Raw landing — capture source data <strong>as-is</strong>, append-only</td>
-<td>Source-shaped, untransformed</td>
+<td>Workflow XML on disk</td>
+<td><code>$MAESTRO_DEPLOYED_FILES_DIR/&lt;job&gt;</code></td>
+<td>The artifact we version and promote</td>
 </tr>
 <tr>
-<td>🥈 <strong>Silver</strong></td>
-<td>Cleaned, conformed, deduplicated, <strong>validated</strong></td>
-<td>Conformed/entity-level</td>
+<td>Workflow metadata</td>
+<td>Postgres <code>t_job_meta</code>, <code>t_job_meta_history</code></td>
+<td>Job type/platform, audit, version history</td>
 </tr>
 <tr>
-<td>🥇 <strong>Gold</strong></td>
-<td>Business marts &amp; serving aggregates</td>
-<td>Business-grain, read-ready</td>
+<td><strong>Export</strong> workflow XML</td>
+<td>SOAP <code>getDeployedJobFileContent(token, user, fileName)</code> (meta-service <code>MaestroMeta</code>)</td>
+<td>Pull a workflow's XML out of an environment</td>
+</tr>
+<tr>
+<td><strong>Deploy / import</strong> workflow XML</td>
+<td>SOAP <code>deploy(...)</code> (meta-service <code>MaestroMeta</code>) — writes XML into the target environment</td>
+<td>Push a workflow's XML into an environment</td>
+</tr>
+<tr>
+<td><strong>Dry-run validation</strong></td>
+<td>SOAP <code>runMigrationCheck(...)</code> (<code>MigrationUtility</code> / <code>MigrationObject</code>)</td>
+<td>Preview an import without writing</td>
+</tr>
+<tr>
+<td>Enumerate workflows</td>
+<td>The same job list the WPF <em>Migration Export</em> screen uses</td>
+<td>Know <em>which</em> workflows to export</td>
+</tr>
+<tr>
+<td>Jenkins automation</td>
+<td><code>source/Jenkinsfile</code> (ACTION-driven) + a PowerShell trigger helper</td>
+<td>Run the capture and promote jobs</td>
 </tr>
 </tbody>
 </table>
+<p><strong>Key insight:</strong> export + import + dry-run already exist as SOAP operations. The new work is
+Git versioning and two Jenkins jobs that string these together.</p>
+<hr />
+<h2 id="proposed-solution">Proposed Solution<a class="headerlink" href="#proposed-solution" title="Permanent link">&para;</a></h2>
+<h3 id="1-git-as-the-source-of-truth">1. Git as the source of truth<a class="headerlink" href="#1-git-as-the-source-of-truth" title="Permanent link">&para;</a></h3>
+<p>A dedicated GitHub repository (working name <code>atni-maestro-workflows</code>) holds one <code>.xml</code> file
+per workflow, mirroring how they sit on disk in the lower environment:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>workflows/
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  &lt;JOB_NAME_1&gt;.xml
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  &lt;JOB_NAME_2&gt;.xml
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  ...
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>manifest.json          # job name -&gt; { type, platform, last-exported-from, checksum }
+</code></pre></div>
+<p>Each export becomes a commit — a point-in-time snapshot. Promotion is then expressed as a
+<strong>Git operation</strong> (a tag or a merge), which is exactly what delivers "version tracking from
+lower environment to prod."</p>
+<h3 id="2-capture-job-jenkins-dev--git--automated">2. Capture job (Jenkins: DEV → Git) — automated<a class="headerlink" href="#2-capture-job-jenkins-dev--git--automated" title="Permanent link">&para;</a></h3>
+<p>A Jenkins job (scheduled and/or on-demand) connects to the <strong>DEV</strong> meta-service over SOAP and:</p>
+<ol>
+<li>Enumerates the workflows (the same list the WPF Migration Export screen uses).</li>
+<li>Calls <code>getDeployedJobFileContent</code> for each to pull its XML.</li>
+<li>Writes each into the Git working copy and updates <code>manifest.json</code>.</li>
+<li>Commits and pushes — only if something actually changed.</li>
+</ol>
+<p>Result: every change a developer makes in DEV becomes a reviewable commit and diff, with <strong>no
+new Git discipline required of developers</strong> — their day-to-day authoring is unchanged.</p>
+<h3 id="3-promote-job-jenkins-git--prod--gated">3. Promote job (Jenkins: Git → PROD) — gated<a class="headerlink" href="#3-promote-job-jenkins-git--prod--gated" title="Permanent link">&para;</a></h3>
+<p>A separate Jenkins "promote" job takes an approved set of workflow XML from Git (a chosen tag
+or commit) and, against the <strong>PROD</strong> meta-service:</p>
+<ol>
+<li><strong>Preview</strong> — for each workflow, run <code>runMigrationCheck</code> (plus a connection-existence
+   check) and show a Git diff of the XML versus what is currently live in production.</li>
+<li><strong>Manual approval gate</strong> — a Jenkins <code>input</code> step pauses the pipeline; a human reviews the
+   preview and approves (or aborts).</li>
+<li><strong>Apply</strong> — call <code>deploy(...)</code> per workflow to write the XML into production, then record
+   the promoted Git commit/tag for audit.</li>
+</ol>
+<p>Developers never touch production; promotion is an explicit, logged, approved action.</p>
+<h3 id="4-connection-strategy-identical-names-per-environment">4. Connection Strategy (identical names per environment)<a class="headerlink" href="#4-connection-strategy-identical-names-per-environment" title="Permanent link">&para;</a></h3>
+<p>Connection names (for example <code>WAREHOUSE_CONN</code>, <code>SYSTEM_SSH</code>) exist in <strong>every</strong> environment,
+each pointing at that environment's own host and credentials. Because a workflow's XML
+references connections <strong>by name</strong>, the same XML promotes <strong>unchanged</strong> — only the target
+environment's connection configuration differs.</p>
+<p>This is the lowest-risk option: it matches the importer's existing <em>skip-if-connection-exists</em>
+behavior, so a promotion never overwrites production connection settings. The one-time setup
+cost is ensuring the matching named connections exist in each environment.</p>
+<hr />
+<h2 id="pipeline-flow-end-to-end">Pipeline Flow (end to end)<a class="headerlink" href="#pipeline-flow-end-to-end" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Developer authors / tests in DEV (WPF client)  ── unchanged workflow ──┐
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>                                                                       v
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>[Jenkins: capture]   export DEV workflows   →   commit/push .xml to GitHub
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>                                                                       │
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>                              (history · diffs · review · tag a release)│
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>                                                                       v
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>[Jenkins: promote]   read approved tag from Git
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        →  runMigrationCheck against PROD   (preview + diff)
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        →  ──  MANUAL APPROVAL GATE  ──
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>        →  deploy() each workflow into PROD   →   record promoted version
+</code></pre></div>
+<hr />
+<h2 id="components-to-build-after-approval">Components to Build (after approval)<a class="headerlink" href="#components-to-build-after-approval" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Workflow repository</strong> — new GitHub repo, directory layout, and <code>manifest.json</code> schema.</li>
+<li><strong>Capture script</strong> — a small client (PowerShell or a thin Java/CLI) that calls
+   <code>getDeployedJobFileContent</code>, reusing the existing SOAP authentication approach (service
+   user, TLS endpoint on port 8181). Driven by a Jenkins job.</li>
+<li><strong>Promote script</strong> — calls <code>runMigrationCheck</code> then <code>deploy</code>, with a Jenkins <code>input</code>
+   approval gate between preview and apply.</li>
+<li><strong>Jenkins jobs</strong> — two new jobs/ACTIONs (capture, promote) wired into the existing
+   <code>source/Jenkinsfile</code> ACTION pattern and PowerShell trigger helper.</li>
+<li><strong>Per-environment connection setup (one-time)</strong> — ensure identically named connections
+   exist in DEV and PROD.</li>
+</ol>
 <blockquote>
-<p><strong>ELTMaestro implements medallion by <em>convention</em>, not as an enforced construct.</strong> The engine has no built-in notion of layers — you impose the discipline through <strong>job naming / <a href="../UG-WORKFLOWS/#configuring-job-metadata">tags</a></strong>, <strong>schema-per-layer</strong> naming, and <strong><a href="#the-orchestration-spine">JobStep</a> chaining</strong>. Each layer is one (or more) workflow; the tiers are how you organize and promote between them.</p>
+<p><strong>Service account:</strong> Use a dedicated automation user (not a developer's interactive WPF
+login) for the SOAP calls. Reusing a logged-in user's token can invalidate that user's live
+client session.</p>
 </blockquote>
-<h2 id="where-the-layers-live--your-target-data-warehouse">Where the layers live — your target data warehouse<a class="headerlink" href="#where-the-layers-live--your-target-data-warehouse" title="Permanent link">&para;</a></h2>
-<p><strong>All three layers — Bronze, Silver, and Gold — live inside the chosen target ("vendor") data-warehouse platform:</strong> Redshift, Snowflake, ClickHouse, SparkSQL (HDFS/Hive), Synapse, Databricks, Greenplum, and the rest. ELTMaestro does not host the medallion itself — it <strong>builds and orchestrates it on the warehouse</strong>, typically as a <strong>schema or database per layer</strong> (<code>bronze_*</code> / <code>silver_*</code> / <code>gold_*</code>) all within that one platform. You pick the platform per workflow via its <strong>Job Type + platform connection</strong> (<a href="../UG-WORKFLOWS/#creating-a-workflow-job">Creating a workflow</a>).</p>
-<p>ELTMaestro's job is the movement and the logic on top of it:</p>
-<ol>
-<li><strong>Land (Bronze / ingest).</strong> Extraction steps pull from heterogeneous sources and <strong>land the raw data into an ingest / landing area on the warehouse</strong>, as-is and append-only:</li>
-<li><strong><code>Jdbcsource</code></strong> — extract from any JDBC source database;</li>
-<li><strong><code>Onstagegroup</code></strong> — stage files and register them as external tables in the warehouse catalog (Spark/Hive);</li>
-<li><strong>General-connection extracts</strong> — <code>Datasource</code> (Corelli streaming) and the connector extracts (Mongo, Salesforce, SFTP, local/remote files) that reach a source through a <a href="../UG-ADMIN/">General / Cloud connection</a>. For MPP targets the landing typically stages through object storage (<code>$OBJECT_STORAGE</code>) and loads into the warehouse.</li>
-<li><strong>Build up (Silver → Gold).</strong> From that landing area you run the <strong>data-quality gates</strong> and the <strong>upper layers entirely inside the warehouse</strong> — conform/clean/validate into Silver, aggregate into Gold — using ELTMaestro's transform + load steps, which push the SQL/Spark work down to the platform.</li>
-</ol>
-<p>So the shape is always: <strong>extract → land on the warehouse → build DQ + Silver + Gold there.</strong> Per-platform wiring is in <a href="../REDSHIFT-SETUP/">Redshift</a> / <a href="../SPARKSQL-SETUP/">SparkSQL</a> / <a href="../CLICKHOUSE-AUTH/">ClickHouse</a> / <a href="../MPP-SETUP/">MPP setup</a>.</p>
-<h2 id="layer--step-mapping">Layer → step mapping<a class="headerlink" href="#layer--step-mapping" title="Permanent link">&para;</a></h2>
-<p>Every item below is a real step type from the <a href="../UG-WORKFLOWS/#adding-steps">step palette</a>.</p>
-<h3 id="-bronze--raw-landing--ingestion">🥉 Bronze — raw landing / ingestion<a class="headerlink" href="#-bronze--raw-landing--ingestion" title="Permanent link">&para;</a></h3>
+<hr />
+<h2 id="phased-roadmap">Phased Roadmap<a class="headerlink" href="#phased-roadmap" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Need</th>
-<th>Steps</th>
+<th>Phase</th>
+<th>Outcome</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Pull / extract</strong></td>
-<td><code>Jdbcsource</code>, <code>Datasource</code> (Corelli streaming source), <code>Local_file</code>, <code>Sftp</code>, <code>Pullfile</code>; connector extracts (Mongo / Salesforce)</td>
+<td><strong>0 — Foundations</strong></td>
+<td>Create the workflow Git repo; stand up identically named connections in DEV and PROD; create the automation user.</td>
 </tr>
 <tr>
-<td><strong>Land into the warehouse</strong></td>
-<td><code>Onstagegroup</code> (stages files → external tables in the Spark/Hive catalog), <code>FileStage</code> / <code>File_Stage</code>, <code>Jdbctargethdfs</code> (object-storage staging via <code>$OBJECT_STORAGE</code>); for MPP targets the staged data is then loaded into the warehouse's landing area</td>
+<td><strong>1 — Capture</strong></td>
+<td>Jenkins job exports DEV workflows and commits them to Git. <strong>Delivers version tracking immediately</strong>, before any automated promotion exists.</td>
 </tr>
 <tr>
-<td><strong>Arrival triggers</strong></td>
-<td><code>FileWatch</code>, <code>FileScanner</code>, <code>RemoteFileScanner</code>, <code>JdbcWatch</code></td>
+<td><strong>2 — Promote (gated)</strong></td>
+<td>Jenkins promote job: dry-run preview + manual approval + <code>deploy</code> to PROD.</td>
 </tr>
 <tr>
-<td><strong>Incremental capture</strong></td>
-<td><code>Watermark</code> + the <code>isCDC</code> / <code>$QUERY_CDC_*</code> delta primitive</td>
+<td><strong>3 — Hardening</strong></td>
+<td>Promotion audit trail (who promoted which tag, when); rollback recipe (re-promote a prior tag); notifications.</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Principle:</strong> capture faithfully, transform minimally, <strong>append-only</strong>. Use a <code>Watermark</code> so each run lands only new data; write to insert-only targets so Bronze stays immutable.</p>
-<p>→ <strong>Deep dive:</strong> <a href="../MEDALLION-BRONZE/">Bronze — ingestion &amp; landing</a></p>
-<h3 id="-silver--cleaned-conformed-validated">🥈 Silver — cleaned, conformed, validated<a class="headerlink" href="#-silver--cleaned-conformed-validated" title="Permanent link">&para;</a></h3>
+<p>Phase 1 has standalone value: even on its own it gives us a complete version history of
+every workflow, which addresses the most acute gap today.</p>
+<hr />
+<h2 id="risks--mitigations">Risks &amp; Mitigations<a class="headerlink" href="#risks--mitigations" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Need</th>
-<th>Steps</th>
+<th>Risk</th>
+<th>Mitigation</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Clean / shape</strong></td>
-<td><code>Filter</code>, <code>Dedupe</code>, <code>Function</code> / <code>Function2</code> (derivations), <code>Datamask</code> (PII), <code>View</code>, <code>Pivot</code></td>
+<td>Connection name drift between environments breaks a promoted workflow</td>
+<td>Identical-names convention + a pre-promote check that every connection referenced by the XML exists in PROD (part of the dry-run)</td>
 </tr>
 <tr>
-<td><strong>Conform / integrate</strong></td>
-<td><code>Join</code>, <code>Union</code>, <code>Minus</code>, <code>Transformer</code>, <code>SparkDataCache</code></td>
+<td>A bad workflow reaches production</td>
+<td>Mandatory dry-run preview + diff + manual approval gate; Git history enables a one-tag rollback</td>
 </tr>
 <tr>
-<td><strong>Historize dimensions</strong></td>
-<td><code>SCD1</code>, <code>SCD2</code></td>
+<td>SOAP session collision invalidating a live WPF session</td>
+<td>Dedicated automation user for all pipeline SOAP calls</td>
 </tr>
 <tr>
-<td><strong>Merge / upsert</strong></td>
-<td><code>OnstageDelta</code>; onstage group loaders with the <code>isCDC</code> / <code>$QUERY_CDC_DELETE</code> + <code>$QUERY_CDC_INSERT</code> delete-then-insert primitive</td>
+<td>Raw-XML import semantics</td>
+<td>Use the lighter <code>deploy()</code> (raw XML) path deliberately — connections are not migrated; confirm in a short Phase-1 spike before finalizing the promote design</td>
 </tr>
 <tr>
-<td><strong>Quality gate</strong></td>
-<td><code>ControlTest</code>, <code>SQLMetrics</code>, <code>MetaProfile</code>, <code>WriteIncident</code> (quarantine bad rows)</td>
+<td>Secrets (SOAP credentials, keystore) in CI</td>
+<td>Use the Jenkins credentials store (already the established pattern for the Jenkins API token)</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Principle:</strong> Silver is <strong>idempotent and re-runnable</strong> — dedupe, conform to canonical types/keys, and <strong>gate promotion on data quality</strong> (see <a href="#the-silver-quality-gate">the Silver quality gate</a>). Column work happens in each step's <a href="../UG-WORKFLOWS/#configuring-a-step--the-expression-builder">expression builder</a>.</p>
-<p>→ <strong>Deep dive:</strong> <a href="../MEDALLION-SILVER/">Silver — clean, conform, validate</a></p>
-<h3 id="-gold--business-marts--serving">🥇 Gold — business marts / serving<a class="headerlink" href="#-gold--business-marts--serving" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Need</th>
-<th>Steps</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Aggregate / model</strong></td>
-<td><code>Aggregate</code>, <code>Aggregate2</code>, <code>Table</code> (GeneralSQLTable), group loaders</td>
-</tr>
-<tr>
-<td><strong>Publish to serving MPP</strong></td>
-<td><code>JdbcTarget{Redshift,Snowflake,Synapse,Clickhouse,Greenplum,Netezza,Yellowbrick,Exasol,Databricks}</code>, <code>WriteJdbc</code>, <code>WriteFile</code>, <code>Export</code></td>
-</tr>
-<tr>
-<td><strong>ML feature/serving</strong></td>
-<td><code>MLFeatureEngineer</code>, <code>MLFeatureTrainer</code>, <code>MLFeaturePredictor</code></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Principle:</strong> Gold is <strong>business-grain and serving-optimized</strong> — pre-aggregated facts/marts the BI and ML layers read directly.</p>
-<p>→ <strong>Deep dive:</strong> <a href="../MEDALLION-GOLD/">Gold — aggregate &amp; serve</a></p>
-<h2 id="the-orchestration-spine">The orchestration spine<a class="headerlink" href="#the-orchestration-spine" title="Permanent link">&para;</a></h2>
-<p>What turns three layers into one end-to-end pipeline:</p>
+<hr />
+<h2 id="open-items-to-confirm-with-stakeholders">Open Items to Confirm with Stakeholders<a class="headerlink" href="#open-items-to-confirm-with-stakeholders" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Chaining layers</strong> — <code>JobStep</code> lets a Bronze workflow invoke Silver, which invokes Gold (one orchestrating DAG, or three workflows wired by JobStep). <code>Switch</code> / <code>SetVariable</code> / <code>Sync</code> handle conditional flow and barriers.</li>
-<li><strong>Scheduling per layer</strong> — <strong>Administration ▸ Scheduler</strong> (cron): e.g. Bronze hourly, Silver/Gold on completion. See <a href="../UG-MENUS/#administration">Menus</a>.</li>
-<li><strong>Alerting</strong> — <strong>Email Alerts</strong> on success/failure per layer.</li>
-<li><strong>Layer labeling</strong> — <a href="../UG-WORKFLOWS/#configuring-job-metadata">Job Metadata</a> <strong>tags</strong> (<code>bronze</code> / <code>silver</code> / <code>gold</code>) so the Workflow(s) list organizes by tier.</li>
+<li>DEV and PROD meta-service endpoints (hosts/ports) and network reachability from the Jenkins
+  agent.</li>
+<li>Whether a third TEST/QA tier is wanted later. The design extends to N tiers — it is the same
+  promote job pointed at a different target environment.</li>
+<li>Who owns the approval gate (which role approves a production promotion).</li>
 </ul>
-<h2 id="the-silver-quality-gate">The Silver quality gate<a class="headerlink" href="#the-silver-quality-gate" title="Permanent link">&para;</a></h2>
-<p>The Bronze → Silver promotion is where you enforce quality — the medallion pattern's core discipline:</p>
+<hr />
+<h2 id="why-this-approach">Why This Approach<a class="headerlink" href="#why-this-approach" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong><code>ControlTest</code></strong> — assert row counts, key uniqueness, referential rules before promoting.</li>
-<li><strong><code>WriteIncident</code></strong> — route failing rows to a quarantine/incident table instead of silently dropping or poisoning Silver.</li>
-<li><strong><code>SQLMetrics</code> / <code>MetaProfile</code></strong> — capture column profiles and run metrics for observability.</li>
-<li><strong><code>Watermark</code></strong> — drive incremental Silver builds so only new/changed Bronze rows are reprocessed.</li>
-</ul>
-<h2 id="governance--observability">Governance &amp; observability<a class="headerlink" href="#governance--observability" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>Metrics</strong> — per-step <code>SQLMetrics</code>, surfaced through <strong>Runtime &amp; Logs ▸ Logging ▸ Workflow Logs</strong>.</li>
-</ul>
-<h2 id="design-principles-the-conventions-to-enforce">Design principles (the conventions to enforce)<a class="headerlink" href="#design-principles-the-conventions-to-enforce" title="Permanent link">&para;</a></h2>
-<ol>
-<li><strong>Append-only Bronze.</strong> Insert-only targets + watermarks; never mutate raw.</li>
-<li><strong>One layer per job, chained by <code>JobStep</code></strong>; tag each job by layer.</li>
-<li><strong>Gate Silver on quality</strong> (<code>ControlTest</code> + <code>WriteIncident</code> quarantine) before promoting.</li>
-<li><strong>Idempotent, re-runnable steps</strong> — watermarks + upsert (<code>OnstageDelta</code> / SCD) so re-runs converge.</li>
-<li><strong>Schema-per-layer naming</strong> (e.g. <code>bronze_*</code> / <code>silver_*</code> / <code>gold_*</code> schemas or databases) to keep tiers separable.</li>
-<li><strong>Honest gap:</strong> ELTMaestro enforces none of this — there is no first-class "medallion" object. It's design discipline, and these conventions are how you keep the tiers clean.</li>
-</ol>
-<h2 id="a-worked-example--hr-headcount-mart">A worked example — HR headcount mart<a class="headerlink" href="#a-worked-example--hr-headcount-mart" title="Permanent link">&para;</a></h2>
-<p>A small end-to-end medallion pipeline, built as <strong>three workflows chained by <code>JobStep</code></strong>:</p>
-<p><strong>1. Bronze — land raw HR data</strong> (<code>bronze_hr</code>, tagged <code>bronze</code>)
-- <code>Jdbcsource</code> (or <code>Datasource</code>) pulls <code>Employee</code> and <code>EmployeeDepartmentHistory</code> from the source system.
-- <code>Watermark</code> scopes each run to new/changed rows; targets are insert-only (<code>Jdbctargethdfs</code> / <code>Onstagegroup</code>), so Bronze stays append-only.</p>
-<p><strong>2. Silver — conform &amp; validate</strong> (<code>silver_hr</code>, tagged <code>silver</code>)
-- <code>Join</code> the two Bronze tables into a conformed <code>employee_department_joined</code>; <code>Dedupe</code> removes duplicates; a <code>Function2</code> step derives/cleans columns; <code>SCD2</code> historizes the department dimension.
-- A <code>ControlTest</code> asserts key uniqueness and row counts; <code>WriteIncident</code> quarantines failing rows rather than letting them into Silver.
-- This is exactly the shape of the join → dedupe → function transform DAG shown in <a href="../UG-WORKFLOWS/#the-job-editor--designing-the-dag">Designing the DAG</a>:</p>
-<p><img alt="Silver-layer transform DAG — Employee + EmployeeDepartmentHistory joined into employee_department_joined, passed through a FUNCTION2 step, with a parallel dedupe → filter branch" src="../images/job-dag-example.png" /></p>
-<p><strong>3. Gold — build the mart</strong> (<code>gold_hr</code>, tagged <code>gold</code>)
-- <code>Aggregate2</code> rolls Silver up to headcount-by-department; <code>Table</code> (or a group loader) writes the <code>gold_headcount</code> mart; <code>JdbcTargetClickhouse</code> (or your serving MPP) publishes it for BI.</p>
-<p><strong>Spine:</strong> a master workflow uses <code>JobStep</code> to run <code>bronze_hr → silver_hr → gold_hr</code> in order; the <strong>Scheduler</strong> runs Bronze hourly and triggers the rest on completion; <strong>Email Alerts</strong> notify on failure.</p>
-<h2 id="where-to-build-a-runnable-reference">Where to build a runnable reference<a class="headerlink" href="#where-to-build-a-runnable-reference" title="Permanent link">&para;</a></h2>
-<p>A local <strong>ClickHouse + Spark/HDFS + Postgres</strong> stack supports an end-to-end medallion demo: files → Bronze (lake external tables) → Silver (conform in ClickHouse/Spark, gated) → Gold (<code>Aggregate2</code> + <code>JdbcTargetClickhouse</code>), chained by <code>JobStep</code>, scheduled + alerted.</p>
-<h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="../UG-WORKFLOWS/">Workflows — building &amp; running jobs</a> · <a href="../UG-ADMIN/">Administration &amp; connections</a> · <a href="../UG-MENUS/">Menus</a></li>
-<li>Function catalog</li>
-<li>Per-platform setup: <a href="../REDSHIFT-SETUP/">Redshift</a> · <a href="../SPARKSQL-SETUP/">SparkSQL</a> · <a href="../CLICKHOUSE-AUTH/">ClickHouse</a></li>
+<li><strong>Low build cost / high leverage</strong> — it composes existing, proven SOAP operations rather
+  than building a new migration engine.</li>
+<li><strong>No disruption to developers</strong> — authoring in DEV is unchanged; capture is automatic.</li>
+<li><strong>Safe by construction</strong> — version history, dry-run preview, and a human approval gate stand
+  between a change and production.</li>
+<li><strong>Incrementally valuable</strong> — Phase 1 alone delivers full workflow version tracking.</li>
 </ul>
 
 
