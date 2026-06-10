@@ -1335,7 +1335,7 @@
 </tr>
 <tr>
 <td>IAM permissions</td>
-<td>The credentials/role must allow <code>s3:PutObject</code>/<code>GetObject</code>/<code>DeleteObject</code> on the bucket and Redshift <code>COPY</code> from S3.</td>
+<td>Two distinct principals: the <strong>engine-host CLI creds</strong> stage files (<code>s3:PutObject</code>/<code>GetObject</code>/<code>DeleteObject</code>), and the <strong><code>COPY</code> IAM role</strong> reads them back (<code>s3:ListBucket</code> + <code>s3:GetObject</code> on the bucket). See <a href="#linking-the-iam-role-cluster--s3-connection--jdbc-user">Linking the IAM role §3</a>.</td>
 </tr>
 <tr>
 <td>base64 decode</td>
@@ -1399,10 +1399,31 @@
    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">GRANT</span><span class="w"> </span><span class="n">ASSUMEROLE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="s1">&#39;arn:aws:iam::&lt;account&gt;:role/&lt;role&gt;&#39;</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="ss">&quot;&lt;db_user&gt;&quot;</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">COPY</span><span class="p">;</span>
 </code></pre></div>
    Without this grant the same (correctly attached) role still fails with <em>not authorized to assume role</em>. Superusers can assume any attached role implicitly; regular users need the explicit <code>ASSUMEROLE … FOR COPY</code> grant.</li>
-<li><strong>S3 read on the role.</strong> The role's IAM policy must allow <code>s3:GetObject</code> / <code>s3:ListBucket</code> on the staging bucket.</li>
+<li><strong>S3 read on the role.</strong> The role's IAM policy must allow <code>s3:ListBucket</code> <strong>and</strong> <code>s3:GetObject</code> on the staging bucket. Attach this policy (inline or managed) to the <code>iam.role</code>, substituting your bucket name:
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2012-10-17&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">&quot;Statement&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">      </span><span class="nt">&quot;Sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;EltmRedshiftCopyList&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">      </span><span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">      </span><span class="nt">&quot;Action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;s3:ListBucket&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">      </span><span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;arn:aws:s3:::&lt;your-bucket&gt;&quot;</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">      </span><span class="nt">&quot;Sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;EltmRedshiftCopyRead&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">      </span><span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">      </span><span class="nt">&quot;Action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;s3:GetObject&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">      </span><span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;arn:aws:s3:::&lt;your-bucket&gt;/*&quot;</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">  </span><span class="p">]</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="p">}</span>
+</code></pre></div><blockquote>
+<p><strong>Gotcha — two different resource ARNs:</strong> <code>s3:ListBucket</code> targets the <strong>bucket</strong> ARN (<code>arn:aws:s3:::&lt;bucket&gt;</code>, no <code>/*</code>); <code>s3:GetObject</code> targets the <strong>objects</strong> ARN (<code>arn:aws:s3:::&lt;bucket&gt;/*</code>). <code>COPY</code> does a prefix <code>LIST</code> before reading, so omitting <code>ListBucket</code> — or scoping it to <code>…/*</code> — fails with <code>S3ServiceException: … not authorized to perform: s3:ListBucket on resource …</code> even though the role <em>was</em> assumed successfully. (If the bucket uses <strong>SSE-KMS</strong>, also grant the role <code>kms:Decrypt</code> on the key; for <strong>UNLOAD</strong>, add <code>s3:PutObject</code>/<code>s3:DeleteObject</code> on <code>…/*</code>.)</p>
+</blockquote>
+</li>
 </ol>
 <blockquote>
-<p><strong>In short:</strong> the ARN on <code>S3_CONNECTION</code> must be a role the <strong>cluster owns and has attached</strong>, <em>and</em> one the <strong>JDBC connection's database user is granted <code>ASSUMEROLE … FOR COPY</code></strong>. Miss the first → <em>Invalid IAM Role ARN / wrong account</em>; miss the second → <em>not authorized to assume role</em>.</p>
+<p><strong>In short:</strong> the ARN on <code>S3_CONNECTION</code> must be a role the <strong>cluster owns and has attached</strong>, <em>and</em> one the <strong>JDBC connection's database user is granted <code>ASSUMEROLE … FOR COPY</code></strong>, <em>and</em> the role's <strong>IAM policy must allow <code>s3:ListBucket</code> + <code>s3:GetObject</code></strong> on the staging bucket. Miss the first → <em>Invalid IAM Role ARN / wrong account</em>; miss the second → <em>not authorized to assume role</em>; miss the third → <em>S3ServiceException: not authorized to perform s3:ListBucket</em>.</p>
 </blockquote>
 <h2 id="running-on-redshift-serverless">Running on Redshift Serverless<a class="headerlink" href="#running-on-redshift-serverless" title="Permanent link">&para;</a></h2>
 <p>The same jobs, <code>system.cfg</code>, S3 connection, <code>COPY</code> command, base64 decode, and JDBC driver run <strong>unchanged</strong> on <strong>Redshift Serverless</strong> — ELTMaestro makes no cluster control-plane calls, and the <code>COPY … IAM_ROLE 'arn'</code> syntax is identical. Only three pieces of <strong>operator wiring</strong> differ:</p>
@@ -1443,10 +1464,10 @@
 </blockquote>
 <h2 id="3-base64-decode-native-no-udf">3. base64 decode (native, no UDF)<a class="headerlink" href="#3-base64-decode-native-no-udf" title="Permanent link">&para;</a></h2>
 <p>base64-stored columns are decoded with Redshift's <strong>native VARBYTE functions</strong> — there is <strong>nothing to install on the cluster</strong>. <code>system.cfg</code> sets:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$B64EXPRESSION=FROM_VARBYTE(TO_VARBYTE($COLUMN, &#39;base64&#39;), &#39;utf-8&#39;)::$DATATYPE
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>$B64EXPRESSION=FROM_VARBYTE(TO_VARBYTE($COLUMN, &#39;base64&#39;), &#39;utf-8&#39;)::$DATATYPE
 </code></pre></div>
 <p><code>TO_VARBYTE($COLUMN,'base64')</code> decodes the base64 string to bytes, <code>FROM_VARBYTE(…,'utf-8')</code> turns those bytes back into UTF-8 text, and <code>::$DATATYPE</code> casts to the column's type. Verify on the cluster (returns <code>hello</code>):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">FROM_VARBYTE</span><span class="p">(</span><span class="n">TO_VARBYTE</span><span class="p">(</span><span class="s1">&#39;aGVsbG8=&#39;</span><span class="p">,</span><span class="s1">&#39;base64&#39;</span><span class="p">),</span><span class="s1">&#39;utf-8&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">FROM_VARBYTE</span><span class="p">(</span><span class="n">TO_VARBYTE</span><span class="p">(</span><span class="s1">&#39;aGVsbG8=&#39;</span><span class="p">,</span><span class="s1">&#39;base64&#39;</span><span class="p">),</span><span class="s1">&#39;utf-8&#39;</span><span class="p">);</span>
 </code></pre></div>
 <p><img alt="DBeaver running SELECT FROM_VARBYTE(TO_VARBYTE('aGVsbG8=','base64'),'utf-8') against Redshift, returning a single from_varbyte column with the value &quot;hello&quot;" src="../images/redshift-base64-native-decode.png" /></p>
 <blockquote>
@@ -1591,8 +1612,8 @@
 <td>A command is missing a required <code>$</code>-var (<code>$AWS_BUCKET</code>/<code>$GUID</code>/<code>$FILENAME</code>/<code>$TARGET</code>) — see the <a href="#file-loader-flow-rsfileloader">table</a>.</td>
 </tr>
 <tr>
-<td><code>COPY</code> access denied</td>
-<td>IAM/credentials lack S3 read or Redshift <code>COPY</code>-from-S3 rights.</td>
+<td><code>COPY</code> <code>S3ServiceException: … not authorized to perform: s3:ListBucket on resource …</code> (role <em>was</em> assumed)</td>
+<td>The <code>iam.role</code> is attached and assumed, but its IAM policy is missing S3 read. Attach the <code>s3:ListBucket</code> (<strong>bucket</strong> ARN) + <code>s3:GetObject</code> (<strong>objects</strong> <code>…/*</code> ARN) policy from <a href="#linking-the-iam-role-cluster--s3-connection--jdbc-user">Linking the IAM role §3</a>.</td>
 </tr>
 <tr>
 <td>base64 column not decoding / <code>FROM_VARBYTE</code>/<code>TO_VARBYTE</code> error</td>
