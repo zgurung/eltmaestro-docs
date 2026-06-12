@@ -1115,17 +1115,18 @@
 on this page.</p>
 <p><strong>Current release line: <code>17.0.4</code></strong> (engine / server). The <code>-17.0.4</code> links below always
 point at the <strong>latest build of that line</strong> (refreshed on each publish). <strong>Refreshed
-2026-06-06 from build <code>17.0.4.354</code></strong> (<code>master-claude-base</code>), via a clean destructive
-rebuild + redeploy (WSDL verified live). Includes the Snowflake Java-21 hardening
-(<code>--add-opens</code> for the JDBC Arrow reader, javax <code>jaxb-api</code>, snowsql key-pair PUT), the
-integrator-metadata install fix (server / edge node / upgrade), the meta-service
-webservice-log read fix, and the WPF job-editor work (Run History + Runtime Status diagram).</p>
+2026-06-11 from build <code>17.0.4.367</code></strong> (<code>master-claude-base</code>), via a clean destructive
+rebuild + redeploy (WSDL verified live). This build adds the meta-service <strong>Jetty
+idle-timeout fix</strong> (large base64 SOAP responses no longer abort at 30 s) and the
+<strong>Redshift Corelli target measure-don't-estimate</strong> rewrite, and ships the Windows
+client <strong>2.5.1.20260611</strong> (busy-cursor-on-crash fix + Run History parent batch-cycle columns).</p>
 <table>
 <thead>
 <tr>
 <th>Package</th>
 <th>Download</th>
 <th>Size</th>
+<th>md5 (current build)</th>
 <th>What it's for</th>
 </tr>
 </thead>
@@ -1134,22 +1135,28 @@ webservice-log read fix, and the WPF job-editor work (Run History + Runtime Stat
 <td><strong>Docker image</strong></td>
 <td><a href="https://eltmaestro.s3.amazonaws.com/docker/eltmaestro-17.0.4.tar.gz">https://eltmaestro.s3.amazonaws.com/docker/eltmaestro-17.0.4.tar.gz</a></td>
 <td>~2.5 GB</td>
+<td><code>648265603d5b1e62ca726ba65d0b0dff</code></td>
 <td>Run the full ELTMaestro server as a container.</td>
 </tr>
 <tr>
 <td><strong>Linux installer</strong> (portable)</td>
 <td><a href="https://eltmaestro.s3.amazonaws.com/docker/eltm-portable-17.0.4.tar.gz">https://eltmaestro.s3.amazonaws.com/docker/eltm-portable-17.0.4.tar.gz</a></td>
 <td>~690 MB</td>
+<td><code>67e7adcb3407b57926e1a7c398aab77d</code></td>
 <td>Bare-metal install on RHEL / Debian / Ubuntu.</td>
 </tr>
 <tr>
 <td><strong>Windows desktop client</strong></td>
-<td><a href="https://eltmaestro.s3.amazonaws.com/docker/ELTMAESTRO-2.5.0.20260611-portable-win-x64.zip">https://eltmaestro.s3.amazonaws.com/docker/ELTMAESTRO-2.5.0.20260611-portable-win-x64.zip</a></td>
+<td><a href="https://eltmaestro.s3.amazonaws.com/docker/ELTMAESTRO-2.5.1.20260611-portable-win-x64.zip">https://eltmaestro.s3.amazonaws.com/docker/ELTMAESTRO-2.5.1.20260611-portable-win-x64.zip</a></td>
 <td>~80 MB</td>
+<td><code>3038586288e00b037f7913f99973c36b</code></td>
 <td>The desktop client used to connect to an ELTMaestro server. EV code-signed.</td>
 </tr>
 </tbody>
 </table>
+<blockquote>
+<p>Checksums are for the <strong>current build</strong> (<code>17.0.4.367</code> server / <code>2.5.1.20260611</code> client). The rolling <code>-17.0.4</code> server objects change md5 on each publish; immutable per-build copies (<code>eltmaestro-17.0.4.367.tar.gz</code>, <code>eltm-portable-17.0.4.367.tar.gz</code>) are also on S3 with the same checksums.</p>
+</blockquote>
 <h2 id="what-to-do-with-each">What to do with each<a class="headerlink" href="#what-to-do-with-each" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Docker image</strong> — <code>curl -fLO &lt;image-url&gt;</code> then <code>docker load -i eltmaestro-17.0.4.tar.gz</code>. Full walkthrough: <strong><a href="../DOCKER-INSTALL/">Install from the Docker image</a></strong>.</li>
@@ -1163,7 +1170,7 @@ webservice-log read fix, and the WPF job-editor work (Run History + Runtime Stat
 </ul>
 <blockquote>
 <p>Tip: the server (Docker image / Linux installer, version <code>17.0.4</code>) and the
-Windows client (version <code>2.5.0</code>) are versioned separately — that's expected.</p>
+Windows client (version <code>2.5.1</code>) are versioned separately — that's expected.</p>
 </blockquote>
 
 
