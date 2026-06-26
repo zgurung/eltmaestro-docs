@@ -1119,7 +1119,7 @@ point at the <strong>latest build of that line</strong> (refreshed on each publi
 rebuild + redeploy (WSDL verified live). This build adds the meta-service <strong>Jetty
 idle-timeout fix</strong> (large base64 SOAP responses no longer abort at 30 s) and the
 <strong>Redshift Corelli target measure-don't-estimate</strong> rewrite, and ships the Windows
-client <strong>2.5.1.20260612</strong> (JobEditor no longer creates/saves/loads duplicate step arrows — fixes the "too many transformers" Runtime Status diagram; plus the earlier busy-cursor-on-crash fix + Run History parent batch-cycle columns).</p>
+client <strong>2.5.1.20260626</strong> (async JDBC connection test with 5-minute WCF timeout + watchdog that auto-clears stuck busy cursor on timeout; Change Password dialog under Help menu; canvas drag-threshold fix so clicking a step no longer repositions it; smooth pixel scrolling on all scrollable widgets; VS Rebuild BG1002 BAML fix).</p>
 <table>
 <thead>
 <tr>
@@ -1147,15 +1147,15 @@ client <strong>2.5.1.20260612</strong> (JobEditor no longer creates/saves/loads 
 </tr>
 <tr>
 <td><strong>Windows desktop client</strong></td>
-<td><a href="https://eltmaestro.s3.amazonaws.com/docker/ELTMAESTRO-2.5.1.20260612-portable-win-x64.zip">https://eltmaestro.s3.amazonaws.com/docker/ELTMAESTRO-2.5.1.20260612-portable-win-x64.zip</a></td>
+<td><a href="https://eltmaestro.s3.amazonaws.com/docker/ELTMAESTRO-2.5.1.20260626-portable-win-x64.zip">https://eltmaestro.s3.amazonaws.com/docker/ELTMAESTRO-2.5.1.20260626-portable-win-x64.zip</a></td>
 <td>~80 MB</td>
-<td><code>5c4d5826ea1f920cf254c3a91cd4a837</code></td>
+<td><code>325147fa335e4e0d055e1956891906cf</code></td>
 <td>The desktop client used to connect to an ELTMaestro server. EV code-signed.</td>
 </tr>
 </tbody>
 </table>
 <blockquote>
-<p>Checksums are for the <strong>current build</strong> (<code>17.0.4.367</code> server / <code>2.5.1.20260612</code> client). The rolling <code>-17.0.4</code> server objects change md5 on each publish; immutable per-build copies (<code>eltmaestro-17.0.4.367.tar.gz</code>, <code>eltm-portable-17.0.4.367.tar.gz</code>) are also on S3 with the same checksums.</p>
+<p>Checksums are for the <strong>current build</strong> (<code>17.0.4.367</code> server / <code>2.5.1.20260626</code> client). The rolling <code>-17.0.4</code> server objects change md5 on each publish; immutable per-build copies (<code>eltmaestro-17.0.4.367.tar.gz</code>, <code>eltm-portable-17.0.4.367.tar.gz</code>) are also on S3 with the same checksums.</p>
 </blockquote>
 <h2 id="what-to-do-with-each">What to do with each<a class="headerlink" href="#what-to-do-with-each" title="Permanent link">&para;</a></h2>
 <ul>
