@@ -1070,6 +1070,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#job-scope--cutoff-windows-job_last_success_run_ts--job_cutoff_" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job scope — cutoff windows ($JOB_LAST_SUCCESS_RUN_TS / $JOB_CUTOFF_*)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#job-scope--platform-specific-runtime" class="md-nav__link">
     <span class="md-ellipsis">
       Job scope — platform-specific runtime
@@ -1369,6 +1378,15 @@
   <a href="#job-scope--watermarks--timestamps" class="md-nav__link">
     <span class="md-ellipsis">
       Job scope — watermarks &amp; timestamps
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#job-scope--cutoff-windows-job_last_success_run_ts--job_cutoff_" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job scope — cutoff windows ($JOB_LAST_SUCCESS_RUN_TS / $JOB_CUTOFF_*)
     </span>
   </a>
   
@@ -1706,6 +1724,51 @@ extra state is stored. Format <code>yyyy-MM-dd HH:mm:ss</code>.</p>
 <tr>
 <td><code>FILE_WATERMARK</code></td>
 <td>File-based watermark counter. <strong>Note: registered without a <code>$</code> prefix.</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="job-scope--cutoff-windows-job_last_success_run_ts--job_cutoff_">Job scope — cutoff windows (<code>$JOB_LAST_SUCCESS_RUN_TS</code> / <code>$JOB_CUTOFF_*</code>)<a class="headerlink" href="#job-scope--cutoff-windows-job_last_success_run_ts--job_cutoff_" title="Permanent link">&para;</a></h2>
+<p>The job-scope counterpart of the batch cutoff windows, set in <code>initializeJobVariables()</code> via
+<code>PG.getJobCutoffWindows(jobId)</code>. <code>$JOB_LAST_SUCCESS_RUN_TS</code> is the <code>max(last_upd_ts)</code> of this job's
+<code>COMPLETE</code> rows in <code>batch_cycle_run_job</code> (<code>1970-01-01</code> if none). Each grain uses the same rule as the
+batch cutoffs — <code>START = date_trunc(grain, last_success) - 1 grain</code> (late-data lookback + gap recovery),
+<code>END = date_trunc(grain, now())</code> (completed periods only). Self-rolling; no extra state. Format
+<code>yyyy-MM-dd HH:mm:ss</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$JOB_LAST_SUCCESS_RUN_TS</code></td>
+<td>Timestamp of this job's most recent <code>COMPLETE</code> run (<code>1970-01-01</code> if never).</td>
+</tr>
+<tr>
+<td><code>$JOB_CUTOFF_HOUR_START_TS</code> / <code>$JOB_CUTOFF_HOUR_END_TS</code></td>
+<td>Hour-grain window <code>[trunc(hour,last_success)-1h, trunc(hour,now))</code>.</td>
+</tr>
+<tr>
+<td><code>$JOB_CUTOFF_DAY_START_TS</code> / <code>$JOB_CUTOFF_DAY_END_TS</code></td>
+<td>Day-grain window.</td>
+</tr>
+<tr>
+<td><code>$JOB_CUTOFF_WEEK_START_TS</code> / <code>$JOB_CUTOFF_WEEK_END_TS</code></td>
+<td>Week-grain window (week starts Monday).</td>
+</tr>
+<tr>
+<td><code>$JOB_CUTOFF_MONTH_START_TS</code> / <code>$JOB_CUTOFF_MONTH_END_TS</code></td>
+<td>Month-grain window.</td>
+</tr>
+<tr>
+<td><code>$JOB_CUTOFF_QUARTER_START_TS</code> / <code>$JOB_CUTOFF_QUARTER_END_TS</code></td>
+<td>Quarter-grain window (lookback = 3 months).</td>
+</tr>
+<tr>
+<td><code>$JOB_CUTOFF_YEAR_START_TS</code> / <code>$JOB_CUTOFF_YEAR_END_TS</code></td>
+<td>Year-grain window.</td>
 </tr>
 </tbody>
 </table>
