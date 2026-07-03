@@ -1553,6 +1553,10 @@ whose name is a prefix of another (e.g. <code>$var_1</code> vs <code>$var_11</co
 <p><strong>Template tokens vs variables.</strong> Strings like <code>$TARGET</code>, <code>$COLUMN</code>, <code>$SELECT_QUERY</code> that appear
 <em>inside</em> the <code>$QUERY_*</code> / <code>$LOAD_COMMAND</code> templates below are <strong>step-level placeholders</strong>, filled in
 by the step at execution time — they are <strong>not</strong> stored variables. They are listed at the end.</p>
+<p><strong>Runtime log.</strong> At batch init the engine logs a <code>---- Runtime variables ----</code> block with the resolved
+<strong>cutoff</strong>, <strong>original</strong> (<code>$BATCH_*</code> / <code>$JOB_*</code>) and <strong>platform-specific</strong> values only. Scope/config
+(<code>$SYSTEM_*</code>, <code>$QUERY_*</code>, other <code>system.cfg</code>), connection (<code>$cloud</code>/<code>$jdbc</code>/<code>$ssh.*</code>) and env vars are
+omitted, and secrets (password / private-key / token) are never printed.</p>
 </blockquote>
 <hr />
 <h2 id="batch-scope--batch_">Batch scope — <code>$BATCH_*</code><a class="headerlink" href="#batch-scope--batch_" title="Permanent link">&para;</a></h2>
