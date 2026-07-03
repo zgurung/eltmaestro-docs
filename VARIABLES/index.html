@@ -1546,7 +1546,9 @@ ones):</p>
 <li><strong>Parent-job scope</strong> — <code>job.parentVariables</code> (inherited when a job is launched by another job).</li>
 </ol>
 <p>Values are substituted by literal string replace (multiple passes), so a variable's value may itself
-reference other variables as long as they are defined earlier in the same scope.</p>
+reference other variables as long as they are defined earlier in the same scope. Within each scope the
+substitution is <strong>longest-name-first</strong> — names are replaced in descending length order — so a variable
+whose name is a prefix of another (e.g. <code>$var_1</code> vs <code>$var_11</code>) is never partially substituted.</p>
 <blockquote>
 <p><strong>Template tokens vs variables.</strong> Strings like <code>$TARGET</code>, <code>$COLUMN</code>, <code>$SELECT_QUERY</code> that appear
 <em>inside</em> the <code>$QUERY_*</code> / <code>$LOAD_COMMAND</code> templates below are <strong>step-level placeholders</strong>, filled in
