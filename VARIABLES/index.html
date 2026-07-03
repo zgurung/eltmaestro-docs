@@ -10,11 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://zgurung.github.io/eltmaestro-docs/CICD-WORKFLOW-PROMOTION-PROPOSAL/">
+        <link rel="canonical" href="https://zgurung.github.io/eltmaestro-docs/VARIABLES/">
       
       
-        <link rel="prev" href="../SCHEMA-PROFILE/">
+        <link rel="prev" href="../OPERATIONS/">
       
+      
+        <link rel="next" href="../SCHEMA-PROFILE/">
       
       
       <link rel="icon" href="../assets/elt-maestro-logo.png">
@@ -22,7 +24,7 @@
     
     
       
-        <title>Workflow promotion (CI/CD) - ELTMaestro Documentation</title>
+        <title>Runtime variables - ELTMaestro Documentation</title>
       
     
     
@@ -74,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#proposal-cicd-pipeline-for-eltmaestro-workflow-version-tracking--promotion" class="md-skip">
+        <a href="#runtime-variables-reference" class="md-skip">
           Skip to content
         </a>
       
@@ -109,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Workflow promotion (CI/CD)
+              Runtime variables
             
           </span>
         </div>
@@ -926,8 +928,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -937,11 +941,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
         
           
           <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
@@ -955,7 +959,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             Reference
@@ -966,10 +970,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../VARIABLES/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Runtime variables
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -978,6 +1002,185 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-resolution-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      How resolution works
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#batch-scope--batch_" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch scope — $BATCH_*
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#job-scope--identity--platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job scope — identity &amp; platform
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#job-scope--watermarks--timestamps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job scope — watermarks &amp; timestamps
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#job-scope--platform-specific-runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job scope — platform-specific runtime
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#job-scope--connection-variables-dynamic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job scope — connection variables (dynamic)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#job-scope--environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job scope — environment variables
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#job-scope--user-defined" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job scope — user-defined
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#platform-config-variables--systemcfg" class="md-nav__link">
+    <span class="md-ellipsis">
+      Platform config variables — system.cfg
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Platform config variables — system.cfg">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#system--identity" class="md-nav__link">
+    <span class="md-ellipsis">
+      System / identity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scd-change-detection-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      SCD change-detection hashing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Encoding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ddl--query-templates--query_" class="md-nav__link">
+    <span class="md-ellipsis">
+      DDL / query templates — $QUERY_*
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loading--staging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Loading &amp; staging
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hive-sparksql-external-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hive (SparkSQL external tables)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix--step-level-template-tokens-not-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Appendix — step-level template tokens (not variables)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      Source references
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1015,8 +1218,6 @@
       
   
   
-    
-  
   
   
     
@@ -1028,11 +1229,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
         
           
           <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
@@ -1046,7 +1247,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_10">
             <span class="md-nav__icon md-icon"></span>
             Proposals
@@ -1057,30 +1258,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Workflow promotion (CI/CD)
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../CICD-WORKFLOW-PROMOTION-PROPOSAL/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1089,176 +1270,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#executive-summary" class="md-nav__link">
-    <span class="md-ellipsis">
-      Executive Summary
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#problem-statement" class="md-nav__link">
-    <span class="md-ellipsis">
-      Problem Statement
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#goals" class="md-nav__link">
-    <span class="md-ellipsis">
-      Goals
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#non-goals-this-phase" class="md-nav__link">
-    <span class="md-ellipsis">
-      Non-Goals (this phase)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-already-exists-reused-not-rebuilt" class="md-nav__link">
-    <span class="md-ellipsis">
-      What Already Exists (reused, not rebuilt)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#proposed-solution" class="md-nav__link">
-    <span class="md-ellipsis">
-      Proposed Solution
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Proposed Solution">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-git-as-the-source-of-truth" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Git as the source of truth
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-capture-job-jenkins-dev--git--automated" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Capture job (Jenkins: DEV → Git) — automated
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-promote-job-jenkins-git--prod--gated" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Promote job (Jenkins: Git → PROD) — gated
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-connection-strategy-identical-names-per-environment" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Connection Strategy (identical names per environment)
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#pipeline-flow-end-to-end" class="md-nav__link">
-    <span class="md-ellipsis">
-      Pipeline Flow (end to end)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#components-to-build-after-approval" class="md-nav__link">
-    <span class="md-ellipsis">
-      Components to Build (after approval)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phased-roadmap" class="md-nav__link">
-    <span class="md-ellipsis">
-      Phased Roadmap
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#risks--mitigations" class="md-nav__link">
-    <span class="md-ellipsis">
-      Risks &amp; Mitigations
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#open-items-to-confirm-with-stakeholders" class="md-nav__link">
-    <span class="md-ellipsis">
-      Open Items to Confirm with Stakeholders
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#why-this-approach" class="md-nav__link">
-    <span class="md-ellipsis">
-      Why This Approach
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1298,91 +1309,136 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#executive-summary" class="md-nav__link">
+  <a href="#how-resolution-works" class="md-nav__link">
     <span class="md-ellipsis">
-      Executive Summary
+      How resolution works
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#problem-statement" class="md-nav__link">
+  <a href="#batch-scope--batch_" class="md-nav__link">
     <span class="md-ellipsis">
-      Problem Statement
+      Batch scope — $BATCH_*
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#goals" class="md-nav__link">
+  <a href="#job-scope--identity--platform" class="md-nav__link">
     <span class="md-ellipsis">
-      Goals
+      Job scope — identity &amp; platform
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#non-goals-this-phase" class="md-nav__link">
+  <a href="#job-scope--watermarks--timestamps" class="md-nav__link">
     <span class="md-ellipsis">
-      Non-Goals (this phase)
+      Job scope — watermarks &amp; timestamps
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-already-exists-reused-not-rebuilt" class="md-nav__link">
+  <a href="#job-scope--platform-specific-runtime" class="md-nav__link">
     <span class="md-ellipsis">
-      What Already Exists (reused, not rebuilt)
+      Job scope — platform-specific runtime
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#proposed-solution" class="md-nav__link">
+  <a href="#job-scope--connection-variables-dynamic" class="md-nav__link">
     <span class="md-ellipsis">
-      Proposed Solution
+      Job scope — connection variables (dynamic)
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Proposed Solution">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#job-scope--environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job scope — environment variables
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#job-scope--user-defined" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job scope — user-defined
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#platform-config-variables--systemcfg" class="md-nav__link">
+    <span class="md-ellipsis">
+      Platform config variables — system.cfg
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Platform config variables — system.cfg">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-git-as-the-source-of-truth" class="md-nav__link">
+  <a href="#system--identity" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Git as the source of truth
+      System / identity
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-capture-job-jenkins-dev--git--automated" class="md-nav__link">
+  <a href="#scd-change-detection-hashing" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Capture job (Jenkins: DEV → Git) — automated
+      SCD change-detection hashing
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-promote-job-jenkins-git--prod--gated" class="md-nav__link">
+  <a href="#encoding" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Promote job (Jenkins: Git → PROD) — gated
+      Encoding
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-connection-strategy-identical-names-per-environment" class="md-nav__link">
+  <a href="#ddl--query-templates--query_" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Connection Strategy (identical names per environment)
+      DDL / query templates — $QUERY_*
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loading--staging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Loading &amp; staging
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hive-sparksql-external-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hive (SparkSQL external tables)
     </span>
   </a>
   
@@ -1394,54 +1450,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pipeline-flow-end-to-end" class="md-nav__link">
+  <a href="#appendix--step-level-template-tokens-not-variables" class="md-nav__link">
     <span class="md-ellipsis">
-      Pipeline Flow (end to end)
+      Appendix — step-level template tokens (not variables)
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#components-to-build-after-approval" class="md-nav__link">
+  <a href="#source-references" class="md-nav__link">
     <span class="md-ellipsis">
-      Components to Build (after approval)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phased-roadmap" class="md-nav__link">
-    <span class="md-ellipsis">
-      Phased Roadmap
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#risks--mitigations" class="md-nav__link">
-    <span class="md-ellipsis">
-      Risks &amp; Mitigations
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#open-items-to-confirm-with-stakeholders" class="md-nav__link">
-    <span class="md-ellipsis">
-      Open Items to Confirm with Stakeholders
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#why-this-approach" class="md-nav__link">
-    <span class="md-ellipsis">
-      Why This Approach
+      Source references
     </span>
   </a>
   
@@ -1462,269 +1482,517 @@
                   
 
 
-<h1 id="proposal-cicd-pipeline-for-eltmaestro-workflow-version-tracking--promotion">Proposal: CI/CD Pipeline for ELTMAESTRO Workflow Version Tracking &amp; Promotion<a class="headerlink" href="#proposal-cicd-pipeline-for-eltmaestro-workflow-version-tracking--promotion" title="Permanent link">&para;</a></h1>
-<p><strong>Audience:</strong> Engineering / platform stakeholders
-<strong>Status:</strong> Proposal for review
-<strong>Scope:</strong> Automate version tracking and controlled promotion of Maestro workflow XML
-definitions from a lower environment to production, using Jenkins, GitHub, and the existing
-ELTMAESTRO meta-service.</p>
-<hr />
-<h2 id="executive-summary">Executive Summary<a class="headerlink" href="#executive-summary" title="Permanent link">&para;</a></h2>
-<p>Today an ELTMAESTRO workflow definition exists <strong>only inside the environment it was authored
-in</strong>. There is no version history outside the live database and no controlled path to move a
-workflow from a lower environment to production — so the only way to change production is to
-edit it directly, which is precisely the practice we want to eliminate.</p>
-<p>This proposal introduces a <strong>Git-backed, Jenkins-automated promotion pipeline</strong>. Developers
-continue to author and test workflows in a lower (DEV) environment exactly as they do today. A
-Jenkins job automatically <strong>captures</strong> each workflow's XML into a GitHub repository (giving us
-full version history, diffs, and rollback), and a separate <strong>gated promotion</strong> job carries an
-approved version into production after a dry-run preview and a manual approval.</p>
-<p>Crucially, this <strong>reuses machinery that already exists</strong> in the product — the meta-service
-already exposes SOAP operations to export, validate, and deploy workflow definitions. The only
-genuinely new element is placing the workflow <code>.xml</code> artifacts under Git version control and
-orchestrating the existing operations from Jenkins.</p>
-<hr />
-<h2 id="problem-statement">Problem Statement<a class="headerlink" href="#problem-statement" title="Permanent link">&para;</a></h2>
-<p>A workflow definition is a single <code>&lt;job&gt;</code> XML document. In each running environment it lives:</p>
-<ul>
-<li><strong>On disk</strong>, one <code>.xml</code> file per job, under <code>$MAESTRO_DEPLOYED_FILES_DIR</code> (named after the
-  job), and</li>
-<li><strong>In Postgres</strong>, with metadata in <code>t_job_meta</code> / <code>t_job_meta_history</code>.</li>
-</ul>
-<p>The gaps this creates:</p>
+<h1 id="runtime-variables-reference">Runtime variables reference<a class="headerlink" href="#runtime-variables-reference" title="Permanent link">&para;</a></h1>
+<p>ELTMaestro resolves <code>$VARIABLE</code> tokens in step configuration, SQL, and shell commands through
+<code>getVarData()</code>. This page is the full catalog of variables initialized at <strong>batch</strong> and <strong>job</strong>
+scope, plus the platform <strong>config</strong> variables loaded from <code>system.cfg</code>.</p>
+<h2 id="how-resolution-works">How resolution works<a class="headerlink" href="#how-resolution-works" title="Permanent link">&para;</a></h2>
+<p><code>BaseStep.getVarData(input)</code> replaces tokens in this order (later scopes see the output of earlier
+ones):</p>
 <ol>
-<li><strong>No version history</strong> of a workflow outside the live database — no diffs, no blame, no
-   easy rollback to a known-good version.</li>
-<li><strong>No controlled promotion path</strong> from a lower environment to production. Moving a workflow
-   means either re-authoring it in the target or a manual, error-prone export/import by hand.</li>
-<li><strong>Direct production editing</strong> becomes the path of least resistance — the opposite of safe
-   change control.</li>
+<li>If the text contains <code>$var_…</code>, it is resolved against <strong>job variables only</strong> and returned early
+   (user-defined job variables use the <code>$var_</code> convention).</li>
+<li><strong>Batch scope</strong> — <code>PG.globalVariable</code> (<code>$BATCH_*</code>).</li>
+<li><strong>Job scope</strong> — <code>job.jobVariables</code> (everything else below), after substituting <code>$STEPID</code> with the
+   current step id.</li>
+<li><strong>Parent-job scope</strong> — <code>job.parentVariables</code> (inherited when a job is launched by another job).</li>
 </ol>
-<h2 id="goals">Goals<a class="headerlink" href="#goals" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Every workflow <code>.xml</code> is <strong>version-tracked in Git</strong>: full history, diffs, blame, rollback.</li>
-<li><strong>Developers never edit production directly</strong>; promotion is a controlled pipeline action.</li>
-<li>Promotion is <strong>previewable (dry-run)</strong> and <strong>gated by human approval</strong> before it touches
-  production.</li>
-<li>Clear visibility into <strong>which version of each workflow is live in each environment</strong>.</li>
-</ul>
-<h2 id="non-goals-this-phase">Non-Goals (this phase)<a class="headerlink" href="#non-goals-this-phase" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>Migrating connections/credentials</strong> between environments. Connections are pre-created per
-  environment with identical names (see <em>Connection Strategy</em>).</li>
-<li><strong>Promoting non-workflow assets</strong> (integrator <code>system.cfg</code>, JDBC drivers, engine images) —
-  these already have their own delivery paths and are out of scope here.</li>
-<li><strong>Replacing the WPF authoring experience</strong> — developers keep authoring in DEV as they do
-  now.</li>
-</ul>
-<hr />
-<h2 id="what-already-exists-reused-not-rebuilt">What Already Exists (reused, not rebuilt)<a class="headerlink" href="#what-already-exists-reused-not-rebuilt" title="Permanent link">&para;</a></h2>
-<p>The product already provides every primitive operation this pipeline needs. We orchestrate
-them; we do not reimplement them.</p>
-<table>
-<thead>
-<tr>
-<th>Capability</th>
-<th>Where it lives</th>
-<th>Role in the pipeline</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Workflow XML on disk</td>
-<td><code>$MAESTRO_DEPLOYED_FILES_DIR/&lt;job&gt;</code></td>
-<td>The artifact we version and promote</td>
-</tr>
-<tr>
-<td>Workflow metadata</td>
-<td>Postgres <code>t_job_meta</code>, <code>t_job_meta_history</code></td>
-<td>Job type/platform, audit, version history</td>
-</tr>
-<tr>
-<td><strong>Export</strong> workflow XML</td>
-<td>SOAP <code>getDeployedJobFileContent(token, user, fileName)</code> (meta-service <code>MaestroMeta</code>)</td>
-<td>Pull a workflow's XML out of an environment</td>
-</tr>
-<tr>
-<td><strong>Deploy / import</strong> workflow XML</td>
-<td>SOAP <code>deploy(...)</code> (meta-service <code>MaestroMeta</code>) — writes XML into the target environment</td>
-<td>Push a workflow's XML into an environment</td>
-</tr>
-<tr>
-<td><strong>Dry-run validation</strong></td>
-<td>SOAP <code>runMigrationCheck(...)</code> (<code>MigrationUtility</code> / <code>MigrationObject</code>)</td>
-<td>Preview an import without writing</td>
-</tr>
-<tr>
-<td>Enumerate workflows</td>
-<td>The same job list the WPF <em>Migration Export</em> screen uses</td>
-<td>Know <em>which</em> workflows to export</td>
-</tr>
-<tr>
-<td>Jenkins automation</td>
-<td><code>source/Jenkinsfile</code> (ACTION-driven) + a PowerShell trigger helper</td>
-<td>Run the capture and promote jobs</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Key insight:</strong> export + import + dry-run already exist as SOAP operations. The new work is
-Git versioning and two Jenkins jobs that string these together.</p>
-<hr />
-<h2 id="proposed-solution">Proposed Solution<a class="headerlink" href="#proposed-solution" title="Permanent link">&para;</a></h2>
-<h3 id="1-git-as-the-source-of-truth">1. Git as the source of truth<a class="headerlink" href="#1-git-as-the-source-of-truth" title="Permanent link">&para;</a></h3>
-<p>A dedicated GitHub repository (working name <code>atni-maestro-workflows</code>) holds one <code>.xml</code> file
-per workflow, mirroring how they sit on disk in the lower environment:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>workflows/
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  &lt;JOB_NAME_1&gt;.xml
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  &lt;JOB_NAME_2&gt;.xml
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  ...
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>manifest.json          # job name -&gt; { type, platform, last-exported-from, checksum }
-</code></pre></div>
-<p>Each export becomes a commit — a point-in-time snapshot. Promotion is then expressed as a
-<strong>Git operation</strong> (a tag or a merge), which is exactly what delivers "version tracking from
-lower environment to prod."</p>
-<h3 id="2-capture-job-jenkins-dev--git--automated">2. Capture job (Jenkins: DEV → Git) — automated<a class="headerlink" href="#2-capture-job-jenkins-dev--git--automated" title="Permanent link">&para;</a></h3>
-<p>A Jenkins job (scheduled and/or on-demand) connects to the <strong>DEV</strong> meta-service over SOAP and:</p>
-<ol>
-<li>Enumerates the workflows (the same list the WPF Migration Export screen uses).</li>
-<li>Calls <code>getDeployedJobFileContent</code> for each to pull its XML.</li>
-<li>Writes each into the Git working copy and updates <code>manifest.json</code>.</li>
-<li>Commits and pushes — only if something actually changed.</li>
-</ol>
-<p>Result: every change a developer makes in DEV becomes a reviewable commit and diff, with <strong>no
-new Git discipline required of developers</strong> — their day-to-day authoring is unchanged.</p>
-<h3 id="3-promote-job-jenkins-git--prod--gated">3. Promote job (Jenkins: Git → PROD) — gated<a class="headerlink" href="#3-promote-job-jenkins-git--prod--gated" title="Permanent link">&para;</a></h3>
-<p>A separate Jenkins "promote" job takes an approved set of workflow XML from Git (a chosen tag
-or commit) and, against the <strong>PROD</strong> meta-service:</p>
-<ol>
-<li><strong>Preview</strong> — for each workflow, run <code>runMigrationCheck</code> (plus a connection-existence
-   check) and show a Git diff of the XML versus what is currently live in production.</li>
-<li><strong>Manual approval gate</strong> — a Jenkins <code>input</code> step pauses the pipeline; a human reviews the
-   preview and approves (or aborts).</li>
-<li><strong>Apply</strong> — call <code>deploy(...)</code> per workflow to write the XML into production, then record
-   the promoted Git commit/tag for audit.</li>
-</ol>
-<p>Developers never touch production; promotion is an explicit, logged, approved action.</p>
-<h3 id="4-connection-strategy-identical-names-per-environment">4. Connection Strategy (identical names per environment)<a class="headerlink" href="#4-connection-strategy-identical-names-per-environment" title="Permanent link">&para;</a></h3>
-<p>Connection names (for example <code>WAREHOUSE_CONN</code>, <code>SYSTEM_SSH</code>) exist in <strong>every</strong> environment,
-each pointing at that environment's own host and credentials. Because a workflow's XML
-references connections <strong>by name</strong>, the same XML promotes <strong>unchanged</strong> — only the target
-environment's connection configuration differs.</p>
-<p>This is the lowest-risk option: it matches the importer's existing <em>skip-if-connection-exists</em>
-behavior, so a promotion never overwrites production connection settings. The one-time setup
-cost is ensuring the matching named connections exist in each environment.</p>
-<hr />
-<h2 id="pipeline-flow-end-to-end">Pipeline Flow (end to end)<a class="headerlink" href="#pipeline-flow-end-to-end" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Developer authors / tests in DEV (WPF client)  ── unchanged workflow ──┐
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>                                                                       v
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>[Jenkins: capture]   export DEV workflows   →   commit/push .xml to GitHub
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>                                                                       │
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>                              (history · diffs · review · tag a release)│
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>                                                                       v
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>[Jenkins: promote]   read approved tag from Git
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        →  runMigrationCheck against PROD   (preview + diff)
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        →  ──  MANUAL APPROVAL GATE  ──
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>        →  deploy() each workflow into PROD   →   record promoted version
-</code></pre></div>
-<hr />
-<h2 id="components-to-build-after-approval">Components to Build (after approval)<a class="headerlink" href="#components-to-build-after-approval" title="Permanent link">&para;</a></h2>
-<ol>
-<li><strong>Workflow repository</strong> — new GitHub repo, directory layout, and <code>manifest.json</code> schema.</li>
-<li><strong>Capture script</strong> — a small client (PowerShell or a thin Java/CLI) that calls
-   <code>getDeployedJobFileContent</code>, reusing the existing SOAP authentication approach (service
-   user, TLS endpoint on port 8181). Driven by a Jenkins job.</li>
-<li><strong>Promote script</strong> — calls <code>runMigrationCheck</code> then <code>deploy</code>, with a Jenkins <code>input</code>
-   approval gate between preview and apply.</li>
-<li><strong>Jenkins jobs</strong> — two new jobs/ACTIONs (capture, promote) wired into the existing
-   <code>source/Jenkinsfile</code> ACTION pattern and PowerShell trigger helper.</li>
-<li><strong>Per-environment connection setup (one-time)</strong> — ensure identically named connections
-   exist in DEV and PROD.</li>
-</ol>
+<p>Values are substituted by literal string replace (multiple passes), so a variable's value may itself
+reference other variables as long as they are defined earlier in the same scope.</p>
 <blockquote>
-<p><strong>Service account:</strong> Use a dedicated automation user (not a developer's interactive WPF
-login) for the SOAP calls. Reusing a logged-in user's token can invalidate that user's live
-client session.</p>
+<p><strong>Template tokens vs variables.</strong> Strings like <code>$TARGET</code>, <code>$COLUMN</code>, <code>$SELECT_QUERY</code> that appear
+<em>inside</em> the <code>$QUERY_*</code> / <code>$LOAD_COMMAND</code> templates below are <strong>step-level placeholders</strong>, filled in
+by the step at execution time — they are <strong>not</strong> stored variables. They are listed at the end.</p>
 </blockquote>
 <hr />
-<h2 id="phased-roadmap">Phased Roadmap<a class="headerlink" href="#phased-roadmap" title="Permanent link">&para;</a></h2>
+<h2 id="batch-scope--batch_">Batch scope — <code>$BATCH_*</code><a class="headerlink" href="#batch-scope--batch_" title="Permanent link">&para;</a></h2>
+<p>Set once per batch run in <code>EngineState.initializeEngine</code> (the only writer of <code>PG.globalVariable</code>).</p>
 <table>
 <thead>
 <tr>
-<th>Phase</th>
-<th>Outcome</th>
+<th>Variable</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>0 — Foundations</strong></td>
-<td>Create the workflow Git repo; stand up identically named connections in DEV and PROD; create the automation user.</td>
+<td><code>$BATCH_NAME</code></td>
+<td>Name of the running batch/workflow (the top job's name).</td>
 </tr>
 <tr>
-<td><strong>1 — Capture</strong></td>
-<td>Jenkins job exports DEV workflows and commits them to Git. <strong>Delivers version tracking immediately</strong>, before any automated promotion exists.</td>
+<td><code>$BATCH_ID</code></td>
+<td>Numeric batch identifier from the metadata database.</td>
 </tr>
 <tr>
-<td><strong>2 — Promote (gated)</strong></td>
-<td>Jenkins promote job: dry-run preview + manual approval + <code>deploy</code> to PROD.</td>
+<td><code>$BATCH_RUN_NUMBER</code></td>
+<td>Unique run number for this execution; also names the halt file.</td>
 </tr>
 <tr>
-<td><strong>3 — Hardening</strong></td>
-<td>Promotion audit trail (who promoted which tag, when); rollback recipe (re-promote a prior tag); notifications.</td>
+<td><code>$BATCH_START_DATA_VALIDITY_TIMESTAMP</code></td>
+<td>Start of the data-validity window for the batch type (incremental-load lower bound).</td>
+</tr>
+<tr>
+<td><code>$BATCH_END_DATA_VALIDITY_TIMESTAMP</code></td>
+<td>End of the data-validity window (upper bound).</td>
+</tr>
+<tr>
+<td><code>$BATCH_DATA_VALIDITY_PERIOD</code></td>
+<td>Configured validity period/grain for the batch type.</td>
+</tr>
+<tr>
+<td><code>$BATCH_HIGH_WATERMARK_VALUE</code></td>
+<td>Batch-scoped high watermark (max of the incremental range).</td>
+</tr>
+<tr>
+<td><code>$BATCH_LOW_WATERMARK_VALUE</code></td>
+<td>Batch-scoped low watermark (min of the incremental range).</td>
+</tr>
+<tr>
+<td><code>$BATCH_HIGHDATE</code></td>
+<td>Sentinel far-future date <code>9999-12-31</code> (SCD2 open-ended end date).</td>
 </tr>
 </tbody>
 </table>
-<p>Phase 1 has standalone value: even on its own it gives us a complete version history of
-every workflow, which addresses the most acute gap today.</p>
 <hr />
-<h2 id="risks--mitigations">Risks &amp; Mitigations<a class="headerlink" href="#risks--mitigations" title="Permanent link">&para;</a></h2>
+<h2 id="job-scope--identity--platform">Job scope — identity &amp; platform<a class="headerlink" href="#job-scope--identity--platform" title="Permanent link">&para;</a></h2>
+<p>Set in <code>Job.java</code> while parsing the job document and connecting to the platform.</p>
 <table>
 <thead>
 <tr>
-<th>Risk</th>
-<th>Mitigation</th>
+<th>Variable</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Connection name drift between environments breaks a promoted workflow</td>
-<td>Identical-names convention + a pre-promote check that every connection referenced by the XML exists in PROD (part of the dry-run)</td>
+<td><code>$JOB_NAME</code></td>
+<td>Name of the current job.</td>
 </tr>
 <tr>
-<td>A bad workflow reaches production</td>
-<td>Mandatory dry-run preview + diff + manual approval gate; Git history enables a one-tag rollback</td>
+<td><code>$JOB_ID</code></td>
+<td>Numeric job id.</td>
 </tr>
 <tr>
-<td>SOAP session collision invalidating a live WPF session</td>
-<td>Dedicated automation user for all pipeline SOAP calls</td>
+<td><code>$JOB_TYPE</code></td>
+<td>Platform/job type code (e.g. <code>CLICKHOUSE</code>, <code>REDSHIFT</code>, <code>SNOWFLAKE</code>).</td>
 </tr>
 <tr>
-<td>Raw-XML import semantics</td>
-<td>Use the lighter <code>deploy()</code> (raw XML) path deliberately — connections are not migrated; confirm in a short Phase-1 spike before finalizing the promote design</td>
+<td><code>$PLATFORM_ID</code> / <code>$MAESTROID</code></td>
+<td>The MPP (platform) connection id the job targets.</td>
 </tr>
 <tr>
-<td>Secrets (SOAP credentials, keystore) in CI</td>
-<td>Use the Jenkins credentials store (already the established pattern for the Jenkins API token)</td>
+<td><code>$SYSTEM_DEFAULT_DATABASE</code></td>
+<td>Default target database — seeded from <code>system.cfg</code>, then overridden from the live MPP connection's catalog.</td>
+</tr>
+<tr>
+<td><code>$SYSTEM_DEFAULT_SCHEMA</code></td>
+<td>Default target schema — same seeding/override as above.</td>
+</tr>
+<tr>
+<td><code>$ELTMAESTRO_PIPE_NAME</code></td>
+<td>Corelli pipeline name used in staging paths (default <code>eltmaestro.delta.lake</code>).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="job-scope--watermarks--timestamps">Job scope — watermarks &amp; timestamps<a class="headerlink" href="#job-scope--watermarks--timestamps" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$JOB_HIGH_WATERMARK_VALUE</code></td>
+<td>Job-scoped high watermark (incremental upper bound).</td>
+</tr>
+<tr>
+<td><code>$JOB_LOW_WATERMARK_VALUE</code></td>
+<td>Job-scoped low watermark (incremental lower bound).</td>
+</tr>
+<tr>
+<td><code>$CURRENT_DATE</code></td>
+<td>Job start date, <code>yyyy-MM-dd</code>.</td>
+</tr>
+<tr>
+<td><code>$CURRENT_TIMESTAMP</code></td>
+<td>Job start timestamp, <code>yyyy-MM-dd HH:mm:ss</code>.</td>
+</tr>
+<tr>
+<td><code>$PROCESSED_DATE</code></td>
+<td>Processing date (same value as <code>$CURRENT_DATE</code>).</td>
+</tr>
+<tr>
+<td><code>$PROCESSED_TIMESTAMP</code></td>
+<td>Processing timestamp (same value as <code>$CURRENT_TIMESTAMP</code>).</td>
+</tr>
+<tr>
+<td><code>FILE_WATERMARK</code></td>
+<td>File-based watermark counter. <strong>Note: registered without a <code>$</code> prefix.</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="job-scope--platform-specific-runtime">Job scope — platform-specific runtime<a class="headerlink" href="#job-scope--platform-specific-runtime" title="Permanent link">&para;</a></h2>
+<p>Populated from the connected platform; only present for the relevant <code>$JOB_TYPE</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Platform</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$MPP_HOST</code> / <code>$MPP_PORT</code></td>
+<td>ClickHouse</td>
+<td>Load host/port. Taken from <code>system.cfg</code> if set, else the engine falls back to ClickHouse <code>hostName()</code> / <code>tcpPort()</code>.</td>
+</tr>
+<tr>
+<td><code>$NZ_XID</code></td>
+<td>Netezza</td>
+<td>Last transaction id (<code>_VT_HOSTTXMGR</code>) for consistent partitioned extract.</td>
+</tr>
+<tr>
+<td><code>$NZ_MIN_DSID</code> / <code>$NZ_MAX_DSID</code></td>
+<td>Netezza</td>
+<td>Min/max data-slice ids (<code>_v_dslice</code>) for slice-partitioned extract.</td>
+</tr>
+<tr>
+<td><code>$EXA_HOST</code> / <code>$EXA_TOKEN</code> / <code>$EXA_PORT</code></td>
+<td>Exasol</td>
+<td>Host / token / port parsed from the connection string.</td>
+</tr>
+<tr>
+<td><code>$CURRENT_ACCOUNT</code></td>
+<td>Snowflake</td>
+<td>Session account.</td>
+</tr>
+<tr>
+<td><code>$CURRENT_ROLE</code></td>
+<td>Snowflake</td>
+<td>Session role.</td>
+</tr>
+<tr>
+<td><code>$CURRENT_WAREHOUSE</code></td>
+<td>Snowflake</td>
+<td>Session virtual warehouse.</td>
+</tr>
+<tr>
+<td><code>$CURRENT_USER</code></td>
+<td>Snowflake</td>
+<td>Connection user name.</td>
+</tr>
+<tr>
+<td><code>$CURRENT_PRIVATE_KEY_FILE</code></td>
+<td>Snowflake</td>
+<td>Path to the key-pair private key (key-pair auth).</td>
+</tr>
+<tr>
+<td><code>$CURRENT_PASSWORD_ENCODED</code></td>
+<td>Snowflake</td>
+<td>Base64-encoded connection password.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="job-scope--connection-variables-dynamic">Job scope — connection variables (dynamic)<a class="headerlink" href="#job-scope--connection-variables-dynamic" title="Permanent link">&para;</a></h2>
+<p>Loaded from the metadata DB (one row per connection parameter) so any configured connection is
+addressable by name. Namespaced by connection type:</p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Source table</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$cloud.&lt;connection&gt;.&lt;param&gt;</code></td>
+<td><code>t_connection_general</code></td>
+<td>Each parameter of a cloud/general (S3/Blob/…) connection, base64-decoded.</td>
+</tr>
+<tr>
+<td><code>$jdbc.&lt;connection&gt;.user_name</code></td>
+<td><code>t_jdbc</code></td>
+<td>JDBC connection user name.</td>
+</tr>
+<tr>
+<td><code>$jdbc.&lt;connection&gt;.password</code></td>
+<td><code>t_jdbc</code></td>
+<td>JDBC connection password (decoded).</td>
+</tr>
+<tr>
+<td><code>$ssh.&lt;connection&gt;.host_name</code></td>
+<td><code>connection2</code></td>
+<td>SSH host.</td>
+</tr>
+<tr>
+<td><code>$ssh.&lt;connection&gt;.user_name</code></td>
+<td><code>connection2</code></td>
+<td>SSH login.</td>
+</tr>
+<tr>
+<td><code>$ssh.&lt;connection&gt;.password</code></td>
+<td><code>connection2</code></td>
+<td>SSH password (decoded).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="job-scope--environment-variables">Job scope — environment variables<a class="headerlink" href="#job-scope--environment-variables" title="Permanent link">&para;</a></h2>
+<p><code>initEnvVariables()</code> registers every <code>export VAR=…</code> line from <code>~/.env_integrator</code> as <code>$VAR</code>, e.g.
+<code>$PGDIR</code>, <code>$MAESTRO_CONSOLE_LOG_DIR</code>, <code>$ABCJDBCDIR</code>, <code>$MAESTRO_ENGINE_OPTS</code>. (Exact set depends on the
+install's <code>env_integrator</code>.)</p>
+<h2 id="job-scope--user-defined">Job scope — user-defined<a class="headerlink" href="#job-scope--user-defined" title="Permanent link">&para;</a></h2>
+<p><code>&lt;jobVariable&gt;</code> elements in the job document become job variables. Use the <code>$var_&lt;name&gt;</code> convention so
+they short-circuit directly to job scope during resolution.</p>
+<hr />
+<h2 id="platform-config-variables--systemcfg">Platform config variables — <code>system.cfg</code><a class="headerlink" href="#platform-config-variables--systemcfg" title="Permanent link">&para;</a></h2>
+<p><code>loadConfiguration()</code> loads every <code>KEY=value</code> line from
+<code>metadata/integrators/&lt;jobType&gt;/system.cfg</code> into job scope. These differ per platform; the tables
+below give the canonical meaning (representative values shown).</p>
+<h3 id="system--identity">System / identity<a class="headerlink" href="#system--identity" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$SYSTEM_ALIAS</code></td>
+<td>Human-readable platform name shown in the client (e.g. "Clickhouse OLAP System").</td>
+</tr>
+<tr>
+<td><code>$SYSTEM_NAME</code></td>
+<td>Internal platform code (e.g. <code>REDSHIFT</code>).</td>
+</tr>
+<tr>
+<td><code>$SYSTEM_DEFAULT_DATABASE</code> / <code>$SYSTEM_DEFAULT_SCHEMA</code></td>
+<td>Default target DB/schema for the platform (overridable by the connection).</td>
+</tr>
+<tr>
+<td><code>$SYSTEM_DEFAULT_SSH_CONNECTION</code></td>
+<td>Named SSH connection used for platform shell operations (e.g. <code>SYSTEM_SSH</code>).</td>
+</tr>
+<tr>
+<td><code>$SYSTEM_TOKEN_ENCLOSER</code></td>
+<td>Identifier quote character — <code>`</code> for ClickHouse/Spark, <code>"</code> for the rest. Drives <code>BaseMeta.quote()</code>.</td>
+</tr>
+<tr>
+<td><code>$SYSTEM_LARGE_OBJECT_ROWS</code></td>
+<td>Row count above which a table is treated as "large" (affects load strategy).</td>
+</tr>
+<tr>
+<td><code>$SYSTEM_VIEW_MATERIALIZATION_THRESHOLD</code></td>
+<td>Controls when a view is materialized vs. kept virtual.</td>
+</tr>
+<tr>
+<td><code>$SYSTEM_STATISTICS_THRESHOLD</code></td>
+<td>Row count above which statistics/<code>ANALYZE</code> is run.</td>
+</tr>
+<tr>
+<td><code>$MAX_CACHE_SIZE</code></td>
+<td>Max rows the cache-builder / preview materializes.</td>
+</tr>
+<tr>
+<td><code>$SCHEMALOADERPARTSIZEBYTES</code></td>
+<td>Part-file size in bytes for schema/bulk loaders (<code>268435456</code> = 256 MB).</td>
+</tr>
+<tr>
+<td><code>$DATAMASK_TAGS</code></td>
+<td>Comma list of column tags that trigger masking (<code>MASK,PII,GDPR,HIPAA,SOX,PCI-DSS,…</code>).</td>
+</tr>
+<tr>
+<td><code>$INTEGRATOR_HOST</code></td>
+<td>Host the integrator runs on (default <code>localhost</code>).</td>
+</tr>
+<tr>
+<td><code>$ML_BASE</code></td>
+<td>Base path for ML artifacts (e.g. <code>/ml</code>).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="scd-change-detection-hashing">SCD change-detection hashing<a class="headerlink" href="#scd-change-detection-hashing" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$HASH_TEMPLATE</code></td>
+<td>Platform SQL expression that hashes <code>$ARG</code> for SCD change detection (e.g. <code>MD5(...)</code>).</td>
+</tr>
+<tr>
+<td><code>$HASH_RETURNS</code></td>
+<td>Return type of the hash (<code>VARCHAR</code>, <code>CHAR(32)</code>, …).</td>
+</tr>
+<tr>
+<td><code>$HASH_EXPRESSION</code></td>
+<td>Full cast wrapper combining <code>$HASH_TEMPLATE</code> and <code>$HASH_RETURNS</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="encoding">Encoding<a class="headerlink" href="#encoding" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$B64EXPRESSION</code></td>
+<td>Platform SQL that base64-<strong>decodes</strong> <code>$COLUMN</code> back to <code>$DATATYPE</code> (Corelli encoded-extract decode). Vendor-specific: ClickHouse <code>base64Decode(...)</code>, Redshift <code>FROM_VARBYTE(TO_VARBYTE(...))</code>, Snowflake <code>base64_decode_string(...)</code>, Spark <code>unbase64(...)</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ddl--query-templates--query_">DDL / query templates — <code>$QUERY_*</code><a class="headerlink" href="#ddl--query-templates--query_" title="Permanent link">&para;</a></h3>
+<p>Platform-specific statement templates (filled with <code>$TARGET</code>, <code>$SOURCE</code>, <code>$COLUMNS</code>, etc. at runtime).</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$QUERY_CTAS</code></td>
+<td><code>CREATE TABLE … AS SELECT</code> (includes engine/ordering clauses on ClickHouse).</td>
+</tr>
+<tr>
+<td><code>$QUERY_VIEW_CREATE</code></td>
+<td><code>CREATE VIEW … AS SELECT</code>.</td>
+</tr>
+<tr>
+<td><code>$QUERY_TRUNCATE</code></td>
+<td>Truncate a table.</td>
+</tr>
+<tr>
+<td><code>$QUERY_DROP_TABLE</code> / <code>$QUERY_DROP_VIEW</code> / <code>$QUERY_DROP_EXTERNAL_TABLE</code></td>
+<td>Drop DDL for tables / views / external tables.</td>
+</tr>
+<tr>
+<td><code>$QUERY_STATISTICS</code></td>
+<td>Refresh statistics (<code>ANALYZE</code> / <code>OPTIMIZE TABLE</code> / no-op).</td>
+</tr>
+<tr>
+<td><code>$QUERY_VACUUM</code></td>
+<td>Vacuum statement or no-op where auto-vacuum applies.</td>
+</tr>
+<tr>
+<td><code>$QUERY_CDC_INSERT</code> / <code>$QUERY_CDC_DELETE</code></td>
+<td>CDC upsert primitives (insert new, delete matched keys).</td>
+</tr>
+<tr>
+<td><code>$QUERY_ADD_COLUMN</code> / <code>$QUERY_ALTER_COLUMN</code></td>
+<td>Schema-evolution DDL (add / retype a column).</td>
+</tr>
+<tr>
+<td><code>$QUERY_PREVIEW_CACHE</code></td>
+<td>Preview <code>SELECT … LIMIT $LIMIT</code>.</td>
+</tr>
+<tr>
+<td><code>$QUERY_CACHE_BUILDER</code></td>
+<td>CTAS that builds a preview/cache table capped at <code>$MAX_CACHE_SIZE</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="loading--staging">Loading &amp; staging<a class="headerlink" href="#loading--staging" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$LOAD_COMMAND</code></td>
+<td>Bulk-load command from a local file into the target (e.g. <code>clickhouse-client … INSERT … FORMAT CSV</code>, Snowflake <code>COPY INTO</code>, Yellowbrick <code>ybload</code>).</td>
+</tr>
+<tr>
+<td><code>$STAGE_COMMAND</code></td>
+<td>Upload a local file to object-storage staging (e.g. <code>aws s3 cp …</code>).</td>
+</tr>
+<tr>
+<td><code>$UNSTAGE_COMMAND</code></td>
+<td>Remove a staged file after load (e.g. <code>aws s3 rm …</code>).</td>
+</tr>
+<tr>
+<td><code>$OBJECT_STORAGE</code></td>
+<td>Name of the S3/Blob general connection used for staging (formerly <code>$CORELLI_CONNECTION</code>).</td>
+</tr>
+<tr>
+<td><code>$AWS_BUCKET</code></td>
+<td><code>s3://</code> bucket for staging; must match the <code>$OBJECT_STORAGE</code> connection's bucket.</td>
+</tr>
+<tr>
+<td><code>$CLICKHOUSE_CMD</code></td>
+<td>Base <code>clickhouse-client -h $MPP_HOST --port $MPP_PORT</code> invocation.</td>
+</tr>
+<tr>
+<td><code>$SCP_CALL</code></td>
+<td>Template to <code>scp</code> a local file to a remote loader/edge host.</td>
+</tr>
+<tr>
+<td><code>$SHELL_CALL</code></td>
+<td>Template to run a remote shell command (<code>$COMMAND</code>) over SSH on that host.</td>
+</tr>
+<tr>
+<td><code>$GPFDISTPORT</code></td>
+<td>Greenplum <code>gpfdist</code> port (default <code>9002</code>).</td>
+</tr>
+<tr>
+<td><code>$EXAPLUS_CLI_PROFILE</code></td>
+<td>EXAplus CLI profile name (Exasol).</td>
+</tr>
+<tr>
+<td><code>$FILESTORE_VOLT_PATH</code></td>
+<td>DBFS FileStore staging path for volt files (Databricks); uses <code>$VOLTID</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="hive-sparksql-external-tables">Hive (SparkSQL external tables)<a class="headerlink" href="#hive-sparksql-external-tables" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$HIVE_CONNECTION</code></td>
+<td>Hive thrift-server connection name for external-table registration.</td>
+</tr>
+<tr>
+<td><code>$HIVE_DATABASE</code> / <code>$HIVE_SCHEMA</code></td>
+<td>Hive database / schema for registered external tables.</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="open-items-to-confirm-with-stakeholders">Open Items to Confirm with Stakeholders<a class="headerlink" href="#open-items-to-confirm-with-stakeholders" title="Permanent link">&para;</a></h2>
+<h2 id="appendix--step-level-template-tokens-not-variables">Appendix — step-level template tokens (not variables)<a class="headerlink" href="#appendix--step-level-template-tokens-not-variables" title="Permanent link">&para;</a></h2>
+<p>These are substituted by the executing step, not stored in a variable package. They appear inside the
+templates above:</p>
+<p><code>$TARGET</code>, <code>$SOURCE</code>, <code>$SELECT_QUERY</code>, <code>$COLUMNS</code>, <code>$KEY_COLUMNS</code>, <code>$COLUMN</code>, <code>$COLUMN_NAME</code>,
+<code>$DATATYPE</code>, <code>$DATA_TYPE</code>, <code>$DATABASE</code>, <code>$SCHEMA</code>, <code>$TABLE</code>, <code>$LIMIT</code>, <code>$ARG</code>, <code>$LOCALFILE</code>,
+<code>$FILENAME</code>, <code>$LOGFILE</code>, <code>$BADFILE</code>, <code>$VOLTID</code>, <code>$COMMAND</code>, <code>$STEPID</code>, <code>$GUID</code>.</p>
+<h2 id="source-references">Source references<a class="headerlink" href="#source-references" title="Permanent link">&para;</a></h2>
 <ul>
-<li>DEV and PROD meta-service endpoints (hosts/ports) and network reachability from the Jenkins
-  agent.</li>
-<li>Whether a third TEST/QA tier is wanted later. The design extends to N tiers — it is the same
-  promote job pointed at a different target environment.</li>
-<li>Who owns the approval gate (which role approves a production promotion).</li>
-</ul>
-<hr />
-<h2 id="why-this-approach">Why This Approach<a class="headerlink" href="#why-this-approach" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>Low build cost / high leverage</strong> — it composes existing, proven SOAP operations rather
-  than building a new migration engine.</li>
-<li><strong>No disruption to developers</strong> — authoring in DEV is unchanged; capture is automatic.</li>
-<li><strong>Safe by construction</strong> — version history, dry-run preview, and a human approval gate stand
-  between a change and production.</li>
-<li><strong>Incrementally valuable</strong> — Phase 1 alone delivers full workflow version tracking.</li>
+<li>Batch scope: <code>source/root-engine-core/.../engine/core/control/EngineState.java</code></li>
+<li>Job scope (identity, watermarks, platform runtime, connection vars, env): <code>source/root-engine-core/.../engine/core/parts/Job.java</code></li>
+<li>Resolution order: <code>source/root-engine-core/.../engine/core/parts/BaseStep.java</code> (<code>getVarData</code>)</li>
+<li>Variable package API: <code>source/root-engine-core/.../engine/metadata/MaestroVariablePackage.java</code></li>
+<li>Platform config: <code>source/root-engine-install/db/metadata/integrators/&lt;platform&gt;/system.cfg</code></li>
 </ul>
 
 

@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://zgurung.github.io/eltmaestro-docs/MEDALLION-SILVER/">
+        <link rel="canonical" href="https://zgurung.github.io/eltmaestro-docs/SCHEMA-PROFILE/">
       
       
-        <link rel="prev" href="../MEDALLION-BRONZE/">
+        <link rel="prev" href="../VARIABLES/">
       
       
-        <link rel="next" href="../MEDALLION-GOLD/">
+        <link rel="next" href="../CICD-WORKFLOW-PROMOTION-PROPOSAL/">
       
       
       <link rel="icon" href="../assets/elt-maestro-logo.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>Silver - ELTMaestro Documentation</title>
+        <title>Schema profile - ELTMaestro Documentation</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#-silver-layer--clean-conform-validate" class="md-skip">
+        <a href="#schema-profile--design--roadmap" class="md-skip">
           Skip to content
         </a>
       
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Silver
+              Schema profile
             
           </span>
         </div>
@@ -535,8 +535,6 @@
       
   
   
-    
-  
   
   
     
@@ -548,11 +546,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
@@ -566,7 +564,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Medallion design
@@ -619,30 +617,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Silver
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../MEDALLION-SILVER/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -651,98 +629,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#cleaning--shaping" class="md-nav__link">
-    <span class="md-ellipsis">
-      Cleaning &amp; shaping
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#conforming--integrating" class="md-nav__link">
-    <span class="md-ellipsis">
-      Conforming &amp; integrating
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#historization-slowly-changing-dimensions" class="md-nav__link">
-    <span class="md-ellipsis">
-      Historization (slowly-changing dimensions)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#upsert--merge-into-silver" class="md-nav__link">
-    <span class="md-ellipsis">
-      Upsert / merge into Silver
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-quality-gate-the-heart-of-silver" class="md-nav__link">
-    <span class="md-ellipsis">
-      The quality gate (the heart of Silver)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#incremental-silver" class="md-nav__link">
-    <span class="md-ellipsis">
-      Incremental Silver
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gotchas" class="md-nav__link">
-    <span class="md-ellipsis">
-      Gotchas
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#next" class="md-nav__link">
-    <span class="md-ellipsis">
-      Next
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1042,8 +928,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -1053,11 +941,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
         
           
           <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
@@ -1071,7 +959,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             Reference
@@ -1103,10 +991,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../SCHEMA-PROFILE/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Schema profile
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -1115,6 +1023,122 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-it-is" class="md-nav__link">
+    <span class="md-ellipsis">
+      What it is
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-producer-jdbctargetparquet" class="md-nav__link">
+    <span class="md-ellipsis">
+      The producer: JDBCTARGETPARQUET
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#storage-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Storage model
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Storage model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#t_sql_profile_table-header-one-row-per-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      t_sql_profile_table (header, one row per object)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#t_sql_profile_column-one-row-per-column" class="md-nav__link">
+    <span class="md-ellipsis">
+      t_sql_profile_column (one row per column)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#functions--views" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions &amp; views
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#current-writer-behavior-saveschemaprofile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current writer behavior (saveSchemaProfile)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-cases-to-build-out-roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use cases to build out (roadmap)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#open-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Open questions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-pointers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Source pointers
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1222,72 +1246,96 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#cleaning--shaping" class="md-nav__link">
+  <a href="#what-it-is" class="md-nav__link">
     <span class="md-ellipsis">
-      Cleaning &amp; shaping
+      What it is
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#conforming--integrating" class="md-nav__link">
+  <a href="#the-producer-jdbctargetparquet" class="md-nav__link">
     <span class="md-ellipsis">
-      Conforming &amp; integrating
+      The producer: JDBCTARGETPARQUET
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#historization-slowly-changing-dimensions" class="md-nav__link">
+  <a href="#storage-model" class="md-nav__link">
     <span class="md-ellipsis">
-      Historization (slowly-changing dimensions)
+      Storage model
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Storage model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#t_sql_profile_table-header-one-row-per-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      t_sql_profile_table (header, one row per object)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#t_sql_profile_column-one-row-per-column" class="md-nav__link">
+    <span class="md-ellipsis">
+      t_sql_profile_column (one row per column)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#functions--views" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions &amp; views
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#current-writer-behavior-saveschemaprofile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current writer behavior (saveSchemaProfile)
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#upsert--merge-into-silver" class="md-nav__link">
+  <a href="#use-cases-to-build-out-roadmap" class="md-nav__link">
     <span class="md-ellipsis">
-      Upsert / merge into Silver
+      Use cases to build out (roadmap)
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-quality-gate-the-heart-of-silver" class="md-nav__link">
+  <a href="#open-questions" class="md-nav__link">
     <span class="md-ellipsis">
-      The quality gate (the heart of Silver)
+      Open questions
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#incremental-silver" class="md-nav__link">
+  <a href="#source-pointers" class="md-nav__link">
     <span class="md-ellipsis">
-      Incremental Silver
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gotchas" class="md-nav__link">
-    <span class="md-ellipsis">
-      Gotchas
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#next" class="md-nav__link">
-    <span class="md-ellipsis">
-      Next
+      Source pointers
     </span>
   </a>
   
@@ -1308,154 +1356,179 @@
                   
 
 
-<h1 id="-silver-layer--clean-conform-validate">🥈 Silver layer — clean, conform, validate<a class="headerlink" href="#-silver-layer--clean-conform-validate" title="Permanent link">&para;</a></h1>
-<p>Deep-dive companion to <a href="../MEDALLION/">Medallion architecture with ELTMaestro</a>. Silver turns raw <a href="../MEDALLION-BRONZE/">Bronze</a> into <strong>clean, conformed, deduplicated, validated</strong> data that the business can trust. Everything here should be <strong>idempotent and re-runnable</strong>.</p>
-<h2 id="cleaning--shaping">Cleaning &amp; shaping<a class="headerlink" href="#cleaning--shaping" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Need</th>
-<th>Step</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Filter rows</strong></td>
-<td><code>Filter</code></td>
-<td>Drop/keep rows by a condition expression.</td>
-</tr>
-<tr>
-<td><strong>Deduplicate</strong></td>
-<td><code>Dedupe</code></td>
-<td>Remove duplicates by key — define the dedupe key carefully (it decides which row wins).</td>
-</tr>
-<tr>
-<td><strong>Derive / clean columns</strong></td>
-<td><code>Function</code> / <code>Function2</code></td>
-<td>Per-row scalar (<code>F(x)</code>) and aggregate (<code>Σ(x)</code>) expressions in the <a href="../UG-WORKFLOWS/#configuring-a-step--the-expression-builder">expression builder</a>; functions come from the function catalog.</td>
-</tr>
-<tr>
-<td><strong>Mask PII</strong></td>
-<td><code>Datamask</code></td>
-<td>Redact/obfuscate sensitive columns as data enters the trusted zone.</td>
-</tr>
-<tr>
-<td><strong>Re-expose</strong></td>
-<td><code>View</code>, <code>Pivot</code></td>
-<td>Logical views / pivot reshaping.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="conforming--integrating">Conforming &amp; integrating<a class="headerlink" href="#conforming--integrating" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Need</th>
-<th>Step</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Join sources</strong></td>
-<td><code>Join</code> (column mapping + join condition in the expression builder)</td>
-</tr>
-<tr>
-<td><strong>Combine sets</strong></td>
-<td><code>Union</code>, <code>Minus</code></td>
-</tr>
-<tr>
-<td><strong>Generic transform</strong></td>
-<td><code>Transformer</code>, <code>SparkDataCache</code> (cache an intermediate for reuse)</td>
-</tr>
-</tbody>
-</table>
-<p>Conform to <strong>canonical types and keys</strong> here — cast the raw Bronze strings to real types, standardize codes, and resolve natural keys so every downstream join lines up.</p>
-<h2 id="historization-slowly-changing-dimensions">Historization (slowly-changing dimensions)<a class="headerlink" href="#historization-slowly-changing-dimensions" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Step</th>
-<th>Use</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>SCD1</code></td>
-<td>Overwrite-in-place — keep only the current value (no history).</td>
-</tr>
-<tr>
-<td><code>SCD2</code></td>
-<td>Versioned history — new row per change, with effective dating.</td>
-</tr>
-</tbody>
-</table>
-<p>SCD steps detect change via the platform's hash template (<code>$HASH_TEMPLATE</code> / <code>$HASH_RETURNS</code> / <code>$HASH_EXPRESSION</code>, e.g. <code>NVL(MD5($ARG::TEXT),'')</code>) — only rows whose hash changed are versioned, so reruns are stable.</p>
-<h2 id="upsert--merge-into-silver">Upsert / merge into Silver<a class="headerlink" href="#upsert--merge-into-silver" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Step</th>
-<th>Pattern</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>OnstageDelta</code></td>
-<td>Apply a staged delta to the Silver table.</td>
-</tr>
-<tr>
-<td>Onstage group loaders + <code>isCDC</code></td>
-<td>Parallel delete-then-insert merge via <code>$QUERY_CDC_DELETE</code> + <code>$QUERY_CDC_INSERT</code> (the engine applies it through its internal parallel JDBC processor).</td>
-</tr>
-</tbody>
-</table>
-<p>These are the <strong>idempotent merge</strong> primitives — re-applying the same delta converges to the same Silver state.</p>
-<h2 id="the-quality-gate-the-heart-of-silver">The quality gate (the heart of Silver)<a class="headerlink" href="#the-quality-gate-the-heart-of-silver" title="Permanent link">&para;</a></h2>
-<p>The Bronze → Silver promotion is where you <strong>enforce trust</strong>:</p>
-<table>
-<thead>
-<tr>
-<th>Step / feature</th>
-<th>Role</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>ControlTest</code></td>
-<td>Assert invariants before promoting — row counts, key uniqueness, referential integrity, value ranges.</td>
-</tr>
-<tr>
-<td><strong>Data Quality Management</strong> (Administration ▸ Metrics Configuration)</td>
-<td>Define and manage reusable DQ rules.</td>
-</tr>
-<tr>
-<td><code>WriteIncident</code></td>
-<td><strong>Quarantine</strong> failing rows to an incident table instead of dropping them or letting them poison Silver.</td>
-</tr>
-<tr>
-<td><code>SQLMetrics</code></td>
-<td>Capture per-run metrics (counts, timings) for observability.</td>
-</tr>
-<tr>
-<td><code>MetaProfile</code> / column profiler</td>
-<td>Profile column distributions to catch drift.</td>
-</tr>
-</tbody>
-</table>
+<h1 id="schema-profile--design--roadmap">Schema Profile — design &amp; roadmap<a class="headerlink" href="#schema-profile--design--roadmap" title="Permanent link">&para;</a></h1>
+<p>Status: <strong>active / evolving</strong> (first producer shipped 2026-07-03). This doc is the working
+reference for the schema-profile feature so we can keep building out its use cases.</p>
+<h2 id="what-it-is">What it is<a class="headerlink" href="#what-it-is" title="Permanent link">&para;</a></h2>
+<p>A <strong>schema profile</strong> is a persisted, platform-neutral description of a data object's columns —
+name, canonical JDBC type, measured size, and derivation — saved to Postgres so it can be reused
+downstream (DDL generation, sizing, drift detection) independently of whichever platform produced it.</p>
+<p>The storage layer (<code>t_sql_profile_table</code> / <code>t_sql_profile_column</code> + helper functions + decode views)
+predates this work but sat <strong>dormant</strong> — schema, <code>seq_profile_id</code>, <code>upsert_/clear_/add_</code> PL/pgSQL
+functions, and <code>v_sql_profile_*</code> views all existed in <code>initdb.sql</code> with <strong>no writer or reader</strong>. The
+<code>JDBCTARGETPARQUET</code> step is the <strong>first producer</strong>.</p>
 <blockquote>
-<p><strong>Quarantine, don't drop.</strong> Route rejects through <code>WriteIncident</code> so bad data is auditable and fixable — silently dropping rows hides upstream problems.</p>
+<p><strong>Out of scope:</strong> <code>METAPROFILE</code> (<code>t_column_profile_sql</code> → <code>t_column_profile_results</code>) is a
+<strong>separate feature</strong> serving data modelers, unrelated to this work. Don't conflate the two — schema
+profile here is <em>structural</em> (columns, canonical types, sizes) for reuse/DDL, not data-modeling
+metrics.</p>
 </blockquote>
-<h2 id="incremental-silver">Incremental Silver<a class="headerlink" href="#incremental-silver" title="Permanent link">&para;</a></h2>
-<p>Drive Silver from a <code>Watermark</code> so each run only reprocesses new/changed Bronze rows, then merge with <code>OnstageDelta</code> / SCD. This keeps Silver cheap and idempotent.</p>
-<h2 id="gotchas">Gotchas<a class="headerlink" href="#gotchas" title="Permanent link">&para;</a></h2>
+<h2 id="the-producer-jdbctargetparquet">The producer: <code>JDBCTARGETPARQUET</code><a class="headerlink" href="#the-producer-jdbctargetparquet" title="Permanent link">&para;</a></h2>
+<p><code>org.maestro.engine.steps.pipeline.core.JdbcTargetParquet</code> (registered in <code>StepProvider</code>; WPF adds it
+to the TRANSFORM menu for Redshift + ClickHouse jobs). It reads the onstage PSV, projects/decodes in
+Spark, writes local Parquet, then calls <code>saveSchemaProfile()</code>.</p>
+<p>Relevant fixes that shaped the current behavior:
+- <strong>Decode in Spark with native <code>unbase64</code></strong>, not the target vendor's <code>$B64EXPRESSION</code> (that resolves
+  to e.g. ClickHouse <code>base64Decode()</code>, which Spark can't resolve). This step always decodes in Spark
+  regardless of job type.
+- <strong>Binary columns (BLOB / VARBINARY / LONGVARBINARY) are blanked at extract</strong>
+  (<code>ParallelJdbcSourceSanitized</code>) — they were being base64-downloaded as raw bytes, producing garbage
+  and PSV bloat. CLOB/NCLOB/SQLXML (text) still flow through. <em>(Open: carry binary as real binary in
+  both the parquet and the profile — see roadmap.)</em></p>
+<h2 id="storage-model">Storage model<a class="headerlink" href="#storage-model" title="Permanent link">&para;</a></h2>
+<h3 id="t_sql_profile_table-header-one-row-per-object"><code>t_sql_profile_table</code> (header, one row per object)<a class="headerlink" href="#t_sql_profile_table-header-one-row-per-object" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>column</th>
+<th>notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>profile_id</code></td>
+<td>PK, <code>nextval('seq_profile_id')</code></td>
+</tr>
+<tr>
+<td><code>profile_type</code></td>
+<td>plain. Currently <code>"PARQUET"</code>.</td>
+</tr>
+<tr>
+<td><code>profile_name</code></td>
+<td><strong>base64</strong>. <code>jobName.connection.catalog.schema.table</code></td>
+</tr>
+<tr>
+<td><code>data_object_path</code></td>
+<td><strong>base64</strong>. <code>connection.catalog.schema.table</code></td>
+</tr>
+<tr>
+<td><code>data_object_name</code></td>
+<td><strong>base64</strong>. <code>tableName</code></td>
+</tr>
+<tr>
+<td><code>created_by</code> / <code>updated_by</code></td>
+<td>plain (<code>job.userName</code>, else <code>engine</code>)</td>
+</tr>
+<tr>
+<td><code>agent_arg_data</code></td>
+<td>plain. Currently <code>"fileFormat=Parquet;compression=snappy"</code> (under-used).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="t_sql_profile_column-one-row-per-column"><code>t_sql_profile_column</code> (one row per column)<a class="headerlink" href="#t_sql_profile_column-one-row-per-column" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>column</th>
+<th>notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>profile_id</code>, <code>column_order</code></td>
+<td>plain</td>
+</tr>
+<tr>
+<td><code>column_name</code></td>
+<td><strong>base64</strong></td>
+</tr>
+<tr>
+<td><code>column_data_type</code></td>
+<td><strong>base64</strong>. <code>"&lt;java.sql.Types id&gt;|&lt;name&gt;"</code> e.g. <code>12|VARCHAR</code>, <code>-155|DATETIMEOFFSET</code></td>
+</tr>
+<tr>
+<td><code>column_expression</code></td>
+<td><strong>base64</strong>. The Spark projection expression (provenance)</td>
+</tr>
+<tr>
+<td><code>column_length</code></td>
+<td>plain. Measured byte-length, grow-only, standardized (see below)</td>
+</tr>
+<tr>
+<td><code>column_decimal_digits</code></td>
+<td>plain. <code>Column.scale</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="functions--views">Functions &amp; views<a class="headerlink" href="#functions--views" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Dedupe key correctness</strong> — the wrong key silently keeps the wrong row; verify with a <code>ControlTest</code> on uniqueness.</li>
-<li><strong>SCD2 effective-dating</strong> — make sure change detection (hash) covers exactly the tracked columns, or you'll over- or under-version.</li>
-<li><strong>Idempotency</strong> — a rerun must converge; rely on watermarks + upsert/SCD, never blind inserts.</li>
+<li><code>upsert_t_sql_profile_table(id, type, name, path, obj, by, by, arg) → profile_id</code>
+  (id <code>0</code> ⇒ insert via seq, else update in place).</li>
+<li><code>clear_t_sql_profile_columns(profile_id)</code>, <code>add_t_sql_profile_column(profile_id, order, name, type, expr, length, scale)</code>.</li>
+<li><strong>Read via the decode views</strong> <code>v_sql_profile_table</code> / <code>v_sql_profile_column</code> — they base64-decode the
+  encoded fields. Base tables store base64 (matches the writer via <code>Crypt.encodeStr</code>).</li>
 </ul>
-<h2 id="next">Next<a class="headerlink" href="#next" title="Permanent link">&para;</a></h2>
-<p>Build marts in <a href="../MEDALLION-GOLD/">🥇 Gold — aggregate &amp; serve</a>. Back to the <a href="../MEDALLION/">Medallion overview</a> · <a href="../MEDALLION-BRONZE/">🥉 Bronze</a>.</p>
+<h2 id="current-writer-behavior-saveschemaprofile">Current writer behavior (<code>saveSchemaProfile</code>)<a class="headerlink" href="#current-writer-behavior-saveschemaprofile" title="Permanent link">&para;</a></h2>
+<p>Non-fatal (never fails the parquet write). Excludes the internal <code>ELTM_TXID</code> column. Flow:
+1. Look up existing <code>profile_id</code> by <code>profile_name</code> → idempotent re-run.
+2. Read prior <code>column_length</code>s (before clearing) → basis for grow-only.
+3. <strong>Measure</strong> this run's max byte-length per column from the written parquet: one Spark aggregation
+   <code>max(octet_length(cast(col as string)))</code>. (We measure the real data, not declared metadata — the
+   extract's incremental <code>Column.length</code> doesn't reach the target step reliably.)
+4. <code>upsert</code> header → <code>clear</code> columns → <code>add</code> each column.
+5. <strong><code>column_length</code> = <code>standardizeLength(max(prior, measured))</code></strong>:
+   - grow-only across runs (never shrinks),
+   - rounded up to the next <strong>power of two</strong> (min 16, cap 65532), forced <strong>multiple of 4</strong>,
+   - bucket boundaries are idempotent, so the value is stable run-to-run until a value outgrows its
+     bucket (no churn).
+6. <strong><code>column_data_type</code> = <code>sqlTypeId|name</code></strong> from <code>Column.sqlType</code> via a reflection reverse-map over the
+   engine <code>SQLTypes</code> mirror (includes vendor <code>-155 DATETIMEOFFSET</code>). Platform-neutral + splittable.</p>
+<p>Deploy: engine SSH-hotswap of <code>sqlm.jar</code> to <code>.201</code>; live as of 2026-07-03.</p>
+<p>Inspect:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">select</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">profile_name</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">column_order</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="k">column_name</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">column_data_type</span><span class="p">,</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">       </span><span class="k">c</span><span class="p">.</span><span class="n">column_length</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">column_decimal_digits</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="k">from</span><span class="w"> </span><span class="n">v_sql_profile_column</span><span class="w"> </span><span class="k">c</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="k">join</span><span class="w"> </span><span class="n">v_sql_profile_table</span><span class="w">  </span><span class="n">p</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">profile_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">profile_id</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">profile_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="k">max</span><span class="p">(</span><span class="n">profile_id</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">t_sql_profile_table</span><span class="p">)</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">column_order</span><span class="p">;</span>
+</code></pre></div></p>
+<h2 id="use-cases-to-build-out-roadmap">Use cases to build out (roadmap)<a class="headerlink" href="#use-cases-to-build-out-roadmap" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Cross-platform DDL generation.</strong> Given <code>(sqlType id, column_length, column_decimal_digits)</code> per
+   column, render a <code>CREATE TABLE</code> for any target dialect — reuse the same mapping the engine's
+   <code>Column.updateDataType(jobType)</code> already uses. A <code>profile → DDL</code> helper/step is the natural next
+   piece. This is the core payoff of storing the canonical type id.</li>
+<li><strong>Downstream target auto-sizing.</strong> Feed <code>column_length</code> (already headroom'd, mult-of-4) into target
+   <code>VARCHAR(n)</code> sizing so tables are created wide enough without per-run estimation.</li>
+<li><strong>A profile reader / consumer.</strong> A step or SOAP op to load a profile by name and expose its columns
+   (e.g. to seed a target <code>transitMeta</code>, or drive a load). Today there is a writer only.</li>
+<li><strong>Schema-drift detection.</strong> Because writes are idempotent + grow-only, diffing a profile across runs
+   (new/removed columns, type changes, length growth) gives drift alerts.</li>
+<li><strong>Producers beyond parquet.</strong> Generalize <code>saveSchemaProfile</code> (it's currently a <code>JdbcTargetParquet</code>
+   method) so other target/source steps can persist profiles — candidate for a shared <code>BaseStep</code> or
+   helper so ClickHouse/Redshift/Snowflake targets can profile too.</li>
+<li><strong>Binary columns.</strong> Currently blanked at extract, so they show length 0 / no real type. Decide
+   whether to (a) carry them as real binary in parquet + profile them as <code>BLOB/VARBINARY</code>, or (b) keep
+   excluding them and mark them in the profile.</li>
+<li><strong><code>agent_arg_data</code> payload.</strong> Only holds a format string today. Could carry the source query /
+   extract config (AgentArg) so a profile is a complete, replayable object definition.</li>
+<li><strong>UI surface.</strong> The dormant WPF <code>ProfileCache</code> window (reads the unrelated <code>hd_table_meta</code>) is a
+   stub; a real viewer over <code>v_sql_profile_*</code> would make profiles usable from the client.</li>
+</ol>
+<h2 id="open-questions">Open questions<a class="headerlink" href="#open-questions" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Should <code>profile_type</code> distinguish source vs target profiles, or encode the producer step type?</li>
+<li>Length semantics: byte-length (current, matches VARCHAR sizing) vs char-length — confirm per target.</li>
+<li>Retention: keep history (versioned profiles) or always overwrite in place (current)?</li>
+</ul>
+<h2 id="source-pointers">Source pointers<a class="headerlink" href="#source-pointers" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>source/root-engine-core/.../steps/pipeline/core/JdbcTargetParquet.java</code> — <code>saveSchemaProfile</code>,
+  <code>standardizeLength</code>, <code>sqlTypeLabel</code>, <code>getSourceIdentity</code>, <code>getDecodeList</code>.</li>
+<li><code>source/root-engine-core/.../engine/metadata/SQLTypes.java</code> — the <code>java.sql.Types</code> mirror (+ <code>-155</code>).</li>
+<li><code>source/root-engine-install/db/initdb.sql</code> — tables, <code>seq_profile_id</code>, <code>upsert_/clear_/add_</code> fns,
+  <code>v_sql_profile_*</code> views.</li>
+</ul>
 
 
 
