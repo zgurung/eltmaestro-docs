@@ -1034,6 +1034,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Batch scope — $BATCH_*">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#batch-cutoff-windows--batch_last_success_run_ts--batch_cutoff_" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch cutoff windows — $BATCH_LAST_SUCCESS_RUN_TS / $BATCH_CUTOFF_*
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1324,6 +1339,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Batch scope — $BATCH_*">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#batch-cutoff-windows--batch_last_success_run_ts--batch_cutoff_" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch cutoff windows — $BATCH_LAST_SUCCESS_RUN_TS / $BATCH_CUTOFF_*
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1550,6 +1580,52 @@ by the step at execution time — they are <strong>not</strong> stored variables
 <tr>
 <td><code>$BATCH_HIGHDATE</code></td>
 <td>Sentinel far-future date <code>9999-12-31</code> (SCD2 open-ended end date).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="batch-cutoff-windows--batch_last_success_run_ts--batch_cutoff_">Batch cutoff windows — <code>$BATCH_LAST_SUCCESS_RUN_TS</code> / <code>$BATCH_CUTOFF_*</code><a class="headerlink" href="#batch-cutoff-windows--batch_last_success_run_ts--batch_cutoff_" title="Permanent link">&para;</a></h3>
+<p>Also set in <code>EngineState.initializeEngine</code> (via <code>PG.getBatchCutoffWindows(batchId)</code>), these give incremental
+processing windows derived from this batch's <strong>last successful run</strong>. <code>$BATCH_LAST_SUCCESS_RUN_TS</code> is the
+<code>max(last_upd_ts)</code> of <code>COMPLETE</code> rows for the batch (<code>1970-01-01</code> if none). For each grain, <code>START =
+date_trunc(grain, last_success) - 1 grain</code> (a lookback that catches late-arriving data and auto-recovers
+gaps across failed runs) and <code>END = date_trunc(grain, now())</code> (only fully-elapsed periods; the in-progress
+one is excluded). The window rolls forward automatically as successful runs advance <code>last_success</code> — no
+extra state is stored. Format <code>yyyy-MM-dd HH:mm:ss</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$BATCH_LAST_SUCCESS_RUN_TS</code></td>
+<td>Timestamp of this batch's most recent <code>COMPLETE</code> run (<code>1970-01-01</code> if never).</td>
+</tr>
+<tr>
+<td><code>$BATCH_CUTOFF_HOUR_START_TS</code> / <code>$BATCH_CUTOFF_HOUR_END_TS</code></td>
+<td>Hour-grain window <code>[trunc(hour,last_success)-1h, trunc(hour,now))</code>.</td>
+</tr>
+<tr>
+<td><code>$BATCH_CUTOFF_DAY_START_TS</code> / <code>$BATCH_CUTOFF_DAY_END_TS</code></td>
+<td>Day-grain window <code>[trunc(day,last_success)-1d, trunc(day,now))</code>.</td>
+</tr>
+<tr>
+<td><code>$BATCH_CUTOFF_WEEK_START_TS</code> / <code>$BATCH_CUTOFF_WEEK_END_TS</code></td>
+<td>Week-grain window (week starts Monday).</td>
+</tr>
+<tr>
+<td><code>$BATCH_CUTOFF_MONTH_START_TS</code> / <code>$BATCH_CUTOFF_MONTH_END_TS</code></td>
+<td>Month-grain window.</td>
+</tr>
+<tr>
+<td><code>$BATCH_CUTOFF_QUARTER_START_TS</code> / <code>$BATCH_CUTOFF_QUARTER_END_TS</code></td>
+<td>Quarter-grain window (lookback = 3 months).</td>
+</tr>
+<tr>
+<td><code>$BATCH_CUTOFF_YEAR_START_TS</code> / <code>$BATCH_CUTOFF_YEAR_END_TS</code></td>
+<td>Year-grain window.</td>
 </tr>
 </tbody>
 </table>
