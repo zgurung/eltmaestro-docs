@@ -524,6 +524,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PARQUET-TO-REDSHIFT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    S3 Parquet → Redshift
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1469,7 +1490,7 @@ Spark, writes local Parquet, then calls <code>saveSchemaProfile()</code>.</p>
   encoded fields. Base tables store base64 (matches the writer via <code>Crypt.encodeStr</code>).</li>
 </ul>
 <h2 id="current-writer-behavior-saveschemaprofile">Current writer behavior (<code>saveSchemaProfile</code>)<a class="headerlink" href="#current-writer-behavior-saveschemaprofile" title="Permanent link">&para;</a></h2>
-<p>Non-fatal (never fails the parquet write). Excludes the internal <code>ELTM_TXID</code> column. Flow:
+<p>Non-fatal (never fails the parquet write). Flow:
 1. Look up existing <code>profile_id</code> by <code>profile_name</code> → idempotent re-run.
 2. Read prior <code>column_length</code>s (before clearing) → basis for grow-only.
 3. <strong>Measure</strong> this run's max byte-length per column from the written parquet: one Spark aggregation
@@ -1482,8 +1503,11 @@ Spark, writes local Parquet, then calls <code>saveSchemaProfile()</code>.</p>
    - bucket boundaries are idempotent, so the value is stable run-to-run until a value outgrows its
      bucket (no churn).
 6. <strong><code>column_data_type</code> = <code>sqlTypeId|name</code></strong> from <code>Column.sqlType</code> via a reflection reverse-map over the
-   engine <code>SQLTypes</code> mirror (includes vendor <code>-155 DATETIMEOFFSET</code>). Platform-neutral + splittable.</p>
-<p>Deploy: engine SSH-hotswap of <code>sqlm.jar</code> to <code>.201</code>; live as of 2026-07-03.</p>
+   engine <code>SQLTypes</code> mirror (includes vendor <code>-155 DATETIMEOFFSET</code>). Platform-neutral + splittable.
+7. <strong>The <code>eltm_txid</code> maintenance column is included</strong> (as <code>-5|BIGINT</code>, order-last) so the profile's column
+   count matches the written Parquet. A consumer that COPYs the Parquet into a table built from this
+   profile (see below) needs it, or Redshift's <code>FORMAT AS PARQUET</code> fails on a column-count mismatch.</p>
+<p>Deploy: engine SSH-hotswap of <code>sqlm.jar</code> to <code>.201</code>; live as of 2026-07-03 (<code>eltm_txid</code> inclusion 2026-07-05).</p>
 <p>Inspect:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">select</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">profile_name</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">column_order</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="k">column_name</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">column_data_type</span><span class="p">,</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">       </span><span class="k">c</span><span class="p">.</span><span class="n">column_length</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">column_decimal_digits</span>
@@ -1500,8 +1524,10 @@ Spark, writes local Parquet, then calls <code>saveSchemaProfile()</code>.</p>
    piece. This is the core payoff of storing the canonical type id.</li>
 <li><strong>Downstream target auto-sizing.</strong> Feed <code>column_length</code> (already headroom'd, mult-of-4) into target
    <code>VARCHAR(n)</code> sizing so tables are created wide enough without per-run estimation.</li>
-<li><strong>A profile reader / consumer.</strong> A step or SOAP op to load a profile by name and expose its columns
-   (e.g. to seed a target <code>transitMeta</code>, or drive a load). Today there is a writer only.</li>
+<li><strong>A profile reader / consumer.</strong> ✅ <strong>First consumer shipped:</strong> the <strong><code>CopyIntoRS</code></strong> step reads a
+   profile by name (WPF <em>Browse Profile</em>) to build a matching Redshift temp table and <code>COPY</code> an S3
+   Parquet into it — see <strong><a href="../PARQUET-TO-REDSHIFT/">Loading S3 Parquet into Redshift</a></strong>. More consumers
+   (seed a target <code>transitMeta</code>, drive a generic load) are the natural next pieces.</li>
 <li><strong>Schema-drift detection.</strong> Because writes are idempotent + grow-only, diffing a profile across runs
    (new/removed columns, type changes, length growth) gives drift alerts.</li>
 <li><strong>Producers beyond parquet.</strong> Generalize <code>saveSchemaProfile</code> (it's currently a <code>JdbcTargetParquet</code>

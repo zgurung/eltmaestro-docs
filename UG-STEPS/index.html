@@ -16,7 +16,7 @@
         <link rel="prev" href="../UG-WORKFLOWS/">
       
       
-        <link rel="next" href="../MEDALLION/">
+        <link rel="next" href="../PARQUET-TO-REDSHIFT/">
       
       
       <link rel="icon" href="../assets/elt-maestro-logo.png">
@@ -889,6 +889,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#copy-into-redshift" class="md-nav__link">
+    <span class="md-ellipsis">
+      Copy Into Redshift
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -981,6 +990,27 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PARQUET-TO-REDSHIFT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    S3 Parquet → Redshift
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1901,6 +1931,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#copy-into-redshift" class="md-nav__link">
+    <span class="md-ellipsis">
+      Copy Into Redshift
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2615,6 +2654,12 @@
 </tr>
 <tr>
 <td>🟢</td>
+<td><a href="#copy-into-redshift">Copy Into Redshift</a></td>
+<td><code>COPYINTORS</code></td>
+<td>Copies an <strong>S3 object</strong> (Parquet/CSV) into a Redshift <strong>temp table</strong> via <code>COPY</code>, then feeds a <code>Table</code> step. A <strong>source</strong> step (no input arrow); columns come from a <strong>schema profile</strong> written by <code>JdbcTargetParquet</code>. Pick the <strong>S3 Connection</strong>, <strong>object path</strong> (bucket-relative), <strong>format</strong>, and <strong>IAM/KEY</strong> auth. See <strong><a href="../PARQUET-TO-REDSHIFT/">Loading S3 Parquet into Redshift</a></strong>.</td>
+</tr>
+<tr>
+<td>🟢</td>
 <td>Local File</td>
 <td><code>LOCAL_FILE</code></td>
 <td>Reads flat files from the local filesystem into the pipeline (a file source).</td>
@@ -2640,6 +2685,17 @@
 <p><img alt="Jdbc Target Redshift — Load Options tab: S3 upload / clean / copy-load commands" src="../images/step-jdbctargetredshift-load.png" /></p>
 <p><strong>Delta Watermark tab</strong> — a query that runs <strong>on the target</strong> (<code>SELECT MAX($COLUMN) FROM $TARGET</code>). When a watermark/Delta column is set on the <code>Jdbcsource</code> and the job runs on a schedule (e.g. hourly), this MAX value becomes the source's <code>$EXTRACT_CONDITION</code> filter, so data loads incrementally.</p>
 <p><img alt="Jdbc Target Redshift — Delta Watermark tab: SELECT MAX($COLUMN) FROM $TARGET" src="../images/step-jdbctargetredshift-watermark.png" /></p>
+<h4 id="copy-into-redshift">Copy Into Redshift<a class="headerlink" href="#copy-into-redshift" title="Permanent link">&para;</a></h4>
+<p><strong>Type</strong> <code>COPYINTORS</code> · <strong>WPF</strong> <code>Steps/Redshift/CopyIntoRS.cs</code> → <code>CopyIntoRSWindow.xaml</code> ("Copy Into Redshift") · add from <strong>REDSHIFT ▸ DATA SOURCE</strong></p>
+<p>A <strong>source</strong> step (no input arrow) that bulk-loads an <strong>S3 object</strong> into a Redshift <strong>temp table</strong> with <code>COPY</code>, then feeds a downstream <code>Table</code> step. It's the consumer half of the <strong>Parquet → Redshift</strong> pattern: <code>JdbcTargetParquet</code> produces the Parquet + a <strong>schema profile</strong>, and this step reads that profile (via <strong>Browse Profile</strong>) to build a matching temp table.</p>
+<ul>
+<li><strong>S3 Connection</strong> — an AWS S3 connection; the bucket is taken from it.</li>
+<li><strong>S3 Object Path</strong> — the key <strong>relative to the bucket</strong> (no <code>s3://</code>, no bucket), e.g. <code>exports/ProductPhoto/2026-07-05</code>.</li>
+<li><strong>Format</strong> — <code>csv</code>/<code>psv</code>/<code>tsv</code>/<code>parquet</code>; changing it re-seeds <strong>Format Options</strong> (parquet clears + disables the box).</li>
+<li><strong>Authentication Mode</strong> — <strong>IAM</strong> (<code>iam_role</code>) or <strong>KEY</strong> (access/secret key), resolved from the S3 connection.</li>
+<li><strong>Browse Profile</strong> — loads the Redshift-typed columns (including the <code>eltm_txid</code> load id) from a <code>JdbcTargetParquet</code> profile.</li>
+</ul>
+<p>Full walkthrough, the generated <code>COPY</code>, and troubleshooting: <strong><a href="../PARQUET-TO-REDSHIFT/">Loading S3 Parquet into Redshift</a></strong>.</p>
 <h3 id="snowflake">Snowflake<a class="headerlink" href="#snowflake" title="Permanent link">&para;</a></h3>
 <table>
 <thead>

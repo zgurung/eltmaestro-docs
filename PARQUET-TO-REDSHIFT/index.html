@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://zgurung.github.io/eltmaestro-docs/UG-GETTING-STARTED/">
+        <link rel="canonical" href="https://zgurung.github.io/eltmaestro-docs/PARQUET-TO-REDSHIFT/">
       
       
-        <link rel="prev" href="../USER-GUIDE/">
+        <link rel="prev" href="../UG-STEPS/">
       
       
-        <link rel="next" href="../UG-MENUS/">
+        <link rel="next" href="../MEDALLION/">
       
       
       <link rel="icon" href="../assets/elt-maestro-logo.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>Getting started - ELTMaestro Documentation</title>
+        <title>S3 Parquet → Redshift - ELTMaestro Documentation</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#getting-started" class="md-skip">
+        <a href="#loading-s3-parquet-into-redshift--jdbctargetparquet--copyintors" class="md-skip">
           Skip to content
         </a>
       
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Getting started
+              S3 Parquet → Redshift
             
           </span>
         </div>
@@ -268,8 +268,6 @@
       
   
   
-    
-  
   
   
     
@@ -281,11 +279,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
@@ -299,7 +297,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Getting started
@@ -331,30 +329,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Getting started
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../UG-GETTING-STARTED/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -363,119 +341,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#signing-in" class="md-nav__link">
-    <span class="md-ellipsis">
-      Signing in
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Signing in">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#the-login-window" class="md-nav__link">
-    <span class="md-ellipsis">
-      The login window
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#first-sign-in-setup" class="md-nav__link">
-    <span class="md-ellipsis">
-      First sign-in (setup)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#what-sign-in-does" class="md-nav__link">
-    <span class="md-ellipsis">
-      What sign-in does
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#if-sign-in-fails" class="md-nav__link">
-    <span class="md-ellipsis">
-      If sign-in fails
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#main-window-overview" class="md-nav__link">
-    <span class="md-ellipsis">
-      Main window overview
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Main window overview">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#the-workflows-tab" class="md-nav__link">
-    <span class="md-ellipsis">
-      The Workflow(s) tab
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#other-tabs" class="md-nav__link">
-    <span class="md-ellipsis">
-      Other tabs
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#menu-bar-at-a-glance" class="md-nav__link">
-    <span class="md-ellipsis">
-      Menu bar at a glance
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -581,8 +446,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -592,11 +459,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
@@ -610,7 +477,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Workflows & steps
@@ -663,10 +530,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../PARQUET-TO-REDSHIFT/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    S3 Parquet → Redshift
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -675,6 +562,137 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#part-1--jdbctargetparquet-the-producer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part 1 — JdbcTargetParquet (the producer)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 1 — JdbcTargetParquet (the producer)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-it-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      What it does
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-schema-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      The schema profile
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-2--copyintors-the-consumer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part 2 — CopyIntoRS (the consumer)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 2 — CopyIntoRS (the consumer)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-it-does-at-runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      What it does at runtime
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-the-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring the step
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#populating-columns-with-browse-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Populating columns with Browse Profile
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-copy-it-generates" class="md-nav__link">
+    <span class="md-ellipsis">
+      The COPY it generates
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#end-to-end-walkthrough" class="md-nav__link">
+    <span class="md-ellipsis">
+      End-to-end walkthrough
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-pointers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Source pointers
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1264,46 +1282,28 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#signing-in" class="md-nav__link">
+  <a href="#part-1--jdbctargetparquet-the-producer" class="md-nav__link">
     <span class="md-ellipsis">
-      Signing in
+      Part 1 — JdbcTargetParquet (the producer)
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Signing in">
+    <nav class="md-nav" aria-label="Part 1 — JdbcTargetParquet (the producer)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#the-login-window" class="md-nav__link">
+  <a href="#what-it-does" class="md-nav__link">
     <span class="md-ellipsis">
-      The login window
+      What it does
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#first-sign-in-setup" class="md-nav__link">
+  <a href="#the-schema-profile" class="md-nav__link">
     <span class="md-ellipsis">
-      First sign-in (setup)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#what-sign-in-does" class="md-nav__link">
-    <span class="md-ellipsis">
-      What sign-in does
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#if-sign-in-fails" class="md-nav__link">
-    <span class="md-ellipsis">
-      If sign-in fails
+      The schema profile
     </span>
   </a>
   
@@ -1315,28 +1315,46 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#main-window-overview" class="md-nav__link">
+  <a href="#part-2--copyintors-the-consumer" class="md-nav__link">
     <span class="md-ellipsis">
-      Main window overview
+      Part 2 — CopyIntoRS (the consumer)
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Main window overview">
+    <nav class="md-nav" aria-label="Part 2 — CopyIntoRS (the consumer)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#the-workflows-tab" class="md-nav__link">
+  <a href="#what-it-does-at-runtime" class="md-nav__link">
     <span class="md-ellipsis">
-      The Workflow(s) tab
+      What it does at runtime
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#other-tabs" class="md-nav__link">
+  <a href="#configuring-the-step" class="md-nav__link">
     <span class="md-ellipsis">
-      Other tabs
+      Configuring the step
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#populating-columns-with-browse-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Populating columns with Browse Profile
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-copy-it-generates" class="md-nav__link">
+    <span class="md-ellipsis">
+      The COPY it generates
     </span>
   </a>
   
@@ -1348,9 +1366,27 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#menu-bar-at-a-glance" class="md-nav__link">
+  <a href="#end-to-end-walkthrough" class="md-nav__link">
     <span class="md-ellipsis">
-      Menu bar at a glance
+      End-to-end walkthrough
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-pointers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Source pointers
     </span>
   </a>
   
@@ -1371,174 +1407,207 @@
                   
 
 
-<h1 id="getting-started">Getting started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h1>
-<p>Part 1 of the <a href="../USER-GUIDE/">ELTMaestro User Guide</a>. Signing in, a tour of the main window, and the menu bar.</p>
-<h2 id="signing-in">Signing in<a class="headerlink" href="#signing-in" title="Permanent link">&para;</a></h2>
-<p>Launch the ELTMaestro client to open the <strong>ELTMaestro Server Login</strong> window.</p>
-<h3 id="the-login-window">The login window<a class="headerlink" href="#the-login-window" title="Permanent link">&para;</a></h3>
+<h1 id="loading-s3-parquet-into-redshift--jdbctargetparquet--copyintors">Loading S3 Parquet into Redshift — <code>JdbcTargetParquet</code> + <code>CopyIntoRS</code><a class="headerlink" href="#loading-s3-parquet-into-redshift--jdbctargetparquet--copyintors" title="Permanent link">&para;</a></h1>
+<p>This guide covers two steps that form a <strong>producer → consumer</strong> pipeline:</p>
+<ol>
+<li><strong><code>JdbcTargetParquet</code></strong> extracts a source table to <strong>Parquet</strong> and records a reusable
+   <strong>schema profile</strong> describing the columns.</li>
+<li><strong><code>CopyIntoRS</code></strong> reads that Parquet from S3 and bulk-loads it into a <strong>Redshift</strong> temp
+   table with <code>COPY</code>, feeding a downstream <code>Table</code> step.</li>
+</ol>
+<p>They're usually two <em>separate jobs</em>: a <strong>producer</strong> job lands the Parquet on S3, and a
+<strong>consumer</strong> Redshift job copies it in. The schema profile is the hand-off — the producer
+writes it, the consumer reads it to build a matching Redshift table.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Producer job:   Jdbcsource ─► JdbcTargetParquet ─► Push File ─► S3 (parquet + schema profile in Postgres)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Consumer job:                              CopyIntoRS ─► Table (Redshift)
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>                                           (reads S3 parquet using the profile)
+</code></pre></div>
+<hr />
+<h2 id="part-1--jdbctargetparquet-the-producer">Part 1 — <code>JdbcTargetParquet</code> (the producer)<a class="headerlink" href="#part-1--jdbctargetparquet-the-producer" title="Permanent link">&para;</a></h2>
+<p><strong>Type</strong> <code>JDBCTARGETPARQUET</code> · <strong>Engine</strong> <code>org.maestro.engine.steps.pipeline.core.JdbcTargetParquet</code>
+· <strong>WPF</strong> TRANSFORM menu (Redshift + ClickHouse jobs) · <strong>requires an upstream <a href="../UG-STEPS/#jdbcsource"><code>Jdbcsource</code></a></strong></p>
+<h3 id="what-it-does">What it does<a class="headerlink" href="#what-it-does" title="Permanent link">&para;</a></h3>
+<p>Downstream of a <code>Jdbcsource</code>, it reads the source's staged PSV, runs a Spark projection, writes
+local <strong>snappy-compressed Parquet</strong>, and then:</p>
+<ul>
+<li><strong>Appends a maintenance column <code>eltm_txid</code></strong> to every row — the <strong>load id</strong>, equal to
+  <code>$BATCH_RUN_NUMBER</code> for that run. It rides along in the Parquet (and downstream) so a target can
+  order/dedupe by load.</li>
+<li><strong>Base64-decodes</strong> the columns the source flagged during extraction, using Spark's native
+  <code>unbase64</code> (so it works regardless of the job's target vendor).</li>
+<li><strong>Saves a schema profile</strong> to Postgres (see below) describing the output columns.</li>
+</ul>
+<p>The Parquet is written locally; a following <strong><a href="../UG-STEPS/#push-file"><code>Push File</code></a></strong> step uploads it to
+S3 (or Azure Blob) for the consumer job to read.</p>
+<div class="admonition note">
+<p class="admonition-title">Column count</p>
+<p>The Parquet has <strong>N source columns + 1 <code>eltm_txid</code></strong>. This matters for the consumer: a Redshift
+<code>COPY … FORMAT AS PARQUET</code> requires the target table to have the <strong>same column count</strong> as the file.
+The schema profile records all N+1 columns so the consumer builds a matching table.</p>
+</div>
+<h3 id="the-schema-profile">The schema profile<a class="headerlink" href="#the-schema-profile" title="Permanent link">&para;</a></h3>
+<p>After the write, <code>JdbcTargetParquet</code> persists a <strong>schema profile</strong> — a platform-neutral description of
+the output columns — to <code>t_sql_profile_table</code> / <code>t_sql_profile_column</code> in the audit DB. It is keyed by:</p>
 <table>
 <thead>
 <tr>
 <th>Field</th>
-<th>What it is</th>
+<th>Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Server</strong></td>
-<td>Hostname or IP of the ELTMaestro meta-service (e.g. <code>&lt;server_ip&gt;</code>).</td>
+<td><code>profile_name</code></td>
+<td><code>jobName.connection.catalog.schema.table</code></td>
 </tr>
 <tr>
-<td><strong>Port</strong></td>
-<td>Meta-service SOAP port — default <strong>8181</strong> (HTTPS). See the architecture diagram.</td>
-</tr>
-<tr>
-<td><strong>User Name</strong></td>
-<td>Your ELTMaestro account.</td>
-</tr>
-<tr>
-<td><strong>Password</strong></td>
-<td>Account password.</td>
-</tr>
-<tr>
-<td><strong>Sign in</strong></td>
-<td>Authenticates. <code>Enter</code> works too (it's the default button).</td>
+<td>per column</td>
+<td>name, canonical <code>java.sql.Types</code> id (<code>12\|VARCHAR</code>, <code>-5\|BIGINT</code>, …), measured length, scale</td>
 </tr>
 </tbody>
 </table>
-<p>All four fields <strong>pre-fill from your last successful sign-in</strong> (saved in your Windows user settings); on a fresh install they're blank.</p>
-<h3 id="first-sign-in-setup">First sign-in (setup)<a class="headerlink" href="#first-sign-in-setup" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Point <strong>Server</strong> / <strong>Port</strong> at your meta-service (e.g. <code>&lt;server_ip&gt;</code> / <code>8181</code>).</li>
-<li>Sign in with the seeded admin account: <strong><code>integrator</code> / <code>integrator123</code></strong>. <strong>Change it right after</strong> via <a href="../UG-ADMIN/#users">Admin ▸ Users</a>.</li>
-<li>On success the login window closes, the main <a href="#main-window-overview">Workflow(s) window</a> opens, and your server / port / user are remembered for next time.</li>
-</ol>
-<blockquote>
-<p><strong>Administrators:</strong> your first real task after signing in is <strong>setting up connections</strong> — the databases, SSH hosts, and cloud/S3 endpoints your workflows will read from and write to. That's the <a href="../UG-ADMIN/">Administration &amp; Setup guide</a> (the initialization step). The connections you create there are exactly what you'll pick from later in the <a href="../UG-WORKFLOWS/">Job editor</a>.</p>
-</blockquote>
-<h3 id="what-sign-in-does">What sign-in does<a class="headerlink" href="#what-sign-in-does" title="Permanent link">&para;</a></h3>
-<p><code>Sign in</code> calls <code>MaestroServerRPC.initialize(server, port, user, password)</code>, which opens the SOAP/HTTPS channel to the meta-service and authenticates. The session token it returns is attached to every later request. The transport is HTTPS (a self-signed server certificate is accepted).</p>
-<h3 id="if-sign-in-fails">If sign-in fails<a class="headerlink" href="#if-sign-in-fails" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Message</th>
-<th>Meaning</th>
-<th>What to check</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Login Error</strong></td>
-<td>Server reached, credentials rejected</td>
-<td>User name / password; that the account exists and is enabled</td>
-</tr>
-<tr>
-<td><strong>Cannot Reach Server</strong></td>
-<td>Host/port wrong, or service down</td>
-<td>Server / Port values; that the meta-service is running (<a href="../OPERATIONS/">OPERATIONS.md</a>)</td>
-</tr>
-<tr>
-<td><strong>Login Timeout</strong></td>
-<td>Service or network slow/blocked</td>
-<td>Connectivity and firewall to the port</td>
-</tr>
-<tr>
-<td><strong>Connection Error</strong></td>
-<td>TLS / transport problem</td>
-<td>That HTTPS is answering on the port; cert / proxy issues</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>Signing in again as the <strong>same user</strong> elsewhere (another client, or a raw SOAP call) invalidates the earlier session — the first client then gets <code>Invalid Session</code> on its next action.</p>
-</blockquote>
-<h2 id="main-window-overview">Main window overview<a class="headerlink" href="#main-window-overview" title="Permanent link">&para;</a></h2>
-<p>After signing in you land on the <strong>main window</strong>. It has a <strong>menu bar</strong> across the top and a row of <strong>tabs</strong>; the default tab, <strong>Workflow(s)</strong>, is your home base.</p>
-<h3 id="the-workflows-tab">The Workflow(s) tab<a class="headerlink" href="#the-workflows-tab" title="Permanent link">&para;</a></h3>
-<p>Lists the workflows (jobs) on the server, with a toolbar of icon buttons:</p>
-<table>
-<thead>
-<tr>
-<th>Button</th>
-<th>What it does</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>New</strong></td>
-<td>Create a new, empty workflow and open it in the <a href="../UG-WORKFLOWS/">Job editor</a>.</td>
-</tr>
-<tr>
-<td><strong>Delete</strong></td>
-<td>Delete the selected workflow from the server.</td>
-</tr>
-<tr>
-<td><strong>Config</strong> (gear icon)</td>
-<td>Open the <a href="../UG-WORKFLOWS/#configuring-job-metadata">Job Metadata</a> editor for the selected workflow — description, tags, support notes (descriptive only; doesn't affect the run).</td>
-</tr>
-<tr>
-<td><strong>Edit Workflow</strong></td>
-<td>Load the selected workflow into the <a href="../UG-WORKFLOWS/">Job editor</a> to design it.</td>
-</tr>
-<tr>
-<td><strong>Unlock Job</strong></td>
-<td>Release the edit lock on the selected workflow(s).</td>
-</tr>
-<tr>
-<td><strong>Search</strong></td>
-<td>Filter the workflow list (your last search is remembered).</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>A workflow is <strong>locked</strong> while open in an editor so two people can't edit it at once. If a session ends abnormally the lock can linger — <strong>Unlock Job</strong> clears it.</p>
-</blockquote>
-<h3 id="other-tabs">Other tabs<a class="headerlink" href="#other-tabs" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Tab</th>
-<th>What's there</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>License Expiration Warning</strong></td>
-<td>Shown in red only when the license is near expiry.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="menu-bar-at-a-glance">Menu bar at a glance<a class="headerlink" href="#menu-bar-at-a-glance" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Menu</th>
-<th>Contains</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>File</strong></td>
-<td>Create Work Flow · Theme (Light / Blue / Dark / Dark Blue / Use System Theme) · Exit</td>
-</tr>
-<tr>
-<td><strong>Administration</strong></td>
-<td><strong>Configure Maestro Server</strong> → the <a href="../UG-ADMIN/">Admin Interface</a> · Metrics Configuration (Control Test, Data Quality Management) · Workflow Configuration (Job Watermarks, Email Alerts) · Scheduler · Migration (Export / Import Workflow(s))</td>
-</tr>
-<tr>
-<td><strong>Runtime &amp; Logs</strong></td>
-<td>Logging (Workflow Logs, Server Logs) · Reports (Metrics Report) · Runtime Operations</td>
-</tr>
-<tr>
-<td><strong>Help</strong></td>
-<td>About · License Information</td>
-</tr>
-</tbody>
-</table>
-<p>Each menu is detailed in <a href="../UG-MENUS/">Menus in depth</a>.</p>
+<p>The profile <strong>includes the <code>eltm_txid</code> column</strong> (as <code>BIGINT</code>), so its column count matches the Parquet.
+Sizes are <strong>measured</strong> from the written Parquet (not declared metadata) and tracked <strong>grow-only</strong> across
+runs. See <strong><a href="../SCHEMA-PROFILE/">Schema profile</a></strong> for the storage model, functions, and roadmap.</p>
+<p>Inspect the latest profile:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">select</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">profile_name</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">column_order</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="k">column_name</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">column_data_type</span><span class="p">,</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">       </span><span class="k">c</span><span class="p">.</span><span class="n">column_length</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">column_decimal_digits</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="k">from</span><span class="w"> </span><span class="n">v_sql_profile_column</span><span class="w"> </span><span class="k">c</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="k">join</span><span class="w"> </span><span class="n">v_sql_profile_table</span><span class="w">  </span><span class="n">p</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">profile_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">profile_id</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">profile_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="k">max</span><span class="p">(</span><span class="n">profile_id</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">t_sql_profile_table</span><span class="p">)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">column_order</span><span class="p">;</span>
+</code></pre></div>
 <hr />
-<p><strong>Next:</strong> <a href="../UG-ADMIN/">Administration &amp; Setup</a> — create your connections (the first-time initialization).</p>
+<h2 id="part-2--copyintors-the-consumer">Part 2 — <code>CopyIntoRS</code> (the consumer)<a class="headerlink" href="#part-2--copyintors-the-consumer" title="Permanent link">&para;</a></h2>
+<p><strong>Type</strong> <code>COPYINTORS</code> · <strong>Engine</strong> <code>org.maestro.engine.steps.redshift.core.CopyIntoRS</code>
+· <strong>WPF</strong> <code>Steps/Redshift/CopyIntoRS.cs</code> → <code>CopyIntoRSWindow.xaml</code> ("Copy Into Redshift")</p>
+<p>Add it from the job-editor palette under the <strong>REDSHIFT ▸ DATA SOURCE</strong> menu. It's a <strong>source</strong> step —
+it has <strong>no input arrow</strong>; it produces the loaded temp table for a downstream <code>Table</code> step.</p>
+<h3 id="what-it-does-at-runtime">What it does at runtime<a class="headerlink" href="#what-it-does-at-runtime" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Creates a Redshift <strong>temp table</strong> from the step's columns (already cast to Redshift types).</li>
+<li>Runs <code>COPY &lt;temp table&gt; FROM 's3://&lt;bucket&gt;/&lt;objectPath&gt;' &lt;credentials&gt; &lt;format&gt;</code>.</li>
+<li>Exposes the temp table to the next step (typically a <code>Table</code> that upserts into the final table).</li>
+</ol>
+<p>The bucket comes from the <strong>S3 connection</strong> (not the path), and the credentials + format are built from
+the fields below.</p>
+<h3 id="configuring-the-step">Configuring the step<a class="headerlink" href="#configuring-the-step" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What to enter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>S3 Connection</strong></td>
+<td>An <strong>AWS S3</strong> connection (e.g. <code>S3_CONNECTION</code>). The bucket is taken from here.</td>
+</tr>
+<tr>
+<td><strong>S3 Object Path</strong></td>
+<td>The object key <strong>relative to the bucket</strong> — e.g. <code>exports/ProductPhoto/2026-07-05</code>. <strong>No <code>s3://</code>, no bucket name.</strong> This is the same value a <code>Push File</code> step would use as its destination.</td>
+</tr>
+<tr>
+<td><strong>Format</strong></td>
+<td><code>csv</code> · <code>psv</code> · <code>tsv</code> · <code>parquet</code>. Selecting a format re-seeds <strong>Format Options</strong> (below).</td>
+</tr>
+<tr>
+<td><strong>Format Options</strong></td>
+<td>Extra <code>COPY</code> options. For <code>csv/psv/tsv</code> this pre-fills <code>ignoreheader 1</code> + the matching <code>delimiter</code>; for <strong><code>parquet</code></strong> the box is <strong>cleared and disabled</strong> (Redshift ignores options for Parquet).</td>
+</tr>
+<tr>
+<td><strong>Authentication Mode</strong></td>
+<td><strong>IAM</strong> (uses the connection's <code>iam_role</code>) or <strong>KEY</strong> (uses <code>aws_access_key_id</code> / <code>aws_secret_access_key</code>).</td>
+</tr>
+<tr>
+<td><strong>Columns</strong></td>
+<td>The Redshift-typed columns to create + load. Use <strong>Browse Profile</strong> to populate them.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="populating-columns-with-browse-profile">Populating columns with Browse Profile<a class="headerlink" href="#populating-columns-with-browse-profile" title="Permanent link">&para;</a></h3>
+<p>Click <strong>Browse Profile…</strong>, search by profile name, and pick the profile the producer job wrote
+(e.g. <code>JDBC2PRQ.ADVENTUREWORKS.AdventureWorks2022.Production.ProductPhoto</code>). The step loads every column
+— <strong>including <code>eltm_txid</code></strong> — already cast to Redshift types. This is what keeps the temp table's column
+count matching the Parquet.</p>
+<div class="admonition warning">
+<p class="admonition-title">Re-browse after the producer changes</p>
+<p>The columns are saved into the job when you browse. If the producer's schema changes (new column,
+or a first run that populates the profile), <strong>re-run the producer job</strong> to refresh the profile, then
+re-open CopyIntoRS, <strong>Browse Profile again</strong>, and <strong>Save</strong>.</p>
+</div>
+<h3 id="the-copy-it-generates">The COPY it generates<a class="headerlink" href="#the-copy-it-generates" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">-- IAM auth, parquet:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">copy</span><span class="w"> </span><span class="ss">&quot;&lt;schema&gt;&quot;</span><span class="p">.</span><span class="ss">&quot;TMP_...&quot;</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="s1">&#39;s3://&lt;bucket&gt;/&lt;objectPath&gt;&#39;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">     </span><span class="n">iam_role</span><span class="w"> </span><span class="s1">&#39;&lt;role from connection&gt;&#39;</span><span class="w"> </span><span class="n">FORMAT</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">PARQUET</span><span class="p">;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1">-- KEY auth, csv/psv/tsv (with your Format Options appended):</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="k">copy</span><span class="w"> </span><span class="ss">&quot;&lt;schema&gt;&quot;</span><span class="p">.</span><span class="ss">&quot;TMP_...&quot;</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="s1">&#39;s3://&lt;bucket&gt;/&lt;objectPath&gt;&#39;</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">     </span><span class="n">credentials</span><span class="w"> </span><span class="s1">&#39;aws_access_key_id=...;aws_secret_access_key=...&#39;</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">     </span><span class="n">FORMAT</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">CSV</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">     </span><span class="n">ignoreheader</span><span class="w"> </span><span class="mi">1</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">     </span><span class="k">delimiter</span><span class="w"> </span><span class="s1">&#39;|&#39;</span><span class="p">;</span>
+</code></pre></div>
+<p><code>$bucket.name</code>, <code>$iam.role</code>, and the access/secret keys are resolved from the <strong>S3 connection</strong> at runtime.</p>
+<hr />
+<h2 id="end-to-end-walkthrough">End-to-end walkthrough<a class="headerlink" href="#end-to-end-walkthrough" title="Permanent link">&para;</a></h2>
+<p><strong>Producer job</strong> (job type ClickHouse or Redshift):</p>
+<ol>
+<li><code>Jdbcsource</code> — pick the source connection + table.</li>
+<li><code>JdbcTargetParquet</code> — connect the source into it. It writes Parquet + the schema profile.</li>
+<li><code>Push File</code> — connect it after the Parquet step; set the S3 connection + destination key (e.g.
+   <code>exports/ProductPhoto/</code>). Run the job. The Parquet lands on S3; the profile lands in Postgres.</li>
+</ol>
+<p><strong>Consumer job</strong> (job type <strong>Redshift</strong>):</p>
+<ol>
+<li><code>CopyIntoRS</code> — set the S3 connection, the <strong>object path</strong> matching where the producer pushed, the
+   <strong>format</strong> (<code>parquet</code>), <strong>IAM</strong> or <strong>KEY</strong>, then <strong>Browse Profile</strong> and pick the producer's profile
+   → <strong>Save</strong>.</li>
+<li><code>Table</code> — connect CopyIntoRS into it, set the target schema/table, map the columns (<strong>Reset</strong> to
+   auto-map), and choose the write mode (e.g. upsert/CDC). Run the job.</li>
+</ol>
+<p>On success the temp table is created, the Parquet is COPY'd in, and the <code>Table</code> step upserts into the
+final Redshift table.</p>
+<hr />
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Cause &amp; fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>COPY</code> fails <strong>"Unmatched number of columns between table and file. Table columns: N, Data columns: N+1"</strong></td>
+<td>The profile has fewer columns than the Parquet (historically it omitted <code>eltm_txid</code>). <strong>Re-run the producer</strong> to regenerate the profile, then <strong>re-Browse Profile</strong> in CopyIntoRS and <strong>Save</strong>. (Engine now records <code>eltm_txid</code> in the profile.)</td>
+</tr>
+<tr>
+<td>Target INSERT fails <strong>"column \"eltm_txid\" of relation … does not exist"</strong></td>
+<td>The target table pre-existed without the column. The <code>Table</code> step's metadata-assertion self-heals it (ALTER ADD) — make sure the engine is current, then re-run.</td>
+</tr>
+<tr>
+<td><code>eltm_txid</code> loads as <strong>NULL</strong></td>
+<td>Producer wrote the column header but not its value. Fixed in the engine (the extract now emits <code>$BATCH_RUN_NUMBER</code>); <strong>re-run the producer</strong> to rewrite the Parquet.</td>
+</tr>
+<tr>
+<td>Deploy/Save fails <strong>"Not authorized, only job/mapping owners can perform this operation"</strong></td>
+<td>You're not logged in as the job's owner. Sign in as the owner, or <strong>Save As</strong> a new job name (you become its owner).</td>
+</tr>
+<tr>
+<td><code>COPY</code> fails on <strong>S3 <code>ListBucket</code>/<code>GetObject</code> denied</strong></td>
+<td>Fix the <strong>IAM role's S3 policy</strong> (grant <code>s3:ListBucket</code> on the bucket + <code>s3:GetObject</code> on the objects) — not the engine CLI creds. See <a href="../REDSHIFT-SETUP/">Redshift setup</a>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="source-pointers">Source pointers<a class="headerlink" href="#source-pointers" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>source/root-engine-core/.../steps/pipeline/core/JdbcTargetParquet.java</code> — Parquet write + <code>saveSchemaProfile</code>.</li>
+<li><code>source/root-engine-core/.../steps/redshift/core/CopyIntoRS.java</code> — temp table + <code>COPY</code>.</li>
+<li><code>source/root-win-client/ELTMAESTRO/Steps/Redshift/CopyIntoRS*.{cs,xaml}</code> — the WPF step + dialog.</li>
+<li>Related: <strong><a href="../SCHEMA-PROFILE/">Schema profile</a></strong>, <strong><a href="../REDSHIFT-SETUP/">Redshift setup</a></strong>, <strong><a href="../UG-STEPS/">Step reference</a></strong>.</li>
+</ul>
 
 
 
