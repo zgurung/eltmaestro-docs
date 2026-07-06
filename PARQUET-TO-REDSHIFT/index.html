@@ -1422,6 +1422,15 @@ writes it, the consumer reads it to build a matching Redshift table.</p>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Consumer job:                              CopyIntoRS ─► Table (Redshift)
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>                                           (reads S3 parquet using the profile)
 </code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Prerequisites</p>
+<ul>
+<li>An <strong>AWS S3</strong> connection (commonly named <code>S3_CONNECTION</code>) with its bucket configured.</li>
+<li>For <strong>IAM</strong> auth, the Redshift cluster's IAM role must allow <code>s3:ListBucket</code> on the bucket and
+  <code>s3:GetObject</code> on the objects. See <a href="../REDSHIFT-SETUP/">Redshift setup</a>.</li>
+<li>The producer job must have run at least once so its <strong>schema profile</strong> exists for CopyIntoRS to browse.</li>
+</ul>
+</div>
 <hr />
 <h2 id="part-1--jdbctargetparquet-the-producer">Part 1 — <code>JdbcTargetParquet</code> (the producer)<a class="headerlink" href="#part-1--jdbctargetparquet-the-producer" title="Permanent link">&para;</a></h2>
 <p><strong>Type</strong> <code>JDBCTARGETPARQUET</code> · <strong>Engine</strong> <code>org.maestro.engine.steps.pipeline.core.JdbcTargetParquet</code>
