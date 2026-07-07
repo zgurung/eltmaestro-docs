@@ -663,6 +663,48 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#part-3--generate-whole-pipelines-in-bulk" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part 3 — Generate whole pipelines in bulk
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 3 — Generate whole pipelines in bulk">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#export-jdbc-to-s3-parquet" class="md-nav__link">
+    <span class="md-ellipsis">
+      Export Jdbc To S3 Parquet
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-s3-parquet-to-redshift" class="md-nav__link">
+    <span class="md-ellipsis">
+      Import S3 Parquet To Redshift
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run-folder-dedupe-watermark-handoff" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run-folder dedupe (watermark handoff)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#end-to-end-walkthrough" class="md-nav__link">
     <span class="md-ellipsis">
       End-to-end walkthrough
@@ -1366,6 +1408,48 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#part-3--generate-whole-pipelines-in-bulk" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part 3 — Generate whole pipelines in bulk
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 3 — Generate whole pipelines in bulk">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#export-jdbc-to-s3-parquet" class="md-nav__link">
+    <span class="md-ellipsis">
+      Export Jdbc To S3 Parquet
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-s3-parquet-to-redshift" class="md-nav__link">
+    <span class="md-ellipsis">
+      Import S3 Parquet To Redshift
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run-folder-dedupe-watermark-handoff" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run-folder dedupe (watermark handoff)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#end-to-end-walkthrough" class="md-nav__link">
     <span class="md-ellipsis">
       End-to-end walkthrough
@@ -1515,7 +1599,7 @@ the fields below.</p>
 </tr>
 <tr>
 <td><strong>S3 Object Path</strong></td>
-<td>The object key <strong>relative to the bucket</strong> — e.g. <code>exports/ProductPhoto/2026-07-05</code>. <strong>No <code>s3://</code>, no bucket name.</strong> This is the same value a <code>Push File</code> step would use as its destination.</td>
+<td>The object key <strong>relative to the bucket</strong> — e.g. <code>exports/ProductPhoto/2026-07-05</code>. <strong>No <code>s3://</code>, no bucket name.</strong> This is the same value a <code>Push File</code> step would use as its destination. It may instead be a <strong>watermark reference</strong> <code>$WM{&lt;exportJob&gt;::&lt;pushStepId&gt;}</code> (see <a href="#run-folder-dedupe-watermark-handoff">Run-folder dedupe</a>) — the engine resolves it to the exact folder the export's <code>Push File</code> step last wrote.</td>
 </tr>
 <tr>
 <td><strong>Format</strong></td>
@@ -1559,6 +1643,140 @@ re-open CopyIntoRS, <strong>Browse Profile again</strong>, and <strong>Save</str
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">     </span><span class="k">delimiter</span><span class="w"> </span><span class="s1">&#39;|&#39;</span><span class="p">;</span>
 </code></pre></div>
 <p><code>$bucket.name</code>, <code>$iam.role</code>, and the access/secret keys are resolved from the <strong>S3 connection</strong> at runtime.</p>
+<hr />
+<h2 id="part-3--generate-whole-pipelines-in-bulk">Part 3 — Generate whole pipelines in bulk<a class="headerlink" href="#part-3--generate-whole-pipelines-in-bulk" title="Permanent link">&para;</a></h2>
+<p>Building the producer and consumer by hand for many tables is tedious. Two <strong>wizards</strong> on the
+<strong>JobEditor canvas</strong> (right-click ▸ <strong>Generate Pipeline</strong>, <strong>Redshift jobs only</strong>) build fully-configured,
+runnable pipelines for a whole list of tables at once:</p>
+<table>
+<thead>
+<tr>
+<th>Menu item</th>
+<th>Builds, per selected table</th>
+<th>Nodes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Export Jdbc To S3 Parquet</strong></td>
+<td><code>Jdbcsource ─► JdbcTargetParquet ─► Push File</code></td>
+<td>3</td>
+</tr>
+<tr>
+<td><strong>Import S3 Parquet To Redshift</strong></td>
+<td><code>CopyIntoRS ─► Table</code></td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>So 5 tables → 15 export nodes, or 10 import nodes. Each generated step is filled in and immediately valid
+(no dialogs to open) — nodes self-add and auto-connect on the canvas.</p>
+<h3 id="export-jdbc-to-s3-parquet">Export Jdbc To S3 Parquet<a class="headerlink" href="#export-jdbc-to-s3-parquet" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Source Connection</strong> + <strong>Browse Schema…</strong></td>
+<td>The source JDBC connection and its catalog/schema.</td>
+</tr>
+<tr>
+<td><strong>Tables</strong></td>
+<td>Multi-select (with search / Select All). One 3-node row is generated per table.</td>
+</tr>
+<tr>
+<td><strong>S3 Connection</strong></td>
+<td>The AWS S3 connection the <code>Push File</code> steps use.</td>
+</tr>
+<tr>
+<td><strong>Path Template</strong></td>
+<td>The destination key. <strong>Generate-time tokens</strong> <code>$DATABASE</code> <code>$SCHEMA</code> <code>$TABLE</code> are substituted now; <strong>runtime <code>$</code>-vars</strong> (<code>$CURRENT_DATE</code>, <code>$BATCH_RUN_NUMBER</code>, …) are left for the engine to resolve each run. Default: <code>pipeline/$DATABASE/$TABLE/$CURRENT_DATE/$BATCH_RUN_NUMBER/</code>.</td>
+</tr>
+<tr>
+<td><strong>Dedupe re-runs</strong></td>
+<td>Enables the <code>Push File</code> <strong>step watermark</strong> so each run's folder is recorded — see <a href="#run-folder-dedupe-watermark-handoff">below</a>. On by default.</td>
+</tr>
+</tbody>
+</table>
+<p>Columns are fetched per table and the Parquet transit columns are typed in the <strong>SparkSQL</strong> dialect
+(matching how <code>JdbcTargetParquet</code> writes the file).</p>
+<h3 id="import-s3-parquet-to-redshift">Import S3 Parquet To Redshift<a class="headerlink" href="#import-s3-parquet-to-redshift" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Export Job</strong> + <strong>Load Pipelines</strong></td>
+<td>Pick the <strong>export job</strong> that produced the Parquet. The wizard parses its XML and lists every table it pushes, with the S3 path.</td>
+</tr>
+<tr>
+<td><strong>Tables</strong></td>
+<td>Multi-select the tables to ingest.</td>
+</tr>
+<tr>
+<td><strong>S3 Connection</strong> + <strong>IAM / Access Key</strong></td>
+<td>The connection + credential mode for the <code>COPY</code>.</td>
+</tr>
+<tr>
+<td><strong>Target DB / Schema</strong></td>
+<td>Database defaults to <strong><code>$SYSTEM_DEFAULT_DATABASE</code></strong> — the engine resolves it to the run connection's current database, so <strong>the workflow migrates across connections</strong> without a hardcoded DB. <strong>Only the schema is required.</strong></td>
+</tr>
+<tr>
+<td><strong>Create target table</strong></td>
+<td><code>CREATE IF NOT EXISTS</code> the target (it persists across runs). Uncheck to load into an existing table.</td>
+</tr>
+<tr>
+<td><strong>Use First Column as Key</strong></td>
+<td>Marks the first column as the key and turns the <code>Table</code> step into <strong>upsert</strong> mode (delete-by-key + insert) so re-runs merge instead of duplicate.</td>
+</tr>
+</tbody>
+</table>
+<p>Column types are derived to match the <strong>Parquet physical types</strong> Spark wrote (e.g. <code>smallint→integer</code>,
+<code>decimal→double precision</code>, text→<code>varchar(&lt;measured length&gt;)</code>), because Redshift <code>COPY … FORMAT AS PARQUET</code>
+is strict about type matching.</p>
+<hr />
+<h2 id="run-folder-dedupe-watermark-handoff">Run-folder dedupe (watermark handoff)<a class="headerlink" href="#run-folder-dedupe-watermark-handoff" title="Permanent link">&para;</a></h2>
+<p><strong>Problem.</strong> If the export runs more than once for the same <code>$CURRENT_DATE</code>, its Parquet piles up in the
+same date folder. A consumer that COPYs the whole prefix then <strong>double-counts</strong> every re-run.</p>
+<p><strong>Solution.</strong> Give each run its own folder and hand the exact folder to the importer:</p>
+<ol>
+<li>The export path ends with <strong><code>$BATCH_RUN_NUMBER</code></strong> (default template), so run 5115 writes
+   <code>pipeline/…/2026-07-07/5115/</code>, run 5116 writes <code>…/5116/</code>, etc. — never colliding.</li>
+<li>With <strong>Dedupe re-runs</strong> on, each <code>Push File</code> step (<code>isWatermarkEnabled</code>) records the <strong>exact folder it
+   wrote</strong> on success in <code>t_step_watermark</code>, keyed by <strong><code>JOB_NAME::STEP_ID</code></strong>.</li>
+<li>The generated <code>CopyIntoRS</code> <strong>S3 Object Path</strong> is a reference token <strong><code>$WM{&lt;exportJob&gt;::&lt;pushStepId&gt;}</code></strong>.
+   At import time the engine reads that step's watermark and COPYs <strong>exactly that folder</strong> — the export's
+   latest successful run, regardless of the import's own <code>$BATCH_RUN_NUMBER</code>.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Export run 5116  →  writes   pipeline/AdventureWorks2022/Address/2026-07-07/5116/
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>                    records  RS_DEMO_JDBC_2_S3::8 = pipeline/AdventureWorks2022/Address/2026-07-07/5116/
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>Import (any run) →  COPY from $WM{RS_DEMO_JDBC_2_S3::8}  →  resolves to  …/5116/   (only the latest)
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Why <code>JOB_NAME::STEP_ID</code>?</p>
+<p>Step IDs are stable and unique within a job (names can be renamed or duplicated), so a cross-job
+reference by ID is unambiguous. The producer watermark uses a <strong>separate</strong> key (<code>JOB::STEP_ID</code>) from
+the file-scanner incremental watermark (<code>getWatermarkName()</code>), so the two never interfere.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Run the export first</p>
+<p>A <code>$WM{…}</code> reference with no recorded watermark yet <strong>fails clearly</strong> ("Run the source export job
+first") rather than guessing a folder — so an import can never silently read the wrong run.</p>
+</div>
+<p>Inspect the recorded folders:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">select</span><span class="w"> </span><span class="n">watermark_name</span><span class="p">,</span><span class="w"> </span><span class="n">watermark_value</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="k">from</span><span class="w"> </span><span class="k">public</span><span class="p">.</span><span class="n">t_step_watermark</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">watermark_name</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;&lt;EXPORT_JOB&gt;::%&#39;</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">watermark_name</span><span class="p">;</span>
+</code></pre></div>
 <hr />
 <h2 id="end-to-end-walkthrough">End-to-end walkthrough<a class="headerlink" href="#end-to-end-walkthrough" title="Permanent link">&para;</a></h2>
 <p><strong>Producer job</strong> (job type ClickHouse or Redshift):</p>
@@ -1613,8 +1831,12 @@ final Redshift table.</p>
 <h2 id="source-pointers">Source pointers<a class="headerlink" href="#source-pointers" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>source/root-engine-core/.../steps/pipeline/core/JdbcTargetParquet.java</code> — Parquet write + <code>saveSchemaProfile</code>.</li>
-<li><code>source/root-engine-core/.../steps/redshift/core/CopyIntoRS.java</code> — temp table + <code>COPY</code>.</li>
+<li><code>source/root-engine-core/.../steps/redshift/core/CopyIntoRS.java</code> — temp table + <code>COPY</code> + <code>$WM{}</code> resolution.</li>
+<li><code>source/root-engine-core/.../steps/common/global/PushFile.java</code> — records the run folder to its watermark.</li>
+<li><code>source/root-engine-core/.../core/parts/BaseStep.java</code> — <code>getStepRefKey()</code> (<code>JOB::STEP_ID</code>), <code>setStepWatermarkString</code>, <code>readWatermarkByName</code>.</li>
 <li><code>source/root-win-client/ELTMAESTRO/Steps/Redshift/CopyIntoRS*.{cs,xaml}</code> — the WPF step + dialog.</li>
+<li><code>source/root-win-client/ELTMAESTRO/GeneralWindow/PipelineGenerator.cs</code> — the bulk export/import generators.</li>
+<li><code>source/root-win-client/ELTMAESTRO/GeneralWindow/Generate{Pipeline,Ingestion}Window.xaml{,.cs}</code> — the two wizards.</li>
 <li>Related: <strong><a href="../SCHEMA-PROFILE/">Schema profile</a></strong>, <strong><a href="../REDSHIFT-SETUP/">Redshift setup</a></strong>, <strong><a href="../UG-STEPS/">Step reference</a></strong>.</li>
 </ul>
 
