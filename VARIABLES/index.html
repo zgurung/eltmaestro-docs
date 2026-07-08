@@ -1651,49 +1651,147 @@ omitted, and secrets (password / private-key / token) are never printed.</p>
 type</strong> — the cadence the batch is meant to run at. The type selects the grain of the
 data-validity window (<code>START</code>/<code>END</code>) and the <code>$BATCH_DATA_VALIDITY_PERIOD</code> that incremental steps
 use as their lower/upper bounds; the timestamps are computed by database functions keyed on the type.</p>
-<p>Types come from the <code>batch_cycle_type</code> catalog. The default is <strong><code>ONREQ</code></strong> ("runs as required");
-the scheduled grains are:</p>
+<p>Types come from the server-side <code>batch_cycle_type</code> catalog (the values shown in the client's <strong>Change
+Batch Cycle Type</strong> dropdown). The default is <strong><code>ONREQ</code></strong>. The full catalog:</p>
 <table>
 <thead>
 <tr>
-<th>Family</th>
-<th>Codes</th>
+<th>Code</th>
 <th>Cadence</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>On request</td>
 <td><code>ONREQ</code></td>
-<td>Runs when launched — no fixed cycle (default).</td>
+<td>Runs as required — on demand, no fixed cycle (<strong>default</strong>).</td>
 </tr>
 <tr>
-<td>Continuous / sub-minute</td>
-<td><code>00MIN</code>, <code>30SEC</code></td>
-<td>Real-time / every 30 seconds.</td>
+<td><code>00MIN</code></td>
+<td>Continuous, real-time.</td>
 </tr>
 <tr>
-<td>N-minute</td>
-<td><code>01MIN</code>, <code>05MIN</code>, <code>15MIN</code>, <code>30MIN</code></td>
-<td>Every 1 / 5 / 15 / 30 minutes.</td>
+<td><code>30SEC</code></td>
+<td>Every 30 seconds (on the 0th and 30th second of each minute).</td>
 </tr>
 <tr>
-<td>Hourly</td>
+<td><code>01MIN</code></td>
+<td>Every minute (on the 0th second).</td>
+</tr>
+<tr>
+<td><code>05MIN</code></td>
+<td>Every 5 minutes (00, 05, 10 … 55 past the hour).</td>
+</tr>
+<tr>
+<td><code>15MIN</code></td>
+<td>Every 15 minutes (00, 15, 30, 45 past the hour).</td>
+</tr>
+<tr>
+<td><code>30MIN</code></td>
+<td>Twice an hour (00 and 30 past the hour).</td>
+</tr>
+<tr>
 <td><code>HOUR</code></td>
-<td>Top of each hour.</td>
+<td>Every hour (at the 00-minute mark).</td>
 </tr>
 <tr>
-<td>Daily</td>
 <td><code>DAILY</code></td>
 <td>Once a day.</td>
 </tr>
 <tr>
-<td>Weekly</td>
-<td><code>WEEK</code>, <code>WEEKM</code>…<code>WEEKU</code></td>
-<td>Weekly, optionally pinned to a weekday (<code>WEEKM</code> = Monday … <code>WEEKU</code> = Sunday).</td>
+<td><code>WEEK</code></td>
+<td>Weekly, on the scheduled day.</td>
+</tr>
+<tr>
+<td><code>WEEKM</code></td>
+<td>Weekly on Mondays.</td>
+</tr>
+<tr>
+<td><code>WEEKT</code></td>
+<td>Weekly on Tuesdays.</td>
+</tr>
+<tr>
+<td><code>WEEKW</code></td>
+<td>Weekly on Wednesdays.</td>
+</tr>
+<tr>
+<td><code>WEEKH</code></td>
+<td>Weekly on Thursdays.</td>
+</tr>
+<tr>
+<td><code>WEEKF</code></td>
+<td>Weekly on Fridays.</td>
+</tr>
+<tr>
+<td><code>WEEKS</code></td>
+<td>Weekly on Saturdays.</td>
+</tr>
+<tr>
+<td><code>WEEKU</code></td>
+<td>Weekly on Sundays.</td>
+</tr>
+<tr>
+<td><code>MONTH</code></td>
+<td>Once per calendar month, on the scheduled day-of-month.</td>
+</tr>
+<tr>
+<td><code>F_MON</code></td>
+<td>First day of each calendar month.</td>
+</tr>
+<tr>
+<td><code>M_MON</code></td>
+<td>15th (mid) day of each calendar month.</td>
+</tr>
+<tr>
+<td><code>L_MON</code></td>
+<td>Last day of each calendar month.</td>
+</tr>
+<tr>
+<td><code>F_QTR</code></td>
+<td>First day of each calendar quarter.</td>
+</tr>
+<tr>
+<td><code>L_QTR</code></td>
+<td>Last day of each calendar quarter.</td>
+</tr>
+<tr>
+<td><code>FYEAR</code></td>
+<td>First day of each calendar year.</td>
+</tr>
+<tr>
+<td><code>LYEAR</code></td>
+<td>Last day of each calendar year.</td>
+</tr>
+<tr>
+<td><code>FFMON</code></td>
+<td>First day of each <strong>fiscal</strong> month.</td>
+</tr>
+<tr>
+<td><code>LFMON</code></td>
+<td>Last day of each <strong>fiscal</strong> month.</td>
+</tr>
+<tr>
+<td><code>FFQTR</code></td>
+<td>First day of each <strong>fiscal</strong> quarter.</td>
+</tr>
+<tr>
+<td><code>LFQTR</code></td>
+<td>Last day of each <strong>fiscal</strong> quarter.</td>
+</tr>
+<tr>
+<td><code>FFYER</code></td>
+<td>First day of each <strong>fiscal</strong> year.</td>
+</tr>
+<tr>
+<td><code>LFYER</code></td>
+<td>Last day of each <strong>fiscal</strong> year.</td>
 </tr>
 </tbody>
 </table>
+<blockquote>
+<p>The type labels the workflow's intended cadence and drives its data-validity window; the actual
+firing of scheduled runs is configured separately in <strong>Administration ▸ Scheduler</strong> (cron). A site
+can add or remove entries in <code>batch_cycle_type</code>, so the dropdown reflects that catalog.</p>
+</blockquote>
 <p><strong>How a workflow gets its type</strong> — resolved at runtime by precedence: the launch CLI <code>--type</code> flag
 <strong>&gt;</strong> the job XML <code>&lt;batchType&gt;</code> element <strong>&gt;</strong> the type stored in the metadata DB <strong>&gt;</strong> <code>ONREQ</code>. The
 job XML value is what you set in the client: <strong>right-click the workflow ▸ Action(s) ▸ Change Batch
