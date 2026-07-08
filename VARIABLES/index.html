@@ -1059,6 +1059,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#batch-cycle-type--the-data-validity-window" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch cycle type — the data-validity window
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#batch-cutoff-windows--batch_last_success_run_ts--batch_cutoff_" class="md-nav__link">
     <span class="md-ellipsis">
       Batch cutoff windows — $BATCH_LAST_SUCCESS_RUN_TS / $BATCH_CUTOFF_*
@@ -1373,6 +1382,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#batch-cycle-type--the-data-validity-window" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch cycle type — the data-validity window
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#batch-cutoff-windows--batch_last_success_run_ts--batch_cutoff_" class="md-nav__link">
     <span class="md-ellipsis">
       Batch cutoff windows — $BATCH_LAST_SUCCESS_RUN_TS / $BATCH_CUTOFF_*
@@ -1628,6 +1646,59 @@ omitted, and secrets (password / private-key / token) are never printed.</p>
 </tr>
 </tbody>
 </table>
+<h3 id="batch-cycle-type--the-data-validity-window">Batch cycle type — the data-validity window<a class="headerlink" href="#batch-cycle-type--the-data-validity-window" title="Permanent link">&para;</a></h3>
+<p>The <code>$BATCH_*_DATA_VALIDITY_TIMESTAMP</code> values above are <strong>derived from the workflow's batch cycle
+type</strong> — the cadence the batch is meant to run at. The type selects the grain of the
+data-validity window (<code>START</code>/<code>END</code>) and the <code>$BATCH_DATA_VALIDITY_PERIOD</code> that incremental steps
+use as their lower/upper bounds; the timestamps are computed by database functions keyed on the type.</p>
+<p>Types come from the <code>batch_cycle_type</code> catalog. The default is <strong><code>ONREQ</code></strong> ("runs as required");
+the scheduled grains are:</p>
+<table>
+<thead>
+<tr>
+<th>Family</th>
+<th>Codes</th>
+<th>Cadence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>On request</td>
+<td><code>ONREQ</code></td>
+<td>Runs when launched — no fixed cycle (default).</td>
+</tr>
+<tr>
+<td>Continuous / sub-minute</td>
+<td><code>00MIN</code>, <code>30SEC</code></td>
+<td>Real-time / every 30 seconds.</td>
+</tr>
+<tr>
+<td>N-minute</td>
+<td><code>01MIN</code>, <code>05MIN</code>, <code>15MIN</code>, <code>30MIN</code></td>
+<td>Every 1 / 5 / 15 / 30 minutes.</td>
+</tr>
+<tr>
+<td>Hourly</td>
+<td><code>HOUR</code></td>
+<td>Top of each hour.</td>
+</tr>
+<tr>
+<td>Daily</td>
+<td><code>DAILY</code></td>
+<td>Once a day.</td>
+</tr>
+<tr>
+<td>Weekly</td>
+<td><code>WEEK</code>, <code>WEEKM</code>…<code>WEEKU</code></td>
+<td>Weekly, optionally pinned to a weekday (<code>WEEKM</code> = Monday … <code>WEEKU</code> = Sunday).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How a workflow gets its type</strong> — resolved at runtime by precedence: the launch CLI <code>--type</code> flag
+<strong>&gt;</strong> the job XML <code>&lt;batchType&gt;</code> element <strong>&gt;</strong> the type stored in the metadata DB <strong>&gt;</strong> <code>ONREQ</code>. The
+job XML value is what you set in the client: <strong>right-click the workflow ▸ Action(s) ▸ Change Batch
+Cycle Type</strong> (see <a href="../UG-WORKFLOWS/#managing-a-workflow--right-click-actions">Workflows — right-click actions</a>).
+It writes <code>&lt;batchType&gt;</code> into the job and syncs <code>batch_cycle_type_cd</code> in the DB.</p>
 <h3 id="batch-cutoff-windows--batch_last_success_run_ts--batch_cutoff_">Batch cutoff windows — <code>$BATCH_LAST_SUCCESS_RUN_TS</code> / <code>$BATCH_CUTOFF_*</code><a class="headerlink" href="#batch-cutoff-windows--batch_last_success_run_ts--batch_cutoff_" title="Permanent link">&para;</a></h3>
 <p>Also set in <code>EngineState.initializeEngine</code> (via <code>PG.getBatchCutoffWindows(batchId)</code>), these give incremental
 processing windows derived from this batch's <strong>last successful run</strong>. <code>$BATCH_LAST_SUCCESS_RUN_TS</code> is the

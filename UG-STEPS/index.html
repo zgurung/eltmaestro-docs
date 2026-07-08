@@ -2100,6 +2100,7 @@
 <li><strong>Auto Partitioning Reference tab</strong> — for very large tables where MIN/MAX is slow, point partition sampling at a smaller reference table; leave "ref table same as source" checked if not needed.</li>
 <li><strong>Manual Partitions tab</strong> — when <strong>Manual</strong> partitioning is selected you <strong>must</strong> supply the extraction-criteria conditions here (the per-bucket <code>WHERE</code> expressions — one partition per condition); in Auto mode, any expressions added here override the auto-partitioning logic.</li>
 <li><strong>Performance &amp; Quality tab</strong> — date/timestamp formats, fetch size, optional SAP zero-padding, <strong>Standardize Data</strong> (strip CR/LF/delimiter/quotes), and an <strong>Encode</strong> list that <strong>base64-encodes</strong> selected columns so special characters survive the flat file — the target decodes them with the platform's base64 function.</li>
+<li><strong>Read Uncommitted</strong> — when checked, the extract runs its <code>SELECT</code> at the <strong>READ UNCOMMITTED</strong> isolation level (the session-level equivalent of SQL Server's <code>WITH (NOLOCK)</code>) so it neither blocks, nor is blocked by, writers on the source. On by default for new steps — the default is set org-wide by the <strong><code>onstage_read_uncommitted</code></strong> <a href="../UG-ADMIN/#system">System Setting</a>. It is applied only where the source database supports it (e.g. SQL Server, MySQL, DB2) and safely skipped where it doesn't (e.g. Oracle).</li>
 </ul>
 <p><img alt="Jdbcsource — Performance &amp; Quality tab: formats, Standardize Data, and the base64 Encode column list" src="../images/step-jdbcsource-quality.png" /></p>
 <h4 id="onstagegroup">Onstagegroup<a class="headerlink" href="#onstagegroup" title="Permanent link">&para;</a></h4>
@@ -2263,7 +2264,7 @@
 <td>🟢</td>
 <td>Control Test</td>
 <td><code>CONTROLTEST</code></td>
-<td>Data-quality test — measures correctness/reasonableness of data. <strong>Defined first</strong> in <strong>Administration ▸ Metrics Configuration ▸ Control Test</strong> (name, type, tolerance, an <strong>expected-value query</strong> vs an <strong>actual-value query</strong> → pass/fail), then selected in the workflow. Test type <strong><code>M</code></strong> = a <em>measurement</em> probe for trending (DB-size growth, counts, …) rather than pass/fail.</td>
+<td>Data-quality test — measures correctness/reasonableness of data. <strong>Defined first</strong> in <strong>Administration ▸ Metrics Configuration ▸ Control Test</strong> (name, type, tolerance, an <strong>expected-value query</strong> vs an <strong>actual-value query</strong> → pass/fail), then selected in the workflow. The <strong>Manage Control Tests</strong> window lists all tests in a searchable grid; <strong>New</strong> / <strong>Edit</strong> (or double-click a row) opens an editor with the test's fields, query <strong>Test</strong> (preview) buttons, and <strong>Save</strong>. Test type <strong><code>M</code></strong> = a <em>measurement</em> probe for trending (DB-size growth, counts, …) rather than pass/fail.</td>
 </tr>
 <tr>
 <td>🟡</td>

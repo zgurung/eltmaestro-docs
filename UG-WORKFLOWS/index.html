@@ -555,6 +555,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#managing-a-workflow--right-click-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Managing a workflow — right-click actions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Managing a workflow — right-click actions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#change-batch-cycle-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Change Batch Cycle Type
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#show-change-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      Show Change History
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#the-job-editor--designing-the-dag" class="md-nav__link">
     <span class="md-ellipsis">
       The Job editor — designing the DAG
@@ -1285,6 +1318,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#managing-a-workflow--right-click-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Managing a workflow — right-click actions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Managing a workflow — right-click actions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#change-batch-cycle-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Change Batch Cycle Type
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#show-change-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      Show Change History
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#the-job-editor--designing-the-dag" class="md-nav__link">
     <span class="md-ellipsis">
       The Job editor — designing the DAG
@@ -1449,6 +1515,32 @@
 <p><img alt="Job Metadata editor (opened from the gear icon) for job RS_TEST — Description, Tag(s), Comment(s), Service Note(s), Service URL(s)" src="../images/job-metadata-editor.png" /></p>
 <p>Once you <strong>Apply</strong>, the metadata travels with the workflow and is shown alongside it in the <strong>Workflow(s) list</strong> on the main window — in the <code>job_description</code>, <code>job_tags</code>, <code>last_comment</code>, <code>service_notes</code>, and <code>service_url</code> columns:</p>
 <p><img alt="Main-window Workflow(s) list showing the RS_TEST row with its tags, comment, service notes, and service URL populated" src="../images/job-metadata-main-window.png" /></p>
+<h2 id="managing-a-workflow--right-click-actions">Managing a workflow — right-click actions<a class="headerlink" href="#managing-a-workflow--right-click-actions" title="Permanent link">&para;</a></h2>
+<p><strong>Right-click a workflow</strong> in the Workflow(s) list for actions beyond the toolbar:</p>
+<ul>
+<li><strong>Action(s) ▸ Change Platform Connection</strong> — repoint the workflow (and its dependents) to a different platform connection without editing the DAG. Use this after renaming/replacing a connection or moving a job between environments.</li>
+<li><strong>Action(s) ▸ Change Batch Cycle Type</strong> — set the workflow's <a href="#change-batch-cycle-type">batch cycle type</a>.</li>
+<li><strong>Show Change History</strong> — browse and compare the workflow's <a href="#show-change-history">saved versions</a>.</li>
+</ul>
+<h3 id="change-batch-cycle-type">Change Batch Cycle Type<a class="headerlink" href="#change-batch-cycle-type" title="Permanent link">&para;</a></h3>
+<p>Every workflow has a <strong>batch cycle type</strong> — the cadence it's meant to run at (<code>ONREQ</code> "on request" by default, or a scheduled grain like <code>HOUR</code>, <code>DAILY</code>, <code>WEEKM</code>, …). The type drives the <strong>data-validity window</strong> the engine exposes to incremental steps at runtime (<code>$BATCH_START_DATA_VALIDITY_TIMESTAMP</code> / <code>$BATCH_END_DATA_VALIDITY_TIMESTAMP</code> / <code>$BATCH_DATA_VALIDITY_PERIOD</code>).</p>
+<p>Pick the type from the dropdown (populated from the server's <code>batch_cycle_type</code> catalog) and click <strong>OK</strong>. The choice is written into the <strong>job XML</strong> (<code>&lt;batchType&gt;</code>) and synced to the metadata database, so it travels with the workflow. At launch the engine resolves the effective type by precedence — CLI <code>--type</code> <strong>&gt;</strong> job XML <strong>&gt;</strong> stored DB type <strong>&gt;</strong> <code>ONREQ</code>.</p>
+<blockquote>
+<p>Full list of types and how they compute the validity window: <strong><a href="../VARIABLES/#batch-cycle-type--the-data-validity-window">Runtime variables ▸ Batch cycle type</a></strong>.</p>
+</blockquote>
+<h3 id="show-change-history">Show Change History<a class="headerlink" href="#show-change-history" title="Permanent link">&para;</a></h3>
+<p>Every time a workflow is saved, the server snapshots it. <strong>Show Change History</strong> opens a read-only grid of those versions for the selected job — newest first, up to the last 500 — with the description, platform, tags, comment, and who changed it and when.</p>
+<p><strong>Compare a version against the current job:</strong> right-click a version row ▸ <strong>Show Changes</strong>. This opens that historical version in a <strong>read-only Job editor</strong> whose canvas is <strong>color-coded against the current deployed job</strong>:</p>
+<ul>
+<li><strong>Unchanged</strong> steps/arrows render normally.</li>
+<li><strong>Changed</strong> steps are highlighted (amber).</li>
+<li><strong>Removed-since</strong> steps (in the old version, gone now) are marked (red); steps <strong>added since</strong> are listed in the status box.</li>
+<li><strong>Double-click any step</strong> in this compare view to see a <strong>side-by-side XML diff</strong> of that step — the exact fields that changed, with unchanged runs collapsed.</li>
+</ul>
+<p>Because it's opened read-only, comparing takes <strong>no lock</strong> on the workflow and can't save, deploy, or run it.</p>
+<blockquote>
+<p><strong>Caveat:</strong> a few rows have no stored snapshot — a job's very first save, deletions, and any run where the backup didn't complete. Those rows show a "no snapshot for this version" message instead of a comparison.</p>
+</blockquote>
 <h2 id="the-job-editor--designing-the-dag">The Job editor — designing the DAG<a class="headerlink" href="#the-job-editor--designing-the-dag" title="Permanent link">&para;</a></h2>
 <p><strong>Edit Workflow</strong> (or double-clicking a workflow) opens the editor. Layout:</p>
 <ul>
@@ -1465,6 +1557,7 @@
 <p>Add a step either by picking it from the left <strong>step palette</strong> (type in the <strong>Search</strong> box to filter) or by <strong>right-clicking the canvas</strong> and choosing <strong>Insert Step ▸</strong> <em>type</em> — it drops at the click point (the same menu also offers <strong>Paste</strong>). Step types are grouped by purpose (sources/loaders, transforms, SQL, control, platform-specific, …). <strong>Double-click a step</strong> to open its configuration dialog, where you set its inputs, outputs, and column expressions.</p>
 <blockquote>
 <p>For what each step type does, its dialog, and its options, see the <strong><a href="../UG-STEPS/">Step reference</a></strong>.</p>
+<p><strong>Bulk-generate a pipeline (Redshift).</strong> On a <strong>REDSHIFT</strong> job, the canvas right-click menu also has a <strong>Generate Pipeline</strong> submenu that builds whole multi-step pipelines for a list of tables at once — <em>Export Jdbc To S3 Parquet</em> and <em>Import S3 Parquet To Redshift</em> — instead of wiring each step by hand. See <strong><a href="../PARQUET-TO-REDSHIFT/">Parquet ⇄ Redshift pipelines</a></strong>.</p>
 </blockquote>
 <h3 id="connecting-steps">Connecting steps<a class="headerlink" href="#connecting-steps" title="Permanent link">&para;</a></h3>
 <p>Drag from one step to the next to draw an <strong>arrow</strong>. Arrows define the execution order and the success/failure branches of the DAG. Steps that hit the database use the <strong>platform connection</strong> bound at job creation; file steps use your <a href="../UG-ADMIN/#ssh-connections">SSH</a> / <a href="../UG-ADMIN/#general--cloud-connections-s3">cloud</a> connections.</p>
