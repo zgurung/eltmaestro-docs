@@ -1530,6 +1530,7 @@
 </blockquote>
 <h3 id="show-change-history">Show Change History<a class="headerlink" href="#show-change-history" title="Permanent link">&para;</a></h3>
 <p>Every time a workflow is saved, the server snapshots it. <strong>Show Change History</strong> opens a read-only grid of those versions for the selected job — newest first, up to the last 500 — with the description, platform, tags, comment, and who changed it and when.</p>
+<p><img alt="The Change History window for job S32RS_I — a read-only grid of saved versions (newest first, &quot;9 version(s), newest first, last 500&quot;), with columns for Version, Job Name, Job Type, Description, Platform, Lock ID, Comment, and Created By" src="../images/change-history-window.png" /></p>
 <p><strong>Compare a version against the current job:</strong> right-click a version row ▸ <strong>Show Changes</strong>. This opens that historical version in a <strong>read-only Job editor</strong> whose canvas is <strong>color-coded against the current deployed job</strong>:</p>
 <ul>
 <li><strong>Unchanged</strong> steps/arrows render normally.</li>
@@ -1537,7 +1538,9 @@
 <li><strong>Removed-since</strong> steps (in the old version, gone now) are marked (red); steps <strong>added since</strong> are listed in the status box.</li>
 <li><strong>Double-click any step</strong> in this compare view to see a <strong>side-by-side XML diff</strong> of that step — the exact fields that changed, with unchanged runs collapsed.</li>
 </ul>
+<p><img alt="Compare (read-only) view — the title bar reads &quot;Compare (read-only): S32RS_I [changed 2, removed 0, added 0]&quot;; the canvas shows a COPYINTORS → product_photo_s3 pipeline with both steps highlighted amber (changed), and the status pane spells out the legend (GREEN unchanged, AMBER changed, RED removed-since) and a summary &quot;0 unchanged, 2 changed, 0 removed, 0 added since&quot;" src="../images/change-history-compare-canvas.png" /></p>
 <p>Because it's opened read-only, comparing takes <strong>no lock</strong> on the workflow and can't save, deploy, or run it.</p>
+<p><img alt="The per-step XML Changes window for the productphoto_s3 TABLE step — Historical on the left, Current on the right, with changed lines highlighted: stepName product_photo_s3 → product_photo_s4, table product_photo_s3 → product_photo_s4, and isTruncate False → True" src="../images/change-history-step-xmldiff.png" /></p>
 <blockquote>
 <p><strong>Caveat:</strong> a few rows have no stored snapshot — a job's very first save, deletions, and any run where the backup didn't complete. Those rows show a "no snapshot for this version" message instead of a comparison.</p>
 </blockquote>
