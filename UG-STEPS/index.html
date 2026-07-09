@@ -584,6 +584,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Jdbcsource">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#incremental-extract-with-the-data-validity-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Incremental extract with the data-validity variables
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1626,6 +1641,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Jdbcsource">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#incremental-extract-with-the-data-validity-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Incremental extract with the data-validity variables
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -2103,6 +2133,85 @@
 <li><strong>Read Uncommitted</strong> — when checked, the extract runs its <code>SELECT</code> at the <strong>READ UNCOMMITTED</strong> isolation level (the session-level equivalent of SQL Server's <code>WITH (NOLOCK)</code>) so it neither blocks, nor is blocked by, writers on the source. On by default for new steps — the default is set org-wide by the <strong><code>onstage_read_uncommitted</code></strong> <a href="../UG-ADMIN/#system">System Setting</a>. It is applied only where the source database supports it (e.g. SQL Server, MySQL, DB2) and safely skipped where it doesn't (e.g. Oracle).</li>
 </ul>
 <p><img alt="Jdbcsource — Performance &amp; Quality tab: formats, Standardize Data, and the base64 Encode column list" src="../images/step-jdbcsource-quality.png" /></p>
+<h5 id="incremental-extract-with-the-data-validity-variables">Incremental extract with the data-validity variables<a class="headerlink" href="#incremental-extract-with-the-data-validity-variables" title="Permanent link">&para;</a></h5>
+<p>Instead of the <a href="#jdbc-target-redshift">Delta Watermark</a> (which drives incrementals off the <em>target's</em> <code>MAX(column)</code>), you can extract <strong>fixed calendar windows</strong> using the batch <strong>data-validity</strong> runtime variables. Set the workflow's batch cycle type to the cadence you want — e.g. <strong><code>DAILY</code></strong> — via <strong>right-click ▸ Action(s) ▸ <a href="../UG-WORKFLOWS/#change-batch-cycle-type">Change Batch Cycle Type</a></strong> (without it the job runs as <code>ONREQ</code>, a 5-minute window). Then filter on a modified-date column in the <strong>Source SQL</strong>.</p>
+<p>Three variables are set once per run (<a href="../VARIABLES/#batch-cycle-type--the-data-validity-window">full reference</a>):</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Role in the window</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$BATCH_END_DATA_VALIDITY_TIMESTAMP</code></td>
+<td><strong>lower</strong> bound (inclusive) — the start of the slice this run loads</td>
+</tr>
+<tr>
+<td><code>$BATCH_START_DATA_VALIDITY_TIMESTAMP</code></td>
+<td><strong>exclusive upper</strong> bound — the start of the current in-progress period (<code>.000</code>)</td>
+</tr>
+<tr>
+<td><code>$BATCH_DATA_VALIDITY_PERIOD</code></td>
+<td>end of the last complete period (<code>.999</code>) = <code>START − 1ms</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Note the naming: the variable called <code>…END…</code> is the <strong>start</strong> of the slice, and <code>…START…</code> is the <em>next</em> period's start, used as the <strong>exclusive upper</strong> bound. This half-open <code>[END … START)</code> form uses only <code>.000</code> timestamps, which avoids the SQL Server <code>datetime</code> rounding gotcha below.</p>
+</blockquote>
+<p><strong>Source SQL (SQL Server):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">SELECT</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">      </span><span class="p">[</span><span class="n">OrderID</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">CustomerID</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">OrderStatus</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">OrderAmount</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">LAST_MODIFIED_DATE</span><span class="p">]</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">FROM</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">Orders</span><span class="p">]</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">WHERE</span><span class="w"> </span><span class="p">[</span><span class="n">LAST_MODIFIED_DATE</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="s1">&#39;$BATCH_END_DATA_VALIDITY_TIMESTAMP&#39;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="p">[</span><span class="n">LAST_MODIFIED_DATE</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="s1">&#39;$BATCH_START_DATA_VALIDITY_TIMESTAMP&#39;</span>
+</code></pre></div></p>
+<p><strong>How it works — sample variable values across runs (DAILY):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Run day</th>
+<th><code>$BATCH_END_DATA_VALIDITY_TIMESTAMP</code> (≥)</th>
+<th><code>$BATCH_START_DATA_VALIDITY_TIMESTAMP</code> (&lt;)</th>
+<th><code>$BATCH_DATA_VALIDITY_PERIOD</code></th>
+<th>Rows pulled</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>First run</strong> (Jul 9)</td>
+<td><code>1990-01-01 23:59:59.999</code> <em>(sentinel)</em></td>
+<td><code>2026-07-09 00:00:00.000</code></td>
+<td><code>2026-07-08 23:59:59.999</code></td>
+<td>everything through Jul 8 <em>(full backfill)</em></td>
+</tr>
+<tr>
+<td>Jul 10</td>
+<td><code>2026-07-09 00:00:00.000</code></td>
+<td><code>2026-07-10 00:00:00.000</code></td>
+<td><code>2026-07-09 23:59:59.999</code></td>
+<td>all of Jul 9</td>
+</tr>
+<tr>
+<td>Jul 11</td>
+<td><code>2026-07-10 00:00:00.000</code></td>
+<td><code>2026-07-11 00:00:00.000</code></td>
+<td><code>2026-07-10 23:59:59.999</code></td>
+<td>all of Jul 10</td>
+</tr>
+</tbody>
+</table>
+<p>The Jul 10 run resolves to:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">WHERE</span><span class="w"> </span><span class="p">[</span><span class="n">LAST_MODIFIED_DATE</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="s1">&#39;2026-07-09 00:00:00.000&#39;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="p">[</span><span class="n">LAST_MODIFIED_DATE</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="s1">&#39;2026-07-10 00:00:00.000&#39;</span>
+</code></pre></div>
+After each run the engine stores that run's <code>PERIOD</code> (<code>…23:59:59.999</code>) as its watermark; the next run's <code>END</code> = that <code>+ 1ms</code> = the next day's <code>00:00:00.000</code>. So one day ends at <code>…23:59:59.999</code> and the next begins at <code>…00:00:00.000</code> — <strong>1 ms apart, no gap and no overlap</strong>. The first run's <code>END</code> is the <code>1990</code> sentinel, so it backfills everything up to yesterday. Change <code>DAILY</code> to any other <a href="../VARIABLES/#batch-cycle-type--the-data-validity-window">batch cycle type</a> (<code>HOUR</code>, <code>WEEK</code>, <code>MONTH</code>, …) and the same query slices by that grain.</p>
+<p><strong>SQL Server notes:</strong>
+- <strong>Half-open vs <code>BETWEEN</code>.</strong> If <code>LAST_MODIFIED_DATE</code> is the legacy <strong><code>datetime</code></strong> type, SQL Server rounds sub-second values to 1/300 s, so the <code>.999</code> <code>PERIOD</code> literal rounds <strong>up to the next day's <code>00:00:00</code></strong> and would double-count the boundary. The <code>≥ END … &lt; START</code> form uses only <code>.000</code> bounds, avoiding this. Use <code>BETWEEN '$BATCH_END_DATA_VALIDITY_TIMESTAMP' AND '$BATCH_DATA_VALIDITY_PERIOD'</code> <strong>only</strong> for exact-precision columns (<code>datetime2</code> / <code>date</code>).
+- <strong>Read Uncommitted.</strong> Enable the step's <strong>Read Uncommitted</strong> option (above) — session <code>READ UNCOMMITTED</code> — or add <code>WITH (NOLOCK)</code> after <code>[dbo].[Orders]</code>. Do one, not both.
+- <strong>Quotes.</strong> The engine substitutes the raw timestamp text, so wrap each variable in single quotes to form valid <code>datetime</code> literals; use <code>[schema].[table]</code> bracket quoting for identifiers.</p>
 <h4 id="onstagegroup">Onstagegroup<a class="headerlink" href="#onstagegroup" title="Permanent link">&para;</a></h4>
 <p><strong>Type</strong> <code>ONSTAGEGROUP</code> · <em>"Onstage Schema Loader"</em> · platform-specific class/dialog:</p>
 <table>
@@ -2145,7 +2254,7 @@
 <p><strong>Caveat:</strong> a source <strong>table whose name contains special characters will not load</strong>.</p>
 </blockquote>
 <p><strong>SparkSQL variant — "Onstage Schema Loader for Spark".</strong> On SparkSQL the <strong>target is an HDFS folder</strong>, not a database schema. Pre-create the destination directory on HDFS, e.g.:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>hdfs dfs -mkdir -p /ingest/adventureworks/hr
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>hdfs dfs -mkdir -p /ingest/adventureworks/hr
 </code></pre></div>
 <p>Then on the <strong>Schema</strong> tab the <strong>Target</strong> group shows <strong>Catalog = none</strong> (disabled) and a <strong>Folder</strong> field — click <strong>Browse</strong> to pick that directory from the HDFS tree (browsed over the Spark driver connection, e.g. <code>ELTM_SPARK_DRIVER</code>). The <strong>Source</strong> group and the <strong>Table(s)</strong> tab work the same as the other platforms. <strong>Load Configurations</strong>: Initial Load Partitions · Initial Load Threads · Run Count Metrics.</p>
 <p><img alt="Onstage Schema Loader for Spark — Schema tab: Source schema + HDFS Folder target + Load Configurations" src="../images/step-onstagegroup-spark-schema.png" /></p>
