@@ -2212,6 +2212,80 @@ After each run the engine stores that run's <code>PERIOD</code> (<code>…23:59:
 - <strong>Half-open vs <code>BETWEEN</code>.</strong> If <code>LAST_MODIFIED_DATE</code> is the legacy <strong><code>datetime</code></strong> type, SQL Server rounds sub-second values to 1/300 s, so the <code>.999</code> <code>PERIOD</code> literal rounds <strong>up to the next day's <code>00:00:00</code></strong> and would double-count the boundary. The <code>≥ END … &lt; START</code> form uses only <code>.000</code> bounds, avoiding this. Use <code>BETWEEN '$BATCH_END_DATA_VALIDITY_TIMESTAMP' AND '$BATCH_DATA_VALIDITY_PERIOD'</code> <strong>only</strong> for exact-precision columns (<code>datetime2</code> / <code>date</code>).
 - <strong>Read Uncommitted.</strong> Enable the step's <strong>Read Uncommitted</strong> option (above) — session <code>READ UNCOMMITTED</code> — or add <code>WITH (NOLOCK)</code> after <code>[dbo].[Orders]</code>. Do one, not both.
 - <strong>Quotes.</strong> The engine substitutes the raw timestamp text, so wrap each variable in single quotes to form valid <code>datetime</code> literals; use <code>[schema].[table]</code> bracket quoting for identifiers.</p>
+<p><strong>Other source databases.</strong> The window logic is identical on every JDBC source — the engine substitutes the same <code>YYYY-MM-DD HH:MM:SS.mmm</code> text into whatever SQL you write. Only three things change per dialect: <strong>identifier quoting</strong>, whether the string literal needs an <strong>explicit cast</strong> to a timestamp, and whether <strong>Read Uncommitted</strong> applies. Below is the same DAILY half-open window (<code>≥ END … &lt; START</code>) for the common sources.</p>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Timestamp literal</th>
+<th>Identifier quoting</th>
+<th>Read Uncommitted</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PostgreSQL / Redshift</strong></td>
+<td>implicit cast; add <code>::timestamp</code> if the column is <code>timestamptz</code></td>
+<td><code>"schema"."table"</code> (double quotes, optional)</td>
+<td>no-op — MVCC, leave off</td>
+</tr>
+<tr>
+<td><strong>MySQL / MariaDB</strong></td>
+<td>implicit cast</td>
+<td><code>`schema`.`table`</code> (backticks)</td>
+<td>supported</td>
+</tr>
+<tr>
+<td><strong>Oracle</strong></td>
+<td><strong>explicit</strong> <code>TO_TIMESTAMP(…, 'YYYY-MM-DD HH24:MI:SS.FF3')</code></td>
+<td><code>SCHEMA.TABLE</code> (uppercase)</td>
+<td>not supported — engine skips it (Oracle is MVCC)</td>
+</tr>
+<tr>
+<td><strong>Snowflake</strong></td>
+<td>implicit; <code>::timestamp_ntz</code> pins no-timezone</td>
+<td>unquoted folds to UPPERCASE; <code>"…"</code> only if created case-sensitive</td>
+<td>n/a — READ COMMITTED only</td>
+</tr>
+<tr>
+<td><strong>ClickHouse</strong></td>
+<td><code>toDateTime64(…, 3)</code> for millisecond grain</td>
+<td><code>`db`.`table`</code> (backticks)</td>
+<td>n/a</td>
+</tr>
+</tbody>
+</table>
+<p><strong>PostgreSQL / Redshift</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">order_id</span><span class="p">,</span><span class="w"> </span><span class="n">customer_id</span><span class="p">,</span><span class="w"> </span><span class="n">order_status</span><span class="p">,</span><span class="w"> </span><span class="n">order_amount</span><span class="p">,</span><span class="w"> </span><span class="n">last_modified_date</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">sales</span><span class="p">.</span><span class="n">orders</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">last_modified_date</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="s1">&#39;$BATCH_END_DATA_VALIDITY_TIMESTAMP&#39;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">last_modified_date</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="s1">&#39;$BATCH_START_DATA_VALIDITY_TIMESTAMP&#39;</span>
+</code></pre></div></p>
+<p><strong>MySQL / MariaDB</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">`</span><span class="n">order_id</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">customer_id</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">order_status</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">order_amount</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">last_modified_date</span><span class="o">`</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">sales</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">orders</span><span class="o">`</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="o">`</span><span class="n">last_modified_date</span><span class="o">`</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="s1">&#39;$BATCH_END_DATA_VALIDITY_TIMESTAMP&#39;</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="o">`</span><span class="n">last_modified_date</span><span class="o">`</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="s1">&#39;$BATCH_START_DATA_VALIDITY_TIMESTAMP&#39;</span>
+</code></pre></div></p>
+<p><strong>Oracle</strong> — Oracle will not implicitly convert the millisecond literal, so wrap each bound in <code>TO_TIMESTAMP</code>. This also works for a plain <code>DATE</code> column (Oracle promotes the <code>DATE</code> to <code>TIMESTAMP</code> for the comparison).
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">ORDER_ID</span><span class="p">,</span><span class="w"> </span><span class="n">CUSTOMER_ID</span><span class="p">,</span><span class="w"> </span><span class="n">ORDER_STATUS</span><span class="p">,</span><span class="w"> </span><span class="n">ORDER_AMOUNT</span><span class="p">,</span><span class="w"> </span><span class="n">LAST_MODIFIED_DATE</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">SALES</span><span class="p">.</span><span class="n">ORDERS</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">LAST_MODIFIED_DATE</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">TO_TIMESTAMP</span><span class="p">(</span><span class="s1">&#39;$BATCH_END_DATA_VALIDITY_TIMESTAMP&#39;</span><span class="p">,</span><span class="w">   </span><span class="s1">&#39;YYYY-MM-DD HH24:MI:SS.FF3&#39;</span><span class="p">)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">LAST_MODIFIED_DATE</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="n">TO_TIMESTAMP</span><span class="p">(</span><span class="s1">&#39;$BATCH_START_DATA_VALIDITY_TIMESTAMP&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;YYYY-MM-DD HH24:MI:SS.FF3&#39;</span><span class="p">)</span>
+</code></pre></div></p>
+<p><strong>Snowflake</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">order_id</span><span class="p">,</span><span class="w"> </span><span class="n">customer_id</span><span class="p">,</span><span class="w"> </span><span class="n">order_status</span><span class="p">,</span><span class="w"> </span><span class="n">order_amount</span><span class="p">,</span><span class="w"> </span><span class="n">last_modified_date</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">sales</span><span class="p">.</span><span class="n">orders</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">last_modified_date</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="s1">&#39;$BATCH_END_DATA_VALIDITY_TIMESTAMP&#39;</span><span class="p">::</span><span class="n">timestamp_ntz</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">last_modified_date</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="s1">&#39;$BATCH_START_DATA_VALIDITY_TIMESTAMP&#39;</span><span class="p">::</span><span class="n">timestamp_ntz</span>
+</code></pre></div></p>
+<p><strong>ClickHouse</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">order_id</span><span class="p">,</span><span class="w"> </span><span class="n">customer_id</span><span class="p">,</span><span class="w"> </span><span class="n">order_status</span><span class="p">,</span><span class="w"> </span><span class="n">order_amount</span><span class="p">,</span><span class="w"> </span><span class="n">last_modified_date</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">sales</span><span class="p">.</span><span class="n">orders</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">last_modified_date</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">toDateTime64</span><span class="p">(</span><span class="s1">&#39;$BATCH_END_DATA_VALIDITY_TIMESTAMP&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">last_modified_date</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="n">toDateTime64</span><span class="p">(</span><span class="s1">&#39;$BATCH_START_DATA_VALIDITY_TIMESTAMP&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+</code></pre></div></p>
+<p>The sample-values table above (First run → Jul 10 → Jul 11) applies unchanged to every dialect; substitute your own schema, table, and modified-date column. For an inclusive <code>BETWEEN … '$BATCH_DATA_VALIDITY_PERIOD'</code> form instead of half-open, the <code>.999</code> upper bound is only safe on exact-precision timestamp types (avoid it on SQL Server <code>datetime</code> and on MySQL <code>DATETIME(0)</code>, which round/truncate the fraction).</p>
 <h4 id="onstagegroup">Onstagegroup<a class="headerlink" href="#onstagegroup" title="Permanent link">&para;</a></h4>
 <p><strong>Type</strong> <code>ONSTAGEGROUP</code> · <em>"Onstage Schema Loader"</em> · platform-specific class/dialog:</p>
 <table>
@@ -2254,7 +2328,7 @@ After each run the engine stores that run's <code>PERIOD</code> (<code>…23:59:
 <p><strong>Caveat:</strong> a source <strong>table whose name contains special characters will not load</strong>.</p>
 </blockquote>
 <p><strong>SparkSQL variant — "Onstage Schema Loader for Spark".</strong> On SparkSQL the <strong>target is an HDFS folder</strong>, not a database schema. Pre-create the destination directory on HDFS, e.g.:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>hdfs dfs -mkdir -p /ingest/adventureworks/hr
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>hdfs dfs -mkdir -p /ingest/adventureworks/hr
 </code></pre></div>
 <p>Then on the <strong>Schema</strong> tab the <strong>Target</strong> group shows <strong>Catalog = none</strong> (disabled) and a <strong>Folder</strong> field — click <strong>Browse</strong> to pick that directory from the HDFS tree (browsed over the Spark driver connection, e.g. <code>ELTM_SPARK_DRIVER</code>). The <strong>Source</strong> group and the <strong>Table(s)</strong> tab work the same as the other platforms. <strong>Load Configurations</strong>: Initial Load Partitions · Initial Load Threads · Run Count Metrics.</p>
 <p><img alt="Onstage Schema Loader for Spark — Schema tab: Source schema + HDFS Folder target + Load Configurations" src="../images/step-onstagegroup-spark-schema.png" /></p>
