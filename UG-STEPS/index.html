@@ -2145,11 +2145,11 @@
 </thead>
 <tbody>
 <tr>
-<td><code>$BATCH_END_DATA_VALIDITY_TIMESTAMP</code></td>
+<td><code>$BATCH_START_DATA_VALIDITY_TIMESTAMP</code></td>
 <td><strong>lower</strong> bound (inclusive) — the start of the slice this run loads</td>
 </tr>
 <tr>
-<td><code>$BATCH_START_DATA_VALIDITY_TIMESTAMP</code></td>
+<td><code>$BATCH_END_DATA_VALIDITY_TIMESTAMP</code></td>
 <td><strong>exclusive upper</strong> bound — the start of the current in-progress period (<code>.000</code>)</td>
 </tr>
 <tr>
@@ -2159,22 +2159,22 @@
 </tbody>
 </table>
 <blockquote>
-<p>Note the naming: the variable called <code>…END…</code> is the <strong>start</strong> of the slice, and <code>…START…</code> is the <em>next</em> period's start, used as the <strong>exclusive upper</strong> bound. This half-open <code>[END … START)</code> form uses only <code>.000</code> timestamps, which avoids the SQL Server <code>datetime</code> rounding gotcha below.</p>
+<p>Note: <code>START</code> is the lower bound (slice start) and <code>END</code> is the upper bound (slice limit). This half-open <code>[START … END)</code> form uses only <code>.000</code> timestamps, which avoids the SQL Server <code>datetime</code> rounding gotcha below.</p>
 </blockquote>
 <p><strong>Source SQL (SQL Server):</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">SELECT</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">      </span><span class="p">[</span><span class="n">OrderID</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">CustomerID</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">OrderStatus</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">OrderAmount</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">LAST_MODIFIED_DATE</span><span class="p">]</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">FROM</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">Orders</span><span class="p">]</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">WHERE</span><span class="w"> </span><span class="p">[</span><span class="n">LAST_MODIFIED_DATE</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="s1">&#39;$BATCH_END_DATA_VALIDITY_TIMESTAMP&#39;</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="p">[</span><span class="n">LAST_MODIFIED_DATE</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="s1">&#39;$BATCH_START_DATA_VALIDITY_TIMESTAMP&#39;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">WHERE</span><span class="w"> </span><span class="p">[</span><span class="n">LAST_MODIFIED_DATE</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="s1">&#39;$BATCH_START_DATA_VALIDITY_TIMESTAMP&#39;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="p">[</span><span class="n">LAST_MODIFIED_DATE</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="s1">&#39;$BATCH_END_DATA_VALIDITY_TIMESTAMP&#39;</span>
 </code></pre></div></p>
 <p><strong>How it works — sample variable values across runs (DAILY):</strong></p>
 <table>
 <thead>
 <tr>
 <th>Run day</th>
-<th><code>$BATCH_END_DATA_VALIDITY_TIMESTAMP</code> (≥)</th>
-<th><code>$BATCH_START_DATA_VALIDITY_TIMESTAMP</code> (&lt;)</th>
+<th><code>$BATCH_START_DATA_VALIDITY_TIMESTAMP</code> (≥)</th>
+<th><code>$BATCH_END_DATA_VALIDITY_TIMESTAMP</code> (&lt;)</th>
 <th><code>$BATCH_DATA_VALIDITY_PERIOD</code></th>
 <th>Rows pulled</th>
 </tr>
@@ -2207,6 +2207,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">WHERE</span><span class="w"> </span><span class="p">[</span><span class="n">LAST_MODIFIED_DATE</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="s1">&#39;2026-07-09 00:00:00.000&#39;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="p">[</span><span class="n">LAST_MODIFIED_DATE</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="s1">&#39;2026-07-10 00:00:00.000&#39;</span>
 </code></pre></div>
+(START = <code>2026-07-09 00:00:00.000</code>, END = <code>2026-07-10 00:00:00.000</code>)
 After each run the engine stores that run's <code>PERIOD</code> (<code>…23:59:59.999</code>) as its watermark; the next run's <code>END</code> = that <code>+ 1ms</code> = the next day's <code>00:00:00.000</code>. So one day ends at <code>…23:59:59.999</code> and the next begins at <code>…00:00:00.000</code> — <strong>1 ms apart, no gap and no overlap</strong>. The first run's <code>END</code> is the <code>1990</code> sentinel, so it backfills everything up to yesterday. Change <code>DAILY</code> to any other <a href="../VARIABLES/#batch-cycle-type--the-data-validity-window">batch cycle type</a> (<code>HOUR</code>, <code>WEEK</code>, <code>MONTH</code>, …) and the same query slices by that grain.</p>
 <p><strong>SQL Server notes:</strong>
 - <strong>Half-open vs <code>BETWEEN</code>.</strong> If <code>LAST_MODIFIED_DATE</code> is the legacy <strong><code>datetime</code></strong> type, SQL Server rounds sub-second values to 1/300 s, so the <code>.999</code> <code>PERIOD</code> literal rounds <strong>up to the next day's <code>00:00:00</code></strong> and would double-count the boundary. The <code>≥ END … &lt; START</code> form uses only <code>.000</code> bounds, avoiding this. Use <code>BETWEEN '$BATCH_END_DATA_VALIDITY_TIMESTAMP' AND '$BATCH_DATA_VALIDITY_PERIOD'</code> <strong>only</strong> for exact-precision columns (<code>datetime2</code> / <code>date</code>).
@@ -2258,8 +2259,8 @@ After each run the engine stores that run's <code>PERIOD</code> (<code>…23:59:
 <p><strong>PostgreSQL / Redshift</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">order_id</span><span class="p">,</span><span class="w"> </span><span class="n">customer_id</span><span class="p">,</span><span class="w"> </span><span class="n">order_status</span><span class="p">,</span><span class="w"> </span><span class="n">order_amount</span><span class="p">,</span><span class="w"> </span><span class="n">last_modified_date</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">sales</span><span class="p">.</span><span class="n">orders</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">last_modified_date</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="s1">&#39;$BATCH_END_DATA_VALIDITY_TIMESTAMP&#39;</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">last_modified_date</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="s1">&#39;$BATCH_START_DATA_VALIDITY_TIMESTAMP&#39;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">last_modified_date</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="s1">&#39;$BATCH_START_DATA_VALIDITY_TIMESTAMP&#39;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">last_modified_date</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="s1">&#39;$BATCH_END_DATA_VALIDITY_TIMESTAMP&#39;</span>
 </code></pre></div></p>
 <p><strong>MySQL / MariaDB</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">`</span><span class="n">order_id</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">customer_id</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">order_status</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">order_amount</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">last_modified_date</span><span class="o">`</span>
