@@ -2209,6 +2209,32 @@
 </code></pre></div>
 (START = <code>2026-07-09 00:00:00.000</code>, END = <code>2026-07-10 00:00:00.000</code>)
 After each run the engine stores that run's <code>PERIOD</code> (<code>…23:59:59.999</code>) as its watermark; the next run's <code>START</code> = that <code>+ 1ms</code> = the next day's <code>00:00:00.000</code>. So one day ends at <code>…23:59:59.999</code> and the next begins at <code>…00:00:00.000</code> — <strong>1 ms apart, no gap and no overlap</strong>. The first run's <code>START</code> is the <code>1990</code> sentinel, so it backfills everything up to yesterday. Change <code>DAILY</code> to any other <a href="../VARIABLES/#batch-cycle-type--the-data-validity-window">batch cycle type</a> (<code>HOUR</code>, <code>WEEK</code>, <code>MONTH</code>, …) and the same query slices by that grain.</p>
+<p><strong>Default <code>ONREQ</code> (5-minute window) — a real two-run example.</strong> With no batch cycle type set, a workflow runs as <code>ONREQ</code>, a rolling <strong>5-minute</strong> window. Two consecutive runs five minutes apart tile exactly the same way:</p>
+<table>
+<thead>
+<tr>
+<th>Run</th>
+<th><code>$BATCH_START_DATA_VALIDITY_TIMESTAMP</code> (≥)</th>
+<th><code>$BATCH_END_DATA_VALIDITY_TIMESTAMP</code> (&lt;)</th>
+<th><code>$BATCH_DATA_VALIDITY_PERIOD</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>First run</strong> (15:05)</td>
+<td><code>1990-01-01 23:59:59.999</code> <em>(sentinel)</em></td>
+<td><code>2026-07-10 15:05:00.000</code></td>
+<td><code>2026-07-10 15:04:59.999</code></td>
+</tr>
+<tr>
+<td>Next run (15:10)</td>
+<td><code>2026-07-10 15:05:00.000</code></td>
+<td><code>2026-07-10 15:10:00.000</code></td>
+<td><code>2026-07-10 15:09:59.999</code></td>
+</tr>
+</tbody>
+</table>
+<p>The first run backfills everything up to the current 5-minute boundary; the next run resumes exactly where it left off (<code>15:04:59.999</code> → <code>15:05:00.000</code>, 1 ms apart). Every batch cycle type behaves identically — only the window length changes.</p>
 <p><strong>SQL Server notes:</strong>
 - <strong>Half-open vs <code>BETWEEN</code>.</strong> If <code>LAST_MODIFIED_DATE</code> is the legacy <strong><code>datetime</code></strong> type, SQL Server rounds sub-second values to 1/300 s, so the <code>.999</code> <code>PERIOD</code> literal rounds <strong>up to the next day's <code>00:00:00</code></strong> and would double-count the boundary. The <code>≥ START … &lt; END</code> form uses only <code>.000</code> bounds, avoiding this. Use <code>BETWEEN '$BATCH_START_DATA_VALIDITY_TIMESTAMP' AND '$BATCH_DATA_VALIDITY_PERIOD'</code> <strong>only</strong> for exact-precision columns (<code>datetime2</code> / <code>date</code>).
 - <strong>Read Uncommitted.</strong> Enable the step's <strong>Read Uncommitted</strong> option (above) — session <code>READ UNCOMMITTED</code> — or add <code>WITH (NOLOCK)</code> after <code>[dbo].[Orders]</code>. Do one, not both.
