@@ -1225,10 +1225,11 @@
 on this page.</p>
 <p><strong>Current release line: <code>17.0.4</code></strong> (engine / server). The <code>-17.0.4</code> links below always
 point at the <strong>latest build of that line</strong> (refreshed on each publish). <strong>Refreshed
-2026-06-11 from build <code>17.0.4.367</code></strong> (<code>master-claude-base</code>), via a clean destructive
-rebuild + redeploy (WSDL verified live). This build adds the meta-service <strong>Jetty
-idle-timeout fix</strong> (large base64 SOAP responses no longer abort at 30 s) and the
-<strong>Redshift Corelli target measure-don't-estimate</strong> rewrite, and ships the Windows
+2026-07-15 from build <code>17.0.4.434</code></strong> (<code>master-claude-base</code>). This build folds in the
+<strong>getVarData concurrency fix</strong> (no crash on concurrent <code>SETVARIABLE</code>), <strong>multipart S3
+push</strong> (files &gt;5 GB no longer fail with EntityTooLarge), the <strong>long-running-batch reaper
+watchdog</strong>, and the <strong>Snowflake <code>closeOnCompletion</code> guard</strong> — on top of the prior Jetty
+idle-timeout and Redshift measure-don't-estimate work — and ships the Windows
 client <strong>2.5.1.20260708</strong> (a <strong>Change History / Show Changes</strong> job version viewer with a read-only compare-mode canvas + per-step XML diff; <strong>Change Batch Cycle Type</strong> from the job right-click menu; a redesigned <strong>Manage Control Tests</strong> window — searchable grid with a separate editor; Redshift <strong>pipeline generators</strong> — bulk <em>Export Jdbc To S3 Parquet</em> and <em>Import S3 Parquet To Redshift</em> canvas wizards that build whole <code>JDBCSOURCE→Parquet→S3</code> and <code>COPY→table</code> pipelines per selected table, with per-run S3-folder <strong>dedupe</strong> via step watermarks, optional first-column <strong>upsert</strong>, and a migratable <code>$SYSTEM_DEFAULT_DATABASE</code> target; a <strong>Read Uncommitted</strong> control for JDBC sources (per-step checkbox + a <code>onstage_read_uncommitted</code> System Setting — SQL Server extracts read at READ UNCOMMITTED); plus the prior 2.5.1 async JDBC test, Change Password dialog, canvas drag fix, and smooth scrolling).</p>
 <table>
 <thead>
@@ -1244,15 +1245,15 @@ client <strong>2.5.1.20260708</strong> (a <strong>Change History / Show Changes<
 <tr>
 <td><strong>Docker image</strong></td>
 <td><a href="https://eltmaestro.s3.amazonaws.com/docker/eltmaestro-17.0.4.tar.gz">https://eltmaestro.s3.amazonaws.com/docker/eltmaestro-17.0.4.tar.gz</a></td>
-<td>~2.5 GB</td>
-<td><code>648265603d5b1e62ca726ba65d0b0dff</code></td>
+<td>~2.6 GB</td>
+<td><code>6513e25e5d9a0c9ec789c617c079e7df</code></td>
 <td>Run the full ELTMaestro server as a container.</td>
 </tr>
 <tr>
 <td><strong>Linux installer</strong> (portable)</td>
 <td><a href="https://eltmaestro.s3.amazonaws.com/docker/eltm-portable-17.0.4.tar.gz">https://eltmaestro.s3.amazonaws.com/docker/eltm-portable-17.0.4.tar.gz</a></td>
-<td>~690 MB</td>
-<td><code>67e7adcb3407b57926e1a7c398aab77d</code></td>
+<td>~720 MB</td>
+<td><code>93d4c9522e3e75a31eca51b0b95ea174</code></td>
 <td>Bare-metal install on RHEL / Debian / Ubuntu.</td>
 </tr>
 <tr>
@@ -1265,7 +1266,7 @@ client <strong>2.5.1.20260708</strong> (a <strong>Change History / Show Changes<
 </tbody>
 </table>
 <blockquote>
-<p>Checksums are for the <strong>current build</strong> (<code>17.0.4.367</code> server / <code>2.5.1.20260708</code> client). The rolling <code>-17.0.4</code> server objects change md5 on each publish; immutable per-build copies (<code>eltmaestro-17.0.4.367.tar.gz</code>, <code>eltm-portable-17.0.4.367.tar.gz</code>) are also on S3 with the same checksums.</p>
+<p>Checksums are for the <strong>current build</strong> (<code>17.0.4.434</code> server / <code>2.5.1.20260708</code> client). The rolling <code>-17.0.4</code> server objects change md5 on each publish; immutable per-build copies (<code>eltmaestro-17.0.4.434.tar.gz</code>, <code>eltm-portable-17.0.4.434.tar.gz</code>) are also on S3 with the same checksums.</p>
 </blockquote>
 <h2 id="what-to-do-with-each">What to do with each<a class="headerlink" href="#what-to-do-with-each" title="Permanent link">&para;</a></h2>
 <ul>
