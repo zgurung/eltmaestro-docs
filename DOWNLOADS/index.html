@@ -1230,7 +1230,7 @@ point at the <strong>latest build of that line</strong> (refreshed on each publi
 push</strong> (files &gt;5 GB no longer fail with EntityTooLarge), the <strong>long-running-batch reaper
 watchdog</strong>, and the <strong>Snowflake <code>closeOnCompletion</code> guard</strong> — on top of the prior Jetty
 idle-timeout and Redshift measure-don't-estimate work — and ships the Windows
-client <strong>2.5.1.20260715</strong> (a <strong>Set Job Metadata</strong> fix — the <strong>Config</strong> dialog now maps its fields correctly, so <em>Description</em> shows the job description instead of the job type and <strong>Apply</strong> no longer errors with <code>value too long for type character varying(64)</code>; Apply now confirms, closes, and refreshes the workflow list; plus a <strong>Change History / Show Changes</strong> job version viewer with a read-only compare-mode canvas + per-step XML diff; <strong>Change Batch Cycle Type</strong> from the job right-click menu; a redesigned <strong>Manage Control Tests</strong> window — searchable grid with a separate editor; Redshift <strong>pipeline generators</strong> — bulk <em>Export Jdbc To S3 Parquet</em> and <em>Import S3 Parquet To Redshift</em> canvas wizards that build whole <code>JDBCSOURCE→Parquet→S3</code> and <code>COPY→table</code> pipelines per selected table, with per-run S3-folder <strong>dedupe</strong> via step watermarks, optional first-column <strong>upsert</strong>, and a migratable <code>$SYSTEM_DEFAULT_DATABASE</code> target; a <strong>Read Uncommitted</strong> control for JDBC sources (per-step checkbox + a <code>onstage_read_uncommitted</code> System Setting — SQL Server extracts read at READ UNCOMMITTED); plus the prior 2.5.1 async JDBC test, Change Password dialog, canvas drag fix, and smooth scrolling).</p>
+client <strong>2.5.2.20260715</strong> (a <strong>canvas click-vs-drag fix</strong> — clicking a step on the editor canvas no longer nudges it out of place; a <strong>Set Job Metadata</strong> fix — the <strong>Config</strong> dialog now maps its fields correctly, so <em>Description</em> shows the job description instead of the job type and <strong>Apply</strong> no longer errors with <code>value too long for type character varying(64)</code>; Apply now confirms, closes, and refreshes the workflow list; plus a <strong>Change History / Show Changes</strong> job version viewer with a read-only compare-mode canvas + per-step XML diff; <strong>Change Batch Cycle Type</strong> from the job right-click menu; a redesigned <strong>Manage Control Tests</strong> window — searchable grid with a separate editor; Redshift <strong>pipeline generators</strong> — bulk <em>Export Jdbc To S3 Parquet</em> and <em>Import S3 Parquet To Redshift</em> canvas wizards that build whole <code>JDBCSOURCE→Parquet→S3</code> and <code>COPY→table</code> pipelines per selected table, with per-run S3-folder <strong>dedupe</strong> via step watermarks, optional first-column <strong>upsert</strong>, and a migratable <code>$SYSTEM_DEFAULT_DATABASE</code> target; a <strong>Read Uncommitted</strong> control for JDBC sources (per-step checkbox + a <code>onstage_read_uncommitted</code> System Setting — SQL Server extracts read at READ UNCOMMITTED); plus the prior 2.5.1 async JDBC test, Change Password dialog, canvas drag fix, and smooth scrolling).</p>
 <table>
 <thead>
 <tr>
@@ -1258,15 +1258,15 @@ client <strong>2.5.1.20260715</strong> (a <strong>Set Job Metadata</strong> fix 
 </tr>
 <tr>
 <td><strong>Windows desktop client</strong></td>
-<td><a href="https://eltmaestro.s3.amazonaws.com/docker/ELTMAESTRO-2.5.1.20260715-portable-win-x64.zip">https://eltmaestro.s3.amazonaws.com/docker/ELTMAESTRO-2.5.1.20260715-portable-win-x64.zip</a></td>
+<td><a href="https://eltmaestro.s3.amazonaws.com/docker/ELTMAESTRO-2.5.2.20260715-portable-win-x64.zip">https://eltmaestro.s3.amazonaws.com/docker/ELTMAESTRO-2.5.2.20260715-portable-win-x64.zip</a></td>
 <td>~80 MB</td>
-<td><code>8e36e49007e649eb4f79f4b30de85d13</code></td>
+<td><code>8fbf477473984fcfeec251ff3bf8bc99</code></td>
 <td>The desktop client used to connect to an ELTMaestro server. EV code-signed.</td>
 </tr>
 </tbody>
 </table>
 <blockquote>
-<p>Checksums are for the <strong>current build</strong> (<code>17.0.4.437</code> server / <code>2.5.1.20260715</code> client). The rolling <code>-17.0.4</code> server objects change md5 on each publish; immutable per-build copies (<code>eltmaestro-17.0.4.437.tar.gz</code>, <code>eltm-portable-17.0.4.437.tar.gz</code>) are also on S3 with the same checksums.</p>
+<p>Checksums are for the <strong>current build</strong> (<code>17.0.4.437</code> server / <code>2.5.2.20260715</code> client). The rolling <code>-17.0.4</code> server objects change md5 on each publish; immutable per-build copies (<code>eltmaestro-17.0.4.437.tar.gz</code>, <code>eltm-portable-17.0.4.437.tar.gz</code>) are also on S3 with the same checksums.</p>
 </blockquote>
 <h2 id="what-to-do-with-each">What to do with each<a class="headerlink" href="#what-to-do-with-each" title="Permanent link">&para;</a></h2>
 <ul>
