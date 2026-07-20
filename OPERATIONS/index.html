@@ -1756,19 +1756,9 @@
 <td>10000</td>
 <td>Hive Thrift (Spark HiveServer2)</td>
 </tr>
-<tr>
-<td>3443</td>
-<td>3443</td>
-<td>Audit-analytics HTTPS</td>
-</tr>
-<tr>
-<td>3080</td>
-<td>3080</td>
-<td>Audit-analytics HTTP</td>
-</tr>
 </tbody>
 </table>
-<p>The meta-service itself only binds <strong>8181</strong> (HTTPS only — there is no HTTP→HTTPS redirect). The other ports are bound by supervisord-managed sidecars (Spark, audit-analytics) and by postgres directly.</p>
+<p>The meta-service itself only binds <strong>8181</strong> (HTTPS only — there is no HTTP→HTTPS redirect). The other ports are bound by supervisord-managed sidecars (Spark) and by postgres directly.</p>
 <h2 id="common-admin-tasks">Common admin tasks<a class="headerlink" href="#common-admin-tasks" title="Permanent link">&para;</a></h2>
 <h3 id="reset-a-users-password">Reset a user's password<a class="headerlink" href="#reset-a-users-password" title="Permanent link">&para;</a></h3>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>mset-password-md5<span class="w"> </span>&lt;USER_ID_UPPERCASE&gt;<span class="w"> </span><span class="s1">&#39;&lt;new-password&gt;&#39;</span>
@@ -1942,7 +1932,7 @@ If either count is 0, reseed by re-running the canonical COPY blocks from <code>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># Inside the container (or bare-metal):</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>ps<span class="w"> </span>-ef<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;[j]ava.*maestro|[p]ostgres&#39;</span>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="c1"># Host-side listener check (matches the Jenkinsfile port table):</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>ss<span class="w"> </span>-lntp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;:(8181|9080|5432|7077|10000|3443|3080)&#39;</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>ss<span class="w"> </span>-lntp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;:(8181|9080|5432|7077|10000)&#39;</span>
 </code></pre></div>
 <h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
 <h3 id="installsh-fails-with-jq-not-on-path"><code>install.sh</code> fails with <code>'jq' not on PATH</code><a class="headerlink" href="#installsh-fails-with-jq-not-on-path" title="Permanent link">&para;</a></h3>
