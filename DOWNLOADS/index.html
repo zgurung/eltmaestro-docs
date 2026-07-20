@@ -1228,7 +1228,8 @@ point at the <strong>latest build of that line</strong> (refreshed on each publi
 2026-07-20 from build <code>17.0.4.441</code></strong> (<code>master-claude-base</code>). This build adds <strong>Snowflake
 query attribution</strong> — every Snowflake session the engine opens is tagged with the batch
 name, batch id and run number, so queries can be traced back to the batch that issued them
-from <code>QUERY_HISTORY</code> (see <strong>Snowflake setup</strong>).
+via <code>select parse_json(query_tag):batchName …</code> against Snowflake's <code>QUERY_HISTORY</code>. No
+configuration needed; credentials are never included in the tag.
 It also carries the <strong>Salesforce <code>SFSOURCE</code></strong> extractor (rolling-window delta, always-on
 deleted-record flag, and a Bulk API 2.0 fast path), on top of a server-side <strong>Job Metadata</strong>
 fix (editing a job's description/tags no longer leaves it locked to your session), the
