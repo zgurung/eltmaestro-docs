@@ -1225,7 +1225,13 @@
 on this page.</p>
 <p><strong>Current release line: <code>17.0.4</code></strong> (engine / server). The <code>-17.0.4</code> links below always
 point at the <strong>latest build of that line</strong> (refreshed on each publish). <strong>Refreshed
-2026-07-15 from build <code>17.0.4.437</code></strong> (<code>master-claude-base</code>). This build folds in a server-side <strong>Job Metadata</strong> fix (editing a job's description/tags no longer leaves it locked to your session), the
+2026-07-20 from build <code>17.0.4.441</code></strong> (<code>master-claude-base</code>). This build adds <strong>Snowflake
+query attribution</strong> — every Snowflake session the engine opens is tagged with the batch
+name, batch id and run number, so queries can be traced back to the batch that issued them
+from <code>QUERY_HISTORY</code> (see <strong>Snowflake setup</strong>).
+It also carries the <strong>Salesforce <code>SFSOURCE</code></strong> extractor (rolling-window delta, always-on
+deleted-record flag, and a Bulk API 2.0 fast path), on top of a server-side <strong>Job Metadata</strong>
+fix (editing a job's description/tags no longer leaves it locked to your session), the
 <strong>getVarData concurrency fix</strong> (no crash on concurrent <code>SETVARIABLE</code>), <strong>multipart S3
 push</strong> (files &gt;5 GB no longer fail with EntityTooLarge), the <strong>long-running-batch reaper
 watchdog</strong>, and the <strong>Snowflake <code>closeOnCompletion</code> guard</strong> — on top of the prior Jetty
@@ -1246,14 +1252,14 @@ client <strong>2.5.2.20260715</strong> (a <strong>canvas click-vs-drag fix</stro
 <td><strong>Docker image</strong></td>
 <td><a href="https://eltmaestro.s3.amazonaws.com/docker/eltmaestro-17.0.4.tar.gz">https://eltmaestro.s3.amazonaws.com/docker/eltmaestro-17.0.4.tar.gz</a></td>
 <td>~2.6 GB</td>
-<td><code>2e2daab298c8f6d14f14a9a6a79888ef</code></td>
+<td><code>f1d2f84a20fb2861cddfe58562f101a2</code></td>
 <td>Run the full ELTMaestro server as a container.</td>
 </tr>
 <tr>
 <td><strong>Linux installer</strong> (portable)</td>
 <td><a href="https://eltmaestro.s3.amazonaws.com/docker/eltm-portable-17.0.4.tar.gz">https://eltmaestro.s3.amazonaws.com/docker/eltm-portable-17.0.4.tar.gz</a></td>
 <td>~720 MB</td>
-<td><code>1603e867eb47da986d15dffa6d0ac0ed</code></td>
+<td><code>ca15f3c1f6ede42bda6865f83477c998</code></td>
 <td>Bare-metal install on RHEL / Debian / Ubuntu.</td>
 </tr>
 <tr>
@@ -1266,7 +1272,7 @@ client <strong>2.5.2.20260715</strong> (a <strong>canvas click-vs-drag fix</stro
 </tbody>
 </table>
 <blockquote>
-<p>Checksums are for the <strong>current build</strong> (<code>17.0.4.437</code> server / <code>2.5.2.20260715</code> client). The rolling <code>-17.0.4</code> server objects change md5 on each publish; immutable per-build copies (<code>eltmaestro-17.0.4.437.tar.gz</code>, <code>eltm-portable-17.0.4.437.tar.gz</code>) are also on S3 with the same checksums.</p>
+<p>Checksums are for the <strong>current build</strong> (<code>17.0.4.441</code> server / <code>2.5.2.20260715</code> client). The rolling <code>-17.0.4</code> server objects change md5 on each publish; immutable per-build copies (<code>eltmaestro-17.0.4.441.tar.gz</code>, <code>eltm-portable-17.0.4.441.tar.gz</code>) are also on S3 with the same checksums.</p>
 </blockquote>
 <h2 id="what-to-do-with-each">What to do with each<a class="headerlink" href="#what-to-do-with-each" title="Permanent link">&para;</a></h2>
 <ul>
