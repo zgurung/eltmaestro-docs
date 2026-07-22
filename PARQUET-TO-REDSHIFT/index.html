@@ -657,6 +657,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#automatic-column-sizing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Automatic column sizing
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1411,6 +1420,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#automatic-column-sizing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Automatic column sizing
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1647,6 +1665,9 @@ count matching the Parquet.</p>
 <p>The columns are saved into the job when you browse. If the producer's schema changes (new column,
 or a first run that populates the profile), <strong>re-run the producer job</strong> to refresh the profile, then
 re-open CopyIntoRS, <strong>Browse Profile again</strong>, and <strong>Save</strong>.</p>
+<p>Re-browse only for a change to the <strong>set</strong> of columns (added / removed / renamed). A column that
+merely grew <strong>wider</strong> than its saved width no longer needs a re-browse — the engine sizes the load
+to the data automatically (see <a href="#automatic-column-sizing">Automatic column sizing</a>).</p>
 </div>
 <h3 id="the-copy-it-generates">The COPY it generates<a class="headerlink" href="#the-copy-it-generates" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">-- IAM auth, parquet:</span>
@@ -1661,6 +1682,26 @@ re-open CopyIntoRS, <strong>Browse Profile again</strong>, and <strong>Save</str
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">     </span><span class="k">delimiter</span><span class="w"> </span><span class="s1">&#39;|&#39;</span><span class="p">;</span>
 </code></pre></div>
 <p><code>$bucket.name</code>, <code>$iam.role</code>, and the access/secret keys are resolved from the <strong>S3 connection</strong> at runtime.</p>
+<h3 id="automatic-column-sizing">Automatic column sizing<a class="headerlink" href="#automatic-column-sizing" title="Permanent link">&para;</a></h3>
+<p><code>CopyIntoRS</code> sizes string columns to the data at load time, so an under-stated width in the saved profile
+can never fail the <code>COPY</code>:</p>
+<ol>
+<li>The transient temp table is created with every <code>varchar</code>/<code>char</code> column at Redshift's <strong>maximum width</strong>
+   (<code>varchar(65532)</code>), so <code>COPY … FORMAT AS PARQUET</code> <strong>cannot overflow</strong> — regardless of what the saved
+   profile said.</li>
+<li>Immediately after the <code>COPY</code>, the step measures each string column's <strong>actual</strong> maximum width
+   (<code>max(octet_length(...))</code>) in one pass and <strong>narrows the temp table</strong> to that measured width.</li>
+</ol>
+<p>The downstream <code>Table</code> step derives the persistent table's schema from that right-sized temp, so the
+<strong>target table lands at the measured width</strong> — not the max. The result: a load that survives a
+stale/narrow profile <strong>and</strong> a persistent table sized to the real data (no <code>varchar(65532)</code> bloat, which
+would inflate Redshift's query-planning memory). It is best-effort — if the measurement can't run, the
+column stays at max width and the load still succeeds.</p>
+<div class="admonition info">
+<p class="admonition-title">Engine build</p>
+<p>Automatic column sizing is in engine <strong>17.0.4.446</strong> and later. On older builds an under-sized profile
+width surfaces as <code>Spectrum Scan Error 15007</code> — see <a href="#troubleshooting">Troubleshooting</a>.</p>
+</div>
 <hr />
 <h2 id="part-3--generate-whole-pipelines-in-bulk">Part 3 — Generate whole pipelines in bulk<a class="headerlink" href="#part-3--generate-whole-pipelines-in-bulk" title="Permanent link">&para;</a></h2>
 <p>Building the producer and consumer by hand for many tables is tedious. Two <strong>wizards</strong> on the
@@ -1864,6 +1905,10 @@ final Redshift table.</p>
 <tr>
 <td><code>COPY</code> fails <strong>"Unmatched number of columns between table and file. Table columns: N, Data columns: N+1"</strong></td>
 <td>The profile has fewer columns than the Parquet (historically it omitted <code>eltm_txid</code>). <strong>Re-run the producer</strong> to regenerate the profile, then <strong>re-Browse Profile</strong> in CopyIntoRS and <strong>Save</strong>. (Engine now records <code>eltm_txid</code> in the profile.)</td>
+</tr>
+<tr>
+<td><code>COPY</code> fails <strong>"Spectrum Scan Error … code 15007 … length of the data column … is longer than the length defined in the table"</strong></td>
+<td>A saved profile width is narrower than the actual Parquet data. <strong>Fixed in engine 17.0.4.446+</strong> — the load auto-sizes to the data (<a href="#automatic-column-sizing">Automatic column sizing</a>). On older builds, <strong>re-run the producer</strong> to refresh the profile then <strong>re-Browse Profile</strong> and <strong>Save</strong>, or upgrade the engine.</td>
 </tr>
 <tr>
 <td>Target INSERT fails <strong>"column \"eltm_txid\" of relation … does not exist"</strong></td>
