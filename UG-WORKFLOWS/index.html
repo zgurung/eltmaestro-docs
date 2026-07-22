@@ -1599,6 +1599,12 @@
 <li><strong>Latest Console Output</strong> — tail of the latest step's console log (set the line count, then Refresh).</li>
 <li><strong>View Runtime Log</strong> (Debug menu) — the run's engine log.</li>
 </ul>
+<p>The editor's <strong>top</strong> tabs give per-run status for the open job (each has its own <strong>Refresh</strong>):</p>
+<ul>
+<li><strong>Run History</strong> — past runs of this job: batch run number, overall/job status, start time, and duration.</li>
+<li><strong>Runtime Status</strong> — a live diagram of the step flow, each step coloured by its status from the latest run; click a node to open that step or jump to its log.</li>
+<li><strong>Step Status</strong> — a grid of per-step status for the latest run (step, type, status, start/update time). Step names shown are the <strong>current</strong> design names, so a renamed step reads the same here as in the Runtime Status diagram. Below the steps, a <strong>Control Tests</strong> grid lists the run's data-quality control-test results — name, description, expected vs. actual value, and pass/fail — so control tests are visible here even though they are recorded separately from the steps.</li>
+</ul>
 <p>Across all workflows, use the main window's <strong>Runtime &amp; Logs ▸ Logging ▸ Workflow Logs</strong> for run history and detailed logs. The log and report viewers are covered in <a href="../UG-MENUS/">Menus in depth</a>.</p>
 <h2 id="tying-it-together">Tying it together<a class="headerlink" href="#tying-it-together" title="Permanent link">&para;</a></h2>
 <p>A workflow connects to the rest of ELTMaestro:</p>
