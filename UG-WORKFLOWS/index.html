@@ -657,6 +657,66 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#scheduling-a-workflow-cron-scheduler" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scheduling a workflow (Cron Scheduler)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scheduling a workflow (Cron Scheduler)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-create-a-cron-calendar" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Create a cron calendar
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-schedule-a-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Schedule a workflow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-deploy-the-schedule-to-the-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Deploy the schedule to the server
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cadence-vs-the-data-validity-window" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cadence vs. the data-validity window
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites--gotchas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites &amp; gotchas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#tying-it-together" class="md-nav__link">
     <span class="md-ellipsis">
       Tying it together
@@ -1420,6 +1480,66 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#scheduling-a-workflow-cron-scheduler" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scheduling a workflow (Cron Scheduler)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scheduling a workflow (Cron Scheduler)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-create-a-cron-calendar" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Create a cron calendar
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-schedule-a-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Schedule a workflow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-deploy-the-schedule-to-the-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Deploy the schedule to the server
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cadence-vs-the-data-validity-window" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cadence vs. the data-validity window
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites--gotchas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites &amp; gotchas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#tying-it-together" class="md-nav__link">
     <span class="md-ellipsis">
       Tying it together
@@ -1603,9 +1723,83 @@
 <ul>
 <li><strong>Run History</strong> — past runs of this job: batch run number, overall/job status, start time, and duration.</li>
 <li><strong>Runtime Status</strong> — a live diagram of the step flow, each step coloured by its status from the latest run; click a node to open that step or jump to its log.</li>
-<li><strong>Step Status</strong> — a grid of per-step status for the latest run (step, type, status, start/update time). Step names shown are the <strong>current</strong> design names, so a renamed step reads the same here as in the Runtime Status diagram. Below the steps, a <strong>Control Tests</strong> grid lists the run's data-quality control-test results — name, description, expected vs. actual value, and pass/fail — so control tests are visible here even though they are recorded separately from the steps.</li>
+<li><strong>Step Status</strong> — a grid of per-step status for the latest run (step, type, status, start/update time). Step names shown are the <strong>current</strong> design names, so a renamed step reads the same here as in the Runtime Status diagram. Below the steps, a <strong>Control Tests</strong> grid lists the run's <a href="../UG-STEPS/#data-quality">data-quality control-test</a> results — name, description, expected vs. actual value, and pass/fail — so control tests are visible here even though they are recorded separately from the steps.</li>
 </ul>
 <p>Across all workflows, use the main window's <strong>Runtime &amp; Logs ▸ Logging ▸ Workflow Logs</strong> for run history and detailed logs. The log and report viewers are covered in <a href="../UG-MENUS/">Menus in depth</a>.</p>
+<h2 id="scheduling-a-workflow-cron-scheduler">Scheduling a workflow (Cron Scheduler)<a class="headerlink" href="#scheduling-a-workflow-cron-scheduler" title="Permanent link">&para;</a></h2>
+<p>Running a workflow on a schedule is separate from designing and running it by hand. <strong>Administration ▸ Scheduler</strong> opens the <strong>Scheduling (using Cron)</strong> window, which manages recurring runs by writing entries into the <strong>Maestro server's crontab</strong> — the OS cron daemon on the server is what actually fires each run, not the client. The client only has to be open while you edit and deploy the schedule.</p>
+<p>There are two things to understand:</p>
+<ul>
+<li>A <strong>cron calendar</strong> is a <em>named, reusable cron expression</em> (e.g. "every day at 03:00"), stored on the server and shared across workflows.</li>
+<li>A <strong>workflow schedule</strong> binds one <strong>deployed workflow</strong> to one calendar on a chosen <strong>server</strong>, producing the actual crontab line.</li>
+</ul>
+<p>So you typically create the calendar once, then attach as many workflows to it as you like. The window has three tabs — <strong>Scheduled Workflow(s)</strong> (the workflow↔calendar bindings), <strong>Calendar</strong> (the reusable cron expressions), and <strong>Cron File</strong> (a read-only view of the server's live <code>crontab -l</code>).</p>
+<p><img alt="The Scheduling (using Cron) window on its Scheduled Workflow(s) tab — the Add / Modify / Remove / Apply toolbar and Search box above the Current Schedule(s) list, with the Calendar and Cron File tabs alongside" src="../images/cron-scheduler-window.png" /></p>
+<h3 id="1-create-a-cron-calendar">1. Create a cron calendar<a class="headerlink" href="#1-create-a-cron-calendar" title="Permanent link">&para;</a></h3>
+<p>On the <strong>Calendar</strong> tab, the grid lists the calendars already defined (their cron entry, schedule group, and description). Click <strong>Add</strong> to open <strong>Add Calendar Schedule</strong> and define a new one:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Group Type</strong></td>
+<td>The group the calendar belongs to (e.g. a team or cadence family). Pick an existing group, or tick <strong>Create New Group</strong> and type a new name (it's upper-cased and spaces become <code>_</code>).</td>
+</tr>
+<tr>
+<td><strong>Description</strong></td>
+<td>A human label for the schedule (max <strong>64</strong> characters; upper-cased on save).</td>
+</tr>
+<tr>
+<td><strong>Cron Value</strong></td>
+<td>The schedule itself, entered as five separate fields — <strong>Minute</strong> (0–59), <strong>Hour</strong> (0–23, 12 AM = 0), <strong>Day Of Month</strong> (1–31), <strong>Month</strong> (1–12, January = 1), and <strong>Day Of Week</strong> (0–6, Sunday = 0). Each accepts standard cron syntax (<code>*</code>, <code>5</code>, <code>*/15</code>, <code>1-5</code>, <code>0,30</code>).</td>
+</tr>
+</tbody>
+</table>
+<p>Click <strong>Add</strong> to save. The calendar is written to the server's <code>cron_schedule_meta</code> table and immediately becomes selectable when you schedule a workflow. Calendars are de-duplicated — adding one whose cron value already exists tells you which group already has it.</p>
+<p><img alt="The Add Calendar Schedule dialog — Group Type dropdown with a Create New Group checkbox, a Description field (max 64 characters), and the five Cron Value fields (Minute, Hour, Day Of Month, Month, Day Of Week) each with its valid range shown to the right" src="../images/cron-add-calendar-dialog.png" /></p>
+<blockquote>
+<p><strong>Example.</strong> For "every day at 03:00" set Minute <code>0</code>, Hour <code>3</code>, and leave Day Of Month, Month, and Day Of Week as <code>*</code> → cron <code>0 3 * * *</code>. For "every 15 minutes" set Minute <code>*/15</code> and the rest <code>*</code>.</p>
+</blockquote>
+<h3 id="2-schedule-a-workflow">2. Schedule a workflow<a class="headerlink" href="#2-schedule-a-workflow" title="Permanent link">&para;</a></h3>
+<p>On the <strong>Scheduled Workflow(s)</strong> tab, click <strong>Add</strong> to open <strong>Add/Modify Workflow Schedule</strong>:</p>
+<ol>
+<li><strong>Server</strong> — the target Maestro server the job runs on (defaults to <strong>master</strong>). In a multi-node install, verify this is the node you intend — the dialog flags it because a wrong server is easy to miss.</li>
+<li><strong>Workflow</strong> — the searchable list shows <strong>deployed</strong> workflows only (a job must be <a href="#validate--save">saved to the server</a> before it can be scheduled; local-only drafts don't appear). Workflows that already have a schedule are marked as such.</li>
+<li><strong>Schedule</strong> — pick one of the calendars from step 1.</li>
+</ol>
+<p><img alt="The Add/Modify Workflow Schedule dialog — a searchable list of deployed workflows on the left, a Server picker (master) top-right, and a Schedule grid of the available cron calendars (Cron Entry, Schedule Group, Description) such as SQLM_CRON_REPEAT &quot;*/15 * * * * — RUN EVERY 15 MINUTES&quot; and SQLM_CRON_DAILY &quot;0 0 * * * — RUN DAILY AT 12 AM&quot;, with Cancel and Apply below" src="../images/cron-add-workflow-schedule-dialog.png" /></p>
+<p>Click <strong>Apply</strong> to stage the binding. Back on the <strong>Scheduled Workflow(s)</strong> tab, the new entry shows its workflow and human-readable schedule. Use <strong>Modify</strong> to repoint an existing entry to a different workflow/calendar/server, <strong>Remove</strong> to drop one, and the <strong>Search</strong> box to filter a long list. These edits are <strong>staged locally</strong> — nothing reaches the server until you Apply the whole tab (next step).</p>
+<h3 id="3-deploy-the-schedule-to-the-server">3. Deploy the schedule to the server<a class="headerlink" href="#3-deploy-the-schedule-to-the-server" title="Permanent link">&para;</a></h3>
+<p>Click <strong>Apply</strong> (top-right of the <strong>Scheduled Workflow(s)</strong> tab) to write all staged changes to the server crontab. On Apply, Maestro:</p>
+<ul>
+<li>backs up the current crontab to <code>~/ELTM_WORKFLOW_HISTORY/cron/cron_&lt;timestamp&gt;.txt</code>;</li>
+<li>rewrites the crontab, preserving any lines you manage by hand and wrapping the Maestro entries between <code>#BEGIN_MAESTRO_MANAGED_SCHEDULE</code> and <code>#END_MAESTRO_MANAGED_SCHEDULE</code> markers — <strong>don't hand-edit inside that block</strong>, the next Apply regenerates it;</li>
+<li>updates each workflow's <code>job_schedule</code> so the cadence is visible in the <a href="#creating-a-workflow-job">Workflow(s) list</a> <code>job_schedule</code> column.</li>
+</ul>
+<p>You'll get a confirmation to verify with <code>crontab -l</code> on the server. Closing the window with un-applied changes prompts a warning.</p>
+<p>Each managed crontab line runs the deployed job through the engine driver — roughly:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&lt;cron-expr&gt; . ~/.env_integrator; java $MAESTRO_ENGINE_OPTS -jar $MAESTRO_JAR_FILE \
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  --server &lt;server&gt; --batch $MAESTRO_DEPLOYED_FILES_DIR/&lt;workflow&gt; \
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  1&gt; $MAESTRO_CONSOLE_LOG_DIR/&lt;workflow&gt;.log 2&gt;&amp;1
+</code></pre></div>
+<h3 id="cadence-vs-the-data-validity-window">Cadence vs. the data-validity window<a class="headerlink" href="#cadence-vs-the-data-validity-window" title="Permanent link">&para;</a></h3>
+<p>The cron expression controls <strong>when</strong> the job launches. It does <strong>not</strong> set the batch/data-validity window — note there is deliberately <strong>no <code>--type</code></strong> on the crontab line. The incremental window each run sees comes from the workflow's <a href="#change-batch-cycle-type">batch cycle type</a> (<code>&lt;batchType&gt;</code> in the job XML), which the engine reads at runtime. So the two are set independently and must agree:</p>
+<ul>
+<li><strong>Cron</strong> = the trigger cadence (e.g. fire hourly).</li>
+<li><strong>Batch cycle type</strong> = the <code>$BATCH_START/END_DATA_VALIDITY_TIMESTAMP</code> window that incremental steps filter on (see <a href="../VARIABLES/#batch-cycle-type--the-data-validity-window">Runtime variables ▸ Batch cycle type</a>).</li>
+</ul>
+<p>A daily-incremental job, for example, is a workflow whose <strong>batch cycle type is <code>DAILY</code></strong> attached to a <strong>calendar that fires once a day</strong>. For change-detection that keys off the target instead of the calendar window, use a Delta Watermark on the extract/load step (<strong>Administration ▸ Workflow Configuration ▸ Job Watermarks</strong>) — that tracks <code>MAX(column)</code> regardless of cadence.</p>
+<h3 id="prerequisites--gotchas">Prerequisites &amp; gotchas<a class="headerlink" href="#prerequisites--gotchas" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>The job must be deployed</strong> (saved to the server) — the scheduler lists deployed workflows only.</li>
+<li><strong>A cron daemon must be running</strong> on the server for entries to fire. The Docker install supervises cron; on a bare host, confirm <code>cron</code>/<code>crond</code> is active.</li>
+<li><strong><code>$MAESTRO_ENGINE_OPTS</code> must be set</strong> in the server's <code>~/.env_integrator</code>. The scheduler emits it so scheduled runs get the same JVM flags as interactive runs — an older crontab hand-edited to a bare <code>java -jar …</code> (no opts) will <strong>silently fail</strong> scheduled Snowflake jobs (the Arrow <code>--add-opens</code> flag is missing). See SNOWFLAKE-SETUP.md.</li>
+<li><strong>Don't edit inside the managed block</strong> — keep your own cron lines outside the <code>#BEGIN/#END_MAESTRO_MANAGED_SCHEDULE</code> markers.</li>
+</ul>
 <h2 id="tying-it-together">Tying it together<a class="headerlink" href="#tying-it-together" title="Permanent link">&para;</a></h2>
 <p>A workflow connects to the rest of ELTMaestro:</p>
 <table>
@@ -1622,7 +1816,7 @@
 </tr>
 <tr>
 <td>Run a workflow on a <strong>schedule</strong></td>
-<td><strong>Administration ▸ Scheduler</strong> (cron) → <a href="../UG-MENUS/#administration">UG-MENUS.md</a></td>
+<td><a href="#scheduling-a-workflow-cron-scheduler">Scheduling a workflow (Cron Scheduler)</a> — <strong>Administration ▸ Scheduler</strong></td>
 </tr>
 <tr>
 <td>Manage <strong>incremental-load watermarks</strong></td>
@@ -1638,7 +1832,7 @@
 </tr>
 <tr>
 <td><strong>Validate</strong> the data</td>
-<td><strong>Administration ▸ Metrics Configuration ▸ Control Test / Data Quality Management</strong></td>
+<td><a href="../UG-STEPS/#data-quality">Data-quality control tests</a> — <strong>Administration ▸ Metrics Configuration ▸ Control Test</strong></td>
 </tr>
 <tr>
 <td>Organize jobs into <strong>Bronze / Silver / Gold</strong> layers</td>

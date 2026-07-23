@@ -1358,7 +1358,8 @@
 </blockquote>
 <h2 id="ssh-connections">SSH connections<a class="headerlink" href="#ssh-connections" title="Permanent link">&para;</a></h2>
 <p>Tab: <strong>SSH Connections</strong>. Toolbar: <strong>Create</strong>, <strong>Edit</strong>, <strong>Delete</strong>. Used for SFTP file sources/landing and remote shell commands.</p>
-<p><strong>Create</strong> opens the SSH editor:</p>
+<p><img alt="The Administration window's SSH Connections tab — Edit / Delete / Create buttons above a grid of SSH connections with columns Connection Name, Port, Host Name, User Name, Password (encrypted), and PEM File" src="../images/ssh-connections-tab.png" /></p>
+<p><strong>Create</strong> opens the <strong>SSH Connection</strong> editor:</p>
 <table>
 <thead>
 <tr>
@@ -1368,32 +1369,52 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>Connection name</strong></td>
-<td>Label (normalized to a proper name).</td>
+<td><strong>Connection</strong></td>
+<td>Connection name/label (normalized to a proper name).</td>
 </tr>
 <tr>
-<td><strong>Host / Port</strong></td>
+<td><strong>Host</strong> / <strong>Port</strong></td>
 <td>SSH host and port.</td>
 </tr>
 <tr>
-<td><strong>User / Password</strong></td>
+<td><strong>User Name</strong> / <strong>Password</strong></td>
 <td>Login user; password stored encrypted.</td>
 </tr>
 <tr>
-<td><strong>Use PEM key</strong></td>
-<td>Authenticate with a key file instead of a password.</td>
+<td><strong>Use PEM/Key File Authentication</strong></td>
+<td>Authenticate with a key file instead of a password. When checked, the password is not required.</td>
 </tr>
 <tr>
-<td><strong>Use SFTP</strong></td>
-<td>Use SFTP for file transfer (vs plain SSH).</td>
+<td><strong>Use SFTP Protocol</strong></td>
+<td>Use SFTP for file transfer (uncheck for plain SSH).</td>
 </tr>
 <tr>
-<td><strong>PEM path</strong></td>
-<td>Path to the key file when <em>Use PEM key</em> is on.</td>
+<td><strong>RSA Private Key File Path</strong></td>
+<td>Path to the key file on the <strong>Maestro server</strong> when key auth is on. The <strong>?</strong> button shows the full key-setup requirements.</td>
+</tr>
+<tr>
+<td><strong>Test</strong></td>
+<td>Saves the connection, then attempts a real login <strong>from the Maestro server</strong> — returns <em>SSH Test SUCCESS</em> or <em>SSH Test Failed</em>.</td>
+</tr>
+<tr>
+<td><strong>Save</strong></td>
+<td>Validates and stores the connection.</td>
 </tr>
 </tbody>
 </table>
 <p>(The key/SFTP choices are stored as a compact <code>key|raw : sftp|ssh : &lt;pem-path&gt;</code> setting.)</p>
+<blockquote>
+<p><strong>Everything the editor checks runs on the Maestro server, not your client.</strong> The key file it looks for, and the <strong>Test</strong> login, all execute on the ELTMaestro server — so reachability to the SFTP host and the key files must be correct <em>there</em>.</p>
+</blockquote>
+<h3 id="troubleshooting-ssh-connections">Troubleshooting SSH connections<a class="headerlink" href="#troubleshooting-ssh-connections" title="Permanent link">&para;</a></h3>
+<p><strong>"Cannot load id_rsa file path" the moment you click Create.</strong> Opening the editor runs <code>find ~/.ssh -name id_rsa</code> on the Maestro server to pre-fill the key path; if the server's OS user has no <code>~/.ssh/id_rsa</code>, you get this error — but the editor still opens behind it, so you can continue.</p>
+<p><img alt="The &quot;Cannot load id_rsa file path&quot; error dialog shown when the Maestro server's user has no ~/.ssh/id_rsa key file" src="../images/ssh-connection-error-id-rsa.png" /></p>
+<ul>
+<li>Using <strong>password</strong> auth? It's harmless — dismiss it and leave the key path blank.</li>
+<li>Want <strong>key-based</strong> auth? Generate a key pair on the Maestro server (<code>ssh-keygen</code>) so <code>~/.ssh/id_rsa</code> and <code>id_rsa.pub</code> exist, then share the server's <code>id_rsa.pub</code> with the remote host's <code>authorized_keys</code> (the editor's <strong>?</strong> button spells this out).</li>
+</ul>
+<p><strong>An error when you click Save.</strong> Save validates the form first — the <strong>port must be numeric</strong>, and <strong>connection name, host, user, and port are required</strong> (password too, unless <em>Use PEM key</em> is checked). If validation passes but the save still errors, it's almost always a <strong>duplicate connection name</strong> or a server/DB error; the message names the cause. Pick a unique name or fix the flagged field.</p>
+<p><strong>"Test does nothing."</strong> Test <strong>saves the connection, then performs a real SSH/SFTP login from the Maestro server</strong> to the host. If the host is unreachable or the port is blocked, the call <strong>waits until it times out</strong>, so it looks like nothing is happening — give it a few seconds and you'll get <strong>SSH Test SUCCESS</strong> or <strong>SSH Test Failed</strong>. If it fails or hangs, confirm from the <strong>Maestro server</strong> (not your workstation) that it can reach the host:port (firewall/routing), that the credentials or key are correct, and — for key auth — that the server's public key is in the remote's <code>authorized_keys</code>.</p>
 <h2 id="general--cloud-connections-s3">General / Cloud connections (S3)<a class="headerlink" href="#general--cloud-connections-s3" title="Permanent link">&para;</a></h2>
 <p>Tab: <strong>General/Cloud Config</strong>. Toolbar: <strong>Create</strong>, <strong>Edit</strong>, <strong>Delete</strong>. This is where object-storage / cloud endpoints live — e.g. the <strong>S3 connection</strong> the Redshift file loader stages to.</p>
 <p><strong>Create</strong> opens the Cloud connection editor:</p>
