@@ -1,0 +1,2723 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="User documentation for the ELTMaestro ELT/data-pipeline platform.">
+      
+      
+      
+        <link rel="canonical" href="https://zgurung.github.io/eltmaestro-docs/DATA-MODEL/">
+      
+      
+        <link rel="prev" href="../SCHEMA-PROFILE/">
+      
+      
+        <link rel="next" href="../DATA-MODEL-SPINE/">
+      
+      
+      <link rel="icon" href="../assets/elt-maestro-logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>Data model — tables & views - ELTMaestro Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#repository-data-model--tables-views--datasets" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ELTMaestro Documentation" class="md-header__button md-logo" aria-label="ELTMaestro Documentation" data-md-component="logo">
+      
+  <img src="../assets/elt-maestro-logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ELTMaestro Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Data model — tables & views
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ELTMaestro Documentation" class="md-nav__button md-logo" aria-label="ELTMaestro Documentation" data-md-component="logo">
+      
+  <img src="../assets/elt-maestro-logo.png" alt="logo">
+
+    </a>
+    ELTMaestro Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DOWNLOADS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Downloads
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Getting started
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Getting started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../USER-GUIDE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-GETTING-STARTED/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-MENUS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Menus
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Admin & connections
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Admin & connections
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-ADMIN/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Administration & setup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Workflows & steps
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Workflows & steps
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-WORKFLOWS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Workflows
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-STEPS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Step reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PARQUET-TO-REDSHIFT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    S3 Parquet → Redshift
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Medallion design
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Medallion design
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION-BRONZE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bronze
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION-SILVER/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Silver
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION-GOLD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Gold
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Platform setup
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Platform setup
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../REDSHIFT-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redshift
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPARKSQL-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SparkSQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CLICKHOUSE-AUTH/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ClickHouse auth
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MPP-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MPP prerequisites
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Install & operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Install & operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INSTALL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Install
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DOCKER-INSTALL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker image install
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UPGRADE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Upgrade
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../OPERATIONS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Operations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../VARIABLES/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Runtime variables
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SCHEMA-PROFILE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Schema profile
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Data model — tables & views
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Data model — tables & views
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-database-is-the-control-plane-not-the-job-store" class="md-nav__link">
+    <span class="md-ellipsis">
+      The database is the control plane, not the job store
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-read-the-inventory" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to read the inventory
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to read the inventory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-the-eng--svc--wpf-numbers-mean" class="md-nav__link">
+    <span class="md-ellipsis">
+      What the Eng / Svc / WPF numbers mean
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-batch-execution--runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Batch execution — RUNTIME
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-step-execution--logs--runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Step execution &amp; logs — RUNTIME
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-process--session-control--runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Process &amp; session control — RUNTIME
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-job--workflow-catalog--design" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Job &amp; workflow catalog — DESIGN
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-connections--design" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Connections — DESIGN
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-jdbc-metadata-cache--design" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. JDBC metadata cache — DESIGN
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-control-tests--both" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Control tests — BOTH
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-data-quality-metrics--both" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Data-quality metrics — BOTH
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-profiling--both" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Profiling — BOTH
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-scheduling--alerting--design" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Scheduling &amp; alerting — DESIGN
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-security--rbac--design" class="md-nav__link">
+    <span class="md-ellipsis">
+      11. Security &amp; RBAC — DESIGN
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-service-audit--service" class="md-nav__link">
+    <span class="md-ellipsis">
+      12. Service audit — SERVICE
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-config-system--lookups--design" class="md-nav__link">
+    <span class="md-ellipsis">
+      13. Config, system &amp; lookups — DESIGN
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-machine-learning--both" class="md-nav__link">
+    <span class="md-ellipsis">
+      14. Machine learning — BOTH
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-deprecated" class="md-nav__link">
+    <span class="md-ellipsis">
+      15. Deprecated
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#excluded-from-the-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Excluded from the model
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Excluded from the model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#referenced-only-via-dynamically-built-sql-real-but-not-literally-grep-able" class="md-nav__link">
+    <span class="md-ellipsis">
+      Referenced only via dynamically-built SQL (real, but not literally grep-able)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#no-code-path--candidates-to-retire" class="md-nav__link">
+    <span class="md-ellipsis">
+      No code path — candidates to retire
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methodology" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methodology
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DATA-MODEL-SPINE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data model — execution spine
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Proposals
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Proposals
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CICD-WORKFLOW-PROMOTION-PROPOSAL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Workflow promotion (CI/CD)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-database-is-the-control-plane-not-the-job-store" class="md-nav__link">
+    <span class="md-ellipsis">
+      The database is the control plane, not the job store
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-read-the-inventory" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to read the inventory
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to read the inventory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-the-eng--svc--wpf-numbers-mean" class="md-nav__link">
+    <span class="md-ellipsis">
+      What the Eng / Svc / WPF numbers mean
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-batch-execution--runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Batch execution — RUNTIME
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-step-execution--logs--runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Step execution &amp; logs — RUNTIME
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-process--session-control--runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Process &amp; session control — RUNTIME
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-job--workflow-catalog--design" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Job &amp; workflow catalog — DESIGN
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-connections--design" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Connections — DESIGN
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-jdbc-metadata-cache--design" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. JDBC metadata cache — DESIGN
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-control-tests--both" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Control tests — BOTH
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-data-quality-metrics--both" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Data-quality metrics — BOTH
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-profiling--both" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Profiling — BOTH
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-scheduling--alerting--design" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Scheduling &amp; alerting — DESIGN
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-security--rbac--design" class="md-nav__link">
+    <span class="md-ellipsis">
+      11. Security &amp; RBAC — DESIGN
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-service-audit--service" class="md-nav__link">
+    <span class="md-ellipsis">
+      12. Service audit — SERVICE
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-config-system--lookups--design" class="md-nav__link">
+    <span class="md-ellipsis">
+      13. Config, system &amp; lookups — DESIGN
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-machine-learning--both" class="md-nav__link">
+    <span class="md-ellipsis">
+      14. Machine learning — BOTH
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-deprecated" class="md-nav__link">
+    <span class="md-ellipsis">
+      15. Deprecated
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#excluded-from-the-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Excluded from the model
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Excluded from the model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#referenced-only-via-dynamically-built-sql-real-but-not-literally-grep-able" class="md-nav__link">
+    <span class="md-ellipsis">
+      Referenced only via dynamically-built SQL (real, but not literally grep-able)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#no-code-path--candidates-to-retire" class="md-nav__link">
+    <span class="md-ellipsis">
+      No code path — candidates to retire
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methodology" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methodology
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="repository-data-model--tables-views--datasets">Repository Data Model — tables, views &amp; datasets<a class="headerlink" href="#repository-data-model--tables-views--datasets" title="Permanent link">&para;</a></h1>
+<p>Data model of the ELTMaestro <strong>audit / metadata database</strong> (the <code>sqlmaestro</code>
+PostgreSQL instance), scoped to the objects the application code <strong>actually
+touches</strong>. Rather than list the whole <code>initdb.sql</code> catalog, this inventory is
+<strong>derived from a reference scan of the engine, meta-service, and WPF client
+code</strong> — an object appears here only if it is referenced by one of those
+layers. Objects with no code reference are listed separately under
+<a href="#excluded-from-the-model">Excluded</a>.</p>
+<p>For the column-level model of the execution core — full ER diagram, column
+dictionaries, the complete foreign-key map, and structural gotchas — see
+<strong><a href="../DATA-MODEL-SPINE/">DATA-MODEL-SPINE.md</a></strong>.</p>
+<blockquote>
+<p><strong>In the model: 72 objects</strong> (67 tables + 5 views), each with ≥1 reference in
+engine / service / WPF code. <strong>Excluded: 41</strong> — 22 dashboard views + 19 tables
+(8 reached only via dynamically-built SQL, 11 with no code path at all).
+Derived from a word-boundary scan of <code>.java</code> / <code>.cs</code> / <code>.xaml</code>; see
+<a href="#methodology">Methodology</a>.</p>
+</blockquote>
+<h2 id="the-database-is-the-control-plane-not-the-job-store">The database is the control plane, not the job store<a class="headerlink" href="#the-database-is-the-control-plane-not-the-job-store" title="Permanent link">&para;</a></h2>
+<p>Job, batch, and control-test <strong>definitions</strong> are XML files on disk under
+<code>/sqlmdata/sqlm_deployed_mappings/{Jobs,Batches,ControlTests}/</code>. That is why
+<code>t_job_meta</code> has <strong>no XML column</strong>. The tables here hold two things:</p>
+<ul>
+<li>the <strong>catalog</strong> — names, types, tags, edit-lock state, version pointers
+  (owned by the meta-service; edited by the WPF client through it), and</li>
+<li>the <strong>execution record</strong> — runs, per-step status, logs, metrics (written by
+  the batch engine at runtime; read back by the client for monitoring).</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>  WPF client ──SOAP──▶ meta-service ──JDBC──▶  Postgres  ◀──JDBC── batch engine
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>   (reads both,          (owns the             (catalog +          (writes the
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    edits catalog         catalog)              execution           execution
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    via service)                                record)             record)
+</code></pre></div>
+<h2 id="how-to-read-the-inventory">How to read the inventory<a class="headerlink" href="#how-to-read-the-inventory" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Phase</strong> — <code>DESIGN</code> (authored/read while building), <code>RUNTIME</code> (written by
+  the engine during a batch), <code>BOTH</code> (definition authored, results written at
+  run), or <code>SERVICE</code> (written by the meta-service only).</li>
+<li><strong>Owner</strong> — the primary writer: <code>engine</code>, <code>service</code>, <code>wpf</code>, or <code>install</code>
+  (seeded at install time, then read).</li>
+<li><strong>Eng / Svc / WPF</strong> — how many <strong>lines of that layer's source mention the
+  object's name</strong>. See <a href="#what-the-eng--svc--wpf-numbers-mean">What the numbers mean</a>
+  below.</li>
+</ul>
+<p>Layers: <strong>Eng</strong> = <code>root-engine-core</code> + <code>root-engine-shared</code> (the Java batch
+engine); <strong>Svc</strong> = <code>root-engine-service</code> (the Java SOAP meta-service); <strong>WPF</strong> =
+<code>root-win-client</code> (the C#/XAML desktop client).</p>
+<h3 id="what-the-eng--svc--wpf-numbers-mean">What the Eng / Svc / WPF numbers mean<a class="headerlink" href="#what-the-eng--svc--wpf-numbers-mean" title="Permanent link">&para;</a></h3>
+<p>Each number is a <strong>count of source lines that reference the object's name</strong> in
+that layer, produced by a word-boundary, case-insensitive <code>grep</code> over
+<code>.java</code> / <code>.cs</code> / <code>.xaml</code> (build dirs excluded):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># the count in the WPF column for t_step_status:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>grep<span class="w"> </span>-rwni<span class="w"> </span><span class="s2">&quot;t_step_status&quot;</span><span class="w"> </span>root-win-client<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">     </span>--include<span class="o">=</span>*.cs<span class="w"> </span>--include<span class="o">=</span>*.xaml<span class="w"> </span>--exclude-dir<span class="o">=</span>obj<span class="w"> </span>--exclude-dir<span class="o">=</span>bin
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1">#  ... 16 matching lines  -&gt;  WPF = 16</span>
+</code></pre></div>
+<p><strong>Read them as a "where does this table live in the code" signal, not a query
+count.</strong> Worked example — <code>t_step_status</code> is <strong>Eng 7 · Svc 1 · WPF 16</strong>:</p>
+<ul>
+<li>The <strong>engine writes it</strong> (7 refs in the batch runner) and the <strong>WPF reads it
+  heavily</strong> (16 refs — the LogViewer and Runtime Status tab both query it),
+  while the <strong>service barely touches it</strong> (1). That pattern is how each row's
+  <strong>Owner</strong> and <strong>Phase</strong> were assigned (here: <code>RUNTIME</code>, owner <code>engine</code>).</li>
+<li>The numbers are also the <strong>filter</strong>: a row is in this model if any column is
+  <code>&gt; 0</code> (or the table is FK-reachable — see below).</li>
+</ul>
+<p>Three caveats, all of which apply to the table above:</p>
+<ol>
+<li><strong>It counts mentions, not queries.</strong> Of <code>t_step_status</code>'s 16 WPF hits, some
+   are real SQL (<code>from public.t_step_status</code>) but several are <strong>comments</strong> and
+   one is <strong>commented-out code</strong>. So <code>16</code> means "referenced in 16 places," not
+   "16 queries."</li>
+<li><strong>Common English words inflate.</strong> <code>job</code> = 1144 and <code>connection</code> = 485 in the
+   engine because those words appear in variable names, method names, and prose
+   throughout the code — not that many SQL statements. Treat large counts on
+   such names as "heavily used," not literal.</li>
+<li><strong><code>0</code> does not always mean unused.</strong> SQL assembled by string concatenation at
+   runtime never contains the table name as a single token, so <code>grep</code> can't see
+   it. Those objects are still real — they are the
+   <a href="#excluded-from-the-model">Excluded → dynamic-SQL-only</a> category (e.g.
+   <code>t_mpp_routines</code>, <code>control_test_point</code>), listed there rather than silently
+   dropped, but they are <strong>not</strong> in the code-referenced model above.</li>
+</ol>
+<hr />
+<h2 id="1-batch-execution--runtime">1. Batch execution — <code>RUNTIME</code><a class="headerlink" href="#1-batch-execution--runtime" title="Permanent link">&para;</a></h2>
+<p>The engine inserts a <code>batch_cycle_run</code> per launch and a <code>batch_cycle_run_job</code>
+per job leg; the WPF LogViewer and Runtime Status tab read these back.</p>
+<table>
+<thead>
+<tr>
+<th>Object</th>
+<th>Phase</th>
+<th>Owner</th>
+<th style="text-align: right;">Eng</th>
+<th style="text-align: right;">Svc</th>
+<th style="text-align: right;">WPF</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>batch_cycle</code></td>
+<td>RUNTIME</td>
+<td>engine</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">19</td>
+<td>Batch header. PK <code>batch_cycle_id</code> (seq <code>seq_batch_cycle_id</code>).</td>
+</tr>
+<tr>
+<td><code>batch_cycle_run</code></td>
+<td>RUNTIME</td>
+<td>engine</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">22</td>
+<td>One row per run. PK <code>batch_run_num</code> (seq <code>seq_batch_run_num</code>); carries <code>batch_status_cd</code>. Root of nearly every runtime join.</td>
+</tr>
+<tr>
+<td><code>batch_cycle_run_job</code></td>
+<td>RUNTIME</td>
+<td>engine</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">21</td>
+<td>Job leg within a run. PK <code>(batch_run_num, job_id)</code> → FK to both.</td>
+</tr>
+<tr>
+<td><code>batch_cycle_type</code></td>
+<td>RUNTIME</td>
+<td>install</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td>Lookup of batch types. PK <code>batch_cycle_type_cd</code>.</td>
+</tr>
+<tr>
+<td><code>job_batch_cycle_run_msg</code></td>
+<td>RUNTIME</td>
+<td>service</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td>Per-run messages/warnings. PK <code>(msg_num, batch_run_num, job_id)</code>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-step-execution--logs--runtime">2. Step execution &amp; logs — <code>RUNTIME</code><a class="headerlink" href="#2-step-execution--logs--runtime" title="Permanent link">&para;</a></h2>
+<p>The per-step record the LogViewer and Runtime Status mermaid tab consume.
+<strong>Not FK-linked</strong> to the run tables — keyed logically on
+<code>(batch_run_num, job_id, step_id)</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Object</th>
+<th>Phase</th>
+<th>Owner</th>
+<th style="text-align: right;">Eng</th>
+<th style="text-align: right;">Svc</th>
+<th style="text-align: right;">WPF</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>t_step_status</code></td>
+<td>RUNTIME</td>
+<td>engine</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">16</td>
+<td>Latest status per step of a run. Historical — retains deleted steps; read by Runtime Status + LogViewer.</td>
+</tr>
+<tr>
+<td><code>t_step_run_detail</code></td>
+<td>RUNTIME</td>
+<td>engine</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">12</td>
+<td>Per-step log lines (<code>log_ordinal</code>, message, stack, affected rows/bytes).</td>
+</tr>
+<tr>
+<td><code>t_step_watermark</code></td>
+<td>RUNTIME</td>
+<td>engine</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td>Delta/CDC high-water marks; also holds a full S3 folder path (PushFile). See <a href="../VARIABLES/">VARIABLES.md</a>.</td>
+</tr>
+<tr>
+<td><code>t_workflow_state_history</code></td>
+<td>RUNTIME</td>
+<td>engine</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4</td>
+<td>State transitions. Unique index on <code>(run_seq_number, run_number, job_id)</code>.</td>
+</tr>
+<tr>
+<td><code>t_console</code></td>
+<td>RUNTIME</td>
+<td>engine</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td>Captured console output stream.</td>
+</tr>
+<tr>
+<td><code>t_event_log</code></td>
+<td>RUNTIME</td>
+<td>service</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
+<td>System event log (service-side operation auditing).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-process--session-control--runtime">3. Process &amp; session control — <code>RUNTIME</code><a class="headerlink" href="#3-process--session-control--runtime" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Object</th>
+<th>Phase</th>
+<th>Owner</th>
+<th style="text-align: right;">Eng</th>
+<th style="text-align: right;">Svc</th>
+<th style="text-align: right;">WPF</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>t_pid_sessions</code></td>
+<td>RUNTIME</td>
+<td>engine</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td>Running JVM/SSH sessions per <code>run_number</code> (PK). Basis for HALT.</td>
+</tr>
+<tr>
+<td><code>v_pid_sessions</code></td>
+<td>RUNTIME</td>
+<td>engine</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td>View over active sessions.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-job--workflow-catalog--design">4. Job &amp; workflow catalog — <code>DESIGN</code><a class="headerlink" href="#4-job--workflow-catalog--design" title="Permanent link">&para;</a></h2>
+<p>Definitions are XML on disk; these hold identity, metadata, edit-lock, versions.</p>
+<table>
+<thead>
+<tr>
+<th>Object</th>
+<th>Phase</th>
+<th>Owner</th>
+<th style="text-align: right;">Eng</th>
+<th style="text-align: right;">Svc</th>
+<th style="text-align: right;">WPF</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>job</code></td>
+<td>DESIGN</td>
+<td>service</td>
+<td style="text-align: right;">1144</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">232</td>
+<td>Central job registry. PK <code>job_id</code> (seq <code>seq_job_id</code>). Count inflated by the word "job" — but genuinely the busiest entity.</td>
+</tr>
+<tr>
+<td><code>t_job_meta</code></td>
+<td>DESIGN</td>
+<td>service</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">14</td>
+<td>Job catalog row. PK <code>job_name</code>; type, platform, tags, <code>lock_id</code> (edit lock). No XML column — file-backed.</td>
+</tr>
+<tr>
+<td><code>t_job_meta_history</code></td>
+<td>DESIGN</td>
+<td>service</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5</td>
+<td>Version log. PK <code>version_key</code> (seq <code>seq_job_version_id</code>), <code>version_path</code> → file. Backs Change History + XML diff.</td>
+</tr>
+<tr>
+<td><code>t_job_alert_setting</code></td>
+<td>DESIGN</td>
+<td>service</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td>Per-job email alert config; pairs with the SMTP row in <code>t_connection_general</code>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5-connections--design">5. Connections — <code>DESIGN</code><a class="headerlink" href="#5-connections--design" title="Permanent link">&para;</a></h2>
+<p>See <a href="../DATA-MODEL-SPINE/#g1">DATA-MODEL-SPINE.md</a> for the <strong>two-registry</strong>
+gotcha (<code>connection</code> vs <code>t_jdbc</code> / <code>t_connection_general</code>).</p>
+<table>
+<thead>
+<tr>
+<th>Object</th>
+<th>Phase</th>
+<th>Owner</th>
+<th style="text-align: right;">Eng</th>
+<th style="text-align: right;">Svc</th>
+<th style="text-align: right;">WPF</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>connection</code></td>
+<td>DESIGN</td>
+<td>service</td>
+<td style="text-align: right;">485</td>
+<td style="text-align: right;">165</td>
+<td style="text-align: right;">462</td>
+<td>Legacy connection master. PK <code>connection_id</code> (seq <code>seq_connection_id</code>), <code>char(1)</code> type code. Count inflated.</td>
+</tr>
+<tr>
+<td><code>connection2</code></td>
+<td>DESIGN</td>
+<td>service</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">15</td>
+<td>Name-keyed connection variant (adds port + secondary host). PK <code>connection_nm</code>.</td>
+</tr>
+<tr>
+<td><code>connection_type</code></td>
+<td>DESIGN</td>
+<td>install</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">20</td>
+<td>Type lookup. PK <code>connection_type_cd</code> <code>char(1)</code>.</td>
+</tr>
+<tr>
+<td><code>t_connection_general</code></td>
+<td>DESIGN</td>
+<td>service</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">31</td>
+<td>Name-keyed general/SMTP connection settings (param blob). PK <code>connection_name</code>.</td>
+</tr>
+<tr>
+<td><code>t_jdbc</code></td>
+<td>DESIGN</td>
+<td>service</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">41</td>
+<td>Modern JDBC registry. PK <code>connection_id</code> — <strong><code>char(32)</code>, not the bigint</strong>; no FK to <code>connection</code>.</td>
+</tr>
+<tr>
+<td><code>t_hdfs_settings</code> · <code>t_redshift_settings</code> · <code>t_netezza_settings</code> · <code>t_xtremedata_settings</code> · <code>t_dashdb_settings</code> · <code>t_dataquality_settings</code></td>
+<td>DESIGN</td>
+<td>service</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">—</td>
+<td>Per-vendor <code>param/value</code> setting tables (each referenced by the WPF admin panels; <code>t_hdfs_settings</code> also engine + service).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-jdbc-metadata-cache--design">6. JDBC metadata cache — <code>DESIGN</code><a class="headerlink" href="#6-jdbc-metadata-cache--design" title="Permanent link">&para;</a></h2>
+<p>Crawled catalog of remote databases, populated when the designer browses a
+source; read back to build pick-lists and preview queries.</p>
+<table>
+<thead>
+<tr>
+<th>Object</th>
+<th>Phase</th>
+<th>Owner</th>
+<th style="text-align: right;">Eng</th>
+<th style="text-align: right;">Svc</th>
+<th style="text-align: right;">WPF</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>t_jdbc_database</code></td>
+<td>DESIGN</td>
+<td>service</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">8</td>
+<td>Cached databases per connection.</td>
+</tr>
+<tr>
+<td><code>t_jdbc_schema</code></td>
+<td>DESIGN</td>
+<td>service</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td>Cached schemas.</td>
+</tr>
+<tr>
+<td><code>t_jdbc_table</code></td>
+<td>DESIGN</td>
+<td>service</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2</td>
+<td>Cached tables.</td>
+</tr>
+<tr>
+<td><code>t_jdbc_column</code></td>
+<td>DESIGN</td>
+<td>service</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1</td>
+<td>Cached columns + <code>java.sql.Types</code> ids.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-control-tests--both">7. Control tests — <code>BOTH</code><a class="headerlink" href="#7-control-tests--both" title="Permanent link">&para;</a></h2>
+<p>Definitions authored in the designer; results written per run. Column detail
+in <a href="../DATA-MODEL-SPINE/#d2-control-tests--column-dictionaries">DATA-MODEL-SPINE.md</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Object</th>
+<th>Phase</th>
+<th>Owner</th>
+<th style="text-align: right;">Eng</th>
+<th style="text-align: right;">Svc</th>
+<th style="text-align: right;">WPF</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>control_test</code></td>
+<td>DESIGN</td>
+<td>service</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">4</td>
+<td>Test master. PK <code>control_test_id</code> (seq <code>seq_control_test_id</code>).</td>
+</tr>
+<tr>
+<td><code>control_test_type</code></td>
+<td>DESIGN</td>
+<td>install</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td>Type lookup. PK <code>control_test_type_cd</code>.</td>
+</tr>
+<tr>
+<td><code>control_test_hierarchy</code></td>
+<td>DESIGN</td>
+<td>service</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td>Parent/child rollup (self-referential).</td>
+</tr>
+<tr>
+<td><code>control_test_h</code></td>
+<td>DESIGN</td>
+<td>service</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td>History/expiry variant. PK <code>(control_test_id, expiration_ts)</code>.</td>
+</tr>
+<tr>
+<td><code>control_test_run</code></td>
+<td>RUNTIME</td>
+<td>engine</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td>Result per run. PK <code>(batch_run_num, control_test_id, grouping_key)</code>; FK → <code>batch_cycle_run</code>, <code>control_test</code>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="8-data-quality-metrics--both">8. Data-quality metrics — <code>BOTH</code><a class="headerlink" href="#8-data-quality-metrics--both" title="Permanent link">&para;</a></h2>
+<p>In the <code>metrics</code> schema. Definitions on the design side; metric values written
+at run and read by the Runtime Metrics grid.</p>
+<table>
+<thead>
+<tr>
+<th>Object</th>
+<th>Phase</th>
+<th>Owner</th>
+<th style="text-align: right;">Eng</th>
+<th style="text-align: right;">Svc</th>
+<th style="text-align: right;">WPF</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>data_quality_metrics</code></td>
+<td>RUNTIME</td>
+<td>engine</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">17</td>
+<td>Metric rows per run. Seq <code>seq_data_quality_metrics</code>. Loosely typed — see <a href="../DATA-MODEL-SPINE/#g6">G6</a>.</td>
+</tr>
+<tr>
+<td><code>dq_definition</code></td>
+<td>DESIGN</td>
+<td>service</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">22</td>
+<td>DQ rule definitions.</td>
+</tr>
+<tr>
+<td><code>dq_group_schema</code></td>
+<td>DESIGN</td>
+<td>service</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">4</td>
+<td>DQ grouping. Seqs <code>seq_dq_group</code>, <code>seq_dq_id</code>.</td>
+</tr>
+<tr>
+<td><code>dq_result</code></td>
+<td>RUNTIME</td>
+<td>engine</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td>DQ evaluation results.</td>
+</tr>
+<tr>
+<td><code>data_quality_chain</code></td>
+<td>DESIGN</td>
+<td>engine</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td>DQ chain container.</td>
+</tr>
+<tr>
+<td><code>data_quality_chain_node</code></td>
+<td>DESIGN</td>
+<td>engine</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td>Nodes within a chain.</td>
+</tr>
+<tr>
+<td><code>default_metrics</code></td>
+<td>DESIGN</td>
+<td>install</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td>Seed set of default metric types.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="9-profiling--both">9. Profiling — <code>BOTH</code><a class="headerlink" href="#9-profiling--both" title="Permanent link">&para;</a></h2>
+<p>Column/table profiler. See <a href="../SCHEMA-PROFILE/">SCHEMA-PROFILE.md</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Object</th>
+<th>Phase</th>
+<th>Owner</th>
+<th style="text-align: right;">Eng</th>
+<th style="text-align: right;">Svc</th>
+<th style="text-align: right;">WPF</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>t_column_profile_sql</code></td>
+<td>DESIGN</td>
+<td>engine</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5</td>
+<td>Profiler SQL catalog. PK <code>(platform_type, profile_name)</code>.</td>
+</tr>
+<tr>
+<td><code>t_column_profile_results</code></td>
+<td>RUNTIME</td>
+<td>engine</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td>Per-column profile output.</td>
+</tr>
+<tr>
+<td><code>t_sql_profile_table</code></td>
+<td>RUNTIME</td>
+<td>engine</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td>Table-level profile. PK <code>profile_id</code> (seq <code>seq_profile_id</code>).</td>
+</tr>
+<tr>
+<td><code>t_sql_profile_column</code></td>
+<td>RUNTIME</td>
+<td>engine</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td>Column-level profile. Unique idx on <code>(profile_id, column_name)</code>.</td>
+</tr>
+<tr>
+<td><code>v_sql_profile_table</code></td>
+<td>BOTH</td>
+<td>service</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">4</td>
+<td>Client-facing profile view.</td>
+</tr>
+<tr>
+<td><code>v_sql_profile_column</code></td>
+<td>BOTH</td>
+<td>service</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td>Client-facing profile view.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="10-scheduling--alerting--design">10. Scheduling &amp; alerting — <code>DESIGN</code><a class="headerlink" href="#10-scheduling--alerting--design" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Object</th>
+<th>Phase</th>
+<th>Owner</th>
+<th style="text-align: right;">Eng</th>
+<th style="text-align: right;">Svc</th>
+<th style="text-align: right;">WPF</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cron_schedule_meta</code></td>
+<td>DESIGN</td>
+<td>service</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">7</td>
+<td>Cron entries. PK <code>cron_tab_entry</code>. Edited in the scheduler UI.</td>
+</tr>
+<tr>
+<td><code>object_trigger</code></td>
+<td>DESIGN</td>
+<td>service</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td>Object-based triggers. Seq <code>seq_object_trigger</code>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="11-security--rbac--design">11. Security &amp; RBAC — <code>DESIGN</code><a class="headerlink" href="#11-security--rbac--design" title="Permanent link">&para;</a></h2>
+<p>The service enforces owner-or-developer(≥1) guards on save/delete.</p>
+<table>
+<thead>
+<tr>
+<th>Object</th>
+<th>Phase</th>
+<th>Owner</th>
+<th style="text-align: right;">Eng</th>
+<th style="text-align: right;">Svc</th>
+<th style="text-align: right;">WPF</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>t_user</code></td>
+<td>DESIGN</td>
+<td>service</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">5</td>
+<td>User accounts (MD5 crypt passwords).</td>
+</tr>
+<tr>
+<td><code>t_user_session</code></td>
+<td>DESIGN</td>
+<td>service</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td>Auth sessions/tokens.</td>
+</tr>
+<tr>
+<td><code>t_component_role_permission</code></td>
+<td>DESIGN</td>
+<td>service</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td>Component-level perms.</td>
+</tr>
+<tr>
+<td><code>v_component_role_permission</code></td>
+<td>DESIGN</td>
+<td>service</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1</td>
+<td>Effective component permissions.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="12-service-audit--service">12. Service audit — <code>SERVICE</code><a class="headerlink" href="#12-service-audit--service" title="Permanent link">&para;</a></h2>
+<p>SOAP request/response logging and auth auditing — written by the meta-service.
+See SERVICE.md.</p>
+<table>
+<thead>
+<tr>
+<th>Object</th>
+<th>Phase</th>
+<th>Owner</th>
+<th style="text-align: right;">Eng</th>
+<th style="text-align: right;">Svc</th>
+<th style="text-align: right;">WPF</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>t_meta_request</code></td>
+<td>SERVICE</td>
+<td>service</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td>Inbound SOAP request record.</td>
+</tr>
+<tr>
+<td><code>t_meta_response</code></td>
+<td>SERVICE</td>
+<td>service</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td>Outbound response record.</td>
+</tr>
+<tr>
+<td><code>t_service_audit</code></td>
+<td>SERVICE</td>
+<td>service</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td>Operation audit trail.</td>
+</tr>
+<tr>
+<td><code>t_service_audit_invalid_auth</code></td>
+<td>SERVICE</td>
+<td>service</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td>Failed-auth log.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="13-config-system--lookups--design">13. Config, system &amp; lookups — <code>DESIGN</code><a class="headerlink" href="#13-config-system--lookups--design" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Object</th>
+<th>Phase</th>
+<th>Owner</th>
+<th style="text-align: right;">Eng</th>
+<th style="text-align: right;">Svc</th>
+<th style="text-align: right;">WPF</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>t_system_settings</code></td>
+<td>DESIGN</td>
+<td>service</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">4</td>
+<td>Global <code>param/value</code> settings. Read across all layers.</td>
+</tr>
+<tr>
+<td><code>license</code></td>
+<td>DESIGN</td>
+<td>service</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">30</td>
+<td>License records. Count partly inflated.</td>
+</tr>
+<tr>
+<td><code>t_maestro_servers</code></td>
+<td>DESIGN</td>
+<td>wpf</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td>Server registry; also the master→edge-node map (EDGE-NODE-SETUP.md).</td>
+</tr>
+<tr>
+<td><code>t_sql_types</code></td>
+<td>DESIGN</td>
+<td>install</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td><code>java.sql.Types</code> mapping catalog.</td>
+</tr>
+<tr>
+<td><code>t_step_help</code> / <code>v_step_help</code></td>
+<td>DESIGN</td>
+<td>install</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td>Step help text shown in the designer.</td>
+</tr>
+<tr>
+<td><code>hd_functions</code> / <code>hd_table_meta</code></td>
+<td>DESIGN</td>
+<td>engine</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td>Function catalog + HD table metadata (see FUNCTION-CATALOG-MIGRATION.md).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="14-machine-learning--both">14. Machine learning — <code>BOTH</code><a class="headerlink" href="#14-machine-learning--both" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Object</th>
+<th>Phase</th>
+<th>Owner</th>
+<th style="text-align: right;">Eng</th>
+<th style="text-align: right;">Svc</th>
+<th style="text-align: right;">WPF</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ml_models</code></td>
+<td>BOTH</td>
+<td>engine</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5</td>
+<td>Trained-model registry (ML feature-trainer/predictor steps).</td>
+</tr>
+<tr>
+<td><code>ml_feature_transformation</code></td>
+<td>BOTH</td>
+<td>engine</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">10</td>
+<td>Feature-engineering definitions/results.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="15-deprecated">15. Deprecated<a class="headerlink" href="#15-deprecated" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Object</th>
+<th>Phase</th>
+<th>Owner</th>
+<th style="text-align: right;">Eng</th>
+<th style="text-align: right;">Svc</th>
+<th style="text-align: right;">WPF</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pipe_schema2s3</code></td>
+<td>RUNTIME</td>
+<td>engine</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">4</td>
+<td>schema→S3 pipe state. Step is <code>@Deprecated</code> — prefer <code>JdbcTarget*</code> / onstage loaders.</td>
+</tr>
+<tr>
+<td><code>pipe_schema2s3_loads</code></td>
+<td>RUNTIME</td>
+<td>engine</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td>Per-load records for the deprecated pipe.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="excluded-from-the-model">Excluded from the model<a class="headerlink" href="#excluded-from-the-model" title="Permanent link">&para;</a></h2>
+<p>41 schema objects are <strong>not</strong> in the model above because no engine / service /
+WPF code references them. Two categories:</p>
+<h3 id="referenced-only-via-dynamically-built-sql-real-but-not-literally-grep-able">Referenced only via dynamically-built SQL (real, but not literally grep-able)<a class="headerlink" href="#referenced-only-via-dynamically-built-sql-real-but-not-literally-grep-able" title="Permanent link">&para;</a></h3>
+<p>These carry no literal token in the source (the SQL is assembled at runtime),
+so they fall outside a code-reference scan — but they are genuinely used. Listed
+here so they are not mistaken for dead objects.</p>
+<table>
+<thead>
+<tr>
+<th>Object</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>t_mpp_routines</code> · <code>t_mpp_system</code></td>
+<td>Per-platform MPP dialect routines + system vars (base64-tagged); read by the engine to build target SQL. See <a href="../MPP-SETUP/">MPP-SETUP.md</a>.</td>
+</tr>
+<tr>
+<td><code>t_workflow_item</code></td>
+<td>Workflow registry (name/type/tags/enabled). PK <code>workflow_name</code>.</td>
+</tr>
+<tr>
+<td><code>t_jdbc_metadata</code></td>
+<td>Driver capability metadata. PK <code>driver_class</code>.</td>
+</tr>
+<tr>
+<td><code>file_load_history</code></td>
+<td>Load-file audit written by loaders.</td>
+</tr>
+<tr>
+<td><code>t_agent_sessions</code> · <code>t_agent_session_response</code></td>
+<td>Agent session registry + responses.</td>
+</tr>
+<tr>
+<td><code>control_test_point</code></td>
+<td>Control-test expected/actual points; PK <code>(control_test_id, actual_or_expected)</code>, FK → <code>control_test</code> + <code>connection</code>. FK-central to the control-test model but reached only via dynamic SQL.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="no-code-path--candidates-to-retire">No code path — candidates to retire<a class="headerlink" href="#no-code-path--candidates-to-retire" title="Permanent link">&para;</a></h3>
+<p>Genuinely unreferenced. <strong>11 tables:</strong> <code>click_house_tmp</code> (transient staging,
+not a real entity), <code>connection_meta_onstage</code>, <code>cron_schedule_current</code>,
+<code>object_alert_rule</code>, <code>sqlm_config</code>, <code>sqlm_reserved</code>, <code>t_configuration_options</code>,
+<code>t_job_permissions</code>, <code>t_role_type</code>, <code>t_app_role_permission</code>,
+<code>t_mailserver_settings</code> (legacy, superseded by <code>t_connection_general</code>).</p>
+<p><strong>22 dashboard/reporting views</strong> with no code reference — resolved by external
+BI or dormant: <code>v_batch_run_status</code>, <code>v_last_batch_cycle_run</code>,
+<code>v_last_run_job_detail</code>, <code>v_running_batch_progress</code>, <code>v_longest_batch_runtimes</code>,
+<code>v_longest_job_runtimes</code>, <code>v_high_runtime_growth_batches</code>,
+<code>v_high_runtime_growth_jobs</code>, <code>v_high_failure_rate_batchs</code>,
+<code>v_high_failure_rate_jobs</code>, <code>v_high_failure_rate_control_tests</code>,
+<code>v_lastload_test_failures</code>, <code>v_missing_control_test_points</code>, <code>v_test_statistics</code>,
+<code>v_tune_test_tolerances</code>, <code>v_control_test_hierarchy1</code>, <code>v_components</code>,
+<code>v_app_role_permission</code>, <code>v_jdbc_database</code>, <code>v_jdbc_schema</code>, <code>v_jdbc_table</code>,
+<code>v_jdbc_metadata</code>.</p>
+<blockquote>
+<p>These are candidates for a decision: wire the useful views into the client's
+dashboards, or drop them from <code>initdb.sql</code>.</p>
+</blockquote>
+<h2 id="methodology">Methodology<a class="headerlink" href="#methodology" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Starting point</strong> — a word-boundary, case-insensitive <code>grep</code> for every
+  object name defined in <code>initdb.sql</code>
+  (<code>source/root-engine-install/db/initdb.sql</code>) across <code>.java</code> / <code>.cs</code> / <code>.xaml</code>
+  in the three layers (build dirs excluded).</li>
+<li><strong>In the model</strong> — object referenced by ≥1 layer. 72 objects.</li>
+<li><strong>Excluded</strong> — zero references across all three layers (41 objects), split
+  into "dynamic-SQL only" (real, but the name is assembled at runtime so <code>grep</code>
+  can't see it — includes <code>control_test_point</code>) vs "no code path" above.</li>
+<li><strong>Phase and owner</strong> — assigned from each object's role plus known
+  engine/service/client responsibilities; architectural judgments, not derived
+  from the counts.</li>
+<li><strong>Caveat</strong> — counts are a reference-frequency signal, not exact query counts.
+  Common English names inflate; dynamic SQL under-counts (hence the excluded
+  "dynamic-SQL only" category — those tables are real, just not literally
+  referenced).</li>
+</ul>
+<p>Keys/FKs (15 declared FKs, 47 PK/unique constraints) and sequences are covered
+in <a href="../DATA-MODEL-SPINE/#d5-complete-foreign-key-reference">DATA-MODEL-SPINE.md</a>.</p>
+<hr />
+<p><em>See also: ARCHITECTURE.md ·
+ENGINE.md (who writes the runtime tables) ·
+SERVICE.md (who owns the catalog) ·
+<a href="../SCHEMA-PROFILE/">SCHEMA-PROFILE.md</a> (profiling tables).</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top", "navigation.instant", "navigation.tracking", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+    
+  </body>
+</html>

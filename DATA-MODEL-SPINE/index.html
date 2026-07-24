@@ -1,0 +1,3026 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="User documentation for the ELTMaestro ELT/data-pipeline platform.">
+      
+      
+      
+        <link rel="canonical" href="https://zgurung.github.io/eltmaestro-docs/DATA-MODEL-SPINE/">
+      
+      
+        <link rel="prev" href="../DATA-MODEL/">
+      
+      
+        <link rel="next" href="../CICD-WORKFLOW-PROMOTION-PROPOSAL/">
+      
+      
+      <link rel="icon" href="../assets/elt-maestro-logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>Data model — execution spine - ELTMaestro Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#data-model--the-execution-spine-column-level" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ELTMaestro Documentation" class="md-header__button md-logo" aria-label="ELTMaestro Documentation" data-md-component="logo">
+      
+  <img src="../assets/elt-maestro-logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ELTMaestro Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Data model — execution spine
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ELTMaestro Documentation" class="md-nav__button md-logo" aria-label="ELTMaestro Documentation" data-md-component="logo">
+      
+  <img src="../assets/elt-maestro-logo.png" alt="logo">
+
+    </a>
+    ELTMaestro Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DOWNLOADS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Downloads
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Getting started
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Getting started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../USER-GUIDE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-GETTING-STARTED/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-MENUS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Menus
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Admin & connections
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Admin & connections
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-ADMIN/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Administration & setup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Workflows & steps
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Workflows & steps
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-WORKFLOWS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Workflows
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-STEPS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Step reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PARQUET-TO-REDSHIFT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    S3 Parquet → Redshift
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Medallion design
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Medallion design
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION-BRONZE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bronze
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION-SILVER/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Silver
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION-GOLD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Gold
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Platform setup
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Platform setup
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../REDSHIFT-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redshift
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPARKSQL-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SparkSQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CLICKHOUSE-AUTH/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ClickHouse auth
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MPP-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MPP prerequisites
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Install & operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Install & operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INSTALL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Install
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DOCKER-INSTALL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker image install
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UPGRADE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Upgrade
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../OPERATIONS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Operations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../VARIABLES/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Runtime variables
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SCHEMA-PROFILE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Schema profile
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DATA-MODEL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data model — tables & views
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Data model — execution spine
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Data model — execution spine
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#entityrelationship-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      Entity–relationship diagram
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#d1-execution--column-dictionaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      D1. Execution — column dictionaries
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="D1. Execution — column dictionaries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#batch_cycle--batch-header-pk-batch_cycle_id-seq-seq_batch_cycle_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      batch_cycle — batch header (PK batch_cycle_id, seq seq_batch_cycle_id)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batch_cycle_run--one-row-per-run-pk-batch_run_num-seq-seq_batch_run_num" class="md-nav__link">
+    <span class="md-ellipsis">
+      batch_cycle_run — one row per run (PK batch_run_num, seq seq_batch_run_num)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batch_cycle_run_job--job-leg-within-a-run-pk-batch_run_num-job_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      batch_cycle_run_job — job leg within a run (PK (batch_run_num, job_id))
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#job--job-registry-pk-job_id-seq-seq_job_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      job — job registry (PK job_id, seq seq_job_id)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#job_batch_cycle_run_msg--per-run-messages-pk-msg_num-batch_run_num-job_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      job_batch_cycle_run_msg — per-run messages (PK (msg_num, batch_run_num, job_id))
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#t_step_status--latest-status-per-step-no-pkfk-logical-key-batch_run_num-job_id-step_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      t_step_status — latest status per step (no PK/FK; logical key (batch_run_num, job_id, step_id))
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#t_step_run_detail--per-step-log-lines-no-pkfk-logical-key--log_ordinal" class="md-nav__link">
+    <span class="md-ellipsis">
+      t_step_run_detail — per-step log lines (no PK/FK; logical key + log_ordinal)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#t_pid_sessions--t_step_watermark--t_workflow_state_history" class="md-nav__link">
+    <span class="md-ellipsis">
+      t_pid_sessions · t_step_watermark · t_workflow_state_history
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#d2-control-tests--column-dictionaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      D2. Control tests — column dictionaries
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="D2. Control tests — column dictionaries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#control_test--test-master-pk-control_test_id-seq-seq_control_test_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      control_test — test master (PK control_test_id, seq seq_control_test_id)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control_test_run--result-per-run-pk-batch_run_num-control_test_id-grouping_key" class="md-nav__link">
+    <span class="md-ellipsis">
+      control_test_run — result per run (PK (batch_run_num, control_test_id, grouping_key))
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control_test_hierarchy--control_test_type" class="md-nav__link">
+    <span class="md-ellipsis">
+      control_test_hierarchy · control_test_type
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#d3-connections--catalog--column-dictionaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      D3. Connections &amp; catalog — column dictionaries
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="D3. Connections & catalog — column dictionaries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connection--legacy-master-pk-connection_id-seq-seq_connection_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      connection — legacy master (PK connection_id, seq seq_connection_id)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#t_jdbc--modern-jdbc-registry-pk-connection_id--char32-not-the-bigint-no-fk-to-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      t_jdbc — modern JDBC registry (PK connection_id — char(32), not the bigint; no FK to connection)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#t_connection_general--connection_type--t_job_meta--t_job_meta_history" class="md-nav__link">
+    <span class="md-ellipsis">
+      t_connection_general · connection_type · t_job_meta · t_job_meta_history
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#d4-dq-metrics--column-dictionary" class="md-nav__link">
+    <span class="md-ellipsis">
+      D4. DQ metrics — column dictionary
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="D4. DQ metrics — column dictionary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metricsdata_quality_metrics--metric-rows-per-run-no-declared-pk-ordinal--seq_data_quality_metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      metrics.data_quality_metrics — metric rows per run (no declared PK; ordinal = seq_data_quality_metrics)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#d5-complete-foreign-key-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      D5. Complete foreign-key reference
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#d6-modeling-gotchas" class="md-nav__link">
+    <span class="md-ellipsis">
+      D6. Modeling gotchas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="D6. Modeling gotchas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#g1--two-connection-registries-joined-by-name-not-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      G1 — Two connection registries, joined by name not id
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g2--the-step-tables-have-no-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      G2 — The step tables have no keys
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g3--status-is-encoded-four-different-ways" class="md-nav__link">
+    <span class="md-ellipsis">
+      G3 — Status is encoded four different ways
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g4--type-code-width-drift" class="md-nav__link">
+    <span class="md-ellipsis">
+      G4 — Type-code width drift
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g5--control_test-points-at-connections-two-ways" class="md-nav__link">
+    <span class="md-ellipsis">
+      G5 — control_test points at connections two ways
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g6--metricsdata_quality_metrics-is-loosely-typed" class="md-nav__link">
+    <span class="md-ellipsis">
+      G6 — metrics.data_quality_metrics is loosely typed
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g7--presentation-state-lives-in-data-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      G7 — Presentation state lives in data tables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g8--t_workflow_state_history-has-1-second-key-resolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      G8 — t_workflow_state_history has 1-second key resolution
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Proposals
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Proposals
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CICD-WORKFLOW-PROMOTION-PROPOSAL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Workflow promotion (CI/CD)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#entityrelationship-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      Entity–relationship diagram
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#d1-execution--column-dictionaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      D1. Execution — column dictionaries
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="D1. Execution — column dictionaries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#batch_cycle--batch-header-pk-batch_cycle_id-seq-seq_batch_cycle_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      batch_cycle — batch header (PK batch_cycle_id, seq seq_batch_cycle_id)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batch_cycle_run--one-row-per-run-pk-batch_run_num-seq-seq_batch_run_num" class="md-nav__link">
+    <span class="md-ellipsis">
+      batch_cycle_run — one row per run (PK batch_run_num, seq seq_batch_run_num)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batch_cycle_run_job--job-leg-within-a-run-pk-batch_run_num-job_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      batch_cycle_run_job — job leg within a run (PK (batch_run_num, job_id))
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#job--job-registry-pk-job_id-seq-seq_job_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      job — job registry (PK job_id, seq seq_job_id)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#job_batch_cycle_run_msg--per-run-messages-pk-msg_num-batch_run_num-job_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      job_batch_cycle_run_msg — per-run messages (PK (msg_num, batch_run_num, job_id))
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#t_step_status--latest-status-per-step-no-pkfk-logical-key-batch_run_num-job_id-step_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      t_step_status — latest status per step (no PK/FK; logical key (batch_run_num, job_id, step_id))
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#t_step_run_detail--per-step-log-lines-no-pkfk-logical-key--log_ordinal" class="md-nav__link">
+    <span class="md-ellipsis">
+      t_step_run_detail — per-step log lines (no PK/FK; logical key + log_ordinal)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#t_pid_sessions--t_step_watermark--t_workflow_state_history" class="md-nav__link">
+    <span class="md-ellipsis">
+      t_pid_sessions · t_step_watermark · t_workflow_state_history
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#d2-control-tests--column-dictionaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      D2. Control tests — column dictionaries
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="D2. Control tests — column dictionaries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#control_test--test-master-pk-control_test_id-seq-seq_control_test_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      control_test — test master (PK control_test_id, seq seq_control_test_id)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control_test_run--result-per-run-pk-batch_run_num-control_test_id-grouping_key" class="md-nav__link">
+    <span class="md-ellipsis">
+      control_test_run — result per run (PK (batch_run_num, control_test_id, grouping_key))
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control_test_hierarchy--control_test_type" class="md-nav__link">
+    <span class="md-ellipsis">
+      control_test_hierarchy · control_test_type
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#d3-connections--catalog--column-dictionaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      D3. Connections &amp; catalog — column dictionaries
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="D3. Connections & catalog — column dictionaries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connection--legacy-master-pk-connection_id-seq-seq_connection_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      connection — legacy master (PK connection_id, seq seq_connection_id)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#t_jdbc--modern-jdbc-registry-pk-connection_id--char32-not-the-bigint-no-fk-to-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      t_jdbc — modern JDBC registry (PK connection_id — char(32), not the bigint; no FK to connection)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#t_connection_general--connection_type--t_job_meta--t_job_meta_history" class="md-nav__link">
+    <span class="md-ellipsis">
+      t_connection_general · connection_type · t_job_meta · t_job_meta_history
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#d4-dq-metrics--column-dictionary" class="md-nav__link">
+    <span class="md-ellipsis">
+      D4. DQ metrics — column dictionary
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="D4. DQ metrics — column dictionary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metricsdata_quality_metrics--metric-rows-per-run-no-declared-pk-ordinal--seq_data_quality_metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      metrics.data_quality_metrics — metric rows per run (no declared PK; ordinal = seq_data_quality_metrics)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#d5-complete-foreign-key-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      D5. Complete foreign-key reference
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#d6-modeling-gotchas" class="md-nav__link">
+    <span class="md-ellipsis">
+      D6. Modeling gotchas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="D6. Modeling gotchas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#g1--two-connection-registries-joined-by-name-not-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      G1 — Two connection registries, joined by name not id
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g2--the-step-tables-have-no-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      G2 — The step tables have no keys
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g3--status-is-encoded-four-different-ways" class="md-nav__link">
+    <span class="md-ellipsis">
+      G3 — Status is encoded four different ways
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g4--type-code-width-drift" class="md-nav__link">
+    <span class="md-ellipsis">
+      G4 — Type-code width drift
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g5--control_test-points-at-connections-two-ways" class="md-nav__link">
+    <span class="md-ellipsis">
+      G5 — control_test points at connections two ways
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g6--metricsdata_quality_metrics-is-loosely-typed" class="md-nav__link">
+    <span class="md-ellipsis">
+      G6 — metrics.data_quality_metrics is loosely typed
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g7--presentation-state-lives-in-data-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      G7 — Presentation state lives in data tables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g8--t_workflow_state_history-has-1-second-key-resolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      G8 — t_workflow_state_history has 1-second key resolution
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="data-model--the-execution-spine-column-level">Data Model — the execution spine (column-level)<a class="headerlink" href="#data-model--the-execution-spine-column-level" title="Permanent link">&para;</a></h1>
+<p>The column-level model of ELTMaestro's core: the <strong>execution</strong> tables
+(batch → run → job leg → step), the <strong>control-test</strong> tables, and the
+<strong>connection</strong> anchors. This is the part a warehouse model or a reporting join
+has to get right.</p>
+<p>For the full object inventory (the 72 code-referenced tables + views, by
+domain, with design-vs-runtime and layer ownership) see
+<strong><a href="../DATA-MODEL/">DATA-MODEL.md</a></strong>.</p>
+<blockquote>
+<p>Every table also carries the standard <strong>audit tail</strong> — <code>create_ts</code>,
+<code>last_upd_ts</code>, <code>created_by_user</code> (default <code>current_user</code>), <code>upd_by_user</code> —
+omitted from the dictionaries below to keep the meaningful columns legible.
+Type shorthand: <code>varchar N</code> = <code>character varying(N)</code>, <code>char N</code> =
+<code>character(N)</code>, <code>ts</code> = <code>timestamp</code>.</p>
+</blockquote>
+<h2 id="entityrelationship-diagram">Entity–relationship diagram<a class="headerlink" href="#entityrelationship-diagram" title="Permanent link">&para;</a></h2>
+<p>Solid lines are <strong>declared foreign keys</strong> in <code>initdb.sql</code>; dashed lines are
+<strong>logical</strong> joins with no enforced FK. On composite keys, members are marked
+<code>PK</code>; their FK role is carried by the relationship edge.</p>
+<blockquote>
+<p>The link table <code>control_test_point</code> (the only <code>control_test ↔ connection</code>
+join) is <strong>excluded</strong> — it has no code reference and is reached only via
+dynamic SQL, so it is not drawn here. See
+<a href="../DATA-MODEL/#excluded-from-the-model">DATA-MODEL.md → Excluded</a>.</p>
+</blockquote>
+<p><img alt="Entity–relationship diagram of the ELTMaestro execution spine — batch_cycle → batch_cycle_run → batch_cycle_run_job → t_step_status/t_step_run_detail, the control-test tables, and the connection anchors." src="../images/data-model-spine.png" /></p>
+<details>
+<summary>Diagram source (Mermaid) — edit this and re-render <code>images/data-model-spine.png</code></summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>erDiagram
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  batch_cycle_type ||--o{ batch_cycle : &quot;types&quot;
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  batch_cycle ||--o{ batch_cycle_run : &quot;runs&quot;
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  batch_cycle_run ||--o{ batch_cycle_run_job : &quot;job legs&quot;
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  batch_cycle_run ||--o{ job_batch_cycle_run_msg : &quot;messages&quot;
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  batch_cycle_run ||--o{ control_test_run : &quot;test results&quot;
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  batch_cycle_run ||..o{ t_pid_sessions : &quot;live process (logical)&quot;
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  job ||--o{ batch_cycle_run_job : &quot;executes as&quot;
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  job ||--o{ job_batch_cycle_run_msg : &quot;logs&quot;
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  batch_cycle_run_job ||..o{ t_step_status : &quot;step status (logical)&quot;
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  batch_cycle_run_job ||..o{ t_step_run_detail : &quot;step logs (logical)&quot;
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>  control_test_type ||--o{ control_test : &quot;categorizes&quot;
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>  control_test ||--o{ control_test_hierarchy : &quot;rolls up&quot;
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>  control_test ||--o{ control_test_run : &quot;produces&quot;
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>  connection_type ||--o{ connection : &quot;typed as&quot;
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>  batch_cycle_type {
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    char batch_cycle_type_cd PK
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    varchar batch_cycle_type_desc
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>  }
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>  batch_cycle {
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    bigint batch_cycle_id PK
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    char batch_cycle_type_cd FK
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>    varchar batch_cycle_nm
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    varchar batch_cycle_desc
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>  }
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>  batch_cycle_run {
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>    bigint batch_run_num PK
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>    bigint batch_cycle_id FK
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>    varchar batch_status_cd
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>    ts batch_run_start_ts
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>    ts batch_run_end_ts
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>    bool completed
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>    bigint error_count
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>    varchar batch_cycle_highwater_mark
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>  }
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>  batch_cycle_run_job {
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>    bigint batch_run_num PK
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>    bigint job_id PK
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>    varchar job_status_cd
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>    ts job_run_start_ts
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>    ts job_run_end_ts
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>    varchar job_highwater_mark
+<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>  }
+<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>  job {
+<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>    bigint job_id PK
+<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>    varchar job_nm
+<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>    varchar job_desc
+<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>    ts last_queried_ts
+<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>  }
+<a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a>  job_batch_cycle_run_msg {
+<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>    bigint msg_num PK
+<a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a>    bigint batch_run_num PK
+<a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>    bigint job_id PK
+<a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a>    varchar phase_nm
+<a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>    bool is_error_msg
+<a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>    varchar msg
+<a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>    varchar severity_cd
+<a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a>    bigint rows_affected
+<a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a>  }
+<a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a>  t_step_status {
+<a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a>    bigint batch_run_num &quot;logical key&quot;
+<a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a>    bigint job_id &quot;logical key&quot;
+<a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a>    int step_id &quot;logical key&quot;
+<a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a>    varchar step_name
+<a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a>    varchar step_type
+<a id="__codelineno-0-67" name="__codelineno-0-67" href="#__codelineno-0-67"></a>    varchar step_status
+<a id="__codelineno-0-68" name="__codelineno-0-68" href="#__codelineno-0-68"></a>    ts start_ts
+<a id="__codelineno-0-69" name="__codelineno-0-69" href="#__codelineno-0-69"></a>    ts end_ts
+<a id="__codelineno-0-70" name="__codelineno-0-70" href="#__codelineno-0-70"></a>    ts update_ts
+<a id="__codelineno-0-71" name="__codelineno-0-71" href="#__codelineno-0-71"></a>  }
+<a id="__codelineno-0-72" name="__codelineno-0-72" href="#__codelineno-0-72"></a>  t_step_run_detail {
+<a id="__codelineno-0-73" name="__codelineno-0-73" href="#__codelineno-0-73"></a>    bigint batch_run_num &quot;logical key&quot;
+<a id="__codelineno-0-74" name="__codelineno-0-74" href="#__codelineno-0-74"></a>    bigint job_id &quot;logical key&quot;
+<a id="__codelineno-0-75" name="__codelineno-0-75" href="#__codelineno-0-75"></a>    int step_id &quot;logical key&quot;
+<a id="__codelineno-0-76" name="__codelineno-0-76" href="#__codelineno-0-76"></a>    bigint log_ordinal
+<a id="__codelineno-0-77" name="__codelineno-0-77" href="#__codelineno-0-77"></a>    bool log_is_error
+<a id="__codelineno-0-78" name="__codelineno-0-78" href="#__codelineno-0-78"></a>    varchar log_message
+<a id="__codelineno-0-79" name="__codelineno-0-79" href="#__codelineno-0-79"></a>    bigint affected_rows
+<a id="__codelineno-0-80" name="__codelineno-0-80" href="#__codelineno-0-80"></a>    bigint affected_size_bytes
+<a id="__codelineno-0-81" name="__codelineno-0-81" href="#__codelineno-0-81"></a>    ts log_ts
+<a id="__codelineno-0-82" name="__codelineno-0-82" href="#__codelineno-0-82"></a>  }
+<a id="__codelineno-0-83" name="__codelineno-0-83" href="#__codelineno-0-83"></a>  t_pid_sessions {
+<a id="__codelineno-0-84" name="__codelineno-0-84" href="#__codelineno-0-84"></a>    bigint run_number PK
+<a id="__codelineno-0-85" name="__codelineno-0-85" href="#__codelineno-0-85"></a>    varchar workflow_name
+<a id="__codelineno-0-86" name="__codelineno-0-86" href="#__codelineno-0-86"></a>    varchar server_host
+<a id="__codelineno-0-87" name="__codelineno-0-87" href="#__codelineno-0-87"></a>    bigint pid
+<a id="__codelineno-0-88" name="__codelineno-0-88" href="#__codelineno-0-88"></a>    varchar pid_state
+<a id="__codelineno-0-89" name="__codelineno-0-89" href="#__codelineno-0-89"></a>    ts start_ts
+<a id="__codelineno-0-90" name="__codelineno-0-90" href="#__codelineno-0-90"></a>    ts stop_ts
+<a id="__codelineno-0-91" name="__codelineno-0-91" href="#__codelineno-0-91"></a>  }
+<a id="__codelineno-0-92" name="__codelineno-0-92" href="#__codelineno-0-92"></a>  control_test_type {
+<a id="__codelineno-0-93" name="__codelineno-0-93" href="#__codelineno-0-93"></a>    char control_test_type_cd PK
+<a id="__codelineno-0-94" name="__codelineno-0-94" href="#__codelineno-0-94"></a>    varchar control_test_type_desc
+<a id="__codelineno-0-95" name="__codelineno-0-95" href="#__codelineno-0-95"></a>  }
+<a id="__codelineno-0-96" name="__codelineno-0-96" href="#__codelineno-0-96"></a>  control_test {
+<a id="__codelineno-0-97" name="__codelineno-0-97" href="#__codelineno-0-97"></a>    bigint control_test_id PK
+<a id="__codelineno-0-98" name="__codelineno-0-98" href="#__codelineno-0-98"></a>    varchar control_test_nm
+<a id="__codelineno-0-99" name="__codelineno-0-99" href="#__codelineno-0-99"></a>    char control_test_type_cd FK
+<a id="__codelineno-0-100" name="__codelineno-0-100" href="#__codelineno-0-100"></a>    numeric control_test_tolerance
+<a id="__codelineno-0-101" name="__codelineno-0-101" href="#__codelineno-0-101"></a>    varchar expected_value_query
+<a id="__codelineno-0-102" name="__codelineno-0-102" href="#__codelineno-0-102"></a>    varchar actual_value_query
+<a id="__codelineno-0-103" name="__codelineno-0-103" href="#__codelineno-0-103"></a>    varchar expected_query_connection
+<a id="__codelineno-0-104" name="__codelineno-0-104" href="#__codelineno-0-104"></a>    varchar actual_query_connection
+<a id="__codelineno-0-105" name="__codelineno-0-105" href="#__codelineno-0-105"></a>  }
+<a id="__codelineno-0-106" name="__codelineno-0-106" href="#__codelineno-0-106"></a>  control_test_hierarchy {
+<a id="__codelineno-0-107" name="__codelineno-0-107" href="#__codelineno-0-107"></a>    bigint control_test_id PK
+<a id="__codelineno-0-108" name="__codelineno-0-108" href="#__codelineno-0-108"></a>    bigint parent_control_test_id PK
+<a id="__codelineno-0-109" name="__codelineno-0-109" href="#__codelineno-0-109"></a>  }
+<a id="__codelineno-0-110" name="__codelineno-0-110" href="#__codelineno-0-110"></a>  control_test_run {
+<a id="__codelineno-0-111" name="__codelineno-0-111" href="#__codelineno-0-111"></a>    bigint batch_run_num PK
+<a id="__codelineno-0-112" name="__codelineno-0-112" href="#__codelineno-0-112"></a>    bigint control_test_id PK
+<a id="__codelineno-0-113" name="__codelineno-0-113" href="#__codelineno-0-113"></a>    varchar grouping_key PK
+<a id="__codelineno-0-114" name="__codelineno-0-114" href="#__codelineno-0-114"></a>    double expected_value
+<a id="__codelineno-0-115" name="__codelineno-0-115" href="#__codelineno-0-115"></a>    double actual_value
+<a id="__codelineno-0-116" name="__codelineno-0-116" href="#__codelineno-0-116"></a>    bool test_passed_ind
+<a id="__codelineno-0-117" name="__codelineno-0-117" href="#__codelineno-0-117"></a>    char result_color_cd
+<a id="__codelineno-0-118" name="__codelineno-0-118" href="#__codelineno-0-118"></a>  }
+<a id="__codelineno-0-119" name="__codelineno-0-119" href="#__codelineno-0-119"></a>  connection_type {
+<a id="__codelineno-0-120" name="__codelineno-0-120" href="#__codelineno-0-120"></a>    char connection_type_cd PK
+<a id="__codelineno-0-121" name="__codelineno-0-121" href="#__codelineno-0-121"></a>    varchar connection_type_desc
+<a id="__codelineno-0-122" name="__codelineno-0-122" href="#__codelineno-0-122"></a>  }
+<a id="__codelineno-0-123" name="__codelineno-0-123" href="#__codelineno-0-123"></a>  connection {
+<a id="__codelineno-0-124" name="__codelineno-0-124" href="#__codelineno-0-124"></a>    bigint connection_id PK
+<a id="__codelineno-0-125" name="__codelineno-0-125" href="#__codelineno-0-125"></a>    char connection_type_cd FK
+<a id="__codelineno-0-126" name="__codelineno-0-126" href="#__codelineno-0-126"></a>    varchar host_distinguished_nm
+<a id="__codelineno-0-127" name="__codelineno-0-127" href="#__codelineno-0-127"></a>    varchar database_nm
+<a id="__codelineno-0-128" name="__codelineno-0-128" href="#__codelineno-0-128"></a>    varchar login_nm
+<a id="__codelineno-0-129" name="__codelineno-0-129" href="#__codelineno-0-129"></a>    varchar password_encrypted_txt
+<a id="__codelineno-0-130" name="__codelineno-0-130" href="#__codelineno-0-130"></a>  }
+</code></pre></div>
+</details>
+<h2 id="d1-execution--column-dictionaries">D1. Execution — column dictionaries<a class="headerlink" href="#d1-execution--column-dictionaries" title="Permanent link">&para;</a></h2>
+<p>Keys: <strong>PK</strong> primary key · <strong>FK</strong> foreign key · <strong>LOG</strong> logical (unenforced) key.</p>
+<h3 id="batch_cycle--batch-header-pk-batch_cycle_id-seq-seq_batch_cycle_id"><code>batch_cycle</code> — batch header (PK <code>batch_cycle_id</code>, seq <code>seq_batch_cycle_id</code>)<a class="headerlink" href="#batch_cycle--batch-header-pk-batch_cycle_id-seq-seq_batch_cycle_id" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Key</th>
+<th>Null / default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>batch_cycle_id</code></td>
+<td>bigint</td>
+<td>PK</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>batch_cycle_type_cd</code></td>
+<td>char 5</td>
+<td>FK → <code>batch_cycle_type</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>batch_cycle_nm</code></td>
+<td>varchar 255</td>
+<td></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>batch_cycle_desc</code></td>
+<td>varchar 255</td>
+<td></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="batch_cycle_run--one-row-per-run-pk-batch_run_num-seq-seq_batch_run_num"><code>batch_cycle_run</code> — one row per run (PK <code>batch_run_num</code>, seq <code>seq_batch_run_num</code>)<a class="headerlink" href="#batch_cycle_run--one-row-per-run-pk-batch_run_num-seq-seq_batch_run_num" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Key</th>
+<th>Null / default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>batch_run_num</code></td>
+<td>bigint</td>
+<td>PK</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>batch_cycle_id</code></td>
+<td>bigint</td>
+<td>FK → <code>batch_cycle</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>batch_status_cd</code></td>
+<td>varchar 12</td>
+<td></td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>batch_run_start_ts</code></td>
+<td>ts</td>
+<td></td>
+<td>NOT NULL <code>now()</code></td>
+</tr>
+<tr>
+<td><code>batch_run_end_ts</code></td>
+<td>ts</td>
+<td></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>batch_cycle_data_validity_ts</code></td>
+<td>ts</td>
+<td></td>
+<td><code>now()</code></td>
+</tr>
+<tr>
+<td><code>batch_cycle_highwater_mark</code></td>
+<td>varchar 60</td>
+<td></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>batch_cycle_lowwater_mark</code></td>
+<td>varchar 60</td>
+<td></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>completed</code></td>
+<td>bool</td>
+<td></td>
+<td>NOT NULL <code>false</code></td>
+</tr>
+<tr>
+<td><code>error_count</code></td>
+<td>bigint</td>
+<td></td>
+<td>NOT NULL <code>0</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="batch_cycle_run_job--job-leg-within-a-run-pk-batch_run_num-job_id"><code>batch_cycle_run_job</code> — job leg within a run (PK <code>(batch_run_num, job_id)</code>)<a class="headerlink" href="#batch_cycle_run_job--job-leg-within-a-run-pk-batch_run_num-job_id" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Key</th>
+<th>Null / default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>batch_run_num</code></td>
+<td>bigint</td>
+<td>PK · FK → <code>batch_cycle_run</code></td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>job_id</code></td>
+<td>bigint</td>
+<td>PK · FK → <code>job</code></td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>job_status_cd</code></td>
+<td>varchar 20</td>
+<td></td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>job_run_start_ts</code></td>
+<td>ts</td>
+<td></td>
+<td>NOT NULL <code>now()</code></td>
+</tr>
+<tr>
+<td><code>job_run_end_ts</code></td>
+<td>ts</td>
+<td></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>job_highwater_mark</code> / <code>job_lowwater_mark</code></td>
+<td>varchar 60</td>
+<td></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="job--job-registry-pk-job_id-seq-seq_job_id"><code>job</code> — job registry (PK <code>job_id</code>, seq <code>seq_job_id</code>)<a class="headerlink" href="#job--job-registry-pk-job_id-seq-seq_job_id" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Key</th>
+<th>Null / default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>job_id</code></td>
+<td>bigint</td>
+<td>PK</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>job_nm</code></td>
+<td>varchar 80</td>
+<td></td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>job_desc</code></td>
+<td>varchar 255</td>
+<td></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>last_queried_ts</code></td>
+<td>ts</td>
+<td></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="job_batch_cycle_run_msg--per-run-messages-pk-msg_num-batch_run_num-job_id"><code>job_batch_cycle_run_msg</code> — per-run messages (PK <code>(msg_num, batch_run_num, job_id)</code>)<a class="headerlink" href="#job_batch_cycle_run_msg--per-run-messages-pk-msg_num-batch_run_num-job_id" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Key</th>
+<th>Null / default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>msg_num</code></td>
+<td>bigint</td>
+<td>PK</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>batch_run_num</code></td>
+<td>bigint</td>
+<td>PK · FK → <code>batch_cycle_run</code></td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>job_id</code></td>
+<td>bigint</td>
+<td>PK · FK → <code>job</code></td>
+<td>NOT NULL, default <code>0</code></td>
+</tr>
+<tr>
+<td><code>phase_nm</code></td>
+<td>varchar 500</td>
+<td></td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>msg</code></td>
+<td>varchar 4096</td>
+<td></td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>is_error_msg</code></td>
+<td>bool</td>
+<td></td>
+<td>NOT NULL <code>false</code></td>
+</tr>
+<tr>
+<td><code>severity_cd</code></td>
+<td>varchar 10</td>
+<td></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>data_snippet</code></td>
+<td>varchar 1024</td>
+<td></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>phase_id</code> / <code>rows_affected</code></td>
+<td>bigint</td>
+<td></td>
+<td>default <code>0</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="t_step_status--latest-status-per-step-no-pkfk-logical-key-batch_run_num-job_id-step_id"><code>t_step_status</code> — latest status per step (<strong>no PK/FK</strong>; logical key <code>(batch_run_num, job_id, step_id)</code>)<a class="headerlink" href="#t_step_status--latest-status-per-step-no-pkfk-logical-key-batch_run_num-job_id-step_id" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Key</th>
+<th>Null / default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>batch_run_num</code></td>
+<td>bigint</td>
+<td>LOG</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>job_id</code></td>
+<td>bigint</td>
+<td>LOG</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>step_id</code></td>
+<td>int</td>
+<td>LOG</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>step_name</code></td>
+<td>varchar 128</td>
+<td></td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>step_type</code></td>
+<td>varchar 128</td>
+<td></td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>step_status</code></td>
+<td>varchar 64</td>
+<td></td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>start_ts</code> / <code>end_ts</code></td>
+<td>ts</td>
+<td></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>create_ts</code> / <code>update_ts</code></td>
+<td>ts</td>
+<td></td>
+<td>NOT NULL <code>now()</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="t_step_run_detail--per-step-log-lines-no-pkfk-logical-key--log_ordinal"><code>t_step_run_detail</code> — per-step log lines (<strong>no PK/FK</strong>; logical key + <code>log_ordinal</code>)<a class="headerlink" href="#t_step_run_detail--per-step-log-lines-no-pkfk-logical-key--log_ordinal" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Key</th>
+<th>Null / default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>batch_run_num</code> / <code>job_id</code> / <code>step_id</code></td>
+<td>bigint / int</td>
+<td>LOG</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>step_name</code> / <code>step_type</code></td>
+<td>varchar 128</td>
+<td></td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>log_ordinal</code></td>
+<td>bigint</td>
+<td></td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>log_is_error</code></td>
+<td>bool</td>
+<td></td>
+<td>NOT NULL <code>false</code></td>
+</tr>
+<tr>
+<td><code>log_message</code> / <code>log_message_stack</code></td>
+<td>varchar 65535</td>
+<td></td>
+<td>default <code>''</code></td>
+</tr>
+<tr>
+<td><code>affected_rows</code> / <code>affected_size_bytes</code></td>
+<td>bigint</td>
+<td></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>log_ts</code></td>
+<td>ts</td>
+<td></td>
+<td>NOT NULL <code>now()</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="t_pid_sessions--t_step_watermark--t_workflow_state_history"><code>t_pid_sessions</code> · <code>t_step_watermark</code> · <code>t_workflow_state_history</code><a class="headerlink" href="#t_pid_sessions--t_step_watermark--t_workflow_state_history" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Table.Column</th>
+<th>Type</th>
+<th>Key</th>
+<th>Null / default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>t_pid_sessions.run_number</code></td>
+<td>bigint</td>
+<td>PK</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>t_pid_sessions.pid_state</code></td>
+<td>varchar 8</td>
+<td></td>
+<td>NOT NULL <code>'ACTIVE'</code></td>
+</tr>
+<tr>
+<td><code>t_pid_sessions.workflow_name</code> / <code>server_host</code></td>
+<td>varchar 256</td>
+<td></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>t_pid_sessions.pid</code></td>
+<td>bigint</td>
+<td></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>t_step_watermark.watermark_name</code></td>
+<td>varchar 128</td>
+<td>PK</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>t_step_watermark.watermark_value</code></td>
+<td>varchar 512</td>
+<td></td>
+<td><code>''</code> · holds full S3 folder path (PushFile)</td>
+</tr>
+<tr>
+<td><code>t_workflow_state_history.(run_seq_number, run_number, job_id)</code></td>
+<td>bigint</td>
+<td>UQ idx</td>
+<td>1-second collision guard — see <a href="#g8">G8</a></td>
+</tr>
+<tr>
+<td><code>t_workflow_state_history.status_code</code> / <code>status_value</code></td>
+<td>varchar 32</td>
+<td></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h2 id="d2-control-tests--column-dictionaries">D2. Control tests — column dictionaries<a class="headerlink" href="#d2-control-tests--column-dictionaries" title="Permanent link">&para;</a></h2>
+<h3 id="control_test--test-master-pk-control_test_id-seq-seq_control_test_id"><code>control_test</code> — test master (PK <code>control_test_id</code>, seq <code>seq_control_test_id</code>)<a class="headerlink" href="#control_test--test-master-pk-control_test_id-seq-seq_control_test_id" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Key</th>
+<th>Null / default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>control_test_id</code></td>
+<td>bigint</td>
+<td>PK</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>control_test_nm</code></td>
+<td>varchar 80</td>
+<td></td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>control_test_type_cd</code></td>
+<td>char 1</td>
+<td>FK → <code>control_test_type</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>control_test_category</code></td>
+<td>varchar 60</td>
+<td></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>control_test_tolerance</code></td>
+<td>numeric(8,2)</td>
+<td></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>expected_value_query</code> / <code>actual_value_query</code></td>
+<td>varchar 2000</td>
+<td></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>expected_query_connection</code> / <code>actual_query_connection</code></td>
+<td>varchar 80</td>
+<td></td>
+<td>NOT NULL <code>'DEFAULT'</code> · connection <strong>by name</strong></td>
+</tr>
+<tr>
+<td><code>xloc</code> / <code>yloc</code></td>
+<td>double</td>
+<td></td>
+<td><code>0</code> · canvas layout</td>
+</tr>
+<tr>
+<td><code>nodecolor</code></td>
+<td>int</td>
+<td></td>
+<td><code>1</code> · canvas layout</td>
+</tr>
+</tbody>
+</table>
+<h3 id="control_test_run--result-per-run-pk-batch_run_num-control_test_id-grouping_key"><code>control_test_run</code> — result per run (PK <code>(batch_run_num, control_test_id, grouping_key)</code>)<a class="headerlink" href="#control_test_run--result-per-run-pk-batch_run_num-control_test_id-grouping_key" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Key</th>
+<th>Null / default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>batch_run_num</code></td>
+<td>bigint</td>
+<td>PK · FK → <code>batch_cycle_run</code></td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>control_test_id</code></td>
+<td>bigint</td>
+<td>PK · FK → <code>control_test</code></td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>grouping_key</code></td>
+<td>varchar 160</td>
+<td>PK</td>
+<td>NOT NULL <code>'~'</code></td>
+</tr>
+<tr>
+<td><code>expected_value</code> / <code>actual_value</code></td>
+<td>double</td>
+<td></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>test_passed_ind</code></td>
+<td>bool</td>
+<td></td>
+<td>— · pass/fail</td>
+</tr>
+<tr>
+<td><code>result_color_cd</code></td>
+<td>char 1</td>
+<td></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="control_test_hierarchy--control_test_type"><code>control_test_hierarchy</code> · <code>control_test_type</code><a class="headerlink" href="#control_test_hierarchy--control_test_type" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><code>control_test_point</code> is <strong>excluded</strong> from the model (no code reference, dynamic
+SQL only) — its columns are omitted here. For reference it keys on
+<code>(control_test_id, actual_or_expected)</code> with FKs to <code>control_test</code> and
+<code>connection</code>; that is the schema's connection-<strong>by-id</strong> path noted in <a href="#g5">G5</a>.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Table.Column</th>
+<th>Type</th>
+<th>Key</th>
+<th>Null / default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>control_test_hierarchy.control_test_id</code></td>
+<td>bigint</td>
+<td>PK · FK → <code>control_test</code></td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>control_test_hierarchy.parent_control_test_id</code></td>
+<td>bigint</td>
+<td>PK · FK → <code>control_test</code> (self)</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>control_test_type.control_test_type_cd</code></td>
+<td>char 1</td>
+<td>PK</td>
+<td>NOT NULL</td>
+</tr>
+</tbody>
+</table>
+<h2 id="d3-connections--catalog--column-dictionaries">D3. Connections &amp; catalog — column dictionaries<a class="headerlink" href="#d3-connections--catalog--column-dictionaries" title="Permanent link">&para;</a></h2>
+<h3 id="connection--legacy-master-pk-connection_id-seq-seq_connection_id"><code>connection</code> — legacy master (PK <code>connection_id</code>, seq <code>seq_connection_id</code>)<a class="headerlink" href="#connection--legacy-master-pk-connection_id-seq-seq_connection_id" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Key</th>
+<th>Null / default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>connection_id</code></td>
+<td>bigint</td>
+<td>PK</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>connection_type_cd</code></td>
+<td>char 1</td>
+<td>FK → <code>connection_type</code></td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>host_distinguished_nm</code></td>
+<td>varchar 80</td>
+<td></td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>database_instance_nm</code> / <code>database_nm</code></td>
+<td>varchar 128</td>
+<td></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>login_nm</code></td>
+<td>varchar 255</td>
+<td></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>password_encrypted_txt</code></td>
+<td>varchar 255</td>
+<td></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="t_jdbc--modern-jdbc-registry-pk-connection_id--char32-not-the-bigint-no-fk-to-connection"><code>t_jdbc</code> — modern JDBC registry (PK <code>connection_id</code> — <strong><code>char(32)</code>, not the bigint</strong>; no FK to <code>connection</code>)<a class="headerlink" href="#t_jdbc--modern-jdbc-registry-pk-connection_id--char32-not-the-bigint-no-fk-to-connection" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Key</th>
+<th>Null / default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>connection_id</code></td>
+<td>char 32</td>
+<td>PK</td>
+<td>NOT NULL · hash/UUID, separate namespace</td>
+</tr>
+<tr>
+<td><code>connection_name</code></td>
+<td>varchar 128</td>
+<td></td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>connection_string</code></td>
+<td>varchar 256</td>
+<td></td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>jdbc_driver_name</code> / <code>jdbc_driver_jar</code></td>
+<td>varchar 128 / 256</td>
+<td></td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>user_name</code> / <code>password64</code></td>
+<td>varchar 128 / 256</td>
+<td></td>
+<td>NOT NULL · base64 password</td>
+</tr>
+</tbody>
+</table>
+<h3 id="t_connection_general--connection_type--t_job_meta--t_job_meta_history"><code>t_connection_general</code> · <code>connection_type</code> · <code>t_job_meta</code> · <code>t_job_meta_history</code><a class="headerlink" href="#t_connection_general--connection_type--t_job_meta--t_job_meta_history" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Table.Column</th>
+<th>Type</th>
+<th>Key</th>
+<th>Null / default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>t_connection_general.connection_name</code></td>
+<td>varchar 256</td>
+<td>PK</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>t_connection_general.connection_type_name</code></td>
+<td>varchar 128</td>
+<td></td>
+<td>NOT NULL · type <strong>by name</strong></td>
+</tr>
+<tr>
+<td><code>t_connection_general.connection_parameters</code></td>
+<td>varchar 16384</td>
+<td></td>
+<td>NOT NULL · param blob (incl. SMTP recipients)</td>
+</tr>
+<tr>
+<td><code>connection_type.connection_type_cd</code></td>
+<td>char 1</td>
+<td>PK</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>t_job_meta.job_name</code></td>
+<td>varchar 1024</td>
+<td>PK</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>t_job_meta.lock_id</code></td>
+<td>varchar 512</td>
+<td></td>
+<td><code>''</code> · edit lock (<code>lock_job</code> fn)</td>
+</tr>
+<tr>
+<td><code>t_job_meta.job_type</code> / <code>job_platform</code></td>
+<td>varchar 64</td>
+<td></td>
+<td>NOT NULL <code>''</code></td>
+</tr>
+<tr>
+<td><code>t_job_meta_history.version_key</code></td>
+<td>bigint</td>
+<td>PK</td>
+<td>seq <code>seq_job_version_id</code></td>
+</tr>
+<tr>
+<td><code>t_job_meta_history.version_path</code></td>
+<td>varchar 1024</td>
+<td></td>
+<td><code>''</code> · pointer to the versioned XML file</td>
+</tr>
+</tbody>
+</table>
+<h2 id="d4-dq-metrics--column-dictionary">D4. DQ metrics — column dictionary<a class="headerlink" href="#d4-dq-metrics--column-dictionary" title="Permanent link">&para;</a></h2>
+<h3 id="metricsdata_quality_metrics--metric-rows-per-run-no-declared-pk-ordinal--seq_data_quality_metrics"><code>metrics.data_quality_metrics</code> — metric rows per run (<strong>no declared PK</strong>; <code>ordinal</code> = <code>seq_data_quality_metrics</code>)<a class="headerlink" href="#metricsdata_quality_metrics--metric-rows-per-run-no-declared-pk-ordinal--seq_data_quality_metrics" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Key</th>
+<th>Null / default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>run_number</code> / <code>job_id</code></td>
+<td>bigint</td>
+<td></td>
+<td><strong>nullable</strong> — loose link to the run</td>
+</tr>
+<tr>
+<td><code>step_id</code></td>
+<td>int</td>
+<td></td>
+<td>nullable</td>
+</tr>
+<tr>
+<td><code>step_type</code></td>
+<td>varchar 64</td>
+<td></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>metrics_object</code></td>
+<td>varchar 256</td>
+<td></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>metrics_type</code></td>
+<td>varchar 32</td>
+<td></td>
+<td><code>Source_Count</code> / <code>Target_Count</code> / …</td>
+</tr>
+<tr>
+<td><code>metrics_key</code></td>
+<td>varchar 64</td>
+<td></td>
+<td><code>'none'</code></td>
+</tr>
+<tr>
+<td><code>metrics_value</code></td>
+<td>bigint</td>
+<td></td>
+<td>NOT NULL <code>0</code></td>
+</tr>
+<tr>
+<td><code>ordinal</code></td>
+<td>bigint</td>
+<td>SEQ</td>
+<td>NOT NULL <code>nextval(seq)</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="d5-complete-foreign-key-reference">D5. Complete foreign-key reference<a class="headerlink" href="#d5-complete-foreign-key-reference" title="Permanent link">&para;</a></h2>
+<p>All <strong>15</strong> declared FK constraints in the schema. Everything else joins by
+convention.</p>
+<table>
+<thead>
+<tr>
+<th>Child table</th>
+<th>Column(s)</th>
+<th>References</th>
+<th>Constraint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>batch_cycle</code></td>
+<td><code>batch_cycle_type_cd</code></td>
+<td><code>batch_cycle_type</code></td>
+<td><code>con_fk_batchctype_batchc</code></td>
+</tr>
+<tr>
+<td><code>batch_cycle_run</code></td>
+<td><code>batch_cycle_id</code></td>
+<td><code>batch_cycle</code></td>
+<td><code>con_fk_batchc_batchcrun</code></td>
+</tr>
+<tr>
+<td><code>batch_cycle_run_job</code></td>
+<td><code>batch_run_num</code></td>
+<td><code>batch_cycle_run</code></td>
+<td><code>con_fk_btchcrun_btchcrunjob</code></td>
+</tr>
+<tr>
+<td><code>batch_cycle_run_job</code></td>
+<td><code>job_id</code></td>
+<td><code>job</code></td>
+<td><code>con_fk_job_batchcyclerunjob</code></td>
+</tr>
+<tr>
+<td><code>job_batch_cycle_run_msg</code></td>
+<td><code>batch_run_num</code></td>
+<td><code>batch_cycle_run</code></td>
+<td><code>con_fk_bcycrun_jobbcyclernmsg</code></td>
+</tr>
+<tr>
+<td><code>job_batch_cycle_run_msg</code></td>
+<td><code>job_id</code></td>
+<td><code>job</code></td>
+<td><code>con_fk_job_batchcyclerunmsg</code></td>
+</tr>
+<tr>
+<td><code>connection</code></td>
+<td><code>connection_type_cd</code></td>
+<td><code>connection_type</code></td>
+<td><code>con_fk_conntype_connectiontypecd</code></td>
+</tr>
+<tr>
+<td><code>connection2</code></td>
+<td><code>connection_type_cd</code></td>
+<td><code>connection_type</code></td>
+<td><code>con_fk_conntype_connectiontypecd</code></td>
+</tr>
+<tr>
+<td><code>control_test</code></td>
+<td><code>control_test_type_cd</code></td>
+<td><code>control_test_type</code></td>
+<td><code>con_fk_cntrltesttyp_cntrltest</code></td>
+</tr>
+<tr>
+<td><code>control_test_point</code></td>
+<td><code>control_test_id</code></td>
+<td><code>control_test</code></td>
+<td><code>con_fk_cntltest_cntltestpoint</code></td>
+</tr>
+<tr>
+<td><code>control_test_point</code></td>
+<td><code>connection_id</code></td>
+<td><code>connection</code></td>
+<td><code>con_fk_connection</code></td>
+</tr>
+<tr>
+<td><code>control_test_hierarchy</code></td>
+<td><code>control_test_id</code></td>
+<td><code>control_test</code></td>
+<td><code>fk_control_test_hierarchy_control_test</code></td>
+</tr>
+<tr>
+<td><code>control_test_hierarchy</code></td>
+<td><code>parent_control_test_id</code></td>
+<td><code>control_test</code></td>
+<td><code>…_control_test22</code> (self-ref)</td>
+</tr>
+<tr>
+<td><code>control_test_run</code></td>
+<td><code>control_test_id</code></td>
+<td><code>control_test</code></td>
+<td><code>con_fk_cntltestrun_cntltest</code></td>
+</tr>
+<tr>
+<td><code>control_test_run</code></td>
+<td><code>batch_run_num</code></td>
+<td><code>batch_cycle_run</code></td>
+<td><code>fk_control_test_run_batch_cycle_run</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="d6-modeling-gotchas">D6. Modeling gotchas<a class="headerlink" href="#d6-modeling-gotchas" title="Permanent link">&para;</a></h2>
+<p>Structural facts that will bite anyone writing joins or standing up a
+warehouse model. Several map directly to bugs already fixed in the client.</p>
+<p><a id="g1"></a></p>
+<h3 id="g1--two-connection-registries-joined-by-name-not-id">G1 — Two connection registries, joined by name not id<a class="headerlink" href="#g1--two-connection-registries-joined-by-name-not-id" title="Permanent link">&para;</a></h3>
+<p><code>connection</code> is the legacy master (bigint <code>connection_id</code>, <code>char(1)</code> type
+code). <code>t_jdbc</code> is the modern registry but its <code>connection_id</code> is <code>char(32)</code>
+(a hash) with <strong>no FK</strong> to <code>connection</code>, and <code>t_connection_general</code> is
+name-keyed with a param blob. Treat "a connection" as two loosely-coupled
+worlds bridged by <code>connection_name</code>, never by id.</p>
+<p><a id="g2"></a></p>
+<h3 id="g2--the-step-tables-have-no-keys">G2 — The step tables have no keys<a class="headerlink" href="#g2--the-step-tables-have-no-keys" title="Permanent link">&para;</a></h3>
+<p><code>t_step_status</code> and <code>t_step_run_detail</code> declare neither PK nor FK — keyed only
+logically on <code>(batch_run_num, job_id, step_id)</code>. Nothing enforces integrity to
+the run, so orphan rows persist; this is why deleted steps linger in the
+Runtime Status grid (the client fix filters to the live canvas).</p>
+<p><a id="g3"></a></p>
+<h3 id="g3--status-is-encoded-four-different-ways">G3 — Status is encoded four different ways<a class="headerlink" href="#g3--status-is-encoded-four-different-ways" title="Permanent link">&para;</a></h3>
+<p><code>batch_status_cd</code> varchar(12), <code>job_status_cd</code> varchar(20),
+<code>t_step_status.step_status</code> varchar(64), and control tests via
+<code>test_passed_ind</code> bool + <code>result_color_cd</code> char(1). No shared status domain or
+lookup table — the root of the LogViewer colour-matching brittleness (the
+client normalises status to uppercase + substring match to compensate).</p>
+<p><a id="g4"></a></p>
+<h3 id="g4--type-code-width-drift">G4 — Type-code width drift<a class="headerlink" href="#g4--type-code-width-drift" title="Permanent link">&para;</a></h3>
+<p>Single-char discriminators (<code>connection_type_cd</code>, <code>control_test_type_cd</code> =
+char(1); <code>batch_cycle_type_cd</code> = char(5)) coexist with name-based typing
+(<code>t_connection_general.connection_type_name</code> varchar(128)). Same concept,
+three encodings.</p>
+<p><a id="g5"></a></p>
+<h3 id="g5--control_test-points-at-connections-two-ways">G5 — <code>control_test</code> points at connections two ways<a class="headerlink" href="#g5--control_test-points-at-connections-two-ways" title="Permanent link">&para;</a></h3>
+<p><code>expected_query_connection</code> / <code>actual_query_connection</code> are varchar(80)
+<strong>names</strong> (default <code>'DEFAULT'</code>); <code>control_test_point.connection_id</code> is a bigint
+<strong>FK</strong> to <code>connection</code>. One feature, two connection-reference styles.</p>
+<p><a id="g6"></a></p>
+<h3 id="g6--metricsdata_quality_metrics-is-loosely-typed">G6 — <code>metrics.data_quality_metrics</code> is loosely typed<a class="headerlink" href="#g6--metricsdata_quality_metrics-is-loosely-typed" title="Permanent link">&para;</a></h3>
+<p>Nullable <code>run_number</code> / <code>job_id</code> / <code>step_id</code>, no declared PK (only an
+<code>ordinal</code> sequence). Joins back to the run are best-effort — filter out nulls
+before aggregating.</p>
+<p><a id="g7"></a></p>
+<h3 id="g7--presentation-state-lives-in-data-tables">G7 — Presentation state lives in data tables<a class="headerlink" href="#g7--presentation-state-lives-in-data-tables" title="Permanent link">&para;</a></h3>
+<p><code>control_test.xloc</code> / <code>yloc</code> / <code>nodecolor</code> store canvas layout inside the test
+definition — the same designer-state-in-the-model concern as the parked
+JobEditor canvas-comment idea.</p>
+<p><a id="g8"></a></p>
+<h3 id="g8--t_workflow_state_history-has-1-second-key-resolution">G8 — <code>t_workflow_state_history</code> has 1-second key resolution<a class="headerlink" href="#g8--t_workflow_state_history-has-1-second-key-resolution" title="Permanent link">&para;</a></h3>
+<p><code>run_seq_number</code> is only second-granular, so concurrent runs collide; the
+schema adds a unique index on <code>(run_seq_number, run_number, job_id)</code> to stop
+state-transition <code>UPDATE</code>s cross-stamping each other. Any model keyed on
+<code>run_seq_number</code> alone is wrong.</p>
+<hr />
+<p><em>See also: <a href="../DATA-MODEL/">DATA-MODEL.md</a> (full object inventory) ·
+ENGINE.md (RunBatch, the step DAG, watermarks, halt) ·
+<a href="../SCHEMA-PROFILE/">SCHEMA-PROFILE.md</a> (profiling tables).</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top", "navigation.instant", "navigation.tracking", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+    
+  </body>
+</html>
