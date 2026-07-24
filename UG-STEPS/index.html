@@ -1009,6 +1009,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Snowflake">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jdbc-target-snowflake" class="md-nav__link">
+    <span class="md-ellipsis">
+      Jdbc Target Snowflake
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -2150,6 +2165,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Snowflake">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jdbc-target-snowflake" class="md-nav__link">
+    <span class="md-ellipsis">
+      Jdbc Target Snowflake
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -3235,12 +3265,25 @@ After each run the engine stores that run's <code>PERIOD</code> (<code>…23:59:
 </tr>
 <tr>
 <td>🟢</td>
-<td>Jdbc Target Snowflake</td>
+<td><a href="#jdbc-target-snowflake">Jdbc Target Snowflake</a></td>
 <td><code>JDBCTARGETSNOWFLAKE</code></td>
-<td>Corelli loader — the Snowflake target half of a <code>Jdbcsource → JdbcTargetSnowflake</code> pipeline (<strong>requires an upstream <code>Jdbcsource</code></strong>); same shape as the other <code>JdbcTarget*</code> loaders. Loads the source's staged files into Snowflake via <strong><code>COPY INTO $TARGET FROM $STAGEPATH</code></strong> with the <code>CORELLI_FORMAT_PIPE0</code> file format. Tabs: <strong>Target Table</strong> (connection / catalog / schema / table · Truncate · Loader Threads) · <strong>Source Column(s)</strong> · <strong>Mapping Column(s)</strong> · <strong>Load Options</strong> (the COPY command) · <strong>Delta Watermark</strong> (<code>SELECT MAX($COLUMN) FROM $TARGET</code>, incremental).</td>
+<td>Corelli loader — the Snowflake target half of a <code>Jdbcsource → JdbcTargetSnowflake</code> (or <a href="#salesforce-source-sfsource"><code>SFSOURCE</code></a><code>→JdbcTargetSnowflake</code>) pipeline; same shape as the other <code>JdbcTarget*</code> loaders. Loads the source's staged files into Snowflake via <strong><code>COPY INTO $TARGET FROM $STAGEPATH</code></strong> with the <code>CORELLI_FORMAT_PIPE0</code> file format.</td>
 </tr>
 </tbody>
 </table>
+<h4 id="jdbc-target-snowflake">Jdbc Target Snowflake<a class="headerlink" href="#jdbc-target-snowflake" title="Permanent link">&para;</a></h4>
+<p><strong>Type</strong> <code>JDBCTARGETSNOWFLAKE</code> · <strong>WPF</strong> <code>Steps/Pipeline/JdbcTargetSnowFlake.cs</code> → <code>JdbcTargetSnowFlakeWindow.xaml</code> ("Snowflake Target — Corelli Parallel Loader") · <strong>requires an upstream <a href="#jdbcsource"><code>Jdbcsource</code></a> or <a href="#salesforce-source-sfsource"><code>Salesforce Source</code></a></strong></p>
+<p>The <strong>target</strong> half of a Corelli pipeline: it loads the flat files staged by the source into Snowflake via <strong><code>COPY INTO $TARGET FROM $STAGEPATH</code></strong> with the <code>CORELLI_FORMAT_PIPE0</code> file format. Like the other <code>JdbcTarget*</code> loaders it only works downstream of a data-provider step (a <code>Jdbcsource</code> or <code>Salesforce Source</code>), never on its own. Five tabs (shown here loading the ATNI Salesforce Cases pipeline):</p>
+<p><strong>Target Table tab</strong> — <strong>Connection</strong>, <strong>Catalog / Database</strong>, <strong>Schema</strong>, <strong>Table</strong>. Check <strong>Table Exists</strong> if the target already exists; leave it unchecked to have Maestro create it. <strong>Truncate</strong> replaces the table each run; <strong>Loader Threads</strong> sets the load parallelism.</p>
+<p><img alt="Jdbc Target Snowflake — Target Table tab: connection, catalog/schema/table, Truncate, Table Exists, Loader Threads" src="../images/step-jdbctargetsnowflake-target.png" /></p>
+<p><strong>Source Column(s) tab</strong> — click <strong>Refresh</strong> (the circular-arrow icon) to pull the incoming columns with their inferred Snowflake types; use the <strong>pencil</strong> icon to correct any type that looks wrong. (Here the Salesforce <code>_sf_is_deleted</code> flag arrives as <code>BOOLEAN</code> alongside <code>Id</code>.)</p>
+<p><img alt="Jdbc Target Snowflake — Source Column(s) tab: incoming columns with inferred types (_sf_is_deleted as BOOLEAN)" src="../images/step-sfsource-target-flag.png" /></p>
+<p><strong>Mapping Columns(s) tab</strong> — click <strong>Check</strong> to validate the source → target column mapping (<strong>Reset</strong> re-auto-maps by name). Leave it on auto so the <a href="#salesforce-source-sfsource"><code>SFSOURCE</code> <strong>Evolve target schema</strong></a> toggle can add new columns to the load.</p>
+<p><img alt="Jdbc Target Snowflake — Mapping Columns(s) tab: source→target column mapping with Check / Reset" src="../images/step-jdbctargetsnowflake-mapping.png" /></p>
+<p><strong>Load Options tab</strong> — the Snowflake <strong><code>COPY INTO $TARGET FROM $STAGEPATH</code></strong> command with the <code>CORELLI_FORMAT_PIPE0</code> file format. Don't change the <code>$VARIABLE</code> placeholders. <strong>Keep Transient Table</strong> retains the transient staging table after load (useful for debugging; off by default).</p>
+<p><img alt="Jdbc Target Snowflake — Load Options tab: the COPY INTO command with CORELLI_FORMAT_PIPE0" src="../images/step-jdbctargetsnowflake-load.png" /></p>
+<p><strong>Delta Watermark tab</strong> — a query that runs <strong>on the target</strong> (<code>SELECT MAX($COLUMN) FROM $TARGET</code>). When a Delta column is set on the upstream source and the job runs on a schedule, this MAX value becomes the source's <code>$EXTRACT_CONDITION</code> filter, so data loads incrementally. (Salesforce delta uses the source's own rolling window instead — see <a href="#salesforce-source-sfsource">SFSOURCE ▸ Delta</a>.)</p>
+<p><img alt="Jdbc Target Snowflake — Delta Watermark tab: SELECT MAX($COLUMN) FROM $TARGET" src="../images/step-jdbctargetsnowflake-watermark.png" /></p>
 <h3 id="clickhouse">ClickHouse<a class="headerlink" href="#clickhouse" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
