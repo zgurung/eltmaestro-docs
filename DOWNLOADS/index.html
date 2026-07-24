@@ -1231,7 +1231,7 @@ name, batch id and run number, so queries can be traced back to the batch that i
 via <code>select parse_json(query_tag):batchName …</code> against Snowflake's <code>QUERY_HISTORY</code>. No
 configuration needed; credentials are never included in the tag.
 It also carries the <strong>Salesforce <code>SFSOURCE</code></strong> extractor (rolling-window delta, always-on
-deleted-record flag, and a Bulk API 2.0 fast path), on top of a server-side <strong>Job Metadata</strong>
+deleted-record flag, and a Bulk API 2.0 fast path — see the <a href="../UG-STEPS/#salesforce-source-sfsource">step reference</a>), on top of a server-side <strong>Job Metadata</strong>
 fix (editing a job's description/tags no longer leaves it locked to your session), the
 <strong>getVarData concurrency fix</strong> (no crash on concurrent <code>SETVARIABLE</code>), <strong>multipart S3
 push</strong> (files &gt;5 GB no longer fail with EntityTooLarge), the <strong>long-running-batch reaper
