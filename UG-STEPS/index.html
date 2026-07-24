@@ -2547,8 +2547,11 @@ After each run the engine stores that run's <code>PERIOD</code> (<code>…23:59:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>SFSOURCE  ──▶  JdbcTarget&lt;Platform&gt;   (── ▶  optional SQLSCRIPT for delete policy)
 </code></pre></div>
 <p>It reads through a <strong>Salesforce <em>general/cloud connection</em></strong> (<code>ConnectForce</code>, the SOAP Partner API; set one up under <a href="../UG-ADMIN/">Admin ▸ Connections</a>). Extracted values are <strong>base64-encoded per SF field type</strong> so special characters survive the flat file; the target decodes them with the platform's base64 function (same mechanism as the <code>Jdbcsource</code> Encode list — see the Snowflake setup notes).</p>
+<p><img alt="A Salesforce pipeline — the SFSOURCE step (SF.Case) feeding a Snowflake target (STAGING.CASES_ZG) and a downstream reconcile, with an optional SQLSCRIPT for delete policy" src="../images/step-sfsource-dag.png" /></p>
 <h5 id="always-on-delete-flag--_sf_is_deleted">Always-on delete flag — <code>_sf_is_deleted</code><a class="headerlink" href="#always-on-delete-flag--_sf_is_deleted" title="Permanent link">&para;</a></h5>
 <p>Every SFSOURCE extract — full <strong>or</strong> delta — runs Salesforce <strong><code>queryAll()</code></strong>, so rows still in the <strong>Recycle Bin</strong> are returned, and the step surfaces the SF <code>IsDeleted</code> field to the target as a normalized flag column <strong><code>_sf_is_deleted</code></strong> (<code>true</code>/<code>false</code>). There is <strong>no toggle</strong> for this — it is unconditional. The step itself applies <strong>no delete policy</strong>; what happens to flagged rows is decided by <em>your</em> SQL after the load (see <a href="#handling-deleted-records-downstream">Handling deleted records</a> below). The name is lowercase on purpose — it sidesteps Snowflake's upper-casing of the mixed-case <code>IsDeleted</code>.</p>
+<p>The flag flows straight through to the target's column list — here the Snowflake target picks it up as a <code>BOOLEAN</code> alongside <code>Id</code>:</p>
+<p><img alt="The downstream Snowflake target's Source Column(s) tab, showing _sf_is_deleted typed as BOOLEAN next to Id" src="../images/step-sfsource-target-flag.png" /></p>
 <p>The dialog has four tabs.</p>
 <h5 id="source-tab">Source tab<a class="headerlink" href="#source-tab" title="Permanent link">&para;</a></h5>
 <ul>
@@ -2560,6 +2563,7 @@ After each run the engine stores that run's <code>PERIOD</code> (<code>…23:59:
 <blockquote>
 <p>Catalog/Database and Schema are disabled (Salesforce has no such notion), and the JDBC-style <strong>Partitioning / Partition Columns / Threads / Rows-per-Partition</strong> controls are hidden — parallel range-partitioning applies only to <code>Jdbcsource</code>. SFSOURCE is always a <strong>single full-pass extract</strong>; incremental behaviour comes from the <strong>Delta</strong> tab, not partitioning.</p>
 </blockquote>
+<p><img alt="SFSOURCE — Source tab: Salesforce connection, the SObject (Case), the key column, and Extract Options" src="../images/step-sfsource-source.png" /></p>
 <h5 id="delta-tab--incremental-rolling-window">Delta tab — incremental (rolling window)<a class="headerlink" href="#delta-tab--incremental-rolling-window" title="Permanent link">&para;</a></h5>
 <p>Off by default (first run = <strong>full snapshot</strong>). Check <strong>Enable delta</strong> to extract only rows changed within the last <strong>N days</strong>:</p>
 <ul>
@@ -2570,11 +2574,13 @@ After each run the engine stores that run's <code>PERIOD</code> (<code>…23:59:
 <blockquote>
 <p><strong>Deletes and delta:</strong> a hard delete does <strong>not</strong> reliably bump <code>SystemModstamp</code>, so a delta run can <em>miss</em> deletes. Use delta for routine inserts/updates and pair it with a <strong>periodic full snapshot</strong> (delta OFF) when you need to reconcile purges — see below.</p>
 </blockquote>
+<p><img alt="SFSOURCE — Delta tab: Enable delta, the reach-back Days, and the Delta field (SystemModstamp)" src="../images/step-sfsource-delta.png" /></p>
 <h5 id="columns-tab--column-pick--schema-evolve">Columns tab — column pick + schema-evolve<a class="headerlink" href="#columns-tab--column-pick--schema-evolve" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>Load from Salesforce</strong> lists the SObject's fields; <strong>Add / Remove / Clear All</strong> trim the set. An <strong>empty list = extract ALL fields</strong>; a subset trims the extract. <strong><code>Id</code> and <code>_sf_is_deleted</code> are always kept.</strong></li>
 <li><strong>Evolve target schema</strong> — when checked, columns present in this extract but missing on the target table are <strong>added automatically</strong> (<code>ALTER TABLE ADD COLUMN</code>, <strong>add-only, never drops</strong>). It only takes effect when the target's column mapping is on <strong>auto</strong> (common-columns); an explicitly saved mapping needs remapping to populate the new columns.</li>
 </ul>
+<p><img alt="SFSOURCE — Columns tab: the loaded SObject fields (Selected columns = 39), Load/Add/Remove/Clear, and the Evolve target schema toggle" src="../images/step-sfsource-columns.png" /></p>
 <h5 id="performance--quality-tab">Performance &amp; Quality tab<a class="headerlink" href="#performance--quality-tab" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>Use Bulk API 2.0</strong> — extract via Salesforce <strong>Bulk API 2.0</strong> (server-side PK chunking + gzip CSV, <code>Sforce-Locator</code> paging) instead of the SOAP cursor. Best for <strong>large</strong> objects; small objects are faster on SOAP. Still <code>queryAll</code> (carries <code>_sf_is_deleted</code>) and honours <strong>Delta</strong> and the <strong>Columns</strong> pick. Requires the connection to reach <strong>REST v47+</strong> (the Bulk <code>/jobs/query</code> endpoint; older SOAP-pinned versions 404). <strong>Bulk Page Size</strong> caps records per page (default <code>100000</code>).</li>
@@ -2582,6 +2588,7 @@ After each run the engine stores that run's <code>PERIOD</code> (<code>…23:59:
 <li><strong>Add SAP Padding</strong> — left-pad fixed-char data with <code>0</code>.</li>
 <li><strong>Row(s) Fetch Size</strong> — SOAP fetch batch size. Date/Timestamp formats are fixed (<code>yyyy-MM-dd</code> / <code>yyyy-MM-dd HH:mm:ss.SSS</code>).</li>
 </ul>
+<p><img alt="SFSOURCE — Performance &amp; Quality tab: Use Bulk API 2.0, Standardize Data, Bulk Page Size, and the fetch/format fields" src="../images/step-sfsource-quality.png" /></p>
 <h5 id="handling-deleted-records-downstream">Handling deleted records downstream<a class="headerlink" href="#handling-deleted-records-downstream" title="Permanent link">&para;</a></h5>
 <p>Because SFSOURCE only flags deletes (via <code>_sf_is_deleted</code>) and never applies them, the delete policy is <strong>your SQL, run after the load</strong> — typically a <a href="#sql-script"><code>SqlScript</code></a> step wired <em>after</em> the target. There are two kinds of delete and they need different handling:</p>
 <table>
