@@ -1297,6 +1297,7 @@
 <p>Three connection types, one tab each. All follow the same <strong>Create / Edit / Delete</strong> pattern; once saved, a connection is selectable by name in the Job editor.</p>
 <h2 id="database-connections-jdbc">Database connections (JDBC)<a class="headerlink" href="#database-connections-jdbc" title="Permanent link">&para;</a></h2>
 <p>Tab: <strong>Database Connections</strong>. Toolbar: <strong>Create</strong>, <strong>Edit</strong>, <strong>Duplicate</strong>, <strong>Delete</strong>.</p>
+<p><img alt="The Administration window's Database Connections tab — a JDBC Connections grid (columns CONNECTIONID, CONNECTIONNAME, JDBCDRIVER_NAME, JDBCDRIVER_JAR) listing connections like ADVENTUREWORKS, AUDIT_DATABASE, CLICKHOUSE, HIVE_EMBEDDED, and REDSHIFT, with Duplicate / Edit / Delete / Create buttons" src="../images/database-connections-tab.png" /></p>
 <p>Click <strong>Create</strong> to open the JDBC connection editor:</p>
 <table>
 <thead>
@@ -1444,6 +1445,7 @@
 </tr>
 </tbody>
 </table>
+<p><img alt="The SSH Connection editor — Connection name, Host, Port, and User Name fields, a masked Password, an RSA Private Key File Path box with a ? help button, the Use PEM/Key File Authentication and Use SFTP Protocol checkboxes, and Test / Save buttons" src="../images/ssh-connection-editor.png" /></p>
 <p>(The key/SFTP choices are stored as a compact <code>key|raw : sftp|ssh : &lt;pem-path&gt;</code> setting.)</p>
 <blockquote>
 <p><strong>Everything the editor checks runs on the Maestro server, not your client.</strong> The key file it looks for, and the <strong>Test</strong> login, all execute on the ELTMaestro server — so reachability to the SFTP host and the key files must be correct <em>there</em>.</p>
@@ -1452,11 +1454,13 @@
 <p><strong>"Cannot load id_rsa file path" the moment you click Create.</strong> Opening the editor runs <code>find ~/.ssh -name id_rsa</code> on the Maestro server to pre-fill the key path; if the server's OS user has no <code>~/.ssh/id_rsa</code>, you get this error — but the editor still opens behind it, so you can continue.</p>
 <p><img alt="The &quot;Cannot load id_rsa file path&quot; error dialog shown when the Maestro server's user has no ~/.ssh/id_rsa key file" src="../images/ssh-connection-error-id-rsa.png" /></p>
 <ul>
-<li>Using <strong>password</strong> auth? It's harmless — dismiss it and leave the key path blank.</li>
+<li>Using <strong>password</strong> auth? Just dismiss the error and carry on. (On client builds <em>before</em> the fix noted below, also put <code>null</code> in the RSA Private Key File Path or the <strong>Test</strong> fails.)</li>
 <li>Want <strong>key-based</strong> auth? Generate a key pair on the Maestro server (<code>ssh-keygen</code>) so <code>~/.ssh/id_rsa</code> and <code>id_rsa.pub</code> exist, then share the server's <code>id_rsa.pub</code> with the remote host's <code>authorized_keys</code> (the editor's <strong>?</strong> button spells this out).</li>
 </ul>
+<p><strong>Test fails on a valid password connection (client builds before this fix).</strong> For <strong>password</strong> authentication, older clients let the <strong>RSA Private Key File Path</strong> be left blank, which saves fine but makes <strong>Test</strong> return <em>SSH Test Failed</em> — a blank path stored an incomplete <code>raw:ssh:</code> setting whose trailing field the server-side test dropped and couldn't parse. <strong>The client now writes a <code>none</code> sentinel automatically</strong>, so a blank path Tests correctly. On an earlier build, type <code>null</code> in that field and Test returns <em>SSH Test SUCCESS</em> (below); re-save any connection that was stored with a blank path to clear it.</p>
+<p><img alt="The SSH Connection editor for jenkins@192.168.1.201 with the RSA Private Key File Path set to &quot;null&quot; and an &quot;SSH Test SUCCESS&quot; confirmation — for a password connection the key path must hold a sentinel, not be left blank" src="../images/ssh-connection-test-null.png" /></p>
 <p><strong>An error when you click Save.</strong> Save validates the form first — the <strong>port must be numeric</strong>, and <strong>connection name, host, user, and port are required</strong> (password too, unless <em>Use PEM key</em> is checked). If validation passes but the save still errors, it's almost always a <strong>duplicate connection name</strong> or a server/DB error; the message names the cause. Pick a unique name or fix the flagged field.</p>
-<p><strong>"Test does nothing."</strong> Test <strong>saves the connection, then performs a real SSH/SFTP login from the Maestro server</strong> to the host. If the host is unreachable or the port is blocked, the call <strong>waits until it times out</strong>, so it looks like nothing is happening — give it a few seconds and you'll get <strong>SSH Test SUCCESS</strong> or <strong>SSH Test Failed</strong>. If it fails or hangs, confirm from the <strong>Maestro server</strong> (not your workstation) that it can reach the host:port (firewall/routing), that the credentials or key are correct, and — for key auth — that the server's public key is in the remote's <code>authorized_keys</code>.</p>
+<p><strong>Test appears to hang.</strong> Test <strong>saves the connection, then performs a real SSH/SFTP login from the Maestro server</strong> to the host. If the host is unreachable or the port is blocked, the call <strong>waits until it times out</strong>, so it can look like nothing is happening — give it a few seconds for <strong>SSH Test SUCCESS</strong> or <strong>SSH Test Failed</strong>. If it still fails, confirm from the <strong>Maestro server</strong> (not your workstation) that it can reach the host:port (firewall/routing), that the credentials or key are correct, and — for key auth — that the server's public key is in the remote's <code>authorized_keys</code>.</p>
 <h2 id="general--cloud-connections-s3">General / Cloud connections (S3)<a class="headerlink" href="#general--cloud-connections-s3" title="Permanent link">&para;</a></h2>
 <p>Tab: <strong>General/Cloud Config</strong>. Toolbar: <strong>Create</strong>, <strong>Edit</strong>, <strong>Delete</strong>. This is where object-storage / cloud endpoints live — e.g. the <strong>S3 connection</strong> the Redshift file loader stages to.</p>
 <p><strong>Create</strong> opens the Cloud connection editor:</p>
@@ -1700,6 +1704,7 @@
 <h1 id="system-config--models">System, config &amp; models<a class="headerlink" href="#system-config--models" title="Permanent link">&para;</a></h1>
 <h2 id="system">System<a class="headerlink" href="#system" title="Permanent link">&para;</a></h2>
 <p>Tab: <strong>System</strong>. Server-level settings (key/value) from <code>t_system_settings</code>. It's a read-only grid — select a row and click <strong>Edit</strong> to change a value (no create/delete).</p>
+<p><img alt="The Administration window's System tab — a read-only System Settings grid (PARAMNAME, PARAMVALUE, ISSTATIC, PARAMDESCRIPTION) with rows such as config_abc_rollup_seconds, config_cron_enable, config_job_max_alive_seconds, and onstage_read_uncommitted, and an Edit button" src="../images/system-settings-tab.png" /></p>
 <h2 id="integrator-config">Integrator Config<a class="headerlink" href="#integrator-config" title="Permanent link">&para;</a></h2>
 <p>Tab: <strong>Integrator Config</strong> — a <strong>live editor for the per-integrator config files</strong> on the server (<code>system.cfg</code>, the <code>get_*</code> introspection templates, <code>static_*</code> lists, etc.). This is how you change integrator configuration <strong>without a redeploy</strong>.</p>
 <ul>
