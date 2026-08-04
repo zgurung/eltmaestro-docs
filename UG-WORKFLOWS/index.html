@@ -565,6 +565,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#resetting-watermarks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resetting watermarks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#change-batch-cycle-type" class="md-nav__link">
     <span class="md-ellipsis">
       Change Batch Cycle Type
@@ -1430,6 +1439,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#resetting-watermarks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resetting watermarks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#change-batch-cycle-type" class="md-nav__link">
     <span class="md-ellipsis">
       Change Batch Cycle Type
@@ -1683,9 +1701,44 @@
 <li><strong>Action(s) ▸ Change Platform Connection</strong> — repoint the workflow (and its dependents) to a different platform connection without editing the DAG. Use this after renaming/replacing a connection or moving a job between environments.</li>
 <li><strong>Action(s) ▸ Change Batch Cycle Type</strong> — set the workflow's <a href="#change-batch-cycle-type">batch cycle type</a>.</li>
 <li><strong>Show Change History</strong> — browse and compare the workflow's <a href="#show-change-history">saved versions</a>.</li>
-<li><strong>Watermark Management</strong> — open the Watermark Management window pre-seeded with this workflow, to view or <strong>reset</strong> its batch/job high and low watermarks (the same window as <strong>Administration ▸ Workflow Configuration ▸ Job Watermarks</strong>).</li>
+<li><strong>Watermark Management</strong> — open the <a href="#resetting-watermarks">Watermark Management</a> window pre-seeded with this workflow, to view or <strong>reset</strong> its job high and low watermarks (the same window as <strong>Administration ▸ Workflow Configuration ▸ Job Watermarks</strong>).</li>
 </ul>
 <p><img alt="Right-clicking a workflow (CH_DEMO_DELTA) in the Workflow(s) list opens a context menu with the Action(s) submenu — Change Platform Connection and Change Batch Cycle Type — plus top-level Show Change History and Watermark Management items" src="../images/workflow-right-click-menu.png" /></p>
+<h3 id="resetting-watermarks">Resetting watermarks<a class="headerlink" href="#resetting-watermarks" title="Permanent link">&para;</a></h3>
+<p>A <strong>watermark</strong> is the value ELTMaestro remembers so the <em>next</em> run only picks up what changed since the last one. Clearing it makes the next run <strong>reload from the start</strong> — useful after a bad load, a schema change, or a manual reload request.</p>
+<p>Open <strong>Watermark Management</strong> — right-click the workflow ▸ <strong>Watermark Management</strong>, or <strong>Administration ▸ Workflow Configuration ▸ Job Watermarks</strong> — then:</p>
+<ol>
+<li>The window opens pre-filled with the workflow (or type a name and click <strong>Search</strong>). Each matching workflow's latest run is listed with its low/high marks.</li>
+<li>Click <strong>Reset Batch Watermarks</strong> to clear (set to <code>null</code>) the low <strong>and</strong> high marks for <strong>every</strong> workflow in the list — it shows a count and asks to confirm.</li>
+<li>To clear a <strong>single</strong> workflow instead, select its row, set <strong>Low</strong>/<strong>High</strong> to <code>null</code>, and click <strong>Set</strong>.</li>
+</ol>
+<p><img alt="The Watermark Management window pre-seeded with a workflow, showing the Reset Batch Watermarks button and the result grid with the job's low/high marks" src="../images/watermark-management-window.png" /></p>
+<p><strong>Which watermark does this reset?</strong> This window manages the <strong>job high/low</strong> watermark. That is the right control when a workflow tracks its increment through the job watermark (e.g. an <code>SFTP</code> <em>Use Watermark</em> download, or a partitioned extract that resumes from the last high mark). Some workflows increment a different way, and the reset is different:</p>
+<table>
+<thead>
+<tr>
+<th>If the workflow increments by…</th>
+<th>To reload, reset…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Job high/low watermark</strong></td>
+<td>This window — <strong>Reset Batch Watermarks</strong>, or <strong>Set</strong> to <code>null</code></td>
+</tr>
+<tr>
+<td><strong>Data-validity window</strong> (<code>$BATCH_START/END_DATA_VALIDITY</code>, driven by the <a href="#change-batch-cycle-type">batch cycle type</a>)</td>
+<td>The batch cycle type / run history — not a watermark value</td>
+</tr>
+<tr>
+<td><strong>Onstage delta</strong> (<code>MAX(delta column)</code> read from the target)</td>
+<td>The <strong>target table</strong> — empty it so the next run re-extracts everything</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>If you're not sure which mechanism a workflow uses, ask us — resetting the job watermark on a data-validity or onstage-delta workflow won't force a reload on its own.</p>
+</blockquote>
 <h3 id="change-batch-cycle-type">Change Batch Cycle Type<a class="headerlink" href="#change-batch-cycle-type" title="Permanent link">&para;</a></h3>
 <p>Every workflow has a <strong>batch cycle type</strong> — the cadence it's meant to run at (<code>ONREQ</code> "on request" by default, or a scheduled grain like <code>HOUR</code>, <code>DAILY</code>, <code>WEEKM</code>, …). The type drives the <strong>data-validity window</strong> the engine exposes to incremental steps at runtime (<code>$BATCH_START_DATA_VALIDITY_TIMESTAMP</code> / <code>$BATCH_END_DATA_VALIDITY_TIMESTAMP</code> / <code>$BATCH_DATA_VALIDITY_PERIOD</code>).</p>
 <p>Pick the type from the dropdown (populated from the server's <code>batch_cycle_type</code> catalog) and click <strong>Save</strong>. The choice is written into the <strong>job XML</strong> (<code>&lt;batchType&gt;</code>) and synced to the metadata database, so it travels with the workflow. At launch the engine resolves the effective type by precedence — CLI <code>--type</code> <strong>&gt;</strong> job XML <strong>&gt;</strong> stored DB type <strong>&gt;</strong> <code>ONREQ</code>.</p>
