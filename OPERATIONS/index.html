@@ -1730,7 +1730,7 @@
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>tail<span class="w"> </span>-F<span class="w"> </span>/data/iserver/server/pgsql/log/*.log<span class="w">    </span><span class="c1"># PostgreSQL server log</span>
 </code></pre></div>
 <p>Health check (WSDL endpoint should return HTTP 200):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>-sk<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;%{http_code}\n&quot;</span><span class="w"> </span><span class="se">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>-sk<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s2">"%{http_code}\n"</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span>https://localhost:8181/MaestroMetaDataProviderService/MaestroMetaService?wsdl
 </code></pre></div>
 <h2 id="install-layout-reference">Install layout reference<a class="headerlink" href="#install-layout-reference" title="Permanent link">&para;</a></h2>
@@ -1803,7 +1803,7 @@
 <p>The meta-service itself only binds <strong>8181</strong> (HTTPS only — there is no HTTP→HTTPS redirect). The other ports are bound by supervisord-managed sidecars (Spark) and by postgres directly.</p>
 <h2 id="common-admin-tasks">Common admin tasks<a class="headerlink" href="#common-admin-tasks" title="Permanent link">&para;</a></h2>
 <h3 id="reset-a-users-password">Reset a user's password<a class="headerlink" href="#reset-a-users-password" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>mset-password-md5<span class="w"> </span>&lt;USER_ID_UPPERCASE&gt;<span class="w"> </span><span class="s1">&#39;&lt;new-password&gt;&#39;</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>mset-password-md5<span class="w"> </span>&lt;USER_ID_UPPERCASE&gt;<span class="w"> </span><span class="s1">'&lt;new-password&gt;'</span>
 </code></pre></div>
 <code>USER_ID</code> in <code>t_user</code> is stored uppercased — <code>INTEGRATOR</code>, not <code>integrator</code>.</p>
 <h3 id="apply-pending-migrations-manually">Apply pending migrations manually<a class="headerlink" href="#apply-pending-migrations-manually" title="Permanent link">&para;</a></h3>
@@ -1822,16 +1822,16 @@
 <h3 id="reseed-an-empty-t_mpp_system--t_jdbc_metadata-one-off-older-deployments">Reseed an empty <code>t_mpp_system</code> / <code>t_jdbc_metadata</code> (one-off, older deployments)<a class="headerlink" href="#reseed-an-empty-t_mpp_system--t_jdbc_metadata-one-off-older-deployments" title="Permanent link">&para;</a></h3>
 <p>Deployments built before commit <code>3064076d5</code> (2026-05-27) silently end up with these two seed dictionaries empty because the <code>initdb.sql</code> COPY block for <code>t_mpp_system</code> declared 3 columns but the data carried 2 fields, and <code>platform_license_string</code> was <code>NOT NULL</code> with no default. Symptom: the WPF connection editor's "platform default" dropdown is unpopulated. The audit DB on a fresh post-fix deploy populates both correctly; an EXISTING deploy needs the one-time manual reseed below.</p>
 <p>Detect:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>eltmaestro<span class="w"> </span>mpsql<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;select &#39;t_mpp_system&#39; as tbl, count(*) from t_mpp_system</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="s2">                                  union all select &#39;t_jdbc_metadata&#39;, count(*) from t_jdbc_metadata;&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>eltmaestro<span class="w"> </span>mpsql<span class="w"> </span>-c<span class="w"> </span><span class="s2">"select 't_mpp_system' as tbl, count(*) from t_mpp_system</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="s2">                                  union all select 't_jdbc_metadata', count(*) from t_jdbc_metadata;"</span>
 </code></pre></div>
 If either count is 0, reseed by re-running the canonical COPY blocks from <code>source/root-engine-install/db/initdb.sql</code> (search for <code>^COPY t_mpp_system</code> and <code>^COPY t_jdbc_metadata</code>). One-shot recipe:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Run from the repo root on a host that can reach the audit DB</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-i<span class="w"> </span>eltmaestro<span class="w"> </span>mpsql<span class="w"> </span>-d<span class="w"> </span>sqlmaestro<span class="w"> </span><span class="s">&lt;&lt;&#39;SQL&#39;</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-i<span class="w"> </span>eltmaestro<span class="w"> </span>mpsql<span class="w"> </span>-d<span class="w"> </span>sqlmaestro<span class="w"> </span><span class="s">&lt;&lt;'SQL'</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="s">BEGIN;</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="s">TRUNCATE t_mpp_system, t_jdbc_metadata;</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="s">\copy t_mpp_system (platform_name, platform_class) FROM PROGRAM &#39;awk &#39;&#39;/^COPY t_mpp_system/,/^\\\\\\.$/&#39;&#39; source/root-engine-install/db/initdb.sql | sed &#39;&#39;1d;$d&#39;&#39;&#39;</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="s">\copy t_jdbc_metadata (...) FROM PROGRAM &#39;...&#39;   -- mirror for the t_jdbc_metadata COPY block</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="s">\copy t_mpp_system (platform_name, platform_class) FROM PROGRAM 'awk ''/^COPY t_mpp_system/,/^\\\\\\.$/'' source/root-engine-install/db/initdb.sql | sed ''1d;$d'''</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="s">\copy t_jdbc_metadata (...) FROM PROGRAM '...'   -- mirror for the t_jdbc_metadata COPY block</span>
 <a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="s">COMMIT;</span>
 <a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="s">SQL</span>
 </code></pre></div>
@@ -1862,8 +1862,8 @@ If either count is 0, reseed by re-running the canonical COPY blocks from <code>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># On 192.168.1.201, as the jenkins user:</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>sudo<span class="w"> </span>install<span class="w"> </span>-d<span class="w"> </span>-o<span class="w"> </span>jenkins<span class="w"> </span>-g<span class="w"> </span>jenkins<span class="w"> </span>-m<span class="w"> </span><span class="m">0700</span><span class="w"> </span>/home/jenkins/maestro-ch-client
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>cat<span class="w"> </span>&gt;<span class="w"> </span>/home/jenkins/maestro-ch-client/config.xml<span class="w"> </span><span class="s">&lt;&lt;&#39;XML&#39;</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="s">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>cat<span class="w"> </span>&gt;<span class="w"> </span>/home/jenkins/maestro-ch-client/config.xml<span class="w"> </span><span class="s">&lt;&lt;'XML'</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="s">&lt;?xml version="1.0"?&gt;</span>
 <a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="s">&lt;config&gt;</span>
 <a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="s">  &lt;host&gt;192.168.1.201&lt;/host&gt;</span>
 <a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="s">  &lt;port&gt;9100&lt;/port&gt;</span>
@@ -1876,7 +1876,7 @@ If either count is 0, reseed by re-running the canonical COPY blocks from <code>
 </code></pre></div>
 <p>(Replace <code>welcome123</code> with the password you actually use. Native TCP on host <code>:9100</code> — see <code>reference_clickhouse_host.md</code> for why it's remapped from 9000. For TLS use <code>&lt;port&gt;9440&lt;/port&gt;</code> + <code>&lt;secure&gt;true&lt;/secure&gt;</code>; for HTTP use <code>&lt;port&gt;8123&lt;/port&gt;</code>. The Jenkinsfile Deploy stage's destructive block refuses to run if this file is missing — see <a href="../CLICKHOUSE-AUTH/#22-bootstrap-configxml-on-the-host-one-time-per-host">CLICKHOUSE-AUTH.md § 2.2</a> for the precondition.)</p>
 <p><strong>Verify</strong> (single one-liner, no <code>docker exec -it</code>):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>eltmaestro<span class="w"> </span>clickhouse-client<span class="w"> </span>--query<span class="w"> </span><span class="s2">&quot;SELECT version(), currentUser()&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>eltmaestro<span class="w"> </span>clickhouse-client<span class="w"> </span>--query<span class="w"> </span><span class="s2">"SELECT version(), currentUser()"</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1"># expected (no prompt):</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="c1"># 24.8.x.x   maestro_etl</span>
 </code></pre></div>
@@ -1895,7 +1895,7 @@ If either count is 0, reseed by re-running the canonical COPY blocks from <code>
 <a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="c1"># Containers AND host poweroff. SSH session drops when the host goes down:</span>
 <a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>sudo<span class="w"> </span>/path/to/eltm-shutdown.sh<span class="w"> </span>--poweroff
 <a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>
-<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="c1"># Print actions without executing (use this first if you&#39;ve never run it):</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="c1"># Print actions without executing (use this first if you've never run it):</span>
 <a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>/path/to/eltm-shutdown.sh<span class="w"> </span>--dry-run
 </code></pre></div>
 <p>What it does:</p>
@@ -1972,9 +1972,9 @@ If either count is 0, reseed by re-running the canonical COPY blocks from <code>
 <p>Full procedure (apt-install rsync on both ends, <code>rrsync</code> forced-command setup, <code>--link-dest</code> rotation, BKHOST <code>current</code> symlink + retention cron, restore-in-place + single-job + drill recipes): <strong>JENKINS-BACKUP.md</strong>.</p>
 <h3 id="inspect-whats-running">Inspect what's running<a class="headerlink" href="#inspect-whats-running" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># Inside the container (or bare-metal):</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>ps<span class="w"> </span>-ef<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;[j]ava.*maestro|[p]ostgres&#39;</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>ps<span class="w"> </span>-ef<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">'[j]ava.*maestro|[p]ostgres'</span>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="c1"># Host-side listener check (matches the Jenkinsfile port table):</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>ss<span class="w"> </span>-lntp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;:(8181|9080|5432|7077|10000)&#39;</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>ss<span class="w"> </span>-lntp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">':(8181|9080|5432|7077|10000)'</span>
 </code></pre></div>
 <h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
 <h3 id="installsh-fails-with-jq-not-on-path"><code>install.sh</code> fails with <code>'jq' not on PATH</code><a class="headerlink" href="#installsh-fails-with-jq-not-on-path" title="Permanent link">&para;</a></h3>

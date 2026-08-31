@@ -761,6 +761,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#sync" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sync
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#switch" class="md-nav__link">
     <span class="md-ellipsis">
       Switch
@@ -1959,6 +1968,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#sync" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sync
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#switch" class="md-nav__link">
     <span class="md-ellipsis">
       Switch
@@ -2417,8 +2435,8 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">SELECT</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">      </span><span class="p">[</span><span class="n">OrderID</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">CustomerID</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">OrderStatus</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">OrderAmount</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">LAST_MODIFIED_DATE</span><span class="p">]</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">FROM</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">Orders</span><span class="p">]</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">WHERE</span><span class="w"> </span><span class="p">[</span><span class="n">LAST_MODIFIED_DATE</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="s1">&#39;$BATCH_START_DATA_VALIDITY_TIMESTAMP&#39;</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="p">[</span><span class="n">LAST_MODIFIED_DATE</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="s1">&#39;$BATCH_END_DATA_VALIDITY_TIMESTAMP&#39;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">WHERE</span><span class="w"> </span><span class="p">[</span><span class="n">LAST_MODIFIED_DATE</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="s1">'$BATCH_START_DATA_VALIDITY_TIMESTAMP'</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="p">[</span><span class="n">LAST_MODIFIED_DATE</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="s1">'$BATCH_END_DATA_VALIDITY_TIMESTAMP'</span>
 </code></pre></div></p>
 <p><strong>How it works — sample variable values across runs (DAILY):</strong></p>
 <table>
@@ -2456,8 +2474,8 @@
 </tbody>
 </table>
 <p>The Jul 10 run resolves to:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">WHERE</span><span class="w"> </span><span class="p">[</span><span class="n">LAST_MODIFIED_DATE</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="s1">&#39;2026-07-09 00:00:00.000&#39;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="p">[</span><span class="n">LAST_MODIFIED_DATE</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="s1">&#39;2026-07-10 00:00:00.000&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">WHERE</span><span class="w"> </span><span class="p">[</span><span class="n">LAST_MODIFIED_DATE</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="s1">'2026-07-09 00:00:00.000'</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="p">[</span><span class="n">LAST_MODIFIED_DATE</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="s1">'2026-07-10 00:00:00.000'</span>
 </code></pre></div>
 (START = <code>2026-07-09 00:00:00.000</code>, END = <code>2026-07-10 00:00:00.000</code>)
 After each run the engine stores that run's <code>PERIOD</code> (<code>…23:59:59.999</code>) as its watermark; the next run's <code>START</code> = that <code>+ 1ms</code> = the next day's <code>00:00:00.000</code>. So one day ends at <code>…23:59:59.999</code> and the next begins at <code>…00:00:00.000</code> — <strong>1 ms apart, no gap and no overlap</strong>. The first run's <code>START</code> is the <code>1990</code> sentinel, so it backfills everything up to yesterday. Change <code>DAILY</code> to any other <a href="../VARIABLES/#batch-cycle-type--the-data-validity-window">batch cycle type</a> (<code>HOUR</code>, <code>WEEK</code>, <code>MONTH</code>, …) and the same query slices by that grain.</p>
@@ -2537,32 +2555,32 @@ After each run the engine stores that run's <code>PERIOD</code> (<code>…23:59:
 <p><strong>PostgreSQL / Redshift</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">order_id</span><span class="p">,</span><span class="w"> </span><span class="n">customer_id</span><span class="p">,</span><span class="w"> </span><span class="n">order_status</span><span class="p">,</span><span class="w"> </span><span class="n">order_amount</span><span class="p">,</span><span class="w"> </span><span class="n">last_modified_date</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">sales</span><span class="p">.</span><span class="n">orders</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">last_modified_date</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="s1">&#39;$BATCH_START_DATA_VALIDITY_TIMESTAMP&#39;</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">last_modified_date</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="s1">&#39;$BATCH_END_DATA_VALIDITY_TIMESTAMP&#39;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">last_modified_date</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="s1">'$BATCH_START_DATA_VALIDITY_TIMESTAMP'</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">last_modified_date</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="s1">'$BATCH_END_DATA_VALIDITY_TIMESTAMP'</span>
 </code></pre></div></p>
 <p><strong>MySQL / MariaDB</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">`</span><span class="n">order_id</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">customer_id</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">order_status</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">order_amount</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">last_modified_date</span><span class="o">`</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">sales</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">orders</span><span class="o">`</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="o">`</span><span class="n">last_modified_date</span><span class="o">`</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="s1">&#39;$BATCH_START_DATA_VALIDITY_TIMESTAMP&#39;</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="o">`</span><span class="n">last_modified_date</span><span class="o">`</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="s1">&#39;$BATCH_END_DATA_VALIDITY_TIMESTAMP&#39;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="o">`</span><span class="n">last_modified_date</span><span class="o">`</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="s1">'$BATCH_START_DATA_VALIDITY_TIMESTAMP'</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="o">`</span><span class="n">last_modified_date</span><span class="o">`</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="s1">'$BATCH_END_DATA_VALIDITY_TIMESTAMP'</span>
 </code></pre></div></p>
 <p><strong>Oracle</strong> — Oracle will not implicitly convert the millisecond literal, so wrap each bound in <code>TO_TIMESTAMP</code>. This also works for a plain <code>DATE</code> column (Oracle promotes the <code>DATE</code> to <code>TIMESTAMP</code> for the comparison).
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">ORDER_ID</span><span class="p">,</span><span class="w"> </span><span class="n">CUSTOMER_ID</span><span class="p">,</span><span class="w"> </span><span class="n">ORDER_STATUS</span><span class="p">,</span><span class="w"> </span><span class="n">ORDER_AMOUNT</span><span class="p">,</span><span class="w"> </span><span class="n">LAST_MODIFIED_DATE</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">SALES</span><span class="p">.</span><span class="n">ORDERS</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">LAST_MODIFIED_DATE</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">TO_TIMESTAMP</span><span class="p">(</span><span class="s1">&#39;$BATCH_START_DATA_VALIDITY_TIMESTAMP&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;YYYY-MM-DD HH24:MI:SS.FF3&#39;</span><span class="p">)</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">LAST_MODIFIED_DATE</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="n">TO_TIMESTAMP</span><span class="p">(</span><span class="s1">&#39;$BATCH_END_DATA_VALIDITY_TIMESTAMP&#39;</span><span class="p">,</span><span class="w">   </span><span class="s1">&#39;YYYY-MM-DD HH24:MI:SS.FF3&#39;</span><span class="p">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">LAST_MODIFIED_DATE</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">TO_TIMESTAMP</span><span class="p">(</span><span class="s1">'$BATCH_START_DATA_VALIDITY_TIMESTAMP'</span><span class="p">,</span><span class="w"> </span><span class="s1">'YYYY-MM-DD HH24:MI:SS.FF3'</span><span class="p">)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">LAST_MODIFIED_DATE</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="n">TO_TIMESTAMP</span><span class="p">(</span><span class="s1">'$BATCH_END_DATA_VALIDITY_TIMESTAMP'</span><span class="p">,</span><span class="w">   </span><span class="s1">'YYYY-MM-DD HH24:MI:SS.FF3'</span><span class="p">)</span>
 </code></pre></div></p>
 <p><strong>Snowflake</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">order_id</span><span class="p">,</span><span class="w"> </span><span class="n">customer_id</span><span class="p">,</span><span class="w"> </span><span class="n">order_status</span><span class="p">,</span><span class="w"> </span><span class="n">order_amount</span><span class="p">,</span><span class="w"> </span><span class="n">last_modified_date</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">sales</span><span class="p">.</span><span class="n">orders</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">last_modified_date</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="s1">&#39;$BATCH_START_DATA_VALIDITY_TIMESTAMP&#39;</span><span class="p">::</span><span class="n">timestamp_ntz</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">last_modified_date</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="s1">&#39;$BATCH_END_DATA_VALIDITY_TIMESTAMP&#39;</span><span class="p">::</span><span class="n">timestamp_ntz</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">last_modified_date</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="s1">'$BATCH_START_DATA_VALIDITY_TIMESTAMP'</span><span class="p">::</span><span class="n">timestamp_ntz</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">last_modified_date</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="s1">'$BATCH_END_DATA_VALIDITY_TIMESTAMP'</span><span class="p">::</span><span class="n">timestamp_ntz</span>
 </code></pre></div></p>
 <p><strong>ClickHouse</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">order_id</span><span class="p">,</span><span class="w"> </span><span class="n">customer_id</span><span class="p">,</span><span class="w"> </span><span class="n">order_status</span><span class="p">,</span><span class="w"> </span><span class="n">order_amount</span><span class="p">,</span><span class="w"> </span><span class="n">last_modified_date</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">sales</span><span class="p">.</span><span class="n">orders</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">last_modified_date</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">toDateTime64</span><span class="p">(</span><span class="s1">&#39;$BATCH_START_DATA_VALIDITY_TIMESTAMP&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">last_modified_date</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="n">toDateTime64</span><span class="p">(</span><span class="s1">&#39;$BATCH_END_DATA_VALIDITY_TIMESTAMP&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">last_modified_date</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">toDateTime64</span><span class="p">(</span><span class="s1">'$BATCH_START_DATA_VALIDITY_TIMESTAMP'</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">last_modified_date</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="n">toDateTime64</span><span class="p">(</span><span class="s1">'$BATCH_END_DATA_VALIDITY_TIMESTAMP'</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
 </code></pre></div></p>
 <p>The sample-values table above (First run → Jul 10 → Jul 11) applies unchanged to every dialect; substitute your own schema, table, and modified-date column. For an inclusive <code>BETWEEN … '$BATCH_DATA_VALIDITY_PERIOD'</code> form instead of half-open, the <code>.999</code> upper bound is only safe on exact-precision timestamp types (avoid it on SQL Server <code>datetime</code> and on MySQL <code>DATETIME(0)</code>, which round/truncate the fraction).</p>
 <h4 id="onstagegroup">Onstagegroup<a class="headerlink" href="#onstagegroup" title="Permanent link">&para;</a></h4>
@@ -2878,9 +2896,9 @@ After each run the engine stores that run's <code>PERIOD</code> (<code>…23:59:
 <tbody>
 <tr>
 <td>🟢</td>
-<td>Sync</td>
+<td><a href="#sync">Sync</a></td>
 <td><code>SYNC</code></td>
-<td>A <strong>barrier / sync point</strong> (aka <em>dummy step</em>) — does nothing itself. Use it to <strong>control parallelism</strong>: point arrows from N parallel steps/threads into one Sync step so it acts as a <strong>stopper</strong> that waits for all N to finish, then the next steps fire from its output. No config.</td>
+<td>A <strong>barrier / sync point</strong> — does nothing itself. Use it to <strong>control parallelism</strong>: point arrows from N parallel steps/threads into one Sync step so it acts as a <strong>stopper</strong> that waits for all N to finish, then the next steps fire from its output. One setting: <strong>Permissive</strong>.</td>
 </tr>
 <tr>
 <td>🟢</td>
@@ -2926,6 +2944,38 @@ After each run the engine stores that run's <code>PERIOD</code> (<code>…23:59:
 </tr>
 </tbody>
 </table>
+<h4 id="sync">Sync<a class="headerlink" href="#sync" title="Permanent link">&para;</a></h4>
+<p><strong>Type</strong> <code>SYNC</code> · <strong>WPF</strong> <code>Steps/Common/Sync.cs</code> → <code>SyncWindow.xaml</code> ("Sync Point") · N inputs</p>
+<p>A <strong>barrier</strong>. It does no work of its own — it waits for every incoming branch to finish, and only then do the steps after it run. Use it to fan several parallel branches back into one point.</p>
+<p><strong>Permissive</strong> (checkbox, <strong>unticked by default</strong>) decides what happens when one of those branches fails.</p>
+<table>
+<thead>
+<tr>
+<th>Permissive</th>
+<th>If an incoming branch fails</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Unticked</strong> (default)</td>
+<td>The sync point is <strong>skipped</strong>, and so is everything after it. One failed branch abandons the whole fan-in, even if the other branches finished cleanly.</td>
+</tr>
+<tr>
+<td><strong>Ticked</strong></td>
+<td>The sync point <strong>completes anyway</strong>, so the healthy branches carry on. Every branch that did not complete is named in the run log.</td>
+</tr>
+</tbody>
+</table>
+<p>Use Permissive when the branches are independent enough that one failing should not stop the rest — e.g. twenty table loads fanning into one barrier, where one bad table should not cancel the nineteen good ones.</p>
+<p>Two things it does <strong>not</strong> change:</p>
+<ul>
+<li><strong>The job still fails.</strong> A permissive sync completes, but the failed step is still <code>FAILED</code> and so is the job. The setting decides whether work continues, not whether the failure is forgiven — you still get the failure and the alert. (This is deliberately different from <a href="#switch">Switch</a>, which <em>handles</em> a failure via its failure path and therefore leaves the job <code>COMPLETE</code>.)</li>
+<li><strong>A halt still wins.</strong> If the run is being terminated, the sync point terminates with it regardless of this setting.</li>
+</ul>
+<blockquote>
+<p>⚠️ Steps after a permissive sync run on <strong>whatever data actually arrived</strong>. If a downstream step assumes all branches loaded, ticking this can push partial data forward rather than stopping. That is the trade being made, and it is why the default is off.</p>
+</blockquote>
+<p><strong>Backwards compatible.</strong> Jobs saved before this setting existed, or by an older client, have no <code>permissive</code> element and behave exactly as they always did (unticked).</p>
 <h4 id="switch">Switch<a class="headerlink" href="#switch" title="Permanent link">&para;</a></h4>
 <p><strong>Type</strong> <code>SWITCH</code> · <strong>WPF</strong> <code>Steps/Common/SWITCH.cs</code> → <code>SwitchWindow.xaml</code> ("Switch Process Flow") · 1 input, ≥2 outputs</p>
 <p>Routes the pipeline flow based on the <strong>success/failure status</strong> of the pipeline leading into it. Assign each connected downstream step to <strong>Run Following On Success</strong> or <strong>Run Following On Failure</strong> (use <code>&gt;</code> to move a step between the lists). Typical use is a <strong>recovery path</strong> — e.g. a <code>Jdbcsource → JdbcTarget</code> pipeline; if it fails, the Switch fires a recovery step (a <code>SqlScript</code> or any other step) instead of just failing the job.</p>

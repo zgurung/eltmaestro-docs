@@ -1466,7 +1466,7 @@
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>sudo<span class="w"> </span>install<span class="w"> </span>-d<span class="w"> </span>/usr/share/postgresql-common/pgdg
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>sudo<span class="w"> </span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://www.postgresql.org/media/keys/ACCC4CF8.asc<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span>-o<span class="w"> </span>/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] http://apt.postgresql.org/pub/repos/apt </span><span class="k">$(</span>lsb_release<span class="w"> </span>-cs<span class="k">)</span><span class="s2">-pgdg main&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] http://apt.postgresql.org/pub/repos/apt </span><span class="k">$(</span>lsb_release<span class="w"> </span>-cs<span class="k">)</span><span class="s2">-pgdg main"</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/pgdg.list
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>postgresql-16
@@ -1546,7 +1546,7 @@
 <p>The WSDL should return HTTP 200 with the SOAP contract.</p>
 <h2 id="step-6---default-credentials">Step 6 - default credentials<a class="headerlink" href="#step-6---default-credentials" title="Permanent link">&para;</a></h2>
 <p>The seed loads a single bootstrap user named <code>integrator</code> (uppercased to <code>INTEGRATOR</code> in <code>t_user.user_id</code>). Reset the password before connecting any real client:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>mset-password-md5<span class="w"> </span>INTEGRATOR<span class="w"> </span><span class="s1">&#39;&lt;new-password&gt;&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>mset-password-md5<span class="w"> </span>INTEGRATOR<span class="w"> </span><span class="s1">'&lt;new-password&gt;'</span>
 </code></pre></div>
 <h2 id="where-to-go-next">Where to go next<a class="headerlink" href="#where-to-go-next" title="Permanent link">&para;</a></h2>
 <ul>

@@ -1774,7 +1774,7 @@ Plaintext-only keeps the negotiation trivial.</p>
 <p>After editing <code>users.d/maestro_etl.xml</code> on a running container, <strong>no
 command is needed</strong> — ClickHouse watches <code>users.d/</code> and hot-reloads on
 file change. Confirm with the server log:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker<span class="w"> </span>logs<span class="w"> </span>clickhouse<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;reloading\|users.d&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tail
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker<span class="w"> </span>logs<span class="w"> </span>clickhouse<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s1">'reloading\|users.d'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tail
 </code></pre></div>
 <p>You should see a line like
 <code>Reloading users config from /etc/clickhouse-server/users.d/maestro_etl.xml</code>.</p>
@@ -1789,8 +1789,8 @@ tables with <code>ORDER BY ($COLUMNS)</code> where any column might be nullable
 <strong>This breaks ClickHouse 24.8.14</strong> — the server bails during access-control
 load with:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Code: 115. DB::Exception: Setting allow_nullable_key is neither a
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>builtin setting nor started with the prefix &#39;SQL_&#39; registered for
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>user-defined settings: while parsing profile &#39;default&#39; in users
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>builtin setting nor started with the prefix 'SQL_' registered for
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>user-defined settings: while parsing profile 'default' in users
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>configuration file. (UNKNOWN_SETTING)
 </code></pre></div>
 <p><code>allow_nullable_key</code> is a <strong>MergeTree-level</strong> setting, not a user/profile
@@ -1865,8 +1865,8 @@ re-laying needed.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># On 192.168.1.201, as the jenkins user:</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>sudo<span class="w"> </span>install<span class="w"> </span>-d<span class="w"> </span>-o<span class="w"> </span>jenkins<span class="w"> </span>-g<span class="w"> </span>jenkins<span class="w"> </span>-m<span class="w"> </span><span class="m">0700</span><span class="w"> </span>/home/jenkins/maestro-ch-client
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>cat<span class="w"> </span>&gt;<span class="w"> </span>/home/jenkins/maestro-ch-client/config.xml<span class="w"> </span><span class="s">&lt;&lt;&#39;XML&#39;</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="s">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>cat<span class="w"> </span>&gt;<span class="w"> </span>/home/jenkins/maestro-ch-client/config.xml<span class="w"> </span><span class="s">&lt;&lt;'XML'</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="s">&lt;?xml version="1.0"?&gt;</span>
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="s">&lt;config&gt;</span>
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="s">  &lt;host&gt;192.168.1.201&lt;/host&gt;</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="s">  &lt;port&gt;9100&lt;/port&gt;</span>
@@ -1914,7 +1914,7 @@ CLI path.</p>
 <hr />
 <h2 id="4-verify">4. Verify<a class="headerlink" href="#4-verify" title="Permanent link">&para;</a></h2>
 <p>From the host (or inside the container, drop the <code>docker exec</code>):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>eltmaestro<span class="w"> </span>clickhouse-client<span class="w"> </span>--query<span class="w"> </span><span class="s2">&quot;SELECT version(), currentUser()&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>eltmaestro<span class="w"> </span>clickhouse-client<span class="w"> </span>--query<span class="w"> </span><span class="s2">"SELECT version(), currentUser()"</span>
 </code></pre></div>
 <p>Expected output (no prompt):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>24.8.x.x        maestro_etl
@@ -1974,7 +1974,7 @@ running container is touched.</p>
 <ol>
 <li>
 <p>Generate a SHA256 of the same cleartext:
-   <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;welcome123&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sha256sum<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $1}&#39;</span>
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s1">'welcome123'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sha256sum<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">'{print $1}'</span>
 </code></pre></div>
    Critical: <code>echo -n</code> so there's <strong>no trailing newline</strong> in the hashed
    input. A trailing newline produces a different hash and you'll get an

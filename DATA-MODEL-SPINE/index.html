@@ -1857,20 +1857,20 @@ dynamic SQL, so it is not drawn here. See
 <details>
 <summary>Diagram source (Mermaid) — edit this and re-render <code>images/data-model-spine.png</code></summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>erDiagram
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  batch_cycle_type ||--o{ batch_cycle : &quot;types&quot;
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  batch_cycle ||--o{ batch_cycle_run : &quot;runs&quot;
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  batch_cycle_run ||--o{ batch_cycle_run_job : &quot;job legs&quot;
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  batch_cycle_run ||--o{ job_batch_cycle_run_msg : &quot;messages&quot;
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  batch_cycle_run ||--o{ control_test_run : &quot;test results&quot;
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  batch_cycle_run ||..o{ t_pid_sessions : &quot;live process (logical)&quot;
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  job ||--o{ batch_cycle_run_job : &quot;executes as&quot;
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  job ||--o{ job_batch_cycle_run_msg : &quot;logs&quot;
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  batch_cycle_run_job ||..o{ t_step_status : &quot;step status (logical)&quot;
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  batch_cycle_run_job ||..o{ t_step_run_detail : &quot;step logs (logical)&quot;
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>  control_test_type ||--o{ control_test : &quot;categorizes&quot;
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>  control_test ||--o{ control_test_hierarchy : &quot;rolls up&quot;
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>  control_test ||--o{ control_test_run : &quot;produces&quot;
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>  connection_type ||--o{ connection : &quot;typed as&quot;
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  batch_cycle_type ||--o{ batch_cycle : "types"
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  batch_cycle ||--o{ batch_cycle_run : "runs"
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  batch_cycle_run ||--o{ batch_cycle_run_job : "job legs"
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  batch_cycle_run ||--o{ job_batch_cycle_run_msg : "messages"
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  batch_cycle_run ||--o{ control_test_run : "test results"
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  batch_cycle_run ||..o{ t_pid_sessions : "live process (logical)"
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  job ||--o{ batch_cycle_run_job : "executes as"
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  job ||--o{ job_batch_cycle_run_msg : "logs"
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  batch_cycle_run_job ||..o{ t_step_status : "step status (logical)"
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  batch_cycle_run_job ||..o{ t_step_run_detail : "step logs (logical)"
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>  control_test_type ||--o{ control_test : "categorizes"
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>  control_test ||--o{ control_test_hierarchy : "rolls up"
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>  control_test ||--o{ control_test_run : "produces"
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>  connection_type ||--o{ connection : "typed as"
 <a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
 <a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>  batch_cycle_type {
 <a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    char batch_cycle_type_cd PK
@@ -1917,9 +1917,9 @@ dynamic SQL, so it is not drawn here. See
 <a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a>    bigint rows_affected
 <a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a>  }
 <a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a>  t_step_status {
-<a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a>    bigint batch_run_num &quot;logical key&quot;
-<a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a>    bigint job_id &quot;logical key&quot;
-<a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a>    int step_id &quot;logical key&quot;
+<a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a>    bigint batch_run_num "logical key"
+<a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a>    bigint job_id "logical key"
+<a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a>    int step_id "logical key"
 <a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a>    varchar step_name
 <a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a>    varchar step_type
 <a id="__codelineno-0-67" name="__codelineno-0-67" href="#__codelineno-0-67"></a>    varchar step_status
@@ -1928,9 +1928,9 @@ dynamic SQL, so it is not drawn here. See
 <a id="__codelineno-0-70" name="__codelineno-0-70" href="#__codelineno-0-70"></a>    ts update_ts
 <a id="__codelineno-0-71" name="__codelineno-0-71" href="#__codelineno-0-71"></a>  }
 <a id="__codelineno-0-72" name="__codelineno-0-72" href="#__codelineno-0-72"></a>  t_step_run_detail {
-<a id="__codelineno-0-73" name="__codelineno-0-73" href="#__codelineno-0-73"></a>    bigint batch_run_num &quot;logical key&quot;
-<a id="__codelineno-0-74" name="__codelineno-0-74" href="#__codelineno-0-74"></a>    bigint job_id &quot;logical key&quot;
-<a id="__codelineno-0-75" name="__codelineno-0-75" href="#__codelineno-0-75"></a>    int step_id &quot;logical key&quot;
+<a id="__codelineno-0-73" name="__codelineno-0-73" href="#__codelineno-0-73"></a>    bigint batch_run_num "logical key"
+<a id="__codelineno-0-74" name="__codelineno-0-74" href="#__codelineno-0-74"></a>    bigint job_id "logical key"
+<a id="__codelineno-0-75" name="__codelineno-0-75" href="#__codelineno-0-75"></a>    int step_id "logical key"
 <a id="__codelineno-0-76" name="__codelineno-0-76" href="#__codelineno-0-76"></a>    bigint log_ordinal
 <a id="__codelineno-0-77" name="__codelineno-0-77" href="#__codelineno-0-77"></a>    bool log_is_error
 <a id="__codelineno-0-78" name="__codelineno-0-78" href="#__codelineno-0-78"></a>    varchar log_message

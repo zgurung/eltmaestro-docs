@@ -1639,17 +1639,17 @@
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>.<span class="w"> </span>~/.env_integrator
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nv">OUT</span><span class="o">=</span>/tmp/job-meta-export-<span class="k">$(</span>date<span class="w"> </span>+%Y%m%d<span class="k">)</span>.sql
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUT</span><span class="s2">&quot;</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>&gt;<span class="w"> </span><span class="s2">"</span><span class="nv">$OUT</span><span class="s2">"</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="k">for</span><span class="w"> </span>T<span class="w"> </span><span class="k">in</span><span class="w"> </span>t_jdbc<span class="w"> </span>t_connection_general<span class="w"> </span>t_job_meta<span class="w"> </span>t_job_meta_history<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">         </span>t_job_alert_setting<span class="w"> </span>t_job_permissions<span class="w"> </span>t_workflow_item<span class="w"> </span>t_step_watermark<span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span>pg_dump<span class="w"> </span>--data-only<span class="w"> </span>--column-inserts<span class="w"> </span>--table<span class="o">=</span>public.<span class="nv">$T</span><span class="w"> </span>sqlmaestro<span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUT</span><span class="s2">&quot;</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span>pg_dump<span class="w"> </span>--data-only<span class="w"> </span>--column-inserts<span class="w"> </span>--table<span class="o">=</span>public.<span class="nv">$T</span><span class="w"> </span>sqlmaestro<span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">"</span><span class="nv">$OUT</span><span class="s2">"</span>
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="k">done</span>
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="c1"># also capture the sequence so version_key doesn&#39;t collide on the new host</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>psql<span class="w"> </span>sqlmaestro<span class="w"> </span>-tAc<span class="w"> </span><span class="s2">&quot;SELECT &#39;SELECT setval(&#39;&#39;public.seq_job_version_id&#39;&#39;, &#39;</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="s2">                          || last_value || &#39;, &#39;</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="s2">                          || is_called || &#39;);&#39;</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="s2">                       FROM public.seq_job_version_id&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUT</span><span class="s2">&quot;</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="c1"># also capture the sequence so version_key doesn't collide on the new host</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>psql<span class="w"> </span>sqlmaestro<span class="w"> </span>-tAc<span class="w"> </span><span class="s2">"SELECT 'SELECT setval(''public.seq_job_version_id'', '</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="s2">                          || last_value || ', '</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="s2">                          || is_called || ');'</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="s2">                       FROM public.seq_job_version_id"</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">"</span><span class="nv">$OUT</span><span class="s2">"</span>
 </code></pre></div>
 <p><code>--column-inserts</code> (rather than the default <code>COPY</code>) is verbose but tolerates minor column-order drift between legacy and modern schemas — INSERT names each column explicitly. For very large <code>t_job_meta_history</code> tables, fall back to <code>COPY</code> and accept the constraint that the schemas must match column-for-column.</p>
 <p>Transfer <code>$OUT</code> to the new host (<code>scp</code>, S3, USB, whatever fits the threat model — the file contains base64 passwords).</p>
@@ -1665,19 +1665,19 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>.<span class="w"> </span>~/.env_integrator
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># row count parity</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>psql<span class="w"> </span>sqlmaestro<span class="w"> </span>-tAc<span class="w"> </span><span class="s2">&quot;SELECT &#39;t_job_meta&#39;, count(*) FROM public.t_job_meta</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="s2">                      UNION ALL SELECT &#39;t_jdbc&#39;, count(*) FROM public.t_jdbc</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="s2">                      UNION ALL SELECT &#39;t_step_watermark&#39;, count(*) FROM public.t_step_watermark&quot;</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>psql<span class="w"> </span>sqlmaestro<span class="w"> </span>-tAc<span class="w"> </span><span class="s2">"SELECT 't_job_meta', count(*) FROM public.t_job_meta</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="s2">                      UNION ALL SELECT 't_jdbc', count(*) FROM public.t_jdbc</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="s2">                      UNION ALL SELECT 't_step_watermark', count(*) FROM public.t_step_watermark"</span>
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1"># spot-check that watermarks weren&#39;t reset</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>psql<span class="w"> </span>sqlmaestro<span class="w"> </span>-tAc<span class="w"> </span><span class="s2">&quot;SELECT job_name, step_name, watermark_value</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1"># spot-check that watermarks weren't reset</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>psql<span class="w"> </span>sqlmaestro<span class="w"> </span>-tAc<span class="w"> </span><span class="s2">"SELECT job_name, step_name, watermark_value</span>
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="s2">                      FROM public.t_step_watermark</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="s2">                      WHERE watermark_value &lt;&gt; &#39;&#39;</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="s2">                      ORDER BY job_name LIMIT 20&quot;</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="s2">                      WHERE watermark_value &lt;&gt; ''</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="s2">                      ORDER BY job_name LIMIT 20"</span>
 <a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
 <a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="c1"># version_key sequence is past the highest historical row</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>psql<span class="w"> </span>sqlmaestro<span class="w"> </span>-tAc<span class="w"> </span><span class="s2">&quot;SELECT last_value FROM public.seq_job_version_id;</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="s2">                      SELECT max(version_key) FROM public.t_job_meta_history&quot;</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>psql<span class="w"> </span>sqlmaestro<span class="w"> </span>-tAc<span class="w"> </span><span class="s2">"SELECT last_value FROM public.seq_job_version_id;</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="s2">                      SELECT max(version_key) FROM public.t_job_meta_history"</span>
 </code></pre></div>
 <p>Counts on both hosts should match for every table you copied. If <code>seq_job_version_id.last_value</code> is <strong>lower</strong> than <code>max(version_key)</code> in <code>t_job_meta_history</code>, the next save from the WPF will fail on duplicate-PK; re-run the <code>setval</code> line from <code>$OUT</code>.</p>
 <h3 id="gotchas">Gotchas<a class="headerlink" href="#gotchas" title="Permanent link">&para;</a></h3>

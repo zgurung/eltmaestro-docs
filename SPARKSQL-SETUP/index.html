@@ -1469,7 +1469,7 @@
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>   HDFS Parquet  ──▶  hdfs://&lt;namenode&gt;/ingest/&lt;schema&gt;/&lt;Table&gt;
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        │
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        ▼  register as Hive external table (Spark Thrift Server)
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>   `&lt;thrift.hive2.schema&gt;`.`&lt;table&gt;`  USING PARQUET LOCATION &#39;hdfs://…/ingest/…&#39;
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>   `&lt;thrift.hive2.schema&gt;`.`&lt;table&gt;`  USING PARQUET LOCATION 'hdfs://…/ingest/…'
 </code></pre></div>
 <p>The step type is <strong><code>ONSTAGEGROUP</code></strong> (<code>GeneralGroupLoaderSpark</code> → <code>OnstageRecordSpark</code>). Per table it computes watermark partitions, extracts to PSV, merges the PSV parts into a Parquet directory on HDFS, then calls <code>SparkEngine.updateThriftMeta</code> to (re)create the matching external table in the Thrift catalog. See ENGINE.md for the internals.</p>
 <h2 id="2-create-the-hdfsspark-connection">2. Create the HDFS/Spark connection<a class="headerlink" href="#2-create-the-hdfsspark-connection" title="Permanent link">&para;</a></h2>

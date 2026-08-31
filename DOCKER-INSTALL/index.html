@@ -1437,7 +1437,7 @@
 </ul>
 <h2 id="step-3---wait-for-startup-and-verify">Step 3 - wait for startup and verify<a class="headerlink" href="#step-3---wait-for-startup-and-verify" title="Permanent link">&para;</a></h2>
 <p>First start initializes the database (a minute or two). Watch for readiness, then confirm the services and the SOAP endpoint:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>eltmaestro<span class="w">                       </span><span class="c1"># wait for &quot;Audit database ready&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>eltmaestro<span class="w">                       </span><span class="c1"># wait for "Audit database ready"</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>eltmaestro<span class="w"> </span>supervisorctl<span class="w"> </span>status<span class="w">     </span><span class="c1"># services should be RUNNING</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>curl<span class="w"> </span>-sk<span class="w"> </span>https://&lt;server_ip&gt;:8181/MaestroMetaDataProviderService/MaestroMetaService?wsdl<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-2
 </code></pre></div>
@@ -1449,7 +1449,7 @@
 <li><strong>Password:</strong> <code>integrator123</code></li>
 </ul>
 <p>Change it before connecting any real client:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>eltmaestro<span class="w"> </span>mset-password-md5<span class="w"> </span>INTEGRATOR<span class="w"> </span><span class="s1">&#39;&lt;new-password&gt;&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>eltmaestro<span class="w"> </span>mset-password-md5<span class="w"> </span>INTEGRATOR<span class="w"> </span><span class="s1">'&lt;new-password&gt;'</span>
 </code></pre></div>
 <h2 id="step-5---connect-the-desktop-client">Step 5 - connect the desktop client<a class="headerlink" href="#step-5---connect-the-desktop-client" title="Permanent link">&para;</a></h2>
 <p>Point the ELTMaestro desktop client's <strong>Server</strong> / <strong>Port</strong> at <code>&lt;server_ip&gt;</code> / <code>8181</code> and sign in as <code>integrator</code> with your new password. From here the <a href="../USER-GUIDE/">User Guide</a> covers connections, workflows, and the rest.</p>
