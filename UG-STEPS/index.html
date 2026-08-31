@@ -2948,6 +2948,8 @@ After each run the engine stores that run's <code>PERIOD</code> (<code>…23:59:
 <p><strong>Type</strong> <code>SYNC</code> · <strong>WPF</strong> <code>Steps/Common/Sync.cs</code> → <code>SyncWindow.xaml</code> ("Sync Point") · N inputs</p>
 <p>A <strong>barrier</strong>. It does no work of its own — it waits for every incoming branch to finish, and only then do the steps after it run. Use it to fan several parallel branches back into one point.</p>
 <p><strong>Permissive</strong> (checkbox, <strong>unticked by default</strong>) decides what happens when one of those branches fails.</p>
+<p><img alt="Sync Point — Permissive unticked, the default and the pre-existing behaviour" src="../images/sync-permissive-unchecked.png" /></p>
+<p><img alt="Sync Point — Permissive ticked, so the barrier completes and the healthy branches carry on" src="../images/sync-permissive-checked.png" /></p>
 <table>
 <thead>
 <tr>
