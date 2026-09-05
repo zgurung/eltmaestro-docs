@@ -1385,7 +1385,11 @@ push</strong> (files &gt;5 GB no longer fail with EntityTooLarge), the <strong>l
 watchdog</strong>, and the <strong>Snowflake <code>closeOnCompletion</code> guard</strong> — on top of the prior Jetty
 idle-timeout and Redshift measure-don't-estimate work — and ships the Windows
 client <strong>2.5.4.20260803</strong> (a <strong>Reset Batch Watermarks</strong> button plus a workflow <strong>right-click ▸ Watermark Management</strong> entry — pre-seeded with the selected workflow — that clear a batch's job low/high watermarks so its tables reload on the next run; <strong>Help ▸ About</strong> now shows the full build version; plus the earlier <strong>control tests now show on the Step Status tab</strong> — attached data-quality control tests, which run and write their results to the ABC database, are now listed on a workflow's <em>Step Status</em> tab alongside the step statuses, with expected/actual and pass/fail, so they're no longer invisible in the client; a <strong>Step Status name-alignment fix</strong> — the <em>Step Status</em> grid now shows each step's current name (matching the Runtime Status diagram) instead of the name recorded at the last run, so a renamed step no longer appears under both its old and new name; plus a <strong>canvas click-vs-drag fix</strong> — clicking a step on the editor canvas no longer nudges it out of place; a <strong>Set Job Metadata</strong> fix — the <strong>Config</strong> dialog now maps its fields correctly, so <em>Description</em> shows the job description instead of the job type and <strong>Apply</strong> no longer errors with <code>value too long for type character varying(64)</code>; Apply now confirms, closes, and refreshes the workflow list; plus a <strong>Change History / Show Changes</strong> job version viewer with a read-only compare-mode canvas + per-step XML diff; <strong>Change Batch Cycle Type</strong> from the job right-click menu; a redesigned <strong>Manage Control Tests</strong> window — searchable grid with a separate editor; Redshift <strong>pipeline generators</strong> — bulk <em>Export Jdbc To S3 Parquet</em> and <em>Import S3 Parquet To Redshift</em> canvas wizards that build whole <code>JDBCSOURCE→Parquet→S3</code> and <code>COPY→table</code> pipelines per selected table, with per-run S3-folder <strong>dedupe</strong> via step watermarks, optional first-column <strong>upsert</strong>, and a migratable <code>$SYSTEM_DEFAULT_DATABASE</code> target; a <strong>Read Uncommitted</strong> control for JDBC sources (per-step checkbox + a <code>onstage_read_uncommitted</code> System Setting — SQL Server extracts read at READ UNCOMMITTED); plus the prior 2.5.1 async JDBC test, Change Password dialog, canvas drag fix, and smooth scrolling).</p>
-<p><strong>Desktop client <code>2.5.5.20260905</code></strong> (5 September 2026) adds the <strong>Run Variable Overrides</strong> section on the
+<p><strong>Desktop client <code>2.5.6.20260905</code></strong> (5 September 2026) stops the <strong>Step Status</strong> tab listing plain arrows as
+steps — the engine records every connector as a <code>TRANSFORMER</code> step, so a 20-arrow workflow showed 20
+extra rows; a plain arrow now appears only if it failed or is still running (see
+<a href="../UG-WORKFLOWS/#managing-a-workflow--right-click-actions">Workflows</a>). It supersedes the same-day
+<code>2.5.5.20260905</code>, which added the <strong>Run Variable Overrides</strong> section on the
 Run dialog — seed the run-history variables for a single run, so a truncated table can be reloaded
 from the beginning with nothing to put back afterwards. Needs server patch <code>e45c8bfc5</code> (below) on the
 engine side. The preceding <code>2.5.5.20260901</code> added the Sync step's <strong>Permissive</strong> setting. Both are in
@@ -1418,15 +1422,15 @@ the release notes; the override walkthrough is
 </tr>
 <tr>
 <td><strong>Windows desktop client</strong></td>
-<td><a href="https://eltmaestro.s3.amazonaws.com/docker/ELTMAESTRO-2.5.5.20260905-portable-win-x64.zip">https://eltmaestro.s3.amazonaws.com/docker/ELTMAESTRO-2.5.5.20260905-portable-win-x64.zip</a></td>
+<td><a href="https://eltmaestro.s3.amazonaws.com/docker/ELTMAESTRO-2.5.6.20260905-portable-win-x64.zip">https://eltmaestro.s3.amazonaws.com/docker/ELTMAESTRO-2.5.6.20260905-portable-win-x64.zip</a></td>
 <td>~81 MB</td>
-<td><code>756052c2f0ddfef9bae6bec27127514a</code></td>
+<td><code>57993fd6d2980e971e2708108f5412bb</code></td>
 <td>The desktop client used to connect to an ELTMaestro server. EV code-signed (IQ Associates, DigiCert-timestamped).</td>
 </tr>
 </tbody>
 </table>
 <blockquote>
-<p>Checksums are for the <strong>current build</strong> (<code>17.0.4.451</code> server image / <code>2.5.5.20260905</code> client). The rolling <code>-17.0.4</code> server objects change md5 on each publish; immutable per-build copies (<code>eltmaestro-17.0.4.451.tar.gz</code>, <code>eltm-portable-17.0.4.451.tar.gz</code>) are also on S3 with the same checksums.</p>
+<p>Checksums are for the <strong>current build</strong> (<code>17.0.4.451</code> server image / <code>2.5.6.20260905</code> client). The rolling <code>-17.0.4</code> server objects change md5 on each publish; immutable per-build copies (<code>eltmaestro-17.0.4.451.tar.gz</code>, <code>eltm-portable-17.0.4.451.tar.gz</code>) are also on S3 with the same checksums.</p>
 </blockquote>
 <h2 id="what-to-do-with-each">What to do with each<a class="headerlink" href="#what-to-do-with-each" title="Permanent link">&para;</a></h2>
 <ul>
@@ -1482,7 +1486,7 @@ completed.</p>
 </ul>
 <blockquote>
 <p>Tip: the server (Docker image / Linux installer, version <code>17.0.4</code>) and the
-Windows client (version <code>2.5.5</code>) are versioned separately — that's expected.</p>
+Windows client (version <code>2.5.6</code>) are versioned separately — that's expected.</p>
 </blockquote>
 
 
