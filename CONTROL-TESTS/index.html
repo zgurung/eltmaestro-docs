@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://zgurung.github.io/eltmaestro-docs/UPGRADE/">
+        <link rel="canonical" href="https://zgurung.github.io/eltmaestro-docs/CONTROL-TESTS/">
       
       
-        <link rel="prev" href="../EDGE-NODE-SETUP/">
+        <link rel="prev" href="../VARIABLES/">
       
       
-        <link rel="next" href="../OPERATIONS/">
+        <link rel="next" href="../SCHEMA-PROFILE/">
       
       
       <link rel="icon" href="../assets/elt-maestro-logo.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>Upgrade - ELTMaestro Documentation</title>
+        <title>Control tests - ELTMaestro Documentation</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#in-place-upgrade" class="md-skip">
+        <a href="#control-tests" class="md-skip">
           Skip to content
         </a>
       
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Upgrade
+              Control tests
             
           </span>
         </div>
@@ -860,8 +860,6 @@
       
   
   
-    
-  
   
   
     
@@ -873,11 +871,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
         
           
           <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
@@ -891,7 +889,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             Install & operations
@@ -965,30 +963,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Upgrade
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../UPGRADE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -997,131 +975,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#what-is-preserved" class="md-nav__link">
-    <span class="md-ellipsis">
-      What is preserved
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-is-replaced" class="md-nav__link">
-    <span class="md-ellipsis">
-      What is replaced
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#before-you-upgrade" class="md-nav__link">
-    <span class="md-ellipsis">
-      Before you upgrade
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#procedure" class="md-nav__link">
-    <span class="md-ellipsis">
-      Procedure
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#rollback" class="md-nav__link">
-    <span class="md-ellipsis">
-      Rollback
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#verifying-the-upgrade-succeeded" class="md-nav__link">
-    <span class="md-ellipsis">
-      Verifying the upgrade succeeded
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#major-upgrade-from-a-legacy-install" class="md-nav__link">
-    <span class="md-ellipsis">
-      Major upgrade from a legacy install
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Major upgrade from a legacy install">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#what-to-copy" class="md-nav__link">
-    <span class="md-ellipsis">
-      What to copy
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#procedure_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Procedure
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#verifying-the-copy" class="md-nav__link">
-    <span class="md-ellipsis">
-      Verifying the copy
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#gotchas" class="md-nav__link">
-    <span class="md-ellipsis">
-      Gotchas
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1159,8 +1012,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -1170,11 +1025,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
         
           
           <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
@@ -1188,7 +1043,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             Reference
@@ -1220,10 +1075,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../CONTROL-TESTS/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Control tests
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -1232,6 +1107,152 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-type-codes-are-two-different-things" class="md-nav__link">
+    <span class="md-ellipsis">
+      The type codes are two different things
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tolerance-is-a-percentage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tolerance is a PERCENTAGE
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tolerance is a PERCENTAGE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#do-not-apply-this-to-a-client-without-measuring-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      Do not apply this to a client without measuring first
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#not-evaluated-is-not-the-same-as-failed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Not evaluated is not the same as failed
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#failures-are-no-longer-swallowed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Failures are no longer swallowed
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-rollup" class="md-nav__link">
+    <span class="md-ellipsis">
+      The rollup
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lookup-and-error-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lookup and error paths
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lookup and error paths">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#known-broken-deliberately-untouched" class="md-nav__link">
+    <span class="md-ellipsis">
+      Known-broken, deliberately untouched
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delivery" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delivery
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Delivery">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#verifying" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verifying
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code map
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      See also
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1402,100 +1423,28 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-is-preserved" class="md-nav__link">
+  <a href="#the-type-codes-are-two-different-things" class="md-nav__link">
     <span class="md-ellipsis">
-      What is preserved
+      The type codes are two different things
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-is-replaced" class="md-nav__link">
+  <a href="#tolerance-is-a-percentage" class="md-nav__link">
     <span class="md-ellipsis">
-      What is replaced
+      Tolerance is a PERCENTAGE
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#before-you-upgrade" class="md-nav__link">
-    <span class="md-ellipsis">
-      Before you upgrade
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#procedure" class="md-nav__link">
-    <span class="md-ellipsis">
-      Procedure
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#rollback" class="md-nav__link">
-    <span class="md-ellipsis">
-      Rollback
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#verifying-the-upgrade-succeeded" class="md-nav__link">
-    <span class="md-ellipsis">
-      Verifying the upgrade succeeded
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#major-upgrade-from-a-legacy-install" class="md-nav__link">
-    <span class="md-ellipsis">
-      Major upgrade from a legacy install
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Major upgrade from a legacy install">
+    <nav class="md-nav" aria-label="Tolerance is a PERCENTAGE">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#what-to-copy" class="md-nav__link">
+  <a href="#do-not-apply-this-to-a-client-without-measuring-first" class="md-nav__link">
     <span class="md-ellipsis">
-      What to copy
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#procedure_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Procedure
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#verifying-the-copy" class="md-nav__link">
-    <span class="md-ellipsis">
-      Verifying the copy
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#gotchas" class="md-nav__link">
-    <span class="md-ellipsis">
-      Gotchas
+      Do not apply this to a client without measuring first
     </span>
   </a>
   
@@ -1503,6 +1452,99 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#not-evaluated-is-not-the-same-as-failed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Not evaluated is not the same as failed
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#failures-are-no-longer-swallowed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Failures are no longer swallowed
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-rollup" class="md-nav__link">
+    <span class="md-ellipsis">
+      The rollup
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lookup-and-error-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lookup and error paths
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lookup and error paths">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#known-broken-deliberately-untouched" class="md-nav__link">
+    <span class="md-ellipsis">
+      Known-broken, deliberately untouched
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delivery" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delivery
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Delivery">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#verifying" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verifying
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code map
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      See also
+    </span>
+  </a>
   
 </li>
       
@@ -1521,255 +1563,288 @@
                   
 
 
-<h1 id="in-place-upgrade">In-place upgrade<a class="headerlink" href="#in-place-upgrade" title="Permanent link">&para;</a></h1>
-<p>Upgrade an existing <code>/data/iserver/</code> install with a newer <code>eltm-portable-&lt;VERSION&gt;.tar.gz</code> while keeping the audit DB, deployed workflows, keystore, and operator tuning intact.</p>
-<p>Run as the same unprivileged user that owns the install (<code>maestro</code> in the <a href="../INSTALL/">INSTALL.md</a> convention). Do not run as root.</p>
-<h2 id="what-is-preserved">What is preserved<a class="headerlink" href="#what-is-preserved" title="Permanent link">&para;</a></h2>
-<p><code>update-server.sh</code> keeps these untouched across the upgrade:</p>
+<h1 id="control-tests">Control tests<a class="headerlink" href="#control-tests" title="Permanent link">&para;</a></h1>
+<p>Control tests are ELTMaestro's data-quality checks: each compares an <strong>expected</strong> value against an
+<strong>actual</strong> value and records a pass/fail and a colour, which the client draws as a tree. This page is
+the reference for the type codes, how a comparison is actually evaluated, how parent nodes get their
+colour, and the three SQL patches that carry the recent fixes.</p>
+<blockquote>
+<p><strong>Status.</strong> Everything on this page is in server patch <strong><code>e45c8bfc5</code></strong> (5 September 2026), published to
+the release bucket and sent to MMS. It is not yet in a numbered server image; a fresh install from
+<code>initdb.sql</code> carries all of it. See <a href="#delivery">Delivery</a>.</p>
+</blockquote>
+<hr />
+<h2 id="the-type-codes-are-two-different-things">The type codes are two different things<a class="headerlink" href="#the-type-codes-are-two-different-things" title="Permanent link">&para;</a></h2>
+<p><code>control_test.control_test_type_cd</code> mixes measured tests with hierarchy nodes, which is the single
+most confusing thing about this feature.</p>
 <table>
 <thead>
 <tr>
-<th>Path</th>
-<th>What's in it</th>
+<th>Code</th>
+<th>Meaning</th>
+<th>Measured?</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>server/pgsql/data/</code></td>
-<td>The audit DB (<code>sqlmaestro</code>). Migrations bundled in the new tarball are applied on top of it.</td>
+<td><code>B</code></td>
+<td>Boolean — exact match, tolerance ignored entirely</td>
+<td>yes</td>
 </tr>
 <tr>
-<td><code>data/workflow/</code></td>
-<td>Deployed jobs.</td>
+<td><code>C</code></td>
+<td>Count / equality, either direction</td>
+<td>yes</td>
 </tr>
 <tr>
-<td><code>data/log/</code></td>
-<td>Historical logs.</td>
+<td><code>I</code></td>
+<td>Same rule as <code>C</code></td>
+<td>yes</td>
 </tr>
 <tr>
-<td><code>transient/</code></td>
-<td>PID files, staging area.</td>
+<td><code>L</code></td>
+<td>Lower bound — <strong>signed</strong>, so a shortfall passes however large</td>
+<td>yes</td>
 </tr>
 <tr>
-<td><code>server/keystore.jks</code></td>
-<td>TLS certificate (generated with this host's SAN at first install).</td>
+<td><code>U</code></td>
+<td>Upper bound — <strong>signed</strong></td>
+<td>yes</td>
 </tr>
 <tr>
-<td><code>tools/{spark,hadoop}/</code></td>
-<td>Apache binaries downloaded at first install. Rarely change between releases.</td>
+<td><code>P</code></td>
+<td><strong>Parent</strong> node in <code>control_test_hierarchy</code> (a mart, fact or dimension)</td>
+<td>no</td>
 </tr>
 <tr>
-<td><code>~/.env_integrator</code></td>
-<td>Operator-tuned environment file.</td>
+<td><code>S</code></td>
+<td><strong>System</strong> root node</td>
+<td>no</td>
 </tr>
 <tr>
-<td><code>~/.env_integrator.paths</code></td>
-<td>Distro-specific <code>JAVA_HOME</code> / <code>PGBIN</code> set at first install.</td>
+<td><code>M</code></td>
+<td>Offered by the client's dropdown, has no comparison rule</td>
+<td>no</td>
 </tr>
 </tbody>
 </table>
-<h2 id="what-is-replaced">What is replaced<a class="headerlink" href="#what-is-replaced" title="Permanent link">&para;</a></h2>
-<p>Overwritten by the new tarball:</p>
+<p><code>P</code> and <code>S</code> are not unsupported comparison types — they are the tree. Their colour is computed from
+their children by <a href="#the-rollup"><code>rollup_controls2</code></a>, they carry no tolerance, and they are never
+evaluated against one. On dev1 the eight <code>P</code> rows are <code>Sales Fact</code>, <code>Customer Dimension</code>,
+<code>Contact Reason Dimension</code> and so on, under a single <code>S</code> row, <code>DATA WAREHOUSE SYSTEM</code>.</p>
+<p>Handing a value to a <code>P</code> or <code>S</code> node is a mistake, and since <code>d3a6553c4</code> it is named as one rather
+than reported as a missing test.</p>
+<hr />
+<h2 id="tolerance-is-a-percentage">Tolerance is a PERCENTAGE<a class="headerlink" href="#tolerance-is-a-percentage" title="Permanent link">&para;</a></h2>
+<p><strong>Changed in <code>450b3a435</code> — shipped in server patch <code>e45c8bfc5</code> (5 September 2026); not yet in a numbered server image, and there it is GATED behind <code>apply-tolerance.sh</code>. This reinterprets every stored tolerance.</strong></p>
+<p>Tolerance used to be an <strong>absolute</strong> difference in whatever units the test measured. It is now a
+<strong>percentage of the expected value</strong>: <code>2.00</code> means 2 %, <code>0.02</code> means two hundredths of one percent.
+(That also settles the question MMS asked on 30 July — 2 % is written <code>2.00</code>.)</p>
+<p>One function decides every comparison:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">control_test_passes</span><span class="p">(</span><span class="k">type</span><span class="p">,</span><span class="w"> </span><span class="n">expected</span><span class="p">,</span><span class="w"> </span><span class="n">actual</span><span class="p">,</span><span class="w"> </span><span class="n">tolerance_pct</span><span class="p">)</span><span class="w"> </span><span class="k">RETURNS</span><span class="w"> </span><span class="nb">boolean</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>diff = actual - expected
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>B                -&gt; diff = 0                       (tolerance ignored)
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>expected = 0     -&gt; diff = 0                       (a percentage of zero is undefined)
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>otherwise pct = diff * 100 / |expected|
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>C, I             -&gt; ABS(pct) &lt;= tolerance
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>L                -&gt; pct &lt; tolerance                (signed, deliberately)
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>U                -&gt; pct &gt; tolerance                (signed, deliberately)
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>anything else    -&gt; named exception
+</code></pre></div>
+<p>It replaced the same comparison inlined in four separate functions. The one the <strong>engine</strong> calls is
+<code>set_actual_test_value_by_test_nm</code> (<code>PG.java:677</code>) — worth stating because an audit that scans only
+part of <code>initdb.sql</code> finds three of the four and misses exactly that one.</p>
+<h3 id="do-not-apply-this-to-a-client-without-measuring-first">Do not apply this to a client without measuring first<a class="headerlink" href="#do-not-apply-this-to-a-client-without-measuring-first" title="Permanent link">&para;</a></h3>
+<p>⚠️ A test carrying <code>100</code>, meaning "100 rows may differ", becomes "100 % may differ" and passes almost
+anything — a control test that has stopped controlling. One carrying <code>0.02</code> becomes far stricter than
+intended. Neither announces itself; the tests keep running and keep reporting a colour.</p>
+<p>The conversion is <code>pct = absolute * 100 / expected</code>, which is not usable by hand because <code>expected</code>
+is not a property of the test — it is measured afresh on every run. Run the assessment instead:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>psql -h &lt;host&gt; -U &lt;user&gt; -d sqlmaestro -f control-test-tolerance-assessment.sql
+</code></pre></div>
+<p>Read-only, creates nothing, safe on production. It replays that installation's own
+<code>control_test_run</code> history under both rules and reports, per test, how many stored results would have
+come out differently — separating <strong>flips_to_pass</strong> (a check that stops catching things) from
+<strong>flips_to_fail</strong> (noisy but visible) — which tests cannot be converted at all and why, and a
+suggested <code>UPDATE</code> for each one that can, using the median expected so one unusual run cannot set the
+tolerance for everything.</p>
+<p>Its section 0 refuses to give advice on an installation that is <strong>already patched</strong>: tolerances there
+are already percentages and converting again would divide them a second time, turning 2 % into 0.2 %.
+<code>control_test_passes()</code> exists only after the patch, so its presence is the tell.</p>
+<p>Convert the tolerances first, then apply the patch. The other order leaves the tests misinterpreted
+for the length of that window.</p>
+<hr />
+<h2 id="not-evaluated-is-not-the-same-as-failed">Not evaluated is not the same as failed<a class="headerlink" href="#not-evaluated-is-not-the-same-as-failed" title="Permanent link">&para;</a></h2>
+<p><code>1b207c554</code> — shipped in server patch <code>e45c8bfc5</code> (5 September 2026); not yet in a numbered server image. <code>get_control_test_status_by_nm</code> folded "no verdict yet" into the
+failure count, so a test that had not run looked like a test that had failed. It now counts three
+states, and the same treatment is applied to parent nodes by the rollup.</p>
+<h2 id="failures-are-no-longer-swallowed">Failures are no longer swallowed<a class="headerlink" href="#failures-are-no-longer-swallowed" title="Permanent link">&para;</a></h2>
+<p><code>237078346</code> — shipped in server patch <code>e45c8bfc5</code> (5 September 2026); not yet in a numbered server image. <code>set_actual_test_value_by_test_nm</code> used to <code>RETURN(-1)</code> when the
+evaluation raised — and no caller checked the return code, so a control test that could not be
+evaluated was indistinguishable from one that passed. It now re-raises with a named message, and the
+engine checks the return code.</p>
+<hr />
+<h2 id="the-rollup">The rollup<a class="headerlink" href="#the-rollup" title="Permanent link">&para;</a></h2>
+<p><code>rollup_controls2()</code> computes the colour of every <code>P</code> and <code>S</code> node from its children. The
+meta-service calls it on a timer (<code>PG.rollup_abc</code>, <code>CONFIG_ABC_ROLLUP_SECONDS</code>); nothing else calls it.</p>
 <table>
 <thead>
 <tr>
-<th>Path</th>
-<th>What's in it</th>
+<th>Condition</th>
+<th>Colour</th>
+<th><code>test_passed_ind</code></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>server/engine/{*.jar, lib/}</code></td>
-<td>Spring Boot meta-service jar + engine CLI jar + their lib dependencies.</td>
+<td>any declared child has no verdict yet</td>
+<td><code>NULL</code></td>
+<td><code>NULL</code></td>
 </tr>
 <tr>
-<td><code>server/webserver/admin/</code></td>
-<td>Contents of the source-tree <code>admin.commands/</code> dir (<code>mstart-*</code>, <code>mstop-*</code>, ...) — <code>publish.sh</code> copies <code>admin.commands/*</code> into this deployed location.</td>
+<td>every child green</td>
+<td><code>G</code></td>
+<td><code>TRUE</code></td>
 </tr>
 <tr>
-<td><code>server/utils/</code></td>
-<td>SOAP <code>ADMIN_*</code> utilities invoked by <code>MaestroMeta</code>.</td>
+<td>every child red</td>
+<td><code>R</code></td>
+<td><code>FALSE</code></td>
 </tr>
 <tr>
-<td><code>server/pgsql.factory/</code></td>
-<td><code>initdb.sql</code>, metadata, migrations, hive-metastore schema.</td>
-</tr>
-<tr>
-<td><code>bin/</code></td>
-<td><code>install.sh</code>, <code>update-server.sh</code>, lib modules.</td>
-</tr>
-<tr>
-<td><code>library/JDBC/</code></td>
-<td>All bundled JDBC drivers.</td>
+<td>all present but mixed</td>
+<td><code>Y</code></td>
+<td><code>FALSE</code></td>
 </tr>
 </tbody>
 </table>
-<p>After the swap, any newly-bundled <code>migrations/*.sql</code> is applied against the live audit DB, idempotently via the <code>schema_version</code> tracking table (same pattern as the Docker entrypoint).</p>
-<h2 id="before-you-upgrade">Before you upgrade<a class="headerlink" href="#before-you-upgrade" title="Permanent link">&para;</a></h2>
-<p>Take a one-off backup of the host so you have a clean rollback target. See BACKUP.md § One-off manual backup — <code>vzdump --mode stop</code> is the canonical recipe for the host VM. If you only care about the audit DB + workflows + keystore, the in-place <code>update-server.sh</code> already preserves them (see "What is preserved" above), so a full VM snapshot is the belt-and-braces option.</p>
-<h2 id="procedure">Procedure<a class="headerlink" href="#procedure" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>su<span class="w"> </span>-<span class="w"> </span>maestro
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>.<span class="w"> </span>~/.env_integrator
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>/data/iserver/bin/update-server.sh<span class="w"> </span>/path/to/eltm-portable-&lt;NEW-VERSION&gt;.tar.gz
-</code></pre></div>
-<p>The script will:</p>
-<ol>
-<li>Source <code>~/.env_integrator</code> and refuse to run if it's missing (you must have an existing install)</li>
-<li>Stop all running services via <code>mstop-all</code> (Postgres, meta-service, engine, ...)</li>
-<li>Wait briefly (3 s) for processes to settle</li>
-<li>Extract the new tarball into a <code>mktemp -d</code> staging area</li>
-<li><code>rsync</code>-style swap of the "replaced" paths from the staging tree into <code>/data/iserver/</code></li>
-<li><strong>Refresh the runtime integrator metadata</strong> — copy the new <code>metadata/integrators</code> into <code>$PGDIR/metadata</code> (the engine reads the <strong>runtime</strong> copy, not the factory), so updated <code>system.cfg</code> / new <code>$SYSTEM_*</code> vars take effect instead of stale config surviving the upgrade</li>
-<li>Restart Postgres alone</li>
-<li>Apply any newly-bundled migrations from <code>server/pgsql.factory/migrations/</code></li>
-<li>Start the rest of the stack via <code>mstart-all</code></li>
-<li>Clean up the staging dir</li>
-</ol>
-<p>Approximate downtime: 30 s - 2 min, depending on how many migrations are pending and how fast the host's disk is.</p>
-<h2 id="rollback">Rollback<a class="headerlink" href="#rollback" title="Permanent link">&para;</a></h2>
-<p>There is no automatic rollback. If a release is bad:</p>
-<ol>
-<li><code>mstop-all</code></li>
-<li>Re-run <code>update-server.sh</code> with the prior tarball — the audit DB is preserved across runs, so any data created since the bad upgrade stays. If the bad release added migrations that the old jars don't understand, you may need to revert those rows in <code>schema_version</code> first.</li>
-</ol>
-<p>Recommended practice: keep the last 2-3 tarballs in a shared location (e.g. <code>/data/releases/</code>) so you can downgrade quickly without re-downloading from Jenkins.</p>
-<h2 id="verifying-the-upgrade-succeeded">Verifying the upgrade succeeded<a class="headerlink" href="#verifying-the-upgrade-succeeded" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>.<span class="w"> </span>~/.env_integrator
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>show-mprocess
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>cat<span class="w"> </span>/data/iserver/VERSION<span class="w">                     </span><span class="c1"># tarball metadata: VERSION, BUILT_AT, GIT_SHA</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>curl<span class="w"> </span>-k<span class="w"> </span>https://localhost:8181/MaestroMetaDataProviderService/MaestroMetaService?wsdl
-</code></pre></div>
-<p>The <code>VERSION</code> file is replaced on every upgrade; the <code>GIT_SHA</code> line is the canonical "what's running here" answer.</p>
-<h2 id="major-upgrade-from-a-legacy-install">Major upgrade from a legacy install<a class="headerlink" href="#major-upgrade-from-a-legacy-install" title="Permanent link">&para;</a></h2>
-<p><code>update-server.sh</code> is the right tool when the legacy and modern installs share the same host and the same <code>/data/iserver/</code> tree. <strong>It is not the right tool</strong> when you're cutting over to a fresh host — typical major-version scenarios:</p>
+<p><strong>Eight defects fixed in <code>37e681159</code> — shipped in server patch <code>e45c8bfc5</code> (5 September 2026); not yet in a numbered server image.</strong> Two of them made the tree report a healthy
+parent over unhealthy or absent children:</p>
 <ul>
-<li>legacy install on a GlassFish-era VM (Java 8, asadmin / <code>domain1</code>) → new host on the Spring Boot stack (Java 21 + embedded Jetty 12)</li>
-<li>legacy install on an older OS (RHEL 7, Ubuntu 18.04) past distro EOL → new host on a supported OS</li>
-<li>legacy install in a customer datacenter → new install in cloud (or vice versa)</li>
+<li><strong>False green over children that never ran.</strong> The <code>batch_run_num</code> predicate sat in the <code>WHERE</code>
+  clause of a <code>LEFT OUTER JOIN</code>, which silently demotes it to an inner join, so a child with no result
+  row left the aggregate entirely instead of counting as "not ready". Measured: a parent with five
+  declared children, four never run and one green, computed <strong>GREEN</strong>.</li>
+<li><strong>Counts multiplied by the parent's own history.</strong> A second join contributed nothing to the SELECT
+  list but multiplied every row by the number of run rows the <em>parent</em> already had. Measured: two
+  green children reported as <code>6</code> after three prior runs — and that inflated figure was written into
+  the parent's <code>expected_value</code>/<code>actual_value</code>, so the number on the dashboard grew with every rollup.</li>
 </ul>
-<p>In those cases the audit DB on the new host is <strong>freshly seeded by <code>initdb.sql</code></strong> — it has the modern schema but no operator content. To carry forward the operator's investment (jobs, schedules, connections, watermarks) you copy the job-meta rows by SQL from old to new.</p>
-<h3 id="what-to-copy">What to copy<a class="headerlink" href="#what-to-copy" title="Permanent link">&para;</a></h3>
-<p>The <code>t_job_meta</code> schema is stable across versions (see SHARED.md for the migration-stability policy), so this is a <strong>data-only</strong> copy. If a legacy column was renamed/dropped between versions, transform during INSERT.</p>
-<p>Tables to copy, in dependency order (referenced data first, referring data last):</p>
+<p>Plus: "not yet run" recorded as "failed"; open <strong>jobs</strong> cancelled based on the open <strong>batch</strong> count
+(a copy-paste typo, and on the fresh-batch path that variable is never assigned, making the test
+<code>NULL</code>); a fixed ten-pass loop with no exit, now a fixpoint that warns if its cap is reached; a
+failure reported only as a <code>NOTICE</code> — below the default <code>log_min_messages</code>, so the reason a rollup was
+cancelled reached no log at all — now a <code>WARNING</code> plus a durable <code>make_error_message</code> row;
+<code>l_runs_today</code> counting every batch run in the installation and never being read; and debug output
+hardcoded on.</p>
+<p>The same open-jobs typo exists in <code>measure_abc_spaceused</code> and <code>measure_batch_runs_per_week</code>. Both are
+dead — nothing in the tree calls either — so they are corrected in <code>initdb.sql</code> but deliberately left
+out of the migration.</p>
+<hr />
+<h2 id="lookup-and-error-paths">Lookup and error paths<a class="headerlink" href="#lookup-and-error-paths" title="Permanent link">&para;</a></h2>
+<p><code>d3a6553c4</code> — shipped in server patch <code>e45c8bfc5</code> (5 September 2026); not yet in a numbered server image. <code>make_control_test_run_by_id</code> / <code>_by_nm</code> looked the test up with
+<code>control_test_type_cd IN ('C','L','U','B')</code>, which conflated two different problems:</p>
+<ul>
+<li>a test of type <code>I</code> — implemented by <code>control_test_passes</code> but excluded here — found no row;</li>
+<li>a <code>P</code>/<code>S</code> node was reported as "could not find the control_test", which is false: the row is
+  plainly in the table.</li>
+</ul>
+<p>Both then landed on a <code>RAISE EXCEPTION</code> that interpolated <strong><code>p_test_nm</code>, which is not a parameter of
+<code>make_control_test_run_by_id</code></strong>. PL/pgSQL resolves identifiers lazily, so the function created
+cleanly and only died when the error path ran, with <code>column "p_test_nm" does not exist</code> instead of
+the diagnostic the operator needed.</p>
+<p>The filter is gone from the lookup and the type is checked immediately after the fetch, where it can
+be named. That also closed a silent path: with no check at all, a call carrying a <code>NULL</code> expected or
+actual skips the comparison entirely and inserts a run row <strong>for a rollup node</strong> without complaint,
+because <code>control_test_passes</code> — the only thing that would have objected — is reached only when both
+values are present.</p>
+<p><code>make_control_test_run_by_num</code> does no comparison despite the name; it only inserts the run row, so it
+has no tolerance or type concern.</p>
+<h3 id="known-broken-deliberately-untouched">Known-broken, deliberately untouched<a class="headerlink" href="#known-broken-deliberately-untouched" title="Permanent link">&para;</a></h3>
+<p><code>set_control_test_run_results</code> has zero callers and is broken independently of any of this:
+<code>SELECT … INTO</code> three variables from two columns <strong>with no <code>WHERE</code> clause</strong>, so it reads an arbitrary
+<code>control_test</code> row, and its <code>L</code>/<code>U</code> branches ignore tolerance entirely. Fixing dead code adds risk
+without benefit — but it is a trap for anyone who wires it up later.</p>
+<hr />
+<h2 id="delivery">Delivery<a class="headerlink" href="#delivery" title="Permanent link">&para;</a></h2>
+<p><code>initdb.sql</code> runs <strong>only on a fresh install</strong>, so these files are the route onto an existing system.
+All are idempotent, change no table and no data, and need no restart — the engine and meta-service
+call these functions by name.</p>
 <table>
 <thead>
 <tr>
-<th>#</th>
-<th>Table</th>
-<th>What's in it</th>
-<th>Notes</th>
+<th>File</th>
+<th>What it carries</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
-<td><code>t_jdbc</code></td>
-<td>JDBC connection definitions (URL, driver class, user, base64 password)</td>
-<td>Passwords are base64-encoded in <code>password64</code>; carry as-is. Jobs reference these by <code>connection_name</code>.</td>
+<td><code>control-test-tolerance-assessment.sql</code></td>
+<td><strong>Read-only.</strong> The pre-flight above. Run it first.</td>
 </tr>
 <tr>
-<td>2</td>
-<td><code>t_connection_general</code></td>
-<td>Cloud / SSH / SMTP connection params</td>
-<td>Same handling as <code>t_jdbc</code> (compound base64 in <code>connection_parameters</code>).</td>
+<td><code>control-test-tolerance-pct.sql</code></td>
+<td><code>control_test_passes()</code> + all four callers repointed; the lookup and type-check fixes</td>
 </tr>
 <tr>
-<td>3</td>
-<td><code>t_job_meta</code></td>
-<td>Live job definitions</td>
-<td>The core artifact.</td>
-</tr>
-<tr>
-<td>4</td>
-<td><code>t_job_meta_history</code></td>
-<td>Version history per job</td>
-<td>Optional but recommended for audit continuity. <code>version_key</code> is from <code>seq_job_version_id</code> — preserve the sequence high-water mark (see below).</td>
-</tr>
-<tr>
-<td>5</td>
-<td><code>t_job_alert_setting</code></td>
-<td>Per-job alerting</td>
-<td>Optional; copy only if alerts are configured.</td>
-</tr>
-<tr>
-<td>6</td>
-<td><code>t_job_permissions</code></td>
-<td>Per-job RBAC</td>
-<td>Required only if <code>t_user</code> rows are also migrated.</td>
-</tr>
-<tr>
-<td>7</td>
-<td><code>t_workflow_item</code></td>
-<td>Workflow assembly (jobs grouped into batches)</td>
-<td>Copy if workflows are used.</td>
-</tr>
-<tr>
-<td>8</td>
-<td><code>t_step_watermark</code></td>
-<td>Incremental-load high-water marks</td>
-<td><strong>Critical for upsert / SCD2 jobs</strong> — losing watermarks restarts every incremental load from zero.</td>
+<td><code>control-test-rollup-fix.sql</code></td>
+<td><code>rollup_controls2()</code></td>
 </tr>
 </tbody>
 </table>
-<p><strong>Do not copy:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>psql -h &lt;host&gt; -U &lt;user&gt; -d sqlmaestro -f control-test-tolerance-assessment.sql   # read-only, first
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>#   ... review, convert tolerances ...
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>psql -h &lt;host&gt; -U &lt;user&gt; -d sqlmaestro -f control-test-tolerance-pct.sql
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>psql -h &lt;host&gt; -U &lt;user&gt; -d sqlmaestro -f control-test-rollup-fix.sql
+</code></pre></div>
+<h3 id="verifying">Verifying<a class="headerlink" href="#verifying" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">-- the comparison function exists and behaves</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">control_test_passes</span><span class="p">(</span><span class="s1">'C'</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1010</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">within</span><span class="p">,</span><span class="w">   </span><span class="c1">-- t</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">       </span><span class="n">control_test_passes</span><span class="p">(</span><span class="s1">'C'</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1050</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">beyond</span><span class="p">;</span><span class="w">   </span><span class="c1">-- f</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="c1">-- an unhandled type is named, not silently passed</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">control_test_passes</span><span class="p">(</span><span class="s1">'P'</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span><span class="w">               </span><span class="c1">-- raises</span>
+</code></pre></div>
+<p>For the rollup, the honest test is a parent whose children are only partly evaluated: it must come
+back <code>NULL</code>, not green, and its <code>expected_value</code> must equal the number of <strong>declared</strong> children.</p>
+<hr />
+<h2 id="code-map">Code map<a class="headerlink" href="#code-map" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Concern</th>
+<th>Where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Engine step</td>
+<td><code>engine/steps/common/global/ControlTest.java</code></td>
+</tr>
+<tr>
+<td>Engine calls</td>
+<td><code>share/PG.java</code> — <code>set_actual_test_value_by_test_nm</code>, <code>get_control_test_status_by_nm</code></td>
+</tr>
+<tr>
+<td>Rollup trigger</td>
+<td><code>root-engine-service</code> <code>PG.rollup_abc</code> (timer)</td>
+</tr>
+<tr>
+<td>Client editor</td>
+<td><code>GeneralWindow/ControlTestEditorWindow.xaml.cs</code>, <code>ControlTestManager.xaml.cs</code></td>
+</tr>
+<tr>
+<td>Comparison</td>
+<td><code>control_test_passes()</code> in <code>initdb.sql</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="see-also">See also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>t_workflow_state_history</code>, <code>t_step_run_detail</code>, <code>t_step_status</code>, <code>t_service_audit</code> — runtime / audit rows. The new install starts clean. If you need run history for compliance, snapshot them as CSV from the legacy host before retiring it.</li>
-<li>The discovered-schema cache (<code>t_jdbc_database</code>, <code>t_jdbc_schema</code>, <code>t_jdbc_table</code>, <code>t_jdbc_column</code>) — repopulated by the first <code>CONTROL_SYNC_CONNECTION</code> against each <code>t_jdbc</code> row after cutover.</li>
-<li><code>t_user.password_md5</code> — these are MD5 hashes (see <code>mset-password-md5</code>). Re-issue passwords on the new host rather than carrying hashes across a major upgrade.</li>
-</ul>
-<h3 id="procedure_1">Procedure<a class="headerlink" href="#procedure_1" title="Permanent link">&para;</a></h3>
-<p>On the legacy host, dump the listed tables (one <code>pg_dump --data-only --table=...</code> per table, in dependency order):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># legacy host, as the postgres owner of the sqlmaestro DB</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>.<span class="w"> </span>~/.env_integrator
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nv">OUT</span><span class="o">=</span>/tmp/job-meta-export-<span class="k">$(</span>date<span class="w"> </span>+%Y%m%d<span class="k">)</span>.sql
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>&gt;<span class="w"> </span><span class="s2">"</span><span class="nv">$OUT</span><span class="s2">"</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="k">for</span><span class="w"> </span>T<span class="w"> </span><span class="k">in</span><span class="w"> </span>t_jdbc<span class="w"> </span>t_connection_general<span class="w"> </span>t_job_meta<span class="w"> </span>t_job_meta_history<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">         </span>t_job_alert_setting<span class="w"> </span>t_job_permissions<span class="w"> </span>t_workflow_item<span class="w"> </span>t_step_watermark<span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span>pg_dump<span class="w"> </span>--data-only<span class="w"> </span>--column-inserts<span class="w"> </span>--table<span class="o">=</span>public.<span class="nv">$T</span><span class="w"> </span>sqlmaestro<span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">"</span><span class="nv">$OUT</span><span class="s2">"</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="k">done</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="c1"># also capture the sequence so version_key doesn't collide on the new host</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>psql<span class="w"> </span>sqlmaestro<span class="w"> </span>-tAc<span class="w"> </span><span class="s2">"SELECT 'SELECT setval(''public.seq_job_version_id'', '</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="s2">                          || last_value || ', '</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="s2">                          || is_called || ');'</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="s2">                       FROM public.seq_job_version_id"</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">"</span><span class="nv">$OUT</span><span class="s2">"</span>
-</code></pre></div>
-<p><code>--column-inserts</code> (rather than the default <code>COPY</code>) is verbose but tolerates minor column-order drift between legacy and modern schemas — INSERT names each column explicitly. For very large <code>t_job_meta_history</code> tables, fall back to <code>COPY</code> and accept the constraint that the schemas must match column-for-column.</p>
-<p>Transfer <code>$OUT</code> to the new host (<code>scp</code>, S3, USB, whatever fits the threat model — the file contains base64 passwords).</p>
-<p>On the modern host, with the new install already running on a fresh DB:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># new host, as the same unprivileged user that owns the install</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>.<span class="w"> </span>~/.env_integrator
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>mstop-all<span class="w">                                </span><span class="c1"># quiesce engine + meta-service; Postgres stays up</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>psql<span class="w"> </span>sqlmaestro<span class="w"> </span>-f<span class="w"> </span>/path/to/job-meta-export-YYYYMMDD.sql
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>mstart-all
-</code></pre></div>
-<p>The meta-service rebuilds its in-memory caches on startup, so the freshly inserted jobs appear in the WPF after the next login. Trigger <code>CONTROL_SYNC_CONNECTION</code> once per JDBC connection (from the WPF Admin tab, or <code>mpsql</code> calling the SOAP op) to repopulate the discovered-schema cache.</p>
-<h3 id="verifying-the-copy">Verifying the copy<a class="headerlink" href="#verifying-the-copy" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>.<span class="w"> </span>~/.env_integrator
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># row count parity</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>psql<span class="w"> </span>sqlmaestro<span class="w"> </span>-tAc<span class="w"> </span><span class="s2">"SELECT 't_job_meta', count(*) FROM public.t_job_meta</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="s2">                      UNION ALL SELECT 't_jdbc', count(*) FROM public.t_jdbc</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="s2">                      UNION ALL SELECT 't_step_watermark', count(*) FROM public.t_step_watermark"</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1"># spot-check that watermarks weren't reset</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>psql<span class="w"> </span>sqlmaestro<span class="w"> </span>-tAc<span class="w"> </span><span class="s2">"SELECT job_name, step_name, watermark_value</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="s2">                      FROM public.t_step_watermark</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="s2">                      WHERE watermark_value &lt;&gt; ''</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="s2">                      ORDER BY job_name LIMIT 20"</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="c1"># version_key sequence is past the highest historical row</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>psql<span class="w"> </span>sqlmaestro<span class="w"> </span>-tAc<span class="w"> </span><span class="s2">"SELECT last_value FROM public.seq_job_version_id;</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="s2">                      SELECT max(version_key) FROM public.t_job_meta_history"</span>
-</code></pre></div>
-<p>Counts on both hosts should match for every table you copied. If <code>seq_job_version_id.last_value</code> is <strong>lower</strong> than <code>max(version_key)</code> in <code>t_job_meta_history</code>, the next save from the WPF will fail on duplicate-PK; re-run the <code>setval</code> line from <code>$OUT</code>.</p>
-<h3 id="gotchas">Gotchas<a class="headerlink" href="#gotchas" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>Connection-test ordering.</strong> Test one JDBC connection from the WPF before running any job — the password round-trip exercises <code>Crypt.decodeStr</code> against the carried-over base64 (see SHARED.md on Crypt). A silent decode failure on the new host means the JVM is missing the unlimited-strength JCE jars or a different Java vendor.</li>
-<li><strong>Watermarks must be present before the first run.</strong> If you start jobs with empty watermarks on the new host, incremental loads degrade to full reloads — and on large fact tables that's a costly mistake to discover after the fact.</li>
-<li><strong>Legacy schema drift.</strong> If the legacy <code>t_job_meta</code> has columns the modern schema doesn't, <code>pg_dump --column-inserts</code> will produce INSERTs that reference missing columns. Edit <code>$OUT</code> to drop those columns before loading; or run the dump through <code>sed -E 's/, *legacy_column//; s/, *NULL//'</code> patterns targeted at the offending columns. There is no general-purpose translator — this is one-off, per-legacy-version work.</li>
-<li><strong>Custom Postgres functions</strong> (<code>lock_job</code>, <code>clear_lock</code>, <code>set_job_run_status</code>, etc., all in <code>initdb.sql</code>) are re-seeded by the new install's <code>initdb.sql</code> — do <strong>not</strong> dump them from legacy. Dumping legacy function bodies risks pinning the new install to an old definition.</li>
+<li><a href="../DATA-MODEL/">DATA-MODEL.md</a> — <code>control_test</code>, <code>control_test_run</code>, <code>control_test_hierarchy</code></li>
+<li><a href="../VARIABLES/">VARIABLES.md</a> — the run-history variables these tests are usually measured against</li>
+<li><a href="../OPERATIONS/">OPERATIONS.md</a> — applying SQL patches to a running installation</li>
 </ul>
 
 

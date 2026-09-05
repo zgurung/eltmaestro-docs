@@ -1,0 +1,1948 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="User documentation for the ELTMaestro ELT/data-pipeline platform.">
+      
+      
+      
+        <link rel="canonical" href="https://zgurung.github.io/eltmaestro-docs/EDGE-NODE-SETUP/">
+      
+      
+        <link rel="prev" href="../DOCKER-INSTALL/">
+      
+      
+        <link rel="next" href="../UPGRADE/">
+      
+      
+      <link rel="icon" href="../assets/elt-maestro-logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>Edge node setup - ELTMaestro Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#adding-an-eltmaestro-server-edge-node-engine-only" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ELTMaestro Documentation" class="md-header__button md-logo" aria-label="ELTMaestro Documentation" data-md-component="logo">
+      
+  <img src="../assets/elt-maestro-logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ELTMaestro Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Edge node setup
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ELTMaestro Documentation" class="md-nav__button md-logo" aria-label="ELTMaestro Documentation" data-md-component="logo">
+      
+  <img src="../assets/elt-maestro-logo.png" alt="logo">
+
+    </a>
+    ELTMaestro Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DOWNLOADS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Downloads
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Getting started
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Getting started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../USER-GUIDE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-GETTING-STARTED/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-MENUS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Menus
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Admin & connections
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Admin & connections
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-ADMIN/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Administration & setup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Workflows & steps
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Workflows & steps
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-WORKFLOWS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Workflows
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-STEPS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Step reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-INCREMENTAL-WATERMARKS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Incremental loads & watermarks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-RUN-VARIABLE-OVERRIDES/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Run variable overrides
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PARQUET-TO-REDSHIFT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    S3 Parquet → Redshift
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Medallion design
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Medallion design
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION-BRONZE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bronze
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION-SILVER/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Silver
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION-GOLD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Gold
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Platform setup
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Platform setup
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../REDSHIFT-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redshift
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPARKSQL-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SparkSQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CLICKHOUSE-AUTH/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ClickHouse auth
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MPP-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MPP prerequisites
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Install & operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Install & operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INSTALL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Install
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DOCKER-INSTALL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker image install
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Edge node setup
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Edge node setup
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      How it works
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conventions-used-below" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conventions used below
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-1--prerequisites-root-once-per-host" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1 — prerequisites (root, once per host)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 1 — prerequisites (root, once per host)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rhel--rocky--alma-810-or-94" class="md-nav__link">
+    <span class="md-ellipsis">
+      RHEL / Rocky / Alma 8.10+ or 9.4+
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debian-12--ubuntu-2204--ubuntu-2404" class="md-nav__link">
+    <span class="md-ellipsis">
+      Debian 12 / Ubuntu 22.04 / Ubuntu 24.04
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2--create-the-dedicated-user-root-once" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2 — create the dedicated user (root, once)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-25--download-the-release-from-s3-as-maestro" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2.5 — download the release from S3 (as maestro)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3--extract-the-tarball-as-maestro" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3 — extract the tarball (as maestro)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4--run-install-enginesh-as-maestro" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4 — run install-engine.sh (as maestro)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5--wire-the-node-into-the-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 5 — wire the node into the cluster
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 5 — wire the node into the cluster">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#5a-on-the-edge-node--accept-the-masters-ssh-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      5a. On the EDGE NODE — accept the master's SSH key
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5b-on-the-central-server--let-the-node-reach-postgres" class="md-nav__link">
+    <span class="md-ellipsis">
+      5b. On the CENTRAL SERVER — let the node reach Postgres
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5c-register-the-node--its-ssh-connection-in-the-audit-db" class="md-nav__link">
+    <span class="md-ellipsis">
+      5c. Register the node + its SSH connection (in the audit DB)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5e-reverse-path-let-the-node-ssh-back-to-the-master-for-log-return" class="md-nav__link">
+    <span class="md-ellipsis">
+      5e. (Reverse path) Let the node SSH back to the master for log return
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5d-target-a-workflow-at-the-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      5d. Target a workflow at the node
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-6--verify" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 6 — verify
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UPGRADE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Upgrade
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../OPERATIONS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Operations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../VARIABLES/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Runtime variables
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CONTROL-TESTS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Control tests
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SCHEMA-PROFILE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Schema profile
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DATA-MODEL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data model — tables & views
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DATA-MODEL-SPINE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data model — execution spine
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Proposals
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Proposals
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CICD-WORKFLOW-PROMOTION-PROPOSAL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Workflow promotion (CI/CD)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      How it works
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conventions-used-below" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conventions used below
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-1--prerequisites-root-once-per-host" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1 — prerequisites (root, once per host)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 1 — prerequisites (root, once per host)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rhel--rocky--alma-810-or-94" class="md-nav__link">
+    <span class="md-ellipsis">
+      RHEL / Rocky / Alma 8.10+ or 9.4+
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debian-12--ubuntu-2204--ubuntu-2404" class="md-nav__link">
+    <span class="md-ellipsis">
+      Debian 12 / Ubuntu 22.04 / Ubuntu 24.04
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2--create-the-dedicated-user-root-once" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2 — create the dedicated user (root, once)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-25--download-the-release-from-s3-as-maestro" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2.5 — download the release from S3 (as maestro)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3--extract-the-tarball-as-maestro" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3 — extract the tarball (as maestro)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4--run-install-enginesh-as-maestro" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4 — run install-engine.sh (as maestro)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5--wire-the-node-into-the-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 5 — wire the node into the cluster
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 5 — wire the node into the cluster">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#5a-on-the-edge-node--accept-the-masters-ssh-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      5a. On the EDGE NODE — accept the master's SSH key
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5b-on-the-central-server--let-the-node-reach-postgres" class="md-nav__link">
+    <span class="md-ellipsis">
+      5b. On the CENTRAL SERVER — let the node reach Postgres
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5c-register-the-node--its-ssh-connection-in-the-audit-db" class="md-nav__link">
+    <span class="md-ellipsis">
+      5c. Register the node + its SSH connection (in the audit DB)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5e-reverse-path-let-the-node-ssh-back-to-the-master-for-log-return" class="md-nav__link">
+    <span class="md-ellipsis">
+      5e. (Reverse path) Let the node SSH back to the master for log return
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5d-target-a-workflow-at-the-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      5d. Target a workflow at the node
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-6--verify" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 6 — verify
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="adding-an-eltmaestro-server-edge-node-engine-only">Adding an ELTMaestro server edge node (engine-only)<a class="headerlink" href="#adding-an-eltmaestro-server-edge-node-engine-only" title="Permanent link">&para;</a></h1>
+<p>An <strong>edge node</strong> is a separate Linux server that runs workflows but holds <strong>no
+local state</strong> — no Postgres, no meta-service, no keystore. The master server
+dispatches work to it over SSH, and the node connects <strong>back to the central
+server's Postgres audit DB</strong> (<code>sqlmaestro</code>) for all batch/step/watermark state.
+Use edge nodes to scale execution horizontally or to run workflows close to a
+particular data source/network.</p>
+<p>Same shape as the full <a href="../INSTALL/">INSTALL.md</a>, but the OS prerequisite is just
+<strong>JDK 21</strong> (no PostgreSQL), and you run <code>install-engine.sh</code> instead of
+<code>install.sh</code>. The engine-only installer ships in the <strong>same</strong> <code>eltm-portable</code>
+tarball.</p>
+<h2 id="how-it-works">How it works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>  master / central server                         edge node
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  ┌─────────────────────────┐                     ┌─────────────────────────┐
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  │ Postgres audit DB  sshd  │  ← JDBC 5432 ──────│ engine (--slave)         │
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  │  (sqlmaestro)            │  ─ SSH: run cmd ──▶│  sqlm.jar + JDBC + Spark │
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  │ meta-service, WPF, etc.  │     + SFTP job xml  │  sshd, deploy dir        │
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  │                          │  ◀─ SSH: log back ─│                          │
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  └─────────────────────────┘                     └─────────────────────────┘
+</code></pre></div>
+<p>The engine batch run uses SSH to <strong>execute run commands</strong> on the node, not just
+to copy files — and it's <strong>bidirectional</strong>:</p>
+<ul>
+<li><strong>Master → node (dispatch).</strong> When a workflow targets a non-master server, the
+  master looks the node up in <code>t_maestro_servers</code> (→ its SSH connection in
+  <code>connection2</code>), <strong>SSH-executes</strong> <code>. ~/.env_integrator; echo
+  $MAESTRO_DEPLOYED_FILES_DIR</code> to find the deploy dir, <strong>SFTPs the job XML(s)</strong>
+  there, then <strong>SSH-executes the run command</strong>
+  <code>. ~/.env_integrator; java -jar $MAESTRO_JAR_FILE --slave --batch &lt;xml&gt; &amp;</code>.
+  The <code>--slave</code> engine connects to the central audit DB via <code>ABC*</code> and runs the
+  workflow — it never calls the meta-service.</li>
+<li><strong>Node → master (log return).</strong> When the slave finishes, it looks up the
+  <strong>master</strong> (<code>select server_ssh_connection_name from t_maestro_servers where
+  is_master=true</code>), <strong>SSHes back to the master</strong>, reads the master's
+  <code>$MAESTRO_CONSOLE_LOG_DIR</code>, and SFTPs its console log there. This is wrapped in
+  try/catch — if the reverse path isn't wired, the workflow still runs and the
+  <strong>central audit DB still tracks all state</strong> (the slave writes it directly); only
+  the console-log copy-back is skipped. Wire it (Step 5e) for log visibility on the
+  master.</li>
+</ul>
+<p>(Every non-Snowflake job runs as a Spark job, so the node ships with Spark + Hadoop.)</p>
+<h2 id="conventions-used-below">Conventions used below<a class="headerlink" href="#conventions-used-below" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>maestro</code> is the dedicated unprivileged user that owns the install <strong>and that
+  the master's SSH connection logs in as</strong> — its <code>~/.env_integrator</code> is what the
+  master sources. Any account works; this doc uses <code>maestro</code>.</li>
+<li><code>/data/</code> is the parent dir the tarball extracts into → <code>/data/iserver/...</code>.</li>
+<li><code>&lt;VERSION&gt;</code> matches the tarball suffix (current release line <code>17.0.4</code>).</li>
+<li><code>&lt;central_server&gt;</code> is the host/IP of the main ELTMaestro server (its Postgres).</li>
+<li><code>&lt;node_ip&gt;</code> is this edge node's address as the central server sees it.</li>
+</ul>
+<h2 id="step-1--prerequisites-root-once-per-host">Step 1 — prerequisites (root, once per host)<a class="headerlink" href="#step-1--prerequisites-root-once-per-host" title="Permanent link">&para;</a></h2>
+<p>Only <strong>JDK 21</strong> + the common CLI tools — <strong>no PostgreSQL</strong> on an edge node. Also
+make sure <strong>sshd</strong> is installed and running (the master dispatches over SSH).</p>
+<h3 id="rhel--rocky--alma-810-or-94">RHEL / Rocky / Alma 8.10+ or 9.4+<a class="headerlink" href="#rhel--rocky--alma-810-or-94" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>java-21-openjdk-devel
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>curl<span class="w"> </span>tar<span class="w"> </span>gzip<span class="w"> </span>openssl<span class="w"> </span>hostname<span class="w"> </span>rsync<span class="w"> </span>openssh-server
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>sshd
+</code></pre></div>
+<blockquote>
+<p>Java 21 is only in RHEL/Rocky/Alma <strong>9.4+</strong> (and 8.10+). On 9.3 or older the
+<code>java-21-openjdk</code> package is absent and the installer's preflight will stop.</p>
+</blockquote>
+<h3 id="debian-12--ubuntu-2204--ubuntu-2404">Debian 12 / Ubuntu 22.04 / Ubuntu 24.04<a class="headerlink" href="#debian-12--ubuntu-2204--ubuntu-2404" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>openjdk-21-jdk-headless<span class="w"> </span>curl<span class="w"> </span>ca-certificates<span class="w"> </span>tar<span class="w"> </span>gzip<span class="w"> </span>hostname<span class="w"> </span>openssl<span class="w"> </span>rsync<span class="w"> </span>openssh-server
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>ssh
+</code></pre></div>
+<p><code>install-engine.sh</code>'s preflight finds Java under <code>/usr/lib/jvm/</code> and verifies the
+tools; if anything's missing it prints the exact <code>dnf</code>/<code>apt</code> line. <strong>rsync</strong> is
+optional (quieter Spark startup).</p>
+<h2 id="step-2--create-the-dedicated-user-root-once">Step 2 — create the dedicated user (root, once)<a class="headerlink" href="#step-2--create-the-dedicated-user-root-once" title="Permanent link">&para;</a></h2>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>useradd<span class="w"> </span>-m<span class="w"> </span>-s<span class="w"> </span>/bin/bash<span class="w"> </span>maestro
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/data
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>sudo<span class="w"> </span>chown<span class="w"> </span>maestro:maestro<span class="w"> </span>/data
+</code></pre></div>
+Use the same user the master will SSH in as. <code>install-engine.sh</code> warns (but does
+not fail) if run as root.</p>
+<h2 id="step-25--download-the-release-from-s3-as-maestro">Step 2.5 — download the release from S3 (as maestro)<a class="headerlink" href="#step-25--download-the-release-from-s3-as-maestro" title="Permanent link">&para;</a></h2>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>su<span class="w"> </span>-<span class="w"> </span>maestro
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nb">cd</span><span class="w"> </span>/data
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>curl<span class="w"> </span>-fLO<span class="w"> </span>https://eltmaestro.s3.amazonaws.com/docker/eltm-portable-&lt;VERSION&gt;.tar.gz
+</code></pre></div>
+Same tarball as the full install — see <a href="../DOWNLOADS/">DOWNLOADS.md</a> for exact URLs.</p>
+<h2 id="step-3--extract-the-tarball-as-maestro">Step 3 — extract the tarball (as maestro)<a class="headerlink" href="#step-3--extract-the-tarball-as-maestro" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">cd</span><span class="w"> </span>/data
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>tar<span class="w"> </span>-xzf<span class="w"> </span>eltm-portable-&lt;VERSION&gt;.tar.gz
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>ls<span class="w"> </span>-d<span class="w"> </span>iserver<span class="w">        </span><span class="c1"># -&gt; /data/iserver/...</span>
+</code></pre></div>
+<h2 id="step-4--run-install-enginesh-as-maestro">Step 4 — run install-engine.sh (as maestro)<a class="headerlink" href="#step-4--run-install-enginesh-as-maestro" title="Permanent link">&para;</a></h2>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>/data/iserver/install-engine.sh<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span>--abchost<span class="w"> </span>&lt;central_server&gt;<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span>--abcport<span class="w"> </span><span class="m">5432</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span>--abcuser<span class="w"> </span>maestro<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span>--abcpassword<span class="w"> </span><span class="s1">'&lt;audit-db-password&gt;'</span>
+</code></pre></div>
+(<code>install-engine.sh</code> is the convenience symlink to <code>bin/install-engine.sh</code>.
+<code>--abchost</code> is required; <code>--abcport</code> defaults to 5432, <code>--abcuser</code> to <code>maestro</code>;
+the password is prompted with <code>read -s</code> if you omit it on a terminal.) In order it:</p>
+<ol>
+<li><strong>Detects distro</strong> and runs the preflight with <code>ENGINE_ONLY=1</code> — JDK 21 + tools,
+   <strong>skips the PostgreSQL check</strong> (no local PG on an edge node).</li>
+<li><strong>Writes the central audit-DB settings</strong> (<code>ABCHOST/ABCPORT/ABCUSER/ABCPASSWORD</code></li>
+<li><code>ABCMASTER=false</code>) into <code>~/.env_integrator.paths</code> (mode <code>600</code> — it holds the
+   password), then installs <code>~/.env_integrator</code>.</li>
+<li><strong>Creates the engine dirs</strong>, incl. <code>data/workflow</code> (= <code>$MAESTRO_DEPLOYED_FILES_DIR</code>,
+   where the master SCPs job XML).</li>
+<li><strong>Downloads Spark 4.1.1 + Hadoop 3.4.3</strong> into <code>tools/</code> (~1.3 GB, one-time).</li>
+<li><strong>Installs the integrator metadata</strong> (<code>metadata/integrators/&lt;jobType&gt;/system.cfg</code>, <code>get_*</code>,
+   <code>static_*</code>, <code>launcher.sh</code>) into <code>$PGDIR/metadata</code> — the engine reads each target platform's
+   config from here even on an edge node with <strong>no Postgres</strong>. Without it, Snowflake/MPP jobs emit
+   SQL with unsubstituted <code>$SYSTEM_*</code> tokens (e.g. <code>$SYSTEM_TOKEN_ENCLOSER</code>) and DDL fails.</li>
+<li><strong>Asserts</strong> the audit JDBC driver <code>library/JDBC/postgresql-42.7.11.jar</code>, does a
+   TCP reachability probe to the central DB, and prints the wiring summary.</li>
+</ol>
+<p>It does <strong>not</strong> install a local Postgres, the meta-service, a keystore, or start
+anything. Expect ~5-10 min (the Spark/Hadoop downloads dominate).</p>
+<blockquote>
+<p><strong>Snowflake / MPP key-pair targets on an edge node.</strong> The engine jar (with the javax
+<code>jaxb-api</code>) and <code>--add-opens</code> ride this same tarball/<code>env_integrator</code>, and the metadata above is
+now installed — but key-pair Snowflake also needs, <strong>on this node</strong>: the private key file at the
+path the connection string's <code>private_key_file=</code> references, and an <strong>NTP-synced clock</strong> (skew ⇒
+<code>JWT token is invalid</code>). See
+SNOWFLAKE-SLAVE-REMEDIATION.md for the per-node checklist + script.</p>
+</blockquote>
+<h2 id="step-5--wire-the-node-into-the-cluster">Step 5 — wire the node into the cluster<a class="headerlink" href="#step-5--wire-the-node-into-the-cluster" title="Permanent link">&para;</a></h2>
+<p>Three things connect a node: (a) the master can <strong>SSH</strong> to it, (b) the node can
+<strong>reach the central Postgres</strong>, and (c) the node is <strong>registered</strong> in the audit DB.</p>
+<h3 id="5a-on-the-edge-node--accept-the-masters-ssh-key">5a. On the EDGE NODE — accept the master's SSH key<a class="headerlink" href="#5a-on-the-edge-node--accept-the-masters-ssh-key" title="Permanent link">&para;</a></h3>
+<p>The master authenticates to the node with an SSH key (recommended) or password.
+For key auth, put the <strong>master's public key</strong> in the install user's
+<code>authorized_keys</code>:</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># as maestro on the edge node</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.ssh<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>chmod<span class="w"> </span><span class="m">700</span><span class="w"> </span>~/.ssh
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">'&lt;master-ssh-public-key&gt;'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.ssh/authorized_keys
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>~/.ssh/authorized_keys
+</code></pre></div>
+Confirm sshd is up (Step 1). Test from the master:
+<code>ssh -i &lt;master-private-key&gt; maestro@&lt;node_ip&gt; 'echo ok'</code>.</p>
+<h3 id="5b-on-the-central-server--let-the-node-reach-postgres">5b. On the CENTRAL SERVER — let the node reach Postgres<a class="headerlink" href="#5b-on-the-central-server--let-the-node-reach-postgres" title="Permanent link">&para;</a></h3>
+<p>The edge engine connects to <code>jdbc:postgresql://&lt;central_server&gt;:5432/sqlmaestro</code>.
+On the central host (bare-metal <code>/data/iserver/server/pgsql/data/</code>, or inside the
+<code>eltmaestro</code> container for a Docker deploy):</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a># postgresql.conf
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>listen_addresses = '*'          # or the central server's IP
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a># pg_hba.conf  — allow this node + the maestro user to the sqlmaestro DB
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>host  sqlmaestro  maestro  &lt;node_ip&gt;/32  scram-sha-256
+</code></pre></div>
+Reload Postgres (<code>pg_ctl reload</code>, or <code>docker exec eltmaestro supervisorctl ...</code>),
+and open the firewall:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--add-port<span class="o">=</span><span class="m">5432</span>/tcp<span class="w"> </span>--permanent<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--reload<span class="w">   </span><span class="c1"># firewalld</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1"># or: sudo ufw allow from &lt;node_ip&gt; to any port 5432                              # ufw</span>
+</code></pre></div></p>
+<h3 id="5c-register-the-node--its-ssh-connection-in-the-audit-db">5c. Register the node + its SSH connection (in the audit DB)<a class="headerlink" href="#5c-register-the-node--its-ssh-connection-in-the-audit-db" title="Permanent link">&para;</a></h3>
+<p>The master finds a node by <code>server_name</code> in <strong><code>t_maestro_servers</code></strong> and its SSH
+creds in <strong><code>connection2</code></strong>. Easiest is the <strong>WPF admin client</strong> (it encrypts the
+SSH password and formats the key field for you); the equivalent SQL on the central
+<code>sqlmaestro</code> DB is:</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1">-- 1) the SSH connection the master uses to reach the node (type 'H' = host/SSH)</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">connection2</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span><span class="p">(</span><span class="n">connection_nm</span><span class="p">,</span><span class="w"> </span><span class="n">host_distinguished_nm</span><span class="p">,</span><span class="w"> </span><span class="n">secondary_distinguished_nm</span><span class="p">,</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">   </span><span class="n">login_nm</span><span class="p">,</span><span class="w"> </span><span class="n">password_encrypted_txt</span><span class="p">,</span><span class="w"> </span><span class="n">port_num</span><span class="p">,</span><span class="w"> </span><span class="n">connection_type_cd</span><span class="p">,</span><span class="w"> </span><span class="n">database_instance_nm</span><span class="p">)</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="k">VALUES</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">  </span><span class="p">(</span><span class="s1">'EDGE1_SSH'</span><span class="p">,</span><span class="w"> </span><span class="s1">'&lt;node_ip&gt;'</span><span class="p">,</span><span class="w"> </span><span class="s1">'&lt;node_ip&gt;'</span><span class="p">,</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">   </span><span class="s1">'maestro'</span><span class="p">,</span><span class="w"> </span><span class="s1">''</span><span class="p">,</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w"> </span><span class="s1">'H'</span><span class="p">,</span><span class="w"> </span><span class="s1">'key:sftp:/home/maestro/.ssh/id_master'</span><span class="p">);</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="c1">--   database_instance_nm formats:</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="c1">--     key auth  : 'key:sftp:/path/to/master_private_key'   (sftp transport)</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="c1">--     password  : 'pass:sftp:'  + put base64(password) in password_encrypted_txt</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="c1">--                 (the WPF stores Crypt/base64; e.g. `printf '%s' '&lt;pw&gt;' | base64`)</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="c1">-- 2) register the node as a non-master execution server</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">t_maestro_servers</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="w">  </span><span class="p">(</span><span class="n">server_id</span><span class="p">,</span><span class="w"> </span><span class="k">server_name</span><span class="p">,</span><span class="w"> </span><span class="n">server_address</span><span class="p">,</span><span class="w"> </span><span class="n">server_maestro_port</span><span class="p">,</span>
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="w">   </span><span class="n">server_ssh_connection_name</span><span class="p">,</span><span class="w"> </span><span class="n">is_master</span><span class="p">)</span>
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="k">VALUES</span>
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a><span class="w">  </span><span class="p">(</span><span class="s1">'EDGE1'</span><span class="p">,</span><span class="w"> </span><span class="s1">'EDGE1'</span><span class="p">,</span><span class="w"> </span><span class="s1">'&lt;node_ip&gt;'</span><span class="p">,</span><span class="w"> </span><span class="mi">8181</span><span class="p">,</span><span class="w"> </span><span class="s1">'EDGE1_SSH'</span><span class="p">,</span><span class="w"> </span><span class="k">false</span><span class="p">);</span>
+</code></pre></div>
+<code>server_name</code> (<code>EDGE1</code> here) is the value you target a workflow at; the path on the
+node is discovered at run time from the node's own <code>$MAESTRO_DEPLOYED_FILES_DIR</code>.</p>
+<h3 id="5e-reverse-path-let-the-node-ssh-back-to-the-master-for-log-return">5e. (Reverse path) Let the node SSH back to the master for log return<a class="headerlink" href="#5e-reverse-path-let-the-node-ssh-back-to-the-master-for-log-return" title="Permanent link">&para;</a></h3>
+<p>When a slave finishes it SSHes <strong>back</strong> to the master to copy its console log there
+(<code>BatchThread</code> <code>finally</code> block). This needs the master registered with
+<code>is_master=true</code> <strong>and</strong> an SSH connection the slave can use — the <strong>opposite</strong>
+direction of 5a/5c. Skippable: without it the workflow still runs and the central
+audit DB still records everything; only the console-log copy-back to the master is
+lost (the log stays in the node's <code>$MAESTRO_CONSOLE_LOG_DIR</code>).</p>
+<ol>
+<li><strong>On the MASTER server</strong> — run sshd and authorize the <strong>node's</strong> public key:
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># as the master's install user</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>sshd<span class="w">            </span><span class="c1"># (sshd / ssh)</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">'&lt;node-ssh-public-key&gt;'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.ssh/authorized_keys<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>~/.ssh/authorized_keys
+</code></pre></div></li>
+<li><strong>On the NODE</strong> — place the node→master <strong>private</strong> key (the slave's engine reads
+   it from the path in the connection below): e.g. <code>~/.ssh/id_to_master</code> (chmod 600).</li>
+<li><strong>In the central <code>sqlmaestro</code> DB</strong> — the master's SSH connection + the master row:
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">connection2</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="p">(</span><span class="n">connection_nm</span><span class="p">,</span><span class="w"> </span><span class="n">host_distinguished_nm</span><span class="p">,</span><span class="w"> </span><span class="n">secondary_distinguished_nm</span><span class="p">,</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">   </span><span class="n">login_nm</span><span class="p">,</span><span class="w"> </span><span class="n">password_encrypted_txt</span><span class="p">,</span><span class="w"> </span><span class="n">port_num</span><span class="p">,</span><span class="w"> </span><span class="n">connection_type_cd</span><span class="p">,</span><span class="w"> </span><span class="n">database_instance_nm</span><span class="p">)</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="k">VALUES</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">  </span><span class="p">(</span><span class="s1">'MASTER_SSH'</span><span class="p">,</span><span class="w"> </span><span class="s1">'&lt;master_address_from_node&gt;'</span><span class="p">,</span><span class="w"> </span><span class="s1">'&lt;master_address_from_node&gt;'</span><span class="p">,</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">   </span><span class="s1">'maestro'</span><span class="p">,</span><span class="w"> </span><span class="s1">''</span><span class="p">,</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w"> </span><span class="s1">'H'</span><span class="p">,</span><span class="w"> </span><span class="s1">'key:sftp:/home/maestro/.ssh/id_to_master'</span><span class="p">);</span><span class="w">   </span><span class="c1">-- path ON THE NODE</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="c1">-- register the master itself (is_master=true) with its SSH connection</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">t_maestro_servers</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="w">  </span><span class="p">(</span><span class="n">server_id</span><span class="p">,</span><span class="w"> </span><span class="k">server_name</span><span class="p">,</span><span class="w"> </span><span class="n">server_address</span><span class="p">,</span><span class="w"> </span><span class="n">server_maestro_port</span><span class="p">,</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="w">   </span><span class="n">server_ssh_connection_name</span><span class="p">,</span><span class="w"> </span><span class="n">is_master</span><span class="p">)</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="k">VALUES</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="w">  </span><span class="p">(</span><span class="s1">'MASTER'</span><span class="p">,</span><span class="w"> </span><span class="s1">'MASTER'</span><span class="p">,</span><span class="w"> </span><span class="s1">'&lt;master_address&gt;'</span><span class="p">,</span><span class="w"> </span><span class="mi">8181</span><span class="p">,</span><span class="w"> </span><span class="s1">'MASTER_SSH'</span><span class="p">,</span><span class="w"> </span><span class="k">true</span><span class="p">);</span>
+</code></pre></div>
+   The slave resolves <code>MASTER_SSH</code> by <code>is_master=true</code>, so exactly one master row must
+   carry a valid <code>server_ssh_connection_name</code>. (For a Docker-deployed master, the
+   <code>eltmaestro</code> container must itself run sshd for this to work.)</li>
+</ol>
+<h3 id="5d-target-a-workflow-at-the-node">5d. Target a workflow at the node<a class="headerlink" href="#5d-target-a-workflow-at-the-node" title="Permanent link">&para;</a></h3>
+<p>Assign the workflow's execution server to the node's <code>server_name</code> (in the WPF /
+job config). On the next run the master takes the SSH branch instead of running
+locally: it SCPs the job XML(s) to the node and launches <code>java -jar sqlm.jar
+--slave</code>.</p>
+<h2 id="step-6--verify">Step 6 — verify<a class="headerlink" href="#step-6--verify" title="Permanent link">&para;</a></h2>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># on the edge node — confirm the env the master will source</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>.<span class="w"> </span>~/.env_integrator
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$ABCHOST</span><span class="s2"> </span><span class="nv">$ABCPORT</span><span class="s2"> </span><span class="nv">$ABCUSER</span><span class="s2"> </span><span class="nv">$ABCMASTER</span><span class="s2">"</span><span class="w">        </span><span class="c1"># -&gt; &lt;central&gt; 5432 maestro false</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>timeout<span class="w"> </span><span class="m">5</span><span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"&lt;/dev/tcp/</span><span class="nv">$ABCHOST</span><span class="s2">/</span><span class="nv">$ABCPORT</span><span class="s2">"</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"central DB reachable (TCP)"</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>ls<span class="w"> </span><span class="s2">"</span><span class="nv">$MAESTRO_JAR_FILE</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="s2">"</span><span class="nv">$SPARK_HOME</span><span class="s2">/bin/spark-submit"</span><span class="w"> </span>--version<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>version
+</code></pre></div>
+Then dispatch a workflow targeting the node and confirm: the job XML lands in the
+node's <code>$MAESTRO_DEPLOYED_FILES_DIR</code> (<code>/data/iserver/data/workflow</code>),
+<code>$MAESTRO_CONSOLE_LOG_DIR/&lt;xml&gt;.log</code> shows the engine starting <code>--slave</code>, and a new
+<code>batch_cycle_run</code> row appears in the central <code>sqlmaestro</code>.</p>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>The central DB <strong>must</strong> be named <code>sqlmaestro</code> and be plain Postgres (the engine
+  hardcodes the db name + <code>org.postgresql.Driver</code>). The audit JDBC driver
+  <code>postgresql-42.7.11.jar</code> ships in the tarball under <code>library/JDBC/</code>.</li>
+<li>The node runs nothing standing — keep <code>sshd</code> up and the deploy dir writable; the
+  master launches the engine per dispatch.</li>
+<li>Re-running <code>install-engine.sh</code> with new <code>--abchost</code>/creds rewrites
+  <code>~/.env_integrator.paths</code> (so updated values take effect) but leaves an existing
+  <code>~/.env_integrator</code> alone.</li>
+<li>No local HDFS is started; Spark runs local and stages to local dirs.</li>
+<li>For a Docker deploy of the central server, the node reaches Postgres via the
+  central <strong>host's</strong> address only if 5432 is published from the <code>eltmaestro</code>
+  container (or both are on the same Docker network).</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top", "navigation.instant", "navigation.tracking", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+    
+  </body>
+</html>

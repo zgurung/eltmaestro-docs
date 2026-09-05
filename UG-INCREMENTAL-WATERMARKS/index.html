@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://zgurung.github.io/eltmaestro-docs/UPGRADE/">
+        <link rel="canonical" href="https://zgurung.github.io/eltmaestro-docs/UG-INCREMENTAL-WATERMARKS/">
       
       
-        <link rel="prev" href="../EDGE-NODE-SETUP/">
+        <link rel="prev" href="../UG-STEPS/">
       
       
-        <link rel="next" href="../OPERATIONS/">
+        <link rel="next" href="../UG-RUN-VARIABLE-OVERRIDES/">
       
       
       <link rel="icon" href="../assets/elt-maestro-logo.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>Upgrade - ELTMaestro Documentation</title>
+        <title>Incremental loads & watermarks - ELTMaestro Documentation</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#in-place-upgrade" class="md-skip">
+        <a href="#incremental-extraction-with-the-data-validity-window" class="md-skip">
           Skip to content
         </a>
       
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Upgrade
+              Incremental loads & watermarks
             
           </span>
         </div>
@@ -446,8 +446,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -457,11 +459,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
@@ -475,7 +477,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Workflows & steps
@@ -528,10 +530,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../UG-INCREMENTAL-WATERMARKS/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Incremental loads & watermarks
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -540,6 +562,104 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-the-two-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. The two jobs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-where-the-watermark-predicate-goes" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Where the watermark predicate goes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-what-the-engine-resolves-at-run-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. What the engine resolves at run time
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-verifying-a-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Verifying a run
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-handing-the-location-downstream-with-wm" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Handing the location downstream with $WM
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-expected-behaviour-worth-recognising" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Expected behaviour worth recognising
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Expected behaviour worth recognising">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adding-a-step-to-a-workflow-that-has-already-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding a step to a workflow that has already run
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-time-zones--check-this-first-when-nothing-loads" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Time zones — check this first when nothing loads
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -860,8 +980,6 @@
       
   
   
-    
-  
   
   
     
@@ -873,11 +991,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
         
           
           <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
@@ -891,7 +1009,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             Install & operations
@@ -965,30 +1083,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Upgrade
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../UPGRADE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -997,131 +1095,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#what-is-preserved" class="md-nav__link">
-    <span class="md-ellipsis">
-      What is preserved
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-is-replaced" class="md-nav__link">
-    <span class="md-ellipsis">
-      What is replaced
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#before-you-upgrade" class="md-nav__link">
-    <span class="md-ellipsis">
-      Before you upgrade
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#procedure" class="md-nav__link">
-    <span class="md-ellipsis">
-      Procedure
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#rollback" class="md-nav__link">
-    <span class="md-ellipsis">
-      Rollback
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#verifying-the-upgrade-succeeded" class="md-nav__link">
-    <span class="md-ellipsis">
-      Verifying the upgrade succeeded
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#major-upgrade-from-a-legacy-install" class="md-nav__link">
-    <span class="md-ellipsis">
-      Major upgrade from a legacy install
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Major upgrade from a legacy install">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#what-to-copy" class="md-nav__link">
-    <span class="md-ellipsis">
-      What to copy
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#procedure_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Procedure
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#verifying-the-copy" class="md-nav__link">
-    <span class="md-ellipsis">
-      Verifying the copy
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#gotchas" class="md-nav__link">
-    <span class="md-ellipsis">
-      Gotchas
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1402,100 +1375,64 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-is-preserved" class="md-nav__link">
+  <a href="#1-the-two-jobs" class="md-nav__link">
     <span class="md-ellipsis">
-      What is preserved
+      1. The two jobs
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-is-replaced" class="md-nav__link">
+  <a href="#2-where-the-watermark-predicate-goes" class="md-nav__link">
     <span class="md-ellipsis">
-      What is replaced
+      2. Where the watermark predicate goes
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#before-you-upgrade" class="md-nav__link">
+  <a href="#3-what-the-engine-resolves-at-run-time" class="md-nav__link">
     <span class="md-ellipsis">
-      Before you upgrade
+      3. What the engine resolves at run time
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#procedure" class="md-nav__link">
+  <a href="#4-verifying-a-run" class="md-nav__link">
     <span class="md-ellipsis">
-      Procedure
+      4. Verifying a run
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#rollback" class="md-nav__link">
+  <a href="#5-handing-the-location-downstream-with-wm" class="md-nav__link">
     <span class="md-ellipsis">
-      Rollback
+      5. Handing the location downstream with $WM
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#verifying-the-upgrade-succeeded" class="md-nav__link">
+  <a href="#6-expected-behaviour-worth-recognising" class="md-nav__link">
     <span class="md-ellipsis">
-      Verifying the upgrade succeeded
+      6. Expected behaviour worth recognising
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#major-upgrade-from-a-legacy-install" class="md-nav__link">
-    <span class="md-ellipsis">
-      Major upgrade from a legacy install
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Major upgrade from a legacy install">
+    <nav class="md-nav" aria-label="6. Expected behaviour worth recognising">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#what-to-copy" class="md-nav__link">
+  <a href="#adding-a-step-to-a-workflow-that-has-already-run" class="md-nav__link">
     <span class="md-ellipsis">
-      What to copy
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#procedure_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Procedure
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#verifying-the-copy" class="md-nav__link">
-    <span class="md-ellipsis">
-      Verifying the copy
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#gotchas" class="md-nav__link">
-    <span class="md-ellipsis">
-      Gotchas
+      Adding a step to a workflow that has already run
     </span>
   </a>
   
@@ -1503,6 +1440,15 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-time-zones--check-this-first-when-nothing-loads" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Time zones — check this first when nothing loads
+    </span>
+  </a>
   
 </li>
       
@@ -1521,256 +1467,129 @@
                   
 
 
-<h1 id="in-place-upgrade">In-place upgrade<a class="headerlink" href="#in-place-upgrade" title="Permanent link">&para;</a></h1>
-<p>Upgrade an existing <code>/data/iserver/</code> install with a newer <code>eltm-portable-&lt;VERSION&gt;.tar.gz</code> while keeping the audit DB, deployed workflows, keystore, and operator tuning intact.</p>
-<p>Run as the same unprivileged user that owns the install (<code>maestro</code> in the <a href="../INSTALL/">INSTALL.md</a> convention). Do not run as root.</p>
-<h2 id="what-is-preserved">What is preserved<a class="headerlink" href="#what-is-preserved" title="Permanent link">&para;</a></h2>
-<p><code>update-server.sh</code> keeps these untouched across the upgrade:</p>
-<table>
-<thead>
-<tr>
-<th>Path</th>
-<th>What's in it</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>server/pgsql/data/</code></td>
-<td>The audit DB (<code>sqlmaestro</code>). Migrations bundled in the new tarball are applied on top of it.</td>
-</tr>
-<tr>
-<td><code>data/workflow/</code></td>
-<td>Deployed jobs.</td>
-</tr>
-<tr>
-<td><code>data/log/</code></td>
-<td>Historical logs.</td>
-</tr>
-<tr>
-<td><code>transient/</code></td>
-<td>PID files, staging area.</td>
-</tr>
-<tr>
-<td><code>server/keystore.jks</code></td>
-<td>TLS certificate (generated with this host's SAN at first install).</td>
-</tr>
-<tr>
-<td><code>tools/{spark,hadoop}/</code></td>
-<td>Apache binaries downloaded at first install. Rarely change between releases.</td>
-</tr>
-<tr>
-<td><code>~/.env_integrator</code></td>
-<td>Operator-tuned environment file.</td>
-</tr>
-<tr>
-<td><code>~/.env_integrator.paths</code></td>
-<td>Distro-specific <code>JAVA_HOME</code> / <code>PGBIN</code> set at first install.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="what-is-replaced">What is replaced<a class="headerlink" href="#what-is-replaced" title="Permanent link">&para;</a></h2>
-<p>Overwritten by the new tarball:</p>
-<table>
-<thead>
-<tr>
-<th>Path</th>
-<th>What's in it</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>server/engine/{*.jar, lib/}</code></td>
-<td>Spring Boot meta-service jar + engine CLI jar + their lib dependencies.</td>
-</tr>
-<tr>
-<td><code>server/webserver/admin/</code></td>
-<td>Contents of the source-tree <code>admin.commands/</code> dir (<code>mstart-*</code>, <code>mstop-*</code>, ...) — <code>publish.sh</code> copies <code>admin.commands/*</code> into this deployed location.</td>
-</tr>
-<tr>
-<td><code>server/utils/</code></td>
-<td>SOAP <code>ADMIN_*</code> utilities invoked by <code>MaestroMeta</code>.</td>
-</tr>
-<tr>
-<td><code>server/pgsql.factory/</code></td>
-<td><code>initdb.sql</code>, metadata, migrations, hive-metastore schema.</td>
-</tr>
-<tr>
-<td><code>bin/</code></td>
-<td><code>install.sh</code>, <code>update-server.sh</code>, lib modules.</td>
-</tr>
-<tr>
-<td><code>library/JDBC/</code></td>
-<td>All bundled JDBC drivers.</td>
-</tr>
-</tbody>
-</table>
-<p>After the swap, any newly-bundled <code>migrations/*.sql</code> is applied against the live audit DB, idempotently via the <code>schema_version</code> tracking table (same pattern as the Docker entrypoint).</p>
-<h2 id="before-you-upgrade">Before you upgrade<a class="headerlink" href="#before-you-upgrade" title="Permanent link">&para;</a></h2>
-<p>Take a one-off backup of the host so you have a clean rollback target. See BACKUP.md § One-off manual backup — <code>vzdump --mode stop</code> is the canonical recipe for the host VM. If you only care about the audit DB + workflows + keystore, the in-place <code>update-server.sh</code> already preserves them (see "What is preserved" above), so a full VM snapshot is the belt-and-braces option.</p>
-<h2 id="procedure">Procedure<a class="headerlink" href="#procedure" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>su<span class="w"> </span>-<span class="w"> </span>maestro
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>.<span class="w"> </span>~/.env_integrator
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>/data/iserver/bin/update-server.sh<span class="w"> </span>/path/to/eltm-portable-&lt;NEW-VERSION&gt;.tar.gz
+<h1 id="incremental-extraction-with-the-data-validity-window">Incremental extraction with the data-validity window<a class="headerlink" href="#incremental-extraction-with-the-data-validity-window" title="Permanent link">&para;</a></h1>
+<p>A worked, end-to-end example of loading only what changed: SQL Server → parquet on S3 → Redshift,
+with the batch data-validity window scoping the extract and a step watermark handing the S3 location
+to the downstream load.</p>
+<p>Every screenshot below is from a real run on a live environment, not a mock-up.</p>
+<hr />
+<h2 id="1-the-two-jobs">1. The two jobs<a class="headerlink" href="#1-the-two-jobs" title="Permanent link">&para;</a></h2>
+<p>The pipeline is a pair. One extracts to parquet and publishes a watermark; the other reads that
+watermark and copies into Redshift.</p>
+<p><img alt="The two pipeline jobs in the workspace" src="../images/pipeline-workspace-jobs.png" /></p>
+<p><code>MMS_PIPELINE_LOAD_S3_1</code> is a fan of 13 identical three-step chains, one per source table —
+<code>SRC.&lt;Table&gt;</code> (JDBCSOURCE) → <code>TGT.&lt;Table&gt;</code> (JDBCTARGETPARQUET) → <code>PUSH.&lt;Table&gt;</code> (PUSHFILE).</p>
+<p><img alt="The parquet export job on the designer canvas" src="../images/pipeline-parquet-job-dag.png" /></p>
+<hr />
+<h2 id="2-where-the-watermark-predicate-goes">2. Where the watermark predicate goes<a class="headerlink" href="#2-where-the-watermark-predicate-goes" title="Permanent link">&para;</a></h2>
+<p>Open a <code>JDBCSOURCE</code> step. The <strong>Source</strong> tab identifies the table — connection, catalog, schema,
+table. Nothing about incrementality lives here.</p>
+<p><img alt="JDBC Source — Source tab" src="../images/jdbcsource-source-tab.png" /></p>
+<p>The <strong>Source SQL</strong> tab shows the generated query, ending in the <code>$EXTRACT_CONDITION</code> placeholder:</p>
+<p><img alt="JDBC Source — Source SQL tab" src="../images/jdbcsource-source-sql-template.png" /></p>
+<p><code>$EXTRACT_CONDITION</code> is filled from the <strong>Manual Partitions</strong> tab. Each manual partition is one SQL
+<code>WHERE</code> clause applied to the extract, and this is where the window goes:</p>
+<p><img alt="The watermark predicate on the Manual Partitions tab" src="../images/jdbcsource-watermark-extract-condition.png" /></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">WHERE</span><span class="w"> </span><span class="ss">"ModifiedDate"</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="s1">'$BATCH_START_DATA_VALIDITY_TIMESTAMP'</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="ss">"ModifiedDate"</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="s1">'$BATCH_END_DATA_VALIDITY_TIMESTAMP'</span>
 </code></pre></div>
-<p>The script will:</p>
+<blockquote>
+<p><strong>Use <code>&gt;= START AND &lt; END</code>, not <code>BETWEEN</code>.</strong> <code>BETWEEN</code> is inclusive at both ends, so a row landing
+exactly on the boundary is extracted by two consecutive runs.</p>
+</blockquote>
+<hr />
+<h2 id="3-what-the-engine-resolves-at-run-time">3. What the engine resolves at run time<a class="headerlink" href="#3-what-the-engine-resolves-at-run-time" title="Permanent link">&para;</a></h2>
+<p>The console output names every variable it binds. The window is the pair to check:</p>
+<p><img alt="Data-validity window in the console output" src="../images/pipeline-data-validity-window-console.png" /></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Variable $BATCH_START_DATA_VALIDITY_TIMESTAMP (2026-09-01 10:35:00)
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Variable $BATCH_END_DATA_VALIDITY_TIMESTAMP   (2026-09-01 10:45:00)
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Variable $BATCH_DATA_VALIDITY_PERIOD          (2026-09-01 10:44:59.999)
+</code></pre></div>
+<p>Note the naming crossover, which trips people up: <strong>START</strong> comes from <code>calc_end_data_validity_ts()</code>
+and is derived from run history (type-independent); <strong>END</strong> comes from
+<code>calculate_data_validity_start_ts()</code> and is wall clock plus the batch cycle type.</p>
+<p><code>START</code> advances only when a run reaches <code>COMPLETE</code>. A failed run does not move it, so the next run
+re-reads the same span rather than skipping data.</p>
+<hr />
+<h2 id="4-verifying-a-run">4. Verifying a run<a class="headerlink" href="#4-verifying-a-run" title="Permanent link">&para;</a></h2>
+<p><strong>Run History</strong> — one row per batch run, with the run number the watermark is keyed on:</p>
+<p><img alt="Run history" src="../images/pipeline-run-history.png" /></p>
+<p><strong>Step Status</strong> — per-step state and timings:</p>
+<p><img alt="Step status" src="../images/pipeline-step-status.png" /></p>
+<hr />
+<h2 id="5-handing-the-location-downstream-with-wm">5. Handing the location downstream with <code>$WM</code><a class="headerlink" href="#5-handing-the-location-downstream-with-wm" title="Permanent link">&para;</a></h2>
+<p><code>PUSHFILE</code> publishes a <strong>step watermark</strong> keyed <code>&lt;JOB_NAME&gt;::&lt;STEP_ID&gt;</code> whose value is the S3 prefix
+it just wrote:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>MMS_PIPELINE_LOAD_S3_1::33 -&gt; pipeline/AdventureWorks2022/ContactType/2026-09-01/7764/
+</code></pre></div>
+<p>The Redshift job's <code>COPYINTORS</code> step refers to it as <code>$WM{MMS_PIPELINE_LOAD_S3_1::33}</code>, and the
+engine substitutes the prefix at run time:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Step: COPYINTORS (COPY.ContactType) Resolved watermark ref $WM{MMS_PIPELINE_LOAD_S3_1::33}
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  [wm MMS_PIPELINE_LOAD_S3_1::33] -&gt; pipeline/AdventureWorks2022/ContactType/2026-09-01/7764/
+</code></pre></div>
+<p>This is what keeps the two jobs decoupled: the load job never hard-codes a path or a date.</p>
+<hr />
+<h2 id="6-expected-behaviour-worth-recognising">6. Expected behaviour worth recognising<a class="headerlink" href="#6-expected-behaviour-worth-recognising" title="Permanent link">&para;</a></h2>
+<p>Three outcomes look like failures and are not:</p>
+<table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>START == END</code>, 0 rows</td>
+<td>A re-run inside the same period. The window is genuinely empty.</td>
+</tr>
+<tr>
+<td>Rows changed a moment ago are not picked up</td>
+<td>They fall in the <em>current, still-open</em> period. They arrive on the next run.</td>
+</tr>
+<tr>
+<td>Row counts in the target stay at full-table size</td>
+<td>The load merges on keys. Check the <em>timestamps</em>, not the counts, to confirm the incremental worked.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="adding-a-step-to-a-workflow-that-has-already-run">Adding a step to a workflow that has already run<a class="headerlink" href="#adding-a-step-to-a-workflow-that-has-already-run" title="Permanent link">&para;</a></h3>
+<p>A step you add today has no history of its own, but the workflow does — so under the plain rules it
+would inherit the batch's current window and take a small delta, <strong>silently skipping everything that
+existed before you added it</strong>. The step succeeds and its table is simply short, which is why this is
+easy to miss.</p>
+<p>The engine now detects a step that has never reached COMPLETE and gives it first-run values, so its
+first execution reads from the epoch and backfills. Every later run uses the normal window. This is
+automatic and there is nothing to configure.</p>
+<p><em>In server patch <code>e45c8bfc5</code> (5 September 2026) — see <a href="../VARIABLES/#step-scope--a-never-run-step-backfills">Runtime variables</a>.</em></p>
+<hr />
+<h2 id="7-time-zones--check-this-first-when-nothing-loads">7. Time zones — check this first when nothing loads<a class="headerlink" href="#7-time-zones--check-this-first-when-nothing-loads" title="Permanent link">&para;</a></h2>
+<p><strong>The window is computed in the engine JVM's time zone, not the database's.</strong> The boundaries come
+from <code>LOCALTIMESTAMP</code> in the audit database, but the JDBC driver issues <code>SET TimeZone</code> from
+<code>TimeZone.getDefault()</code> on every connect, which overrides the database setting.</p>
+<p><code>alter database sqlmaestro set timezone</code> therefore does <strong>not</strong> move the window. The lever is the
+engine container's <code>TZ</code> / <code>-Duser.timezone</code>.</p>
+<p>This matters because the window is compared against timestamps <em>the source</em> stamped, in the
+source's zone. If a SQL Server runs UTC while the engine host runs US Central, the window trails the
+data by five hours — and the extract matches <strong>zero rows while the batch reports COMPLETE</strong>. In the
+log that is indistinguishable from "no new data".</p>
+<p>Since 11.0.2 the engine logs the zone it used, so this is visible without an experiment:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>(initializeEngine) data-validity window [2026-09-01 10:35:00] -&gt; [2026-09-01 05:45:00]
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  expressed in the ENGINE JVM time zone [America/Chicago / CDT]. ...
+</code></pre></div>
+<p>Three clocks to compare before blaming the watermark:</p>
 <ol>
-<li>Source <code>~/.env_integrator</code> and refuse to run if it's missing (you must have an existing install)</li>
-<li>Stop all running services via <code>mstop-all</code> (Postgres, meta-service, engine, ...)</li>
-<li>Wait briefly (3 s) for processes to settle</li>
-<li>Extract the new tarball into a <code>mktemp -d</code> staging area</li>
-<li><code>rsync</code>-style swap of the "replaced" paths from the staging tree into <code>/data/iserver/</code></li>
-<li><strong>Refresh the runtime integrator metadata</strong> — copy the new <code>metadata/integrators</code> into <code>$PGDIR/metadata</code> (the engine reads the <strong>runtime</strong> copy, not the factory), so updated <code>system.cfg</code> / new <code>$SYSTEM_*</code> vars take effect instead of stale config surviving the upgrade</li>
-<li>Restart Postgres alone</li>
-<li>Apply any newly-bundled migrations from <code>server/pgsql.factory/migrations/</code></li>
-<li>Start the rest of the stack via <code>mstart-all</code></li>
-<li>Clean up the staging dir</li>
+<li>the source's own clock — for SQL Server, <code>SELECT GETDATE(), GETUTCDATE()</code> (equal ⇒ it runs UTC);</li>
+<li>the engine JVM's zone, from the log line above;</li>
+<li>the window the run actually logged.</li>
 </ol>
-<p>Approximate downtime: 30 s - 2 min, depending on how many migrations are pending and how fast the host's disk is.</p>
-<h2 id="rollback">Rollback<a class="headerlink" href="#rollback" title="Permanent link">&para;</a></h2>
-<p>There is no automatic rollback. If a release is bad:</p>
-<ol>
-<li><code>mstop-all</code></li>
-<li>Re-run <code>update-server.sh</code> with the prior tarball — the audit DB is preserved across runs, so any data created since the bad upgrade stays. If the bad release added migrations that the old jars don't understand, you may need to revert those rows in <code>schema_version</code> first.</li>
-</ol>
-<p>Recommended practice: keep the last 2-3 tarballs in a shared location (e.g. <code>/data/releases/</code>) so you can downgrade quickly without re-downloading from Jenkins.</p>
-<h2 id="verifying-the-upgrade-succeeded">Verifying the upgrade succeeded<a class="headerlink" href="#verifying-the-upgrade-succeeded" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>.<span class="w"> </span>~/.env_integrator
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>show-mprocess
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>cat<span class="w"> </span>/data/iserver/VERSION<span class="w">                     </span><span class="c1"># tarball metadata: VERSION, BUILT_AT, GIT_SHA</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>curl<span class="w"> </span>-k<span class="w"> </span>https://localhost:8181/MaestroMetaDataProviderService/MaestroMetaService?wsdl
+<p><strong>If the zone changes between runs of one job</strong>, the stored lower bound and the fresh upper bound end
+up in different frames and the window inverts. The engine refuses that run rather than reporting
+success over nothing:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>DATA-VALIDITY WINDOW IS INVERTED: start [2026-09-01 10:35:00] is AFTER end [2026-09-01 05:45:00]
 </code></pre></div>
-<p>The <code>VERSION</code> file is replaced on every upgrade; the <code>GIT_SHA</code> line is the canonical "what's running here" answer.</p>
-<h2 id="major-upgrade-from-a-legacy-install">Major upgrade from a legacy install<a class="headerlink" href="#major-upgrade-from-a-legacy-install" title="Permanent link">&para;</a></h2>
-<p><code>update-server.sh</code> is the right tool when the legacy and modern installs share the same host and the same <code>/data/iserver/</code> tree. <strong>It is not the right tool</strong> when you're cutting over to a fresh host — typical major-version scenarios:</p>
-<ul>
-<li>legacy install on a GlassFish-era VM (Java 8, asadmin / <code>domain1</code>) → new host on the Spring Boot stack (Java 21 + embedded Jetty 12)</li>
-<li>legacy install on an older OS (RHEL 7, Ubuntu 18.04) past distro EOL → new host on a supported OS</li>
-<li>legacy install in a customer datacenter → new install in cloud (or vice versa)</li>
-</ul>
-<p>In those cases the audit DB on the new host is <strong>freshly seeded by <code>initdb.sql</code></strong> — it has the modern schema but no operator content. To carry forward the operator's investment (jobs, schedules, connections, watermarks) you copy the job-meta rows by SQL from old to new.</p>
-<h3 id="what-to-copy">What to copy<a class="headerlink" href="#what-to-copy" title="Permanent link">&para;</a></h3>
-<p>The <code>t_job_meta</code> schema is stable across versions (see SHARED.md for the migration-stability policy), so this is a <strong>data-only</strong> copy. If a legacy column was renamed/dropped between versions, transform during INSERT.</p>
-<p>Tables to copy, in dependency order (referenced data first, referring data last):</p>
-<table>
-<thead>
-<tr>
-<th>#</th>
-<th>Table</th>
-<th>What's in it</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td><code>t_jdbc</code></td>
-<td>JDBC connection definitions (URL, driver class, user, base64 password)</td>
-<td>Passwords are base64-encoded in <code>password64</code>; carry as-is. Jobs reference these by <code>connection_name</code>.</td>
-</tr>
-<tr>
-<td>2</td>
-<td><code>t_connection_general</code></td>
-<td>Cloud / SSH / SMTP connection params</td>
-<td>Same handling as <code>t_jdbc</code> (compound base64 in <code>connection_parameters</code>).</td>
-</tr>
-<tr>
-<td>3</td>
-<td><code>t_job_meta</code></td>
-<td>Live job definitions</td>
-<td>The core artifact.</td>
-</tr>
-<tr>
-<td>4</td>
-<td><code>t_job_meta_history</code></td>
-<td>Version history per job</td>
-<td>Optional but recommended for audit continuity. <code>version_key</code> is from <code>seq_job_version_id</code> — preserve the sequence high-water mark (see below).</td>
-</tr>
-<tr>
-<td>5</td>
-<td><code>t_job_alert_setting</code></td>
-<td>Per-job alerting</td>
-<td>Optional; copy only if alerts are configured.</td>
-</tr>
-<tr>
-<td>6</td>
-<td><code>t_job_permissions</code></td>
-<td>Per-job RBAC</td>
-<td>Required only if <code>t_user</code> rows are also migrated.</td>
-</tr>
-<tr>
-<td>7</td>
-<td><code>t_workflow_item</code></td>
-<td>Workflow assembly (jobs grouped into batches)</td>
-<td>Copy if workflows are used.</td>
-</tr>
-<tr>
-<td>8</td>
-<td><code>t_step_watermark</code></td>
-<td>Incremental-load high-water marks</td>
-<td><strong>Critical for upsert / SCD2 jobs</strong> — losing watermarks restarts every incremental load from zero.</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Do not copy:</strong></p>
-<ul>
-<li><code>t_workflow_state_history</code>, <code>t_step_run_detail</code>, <code>t_step_status</code>, <code>t_service_audit</code> — runtime / audit rows. The new install starts clean. If you need run history for compliance, snapshot them as CSV from the legacy host before retiring it.</li>
-<li>The discovered-schema cache (<code>t_jdbc_database</code>, <code>t_jdbc_schema</code>, <code>t_jdbc_table</code>, <code>t_jdbc_column</code>) — repopulated by the first <code>CONTROL_SYNC_CONNECTION</code> against each <code>t_jdbc</code> row after cutover.</li>
-<li><code>t_user.password_md5</code> — these are MD5 hashes (see <code>mset-password-md5</code>). Re-issue passwords on the new host rather than carrying hashes across a major upgrade.</li>
-</ul>
-<h3 id="procedure_1">Procedure<a class="headerlink" href="#procedure_1" title="Permanent link">&para;</a></h3>
-<p>On the legacy host, dump the listed tables (one <code>pg_dump --data-only --table=...</code> per table, in dependency order):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># legacy host, as the postgres owner of the sqlmaestro DB</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>.<span class="w"> </span>~/.env_integrator
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nv">OUT</span><span class="o">=</span>/tmp/job-meta-export-<span class="k">$(</span>date<span class="w"> </span>+%Y%m%d<span class="k">)</span>.sql
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>&gt;<span class="w"> </span><span class="s2">"</span><span class="nv">$OUT</span><span class="s2">"</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="k">for</span><span class="w"> </span>T<span class="w"> </span><span class="k">in</span><span class="w"> </span>t_jdbc<span class="w"> </span>t_connection_general<span class="w"> </span>t_job_meta<span class="w"> </span>t_job_meta_history<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">         </span>t_job_alert_setting<span class="w"> </span>t_job_permissions<span class="w"> </span>t_workflow_item<span class="w"> </span>t_step_watermark<span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span>pg_dump<span class="w"> </span>--data-only<span class="w"> </span>--column-inserts<span class="w"> </span>--table<span class="o">=</span>public.<span class="nv">$T</span><span class="w"> </span>sqlmaestro<span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">"</span><span class="nv">$OUT</span><span class="s2">"</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="k">done</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="c1"># also capture the sequence so version_key doesn't collide on the new host</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>psql<span class="w"> </span>sqlmaestro<span class="w"> </span>-tAc<span class="w"> </span><span class="s2">"SELECT 'SELECT setval(''public.seq_job_version_id'', '</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="s2">                          || last_value || ', '</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="s2">                          || is_called || ');'</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="s2">                       FROM public.seq_job_version_id"</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">"</span><span class="nv">$OUT</span><span class="s2">"</span>
-</code></pre></div>
-<p><code>--column-inserts</code> (rather than the default <code>COPY</code>) is verbose but tolerates minor column-order drift between legacy and modern schemas — INSERT names each column explicitly. For very large <code>t_job_meta_history</code> tables, fall back to <code>COPY</code> and accept the constraint that the schemas must match column-for-column.</p>
-<p>Transfer <code>$OUT</code> to the new host (<code>scp</code>, S3, USB, whatever fits the threat model — the file contains base64 passwords).</p>
-<p>On the modern host, with the new install already running on a fresh DB:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># new host, as the same unprivileged user that owns the install</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>.<span class="w"> </span>~/.env_integrator
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>mstop-all<span class="w">                                </span><span class="c1"># quiesce engine + meta-service; Postgres stays up</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>psql<span class="w"> </span>sqlmaestro<span class="w"> </span>-f<span class="w"> </span>/path/to/job-meta-export-YYYYMMDD.sql
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>mstart-all
-</code></pre></div>
-<p>The meta-service rebuilds its in-memory caches on startup, so the freshly inserted jobs appear in the WPF after the next login. Trigger <code>CONTROL_SYNC_CONNECTION</code> once per JDBC connection (from the WPF Admin tab, or <code>mpsql</code> calling the SOAP op) to repopulate the discovered-schema cache.</p>
-<h3 id="verifying-the-copy">Verifying the copy<a class="headerlink" href="#verifying-the-copy" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>.<span class="w"> </span>~/.env_integrator
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># row count parity</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>psql<span class="w"> </span>sqlmaestro<span class="w"> </span>-tAc<span class="w"> </span><span class="s2">"SELECT 't_job_meta', count(*) FROM public.t_job_meta</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="s2">                      UNION ALL SELECT 't_jdbc', count(*) FROM public.t_jdbc</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="s2">                      UNION ALL SELECT 't_step_watermark', count(*) FROM public.t_step_watermark"</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1"># spot-check that watermarks weren't reset</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>psql<span class="w"> </span>sqlmaestro<span class="w"> </span>-tAc<span class="w"> </span><span class="s2">"SELECT job_name, step_name, watermark_value</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="s2">                      FROM public.t_step_watermark</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="s2">                      WHERE watermark_value &lt;&gt; ''</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="s2">                      ORDER BY job_name LIMIT 20"</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="c1"># version_key sequence is past the highest historical row</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>psql<span class="w"> </span>sqlmaestro<span class="w"> </span>-tAc<span class="w"> </span><span class="s2">"SELECT last_value FROM public.seq_job_version_id;</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="s2">                      SELECT max(version_key) FROM public.t_job_meta_history"</span>
-</code></pre></div>
-<p>Counts on both hosts should match for every table you copied. If <code>seq_job_version_id.last_value</code> is <strong>lower</strong> than <code>max(version_key)</code> in <code>t_job_meta_history</code>, the next save from the WPF will fail on duplicate-PK; re-run the <code>setval</code> line from <code>$OUT</code>.</p>
-<h3 id="gotchas">Gotchas<a class="headerlink" href="#gotchas" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>Connection-test ordering.</strong> Test one JDBC connection from the WPF before running any job — the password round-trip exercises <code>Crypt.decodeStr</code> against the carried-over base64 (see SHARED.md on Crypt). A silent decode failure on the new host means the JVM is missing the unlimited-strength JCE jars or a different Java vendor.</li>
-<li><strong>Watermarks must be present before the first run.</strong> If you start jobs with empty watermarks on the new host, incremental loads degrade to full reloads — and on large fact tables that's a costly mistake to discover after the fact.</li>
-<li><strong>Legacy schema drift.</strong> If the legacy <code>t_job_meta</code> has columns the modern schema doesn't, <code>pg_dump --column-inserts</code> will produce INSERTs that reference missing columns. Edit <code>$OUT</code> to drop those columns before loading; or run the dump through <code>sed -E 's/, *legacy_column//; s/, *NULL//'</code> patterns targeted at the offending columns. There is no general-purpose translator — this is one-off, per-legacy-version work.</li>
-<li><strong>Custom Postgres functions</strong> (<code>lock_job</code>, <code>clear_lock</code>, <code>set_job_run_status</code>, etc., all in <code>initdb.sql</code>) are re-seeded by the new install's <code>initdb.sql</code> — do <strong>not</strong> dump them from legacy. Dumping legacy function bodies risks pinning the new install to an old definition.</li>
-</ul>
+<p>and the batch is marked <code>FAILED</code>. The same guard catches the other cause of an inverted window —
+running a batch under a different cycle type than its previous runs stored.</p>
 
 
 

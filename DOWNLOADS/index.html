@@ -306,6 +306,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#server-patches-apply-on-top-of-a-1704-install" class="md-nav__link">
+    <span class="md-ellipsis">
+      Server patches (apply on top of a 17.0.4 install)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#versions" class="md-nav__link">
     <span class="md-ellipsis">
       Versions
@@ -573,6 +582,48 @@
   
   <span class="md-ellipsis">
     Step reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-INCREMENTAL-WATERMARKS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Incremental loads & watermarks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-RUN-VARIABLE-OVERRIDES/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Run variable overrides
   </span>
   
 
@@ -961,6 +1012,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../EDGE-NODE-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Edge node setup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../UPGRADE/" class="md-nav__link">
         
   
@@ -1055,6 +1127,27 @@
   
   <span class="md-ellipsis">
     Runtime variables
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CONTROL-TESTS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Control tests
   </span>
   
 
@@ -1238,6 +1331,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#server-patches-apply-on-top-of-a-1704-install" class="md-nav__link">
+    <span class="md-ellipsis">
+      Server patches (apply on top of a 17.0.4 install)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#versions" class="md-nav__link">
     <span class="md-ellipsis">
       Versions
@@ -1283,6 +1385,12 @@ push</strong> (files &gt;5 GB no longer fail with EntityTooLarge), the <strong>l
 watchdog</strong>, and the <strong>Snowflake <code>closeOnCompletion</code> guard</strong> — on top of the prior Jetty
 idle-timeout and Redshift measure-don't-estimate work — and ships the Windows
 client <strong>2.5.4.20260803</strong> (a <strong>Reset Batch Watermarks</strong> button plus a workflow <strong>right-click ▸ Watermark Management</strong> entry — pre-seeded with the selected workflow — that clear a batch's job low/high watermarks so its tables reload on the next run; <strong>Help ▸ About</strong> now shows the full build version; plus the earlier <strong>control tests now show on the Step Status tab</strong> — attached data-quality control tests, which run and write their results to the ABC database, are now listed on a workflow's <em>Step Status</em> tab alongside the step statuses, with expected/actual and pass/fail, so they're no longer invisible in the client; a <strong>Step Status name-alignment fix</strong> — the <em>Step Status</em> grid now shows each step's current name (matching the Runtime Status diagram) instead of the name recorded at the last run, so a renamed step no longer appears under both its old and new name; plus a <strong>canvas click-vs-drag fix</strong> — clicking a step on the editor canvas no longer nudges it out of place; a <strong>Set Job Metadata</strong> fix — the <strong>Config</strong> dialog now maps its fields correctly, so <em>Description</em> shows the job description instead of the job type and <strong>Apply</strong> no longer errors with <code>value too long for type character varying(64)</code>; Apply now confirms, closes, and refreshes the workflow list; plus a <strong>Change History / Show Changes</strong> job version viewer with a read-only compare-mode canvas + per-step XML diff; <strong>Change Batch Cycle Type</strong> from the job right-click menu; a redesigned <strong>Manage Control Tests</strong> window — searchable grid with a separate editor; Redshift <strong>pipeline generators</strong> — bulk <em>Export Jdbc To S3 Parquet</em> and <em>Import S3 Parquet To Redshift</em> canvas wizards that build whole <code>JDBCSOURCE→Parquet→S3</code> and <code>COPY→table</code> pipelines per selected table, with per-run S3-folder <strong>dedupe</strong> via step watermarks, optional first-column <strong>upsert</strong>, and a migratable <code>$SYSTEM_DEFAULT_DATABASE</code> target; a <strong>Read Uncommitted</strong> control for JDBC sources (per-step checkbox + a <code>onstage_read_uncommitted</code> System Setting — SQL Server extracts read at READ UNCOMMITTED); plus the prior 2.5.1 async JDBC test, Change Password dialog, canvas drag fix, and smooth scrolling).</p>
+<p><strong>Desktop client <code>2.5.5.20260905</code></strong> (5 September 2026) adds the <strong>Run Variable Overrides</strong> section on the
+Run dialog — seed the run-history variables for a single run, so a truncated table can be reloaded
+from the beginning with nothing to put back afterwards. Needs server patch <code>e45c8bfc5</code> (below) on the
+engine side. The preceding <code>2.5.5.20260901</code> added the Sync step's <strong>Permissive</strong> setting. Both are in
+the release notes; the override walkthrough is
+<a href="../UG-RUN-VARIABLE-OVERRIDES/">here</a>.</p>
 <table>
 <thead>
 <tr>
@@ -1310,22 +1418,63 @@ client <strong>2.5.4.20260803</strong> (a <strong>Reset Batch Watermarks</strong
 </tr>
 <tr>
 <td><strong>Windows desktop client</strong></td>
-<td><a href="https://eltmaestro.s3.amazonaws.com/docker/ELTMAESTRO-2.5.4.20260803-portable-win-x64.zip">https://eltmaestro.s3.amazonaws.com/docker/ELTMAESTRO-2.5.4.20260803-portable-win-x64.zip</a></td>
-<td>~80 MB</td>
-<td><code>7c20c455240896956c80eb643c48b218</code></td>
-<td>The desktop client used to connect to an ELTMaestro server. EV code-signed.</td>
+<td><a href="https://eltmaestro.s3.amazonaws.com/docker/ELTMAESTRO-2.5.5.20260905-portable-win-x64.zip">https://eltmaestro.s3.amazonaws.com/docker/ELTMAESTRO-2.5.5.20260905-portable-win-x64.zip</a></td>
+<td>~81 MB</td>
+<td><code>756052c2f0ddfef9bae6bec27127514a</code></td>
+<td>The desktop client used to connect to an ELTMaestro server. EV code-signed (IQ Associates, DigiCert-timestamped).</td>
 </tr>
 </tbody>
 </table>
 <blockquote>
-<p>Checksums are for the <strong>current build</strong> (<code>17.0.4.451</code> server / <code>2.5.4.20260803</code> client). The rolling <code>-17.0.4</code> server objects change md5 on each publish; immutable per-build copies (<code>eltmaestro-17.0.4.451.tar.gz</code>, <code>eltm-portable-17.0.4.451.tar.gz</code>) are also on S3 with the same checksums.</p>
+<p>Checksums are for the <strong>current build</strong> (<code>17.0.4.451</code> server image / <code>2.5.5.20260905</code> client). The rolling <code>-17.0.4</code> server objects change md5 on each publish; immutable per-build copies (<code>eltmaestro-17.0.4.451.tar.gz</code>, <code>eltm-portable-17.0.4.451.tar.gz</code>) are also on S3 with the same checksums.</p>
 </blockquote>
 <h2 id="what-to-do-with-each">What to do with each<a class="headerlink" href="#what-to-do-with-each" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Docker image</strong> — <code>curl -fLO &lt;image-url&gt;</code> then <code>docker load -i eltmaestro-17.0.4.tar.gz</code>. Full walkthrough: <strong><a href="../DOCKER-INSTALL/">Install from the Docker image</a></strong>.</li>
-<li><strong>Linux installer</strong> — <code>curl -fLO &lt;installer-url&gt;</code>, extract, run <code>install.sh</code>. Full walkthrough: <strong><a href="../INSTALL/">Install</a></strong>. The <strong>same</strong> tarball also installs an <strong>engine-only edge node</strong> — run <code>install-engine.sh</code> instead of <code>install.sh</code> to add a remote execution server that connects to the central audit DB: <strong>Edge node setup</strong>.</li>
+<li><strong>Linux installer</strong> — <code>curl -fLO &lt;installer-url&gt;</code>, extract, run <code>install.sh</code>. Full walkthrough: <strong><a href="../INSTALL/">Install</a></strong>. The <strong>same</strong> tarball also installs an <strong>engine-only edge node</strong> — run <code>install-engine.sh</code> instead of <code>install.sh</code> to add a remote execution server that connects to the central audit DB: <strong><a href="../EDGE-NODE-SETUP/">Edge node setup</a></strong>.</li>
 <li><strong>Windows desktop client</strong> — download the <code>.zip</code>, unzip, run <code>ELTMAESTRO.exe</code>, and point <strong>Server / Port</strong> at your ELTMaestro host (<code>8181</code>). See <strong><a href="../UG-GETTING-STARTED/">Getting started</a></strong>.</li>
 </ul>
+<h2 id="server-patches-apply-on-top-of-a-1704-install">Server patches (apply on top of a <code>17.0.4</code> install)<a class="headerlink" href="#server-patches-apply-on-top-of-a-1704-install" title="Permanent link">&para;</a></h2>
+<p>Interim engine + database fixes shipped between numbered images. Each zip is flat (no wrapper
+folder), carries its own <code>README.md</code>, <code>SMOKE-TEST.md</code>, <code>CHECKSUMS.txt</code>, <code>apply.sh</code> and <code>rollback.sh</code>,
+and is identified by the commit it was built from rather than a Jenkins build number. Apply in date
+order; each is idempotent.</p>
+<table>
+<thead>
+<tr>
+<th>Patch</th>
+<th>Date</th>
+<th>Download</th>
+<th>Size</th>
+<th>md5</th>
+<th>What it carries</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>6bf74adb4-r2</code></td>
+<td>2026-09-01</td>
+<td><a href="https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-watermarks-6bf74adb4-r2.zip">https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-watermarks-6bf74adb4-r2.zip</a></td>
+<td>44,578,835</td>
+<td><code>a2fb5715e2fbe875ee66c7a1bd39b843</code></td>
+<td>Data-validity watermark functions (M_MON/M_QTR future upper bound; inverted window refused; time zone logged), Sync Permissive, step-start race, both jars.</td>
+</tr>
+<tr>
+<td><code>e45c8bfc5</code></td>
+<td>2026-09-05</td>
+<td><a href="https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-variables-controltests-e45c8bfc5.zip">https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-variables-controltests-e45c8bfc5.zip</a></td>
+<td>1,239,477</td>
+<td><code>4bb23f5c57cef51ffb60a6544b48f569</code></td>
+<td>Variable-scope fix, <strong>step scope</strong> (never-run step backfills), <strong>run variable overrides</strong> (engine half), first-run sentinel → <code>1970-01-01</code>, control-test rollup fix; tolerance-as-percentage <strong>gated</strong> behind <code>apply-tolerance.sh</code>. Engine jar only — nothing restarts.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>The <code>e45c8bfc5</code> patch re-issues the watermark functions with the new sentinel, so it supersedes the
+database half of <code>6bf74adb4-r2</code>. Read each kit's <code>README.md</code> <strong>before</strong> scheduling — both turn
+silent wrong answers into visible failures, and <code>e45c8bfc5</code> will backfill any step that has never
+completed.</p>
+</blockquote>
 <h2 id="versions">Versions<a class="headerlink" href="#versions" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The <code>-17.0.4</code> filenames track the <strong>current release line</strong> and are refreshed on each publish — use these for "the latest".</li>
@@ -1333,7 +1482,7 @@ client <strong>2.5.4.20260803</strong> (a <strong>Reset Batch Watermarks</strong
 </ul>
 <blockquote>
 <p>Tip: the server (Docker image / Linux installer, version <code>17.0.4</code>) and the
-Windows client (version <code>2.5.4</code>) are versioned separately — that's expected.</p>
+Windows client (version <code>2.5.5</code>) are versioned separately — that's expected.</p>
 </blockquote>
 
 

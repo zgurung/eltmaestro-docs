@@ -16,7 +16,7 @@
         <link rel="prev" href="../OPERATIONS/">
       
       
-        <link rel="next" href="../SCHEMA-PROFILE/">
+        <link rel="next" href="../CONTROL-TESTS/">
       
       
       <link rel="icon" href="../assets/elt-maestro-logo.png">
@@ -531,6 +531,48 @@
   
   
     <li class="md-nav__item">
+      <a href="../UG-INCREMENTAL-WATERMARKS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Incremental loads & watermarks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-RUN-VARIABLE-OVERRIDES/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Run variable overrides
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../PARQUET-TO-REDSHIFT/" class="md-nav__link">
         
   
@@ -903,6 +945,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../EDGE-NODE-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Edge node setup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../UPGRADE/" class="md-nav__link">
         
   
@@ -1145,6 +1208,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#step-scope--a-never-run-step-backfills" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step scope — a never-run step backfills
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run-variable-overrides--one-shot-manual-seeding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run variable overrides — one-shot manual seeding
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#platform-config-variables--systemcfg" class="md-nav__link">
     <span class="md-ellipsis">
       Platform config variables — system.cfg
@@ -1235,6 +1316,27 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CONTROL-TESTS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Control tests
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1510,6 +1612,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#step-scope--a-never-run-step-backfills" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step scope — a never-run step backfills
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run-variable-overrides--one-shot-manual-seeding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run variable overrides — one-shot manual seeding
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#platform-config-variables--systemcfg" class="md-nav__link">
     <span class="md-ellipsis">
       Platform config variables — system.cfg
@@ -1616,16 +1736,35 @@
 <code>getVarData()</code>. This page is the full catalog of variables initialized at <strong>batch</strong> and <strong>job</strong>
 scope, plus the platform <strong>config</strong> variables loaded from <code>system.cfg</code>.</p>
 <h2 id="how-resolution-works">How resolution works<a class="headerlink" href="#how-resolution-works" title="Permanent link">&para;</a></h2>
-<p><code>BaseStep.getVarData(input)</code> replaces tokens in this order (later scopes see the output of earlier
-ones):</p>
+<p><code>BaseStep.getVarData(input)</code> walks every scope in this order, each seeing the output of the last
+(<code>BaseStep.resolveScopes</code>):</p>
 <ol>
-<li>If the text contains <code>$var_…</code>, it is resolved against <strong>job variables only</strong> and returned early
-   (user-defined job variables use the <code>$var_</code> convention).</li>
+<li><strong>Step scope</strong> — <code>stepVariables</code>, present only when <a href="#step-scope--a-never-run-step-backfills">step scope</a>
+   applies to this step. Absent on the overwhelming majority of runs.</li>
 <li><strong>Batch scope</strong> — <code>PG.globalVariable</code> (<code>$BATCH_*</code>).</li>
-<li><strong>Job scope</strong> — <code>job.jobVariables</code> (everything else below), after substituting <code>$STEPID</code> with the
-   current step id.</li>
+<li><code>$STEPID</code> is replaced with the current step id.</li>
+<li><strong>Job scope</strong> — <code>job.jobVariables</code> (everything else below).</li>
 <li><strong>Parent-job scope</strong> — <code>job.parentVariables</code> (inherited when a job is launched by another job).</li>
 </ol>
+<p>Because substitution is destructive — a name is replaced the first time a scope defines it — <strong>the
+first scope to define a name wins</strong>, and later scopes see text in which that token no longer appears.
+So step beats batch beats job beats parent.</p>
+<blockquote>
+<p><strong>Fixed 2026-09-02 (<code>7993c8ff8</code>) — shipped in server patch <code>e45c8bfc5</code> (5 September 2026); not yet in a numbered server image.</strong> Two defects in this chain, both of which
+produced a silently wrong value rather than an error:</p>
+<ul>
+<li>Any text containing <code>$var_</code> (the <em>default</em> job-variable prefix seeded by the client, <code>$VAR_0…4</code>)
+  was resolved against <strong>job scope alone and returned early</strong>. One job variable anywhere in a
+  string — even inside a comment — sent <code>$BATCH_START_DATA_VALIDITY_TIMESTAMP</code> to the warehouse as
+  a literal. Against a varchar watermark column that compares cleanly and loads nothing, or
+  everything, with the batch reporting COMPLETE either way.</li>
+<li><code>JobStep</code> flattened a child's inherited package own-then-inherited, and <code>addVariable</code> overwrites,
+  so a <strong>grandparent's</strong> value beat the immediate parent's. Now one <code>flattenForChild()</code>.</li>
+</ul>
+<p>Still open from that audit: batch scope beats job scope, which is the reverse of the
+step → job → batch precedence one might expect; and the non-step-aware
+<code>JdbcConnection.execute(String)</code> overloads apply no substitution at all.</p>
+</blockquote>
 <p>Values are substituted by literal string replace (multiple passes), so a variable's value may itself
 reference other variables as long as they are defined earlier in the same scope. Within each scope the
 substitution is <strong>longest-name-first</strong> — names are replaced in descending length order — so a variable
@@ -1847,6 +1986,17 @@ date_trunc(grain, last_success) - 1 grain</code> (a lookback that catches late-a
 gaps across failed runs) and <code>END = date_trunc(grain, now())</code> (only fully-elapsed periods; the in-progress
 one is excluded). The window rolls forward automatically as successful runs advance <code>last_success</code> — no
 extra state is stored. Format <code>yyyy-MM-dd HH:mm:ss</code>.</p>
+<blockquote>
+<p><strong>The first-run sentinel is <code>1970-01-01 00:00:00</code> everywhere — since <code>916147345</code>, shipped in server patch <code>e45c8bfc5</code> (5 September 2026); not yet in a numbered server image.</strong>
+Three different values used to mean "never ran": <code>1969-12-31</code>, <code>1970-01-01</code> and <code>1990-01-01</code>,
+depending on which path produced it, so code comparing against one of them silently missed the
+others. They are now one value, with <code>Helper.isFirstRunDataValidityTs()</code> recognising the legacy
+spelling for anything already stored.</p>
+<p><strong>The sentinel is owned by the database functions, not the jar.</strong> <code>initdb.sql</code> runs only on a fresh
+install, so an installation that has not had the watermark function patch applied still returns the
+old values however new its engine is. Check with
+<code>select calc_end_data_validity_ts('__NO_SUCH_BATCH__');</code> — it must return <code>1970-01-01 00:00:00</code>.</p>
+</blockquote>
 <table>
 <thead>
 <tr>
@@ -2122,8 +2272,56 @@ addressable by name. Namespaced by connection type:</p>
 <code>$PGDIR</code>, <code>$MAESTRO_CONSOLE_LOG_DIR</code>, <code>$ABCJDBCDIR</code>, <code>$MAESTRO_ENGINE_OPTS</code>. (Exact set depends on the
 install's <code>env_integrator</code>.)</p>
 <h2 id="job-scope--user-defined">Job scope — user-defined<a class="headerlink" href="#job-scope--user-defined" title="Permanent link">&para;</a></h2>
-<p><code>&lt;jobVariable&gt;</code> elements in the job document become job variables. Use the <code>$var_&lt;name&gt;</code> convention so
-they short-circuit directly to job scope during resolution.</p>
+<p><code>&lt;jobVariable&gt;</code> elements in the job document become job variables. The <code>$var_&lt;name&gt;</code> convention is
+the client's default naming (<code>CreateJob.xaml.cs</code> seeds <code>$VAR_0</code>…<code>$VAR_4</code>); it carries <strong>no special
+resolution behaviour</strong>. It used to short-circuit the whole chain to job scope, which is the defect
+described under <a href="#how-resolution-works">How resolution works</a>.</p>
+<blockquote>
+<p><strong>Naming trap, still open.</strong> A job variable whose name <em>extends</em> a global's — <code>$BATCH_IDX</code> against
+the built-in <code>$BATCH_ID</code> — is mangled: substitution is longest-name-first <strong>within</strong> a scope, but
+batch scope runs before job scope, so <code>$BATCH_ID</code> is replaced inside <code>$BATCH_IDX</code> and the remaining
+<code>X</code> is left stranded. Avoid naming a job variable with a built-in as its prefix.</p>
+</blockquote>
+<hr />
+<h2 id="step-scope--a-never-run-step-backfills">Step scope — a never-run step backfills<a class="headerlink" href="#step-scope--a-never-run-step-backfills" title="Permanent link">&para;</a></h2>
+<p>A step <strong>added to an existing workflow</strong> has no history of its own, but the batch does. Under the
+plain cutoff rules it would inherit the batch's window and take a small delta — silently skipping
+everything that existed before it was added. The step looks healthy and its table is short.</p>
+<p>Step scope closes that. Before a step runs, the engine asks whether <strong>this step</strong> has ever reached
+COMPLETE, keyed on <code>t_step_status(job_id, step_id)</code> — not <code>t_step_watermark</code>. If it never has, the
+step gets a private variable package in which the fifteen run-history variables are replaced with
+their <strong>first-run</strong> values (from <code>PG.getFirstRunCutoffWindows()</code>), so its first execution reads from
+the epoch and backfills. Every later run uses the normal batch window.</p>
+<p>This is <strong>unconditional and needs no configuration</strong> — a newly-added step backfilling on its first
+run is the correct default, not an opt-in.</p>
+<p>Step scope is the first entry in the resolution chain, so it beats batch scope for those fifteen
+names and nothing else changes.</p>
+<p><strong>It stands down when <a href="#run-variable-overrides--one-shot-manual-seeding">run variable overrides</a> are
+active</strong>, and says so in the log:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Step scope suppressed: run-history variables were manually overridden for this run (...). The override wins.
+</code></pre></div>
+<p>Both features exist to control the same window; if both applied the result would depend on ordering,
+so the explicit instruction wins.</p>
+<p>Built in <code>916147345</code>; test coverage in <code>b4eaca2ae</code> and <code>0a3e4db58</code>. Shipped in server patch <code>e45c8bfc5</code> (5 September 2026); not yet in a numbered server image.</p>
+<hr />
+<h2 id="run-variable-overrides--one-shot-manual-seeding">Run variable overrides — one-shot manual seeding<a class="headerlink" href="#run-variable-overrides--one-shot-manual-seeding" title="Permanent link">&para;</a></h2>
+<p>The run-history variables are <em>derived</em>, so during development there is no way to ask "what would
+this load if the batch had last succeeded in January?" short of editing the audit database by hand.</p>
+<p>A developer can seed them for a <strong>single run</strong> from the client's Run dialog (<strong>Run Variable Overrides
+(this run only)</strong>), or by dropping the file the dialog writes:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$MAESTRO_TMP_DIR/&lt;JOB_NAME&gt;.var.json
+</code></pre></div>
+<p>The engine loads it during <code>initializeEngine</code>, applies the values, <strong>deletes the file</strong>, and logs
+each substitution as <code>computed [...] -&gt; using [...]</code>. The next run computes normally.</p>
+<p>Seventeen variables may be overridden — the three <code>$BATCH_*_DATA_VALIDITY_*</code>, both
+<code>*_LAST_SUCCESS_RUN_TS</code>, and all twelve <code>$BATCH_/$JOB_CUTOFF_*_START_TS</code>. Anything else in the file
+is skipped with a logged reason, as is a name written without its leading <code>$</code>.</p>
+<p>Absent file == today's behaviour exactly, and a malformed, expired, wrong-job or unreadable file is
+logged, deleted and ignored — never fatal. A development convenience that can break a production run
+is worse than no feature.</p>
+<p>Full walkthrough, file format and safety properties:
+<a href="../UG-RUN-VARIABLE-OVERRIDES/">Run Variable Overrides user guide</a>.</p>
+<p>Engine half <code>4dddec7b1</code> — shipped in server patch <code>e45c8bfc5</code> (5 September 2026); not yet in a numbered server image. Client half <code>622f148d1</code> — desktop client 2.5.5.20260905.</p>
 <hr />
 <h2 id="platform-config-variables--systemcfg">Platform config variables — <code>system.cfg</code><a class="headerlink" href="#platform-config-variables--systemcfg" title="Permanent link">&para;</a></h2>
 <p><code>loadConfiguration()</code> loads every <code>KEY=value</code> line from

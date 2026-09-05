@@ -2,106 +2,122 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://zgurung.github.io/eltmaestro-docs/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://zgurung.github.io/eltmaestro-docs/CICD-WORKFLOW-PROMOTION-PROPOSAL/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://zgurung.github.io/eltmaestro-docs/CLICKHOUSE-AUTH/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-05</lastmod>
+    </url>
+    <url>
+         <loc>https://zgurung.github.io/eltmaestro-docs/CONTROL-TESTS/</loc>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://zgurung.github.io/eltmaestro-docs/DATA-MODEL-SPINE/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://zgurung.github.io/eltmaestro-docs/DATA-MODEL/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://zgurung.github.io/eltmaestro-docs/DOCKER-INSTALL/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://zgurung.github.io/eltmaestro-docs/DOWNLOADS/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-05</lastmod>
+    </url>
+    <url>
+         <loc>https://zgurung.github.io/eltmaestro-docs/EDGE-NODE-SETUP/</loc>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://zgurung.github.io/eltmaestro-docs/INSTALL/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://zgurung.github.io/eltmaestro-docs/MEDALLION-BRONZE/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://zgurung.github.io/eltmaestro-docs/MEDALLION-GOLD/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://zgurung.github.io/eltmaestro-docs/MEDALLION-SILVER/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://zgurung.github.io/eltmaestro-docs/MEDALLION/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://zgurung.github.io/eltmaestro-docs/MPP-SETUP/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://zgurung.github.io/eltmaestro-docs/OPERATIONS/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://zgurung.github.io/eltmaestro-docs/PARQUET-TO-REDSHIFT/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://zgurung.github.io/eltmaestro-docs/REDSHIFT-SETUP/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://zgurung.github.io/eltmaestro-docs/SCHEMA-PROFILE/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://zgurung.github.io/eltmaestro-docs/SPARKSQL-SETUP/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://zgurung.github.io/eltmaestro-docs/UG-ADMIN/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://zgurung.github.io/eltmaestro-docs/UG-GETTING-STARTED/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-05</lastmod>
+    </url>
+    <url>
+         <loc>https://zgurung.github.io/eltmaestro-docs/UG-INCREMENTAL-WATERMARKS/</loc>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://zgurung.github.io/eltmaestro-docs/UG-MENUS/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-05</lastmod>
+    </url>
+    <url>
+         <loc>https://zgurung.github.io/eltmaestro-docs/UG-RUN-VARIABLE-OVERRIDES/</loc>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://zgurung.github.io/eltmaestro-docs/UG-STEPS/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://zgurung.github.io/eltmaestro-docs/UG-WORKFLOWS/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://zgurung.github.io/eltmaestro-docs/UPGRADE/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://zgurung.github.io/eltmaestro-docs/USER-GUIDE/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://zgurung.github.io/eltmaestro-docs/VARIABLES/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
 </urlset>

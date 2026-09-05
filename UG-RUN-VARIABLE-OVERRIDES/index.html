@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://zgurung.github.io/eltmaestro-docs/UPGRADE/">
+        <link rel="canonical" href="https://zgurung.github.io/eltmaestro-docs/UG-RUN-VARIABLE-OVERRIDES/">
       
       
-        <link rel="prev" href="../EDGE-NODE-SETUP/">
+        <link rel="prev" href="../UG-INCREMENTAL-WATERMARKS/">
       
       
-        <link rel="next" href="../OPERATIONS/">
+        <link rel="next" href="../PARQUET-TO-REDSHIFT/">
       
       
       <link rel="icon" href="../assets/elt-maestro-logo.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>Upgrade - ELTMaestro Documentation</title>
+        <title>Run variable overrides - ELTMaestro Documentation</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#in-place-upgrade" class="md-skip">
+        <a href="#run-variable-overrides" class="md-skip">
           Skip to content
         </a>
       
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Upgrade
+              Run variable overrides
             
           </span>
         </div>
@@ -446,8 +446,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -457,11 +459,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
@@ -475,7 +477,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Workflows & steps
@@ -549,10 +551,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../UG-RUN-VARIABLE-OVERRIDES/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Run variable overrides
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -561,6 +583,188 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-problem-this-solves" class="md-nav__link">
+    <span class="md-ellipsis">
+      What problem this solves
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using it
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using it">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-open-the-workflow-and-press-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Open the workflow and press Run
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-the-run-dialog-now-carries-a-third-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. The Run dialog now carries a third section
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-tick-override-run-history-variables-for-this-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Tick Override run-history variables for this run
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-double-click-a-value-cell-then-type-a-timestamp" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Double-click a Value cell, then type a timestamp
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-bad-input-stops-the-run-at-the-point-you-can-still-fix-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Bad input stops the run, at the point you can still fix it
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-press-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Press Run
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-the-run-uses-the-seeded-values-and-only-those" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. The run uses the seeded values, and only those
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-the-engine-does-with-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      What the engine does with it
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What the engine does with it">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#it-is-genuinely-one-shot" class="md-nav__link">
+    <span class="md-ellipsis">
+      It is genuinely one-shot
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interaction-with-step-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interaction with step scope
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-file-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      The file format
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The file format">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overridable-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overridable variables
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#safety-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      Safety properties
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limitations
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -860,8 +1064,6 @@
       
   
   
-    
-  
   
   
     
@@ -873,11 +1075,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
         
           
           <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
@@ -891,7 +1093,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             Install & operations
@@ -965,30 +1167,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Upgrade
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../UPGRADE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -997,131 +1179,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#what-is-preserved" class="md-nav__link">
-    <span class="md-ellipsis">
-      What is preserved
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-is-replaced" class="md-nav__link">
-    <span class="md-ellipsis">
-      What is replaced
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#before-you-upgrade" class="md-nav__link">
-    <span class="md-ellipsis">
-      Before you upgrade
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#procedure" class="md-nav__link">
-    <span class="md-ellipsis">
-      Procedure
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#rollback" class="md-nav__link">
-    <span class="md-ellipsis">
-      Rollback
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#verifying-the-upgrade-succeeded" class="md-nav__link">
-    <span class="md-ellipsis">
-      Verifying the upgrade succeeded
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#major-upgrade-from-a-legacy-install" class="md-nav__link">
-    <span class="md-ellipsis">
-      Major upgrade from a legacy install
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Major upgrade from a legacy install">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#what-to-copy" class="md-nav__link">
-    <span class="md-ellipsis">
-      What to copy
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#procedure_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Procedure
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#verifying-the-copy" class="md-nav__link">
-    <span class="md-ellipsis">
-      Verifying the copy
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#gotchas" class="md-nav__link">
-    <span class="md-ellipsis">
-      Gotchas
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1402,100 +1459,82 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-is-preserved" class="md-nav__link">
+  <a href="#what-problem-this-solves" class="md-nav__link">
     <span class="md-ellipsis">
-      What is preserved
+      What problem this solves
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-is-replaced" class="md-nav__link">
+  <a href="#using-it" class="md-nav__link">
     <span class="md-ellipsis">
-      What is replaced
+      Using it
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#before-you-upgrade" class="md-nav__link">
-    <span class="md-ellipsis">
-      Before you upgrade
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#procedure" class="md-nav__link">
-    <span class="md-ellipsis">
-      Procedure
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#rollback" class="md-nav__link">
-    <span class="md-ellipsis">
-      Rollback
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#verifying-the-upgrade-succeeded" class="md-nav__link">
-    <span class="md-ellipsis">
-      Verifying the upgrade succeeded
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#major-upgrade-from-a-legacy-install" class="md-nav__link">
-    <span class="md-ellipsis">
-      Major upgrade from a legacy install
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Major upgrade from a legacy install">
+    <nav class="md-nav" aria-label="Using it">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#what-to-copy" class="md-nav__link">
+  <a href="#1-open-the-workflow-and-press-run" class="md-nav__link">
     <span class="md-ellipsis">
-      What to copy
+      1. Open the workflow and press Run
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#procedure_1" class="md-nav__link">
+  <a href="#2-the-run-dialog-now-carries-a-third-section" class="md-nav__link">
     <span class="md-ellipsis">
-      Procedure
+      2. The Run dialog now carries a third section
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#verifying-the-copy" class="md-nav__link">
+  <a href="#3-tick-override-run-history-variables-for-this-run" class="md-nav__link">
     <span class="md-ellipsis">
-      Verifying the copy
+      3. Tick Override run-history variables for this run
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#gotchas" class="md-nav__link">
+  <a href="#4-double-click-a-value-cell-then-type-a-timestamp" class="md-nav__link">
     <span class="md-ellipsis">
-      Gotchas
+      4. Double-click a Value cell, then type a timestamp
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-bad-input-stops-the-run-at-the-point-you-can-still-fix-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Bad input stops the run, at the point you can still fix it
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-press-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Press Run
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-the-run-uses-the-seeded-values-and-only-those" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. The run uses the seeded values, and only those
     </span>
   </a>
   
@@ -1503,6 +1542,81 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-the-engine-does-with-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      What the engine does with it
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What the engine does with it">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#it-is-genuinely-one-shot" class="md-nav__link">
+    <span class="md-ellipsis">
+      It is genuinely one-shot
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interaction-with-step-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interaction with step scope
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-file-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      The file format
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The file format">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overridable-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overridable variables
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#safety-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      Safety properties
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limitations
+    </span>
+  </a>
   
 </li>
       
@@ -1521,255 +1635,169 @@
                   
 
 
-<h1 id="in-place-upgrade">In-place upgrade<a class="headerlink" href="#in-place-upgrade" title="Permanent link">&para;</a></h1>
-<p>Upgrade an existing <code>/data/iserver/</code> install with a newer <code>eltm-portable-&lt;VERSION&gt;.tar.gz</code> while keeping the audit DB, deployed workflows, keystore, and operator tuning intact.</p>
-<p>Run as the same unprivileged user that owns the install (<code>maestro</code> in the <a href="../INSTALL/">INSTALL.md</a> convention). Do not run as root.</p>
-<h2 id="what-is-preserved">What is preserved<a class="headerlink" href="#what-is-preserved" title="Permanent link">&para;</a></h2>
-<p><code>update-server.sh</code> keeps these untouched across the upgrade:</p>
+<h1 id="run-variable-overrides">Run Variable Overrides<a class="headerlink" href="#run-variable-overrides" title="Permanent link">&para;</a></h1>
+<p><em>Seeding the run-history variables for a single manual run.</em></p>
+<p>Applies to server patch <code>e45c8bfc5</code> (5 September 2026) or later, with desktop client <strong>2.5.5.20260905</strong> or later. The engine half alone does nothing; the client alone writes a file nothing reads. You need both, in either order.</p>
+<p>Engine-side detail — resolution order, step scope, and how the two interact — is in <a href="../VARIABLES/#run-variable-overrides--one-shot-manual-seeding">Runtime variables</a>.</p>
+<hr />
+<h2 id="what-problem-this-solves">What problem this solves<a class="headerlink" href="#what-problem-this-solves" title="Permanent link">&para;</a></h2>
+<p>The batch and job window variables — <code>$BATCH_START_DATA_VALIDITY_TIMESTAMP</code>, the
+<code>$BATCH_CUTOFF_*_START_TS</code> family, and their <code>$JOB_*</code> counterparts — are <strong>derived from run
+history</strong>. They are not settable in the workflow, because their whole purpose is to describe what
+has already happened.</p>
+<p>That is correct at run time and painful during development. To answer "what would this job load if
+the batch had last succeeded in January?" you previously had to edit the audit database by hand,
+run, and then remember to put it back. Getting that wrong leaves a workflow silently loading the
+wrong window on its next scheduled run.</p>
+<p>This feature lets a developer seed those variables <strong>for one run</strong>, from the Run dialog, with no
+database editing and nothing to undo afterwards.</p>
+<hr />
+<h2 id="using-it">Using it<a class="headerlink" href="#using-it" title="Permanent link">&para;</a></h2>
+<h3 id="1-open-the-workflow-and-press-run">1. Open the workflow and press Run<a class="headerlink" href="#1-open-the-workflow-and-press-run" title="Permanent link">&para;</a></h3>
+<p><img alt="Workflow list" src="../images/rvo-01-workflow-list.png" /></p>
+<h3 id="2-the-run-dialog-now-carries-a-third-section">2. The Run dialog now carries a third section<a class="headerlink" href="#2-the-run-dialog-now-carries-a-third-section" title="Permanent link">&para;</a></h3>
+<p>Everything above it is unchanged. With the box unticked the run behaves exactly as it always has —
+this is the default, and an existing user who ignores the section sees no change in behaviour.</p>
+<p><img alt="Run dialog, feature off" src="../images/rvo-02-dialog-feature-off.png" /></p>
+<h3 id="3-tick-override-run-history-variables-for-this-run">3. Tick <em>Override run-history variables for this run</em><a class="headerlink" href="#3-tick-override-run-history-variables-for-this-run" title="Permanent link">&para;</a></h3>
+<p>The grid becomes editable and lists every variable the engine will accept.</p>
+<p><img alt="Run dialog, enabled" src="../images/rvo-03-dialog-enabled.png" /></p>
+<h3 id="4-double-click-a-value-cell-then-type-a-timestamp">4. Double-click a Value cell, then type a timestamp<a class="headerlink" href="#4-double-click-a-value-cell-then-type-a-timestamp" title="Permanent link">&para;</a></h3>
+<p>The cell only becomes editable on a <strong>double-click</strong> — a single click just selects the row. The
+dialog says so above the grid.</p>
+<p>Format is <code>yyyy-MM-dd HH:mm:ss</code> (fractional seconds are accepted, e.g. <code>2026-03-01 23:59:59.999</code>,
+which is the form the engine itself uses for <code>$BATCH_DATA_VALIDITY_PERIOD</code>).</p>
+<p><strong>Typing a value ticks the row for you</strong> — you do not have to remember to tick <em>Use</em> as well.
+The tick is there so you can park a value without applying it; untick it and the row is ignored.
+The <em>Use</em> box also toggles on a single click.</p>
+<p><img alt="Value auto-ticks the row" src="../images/rvo-04-value-auto-ticks.png" /></p>
+<h3 id="5-bad-input-stops-the-run-at-the-point-you-can-still-fix-it">5. Bad input stops the run, at the point you can still fix it<a class="headerlink" href="#5-bad-input-stops-the-run-at-the-point-you-can-still-fix-it" title="Permanent link">&para;</a></h3>
+<p>A ticked row with no value is a half-finished edit, not an instruction. Rather than quietly ignoring
+it — which would look exactly like the feature not working — the dialog names the variable and waits.</p>
+<p><img alt="Validation" src="../images/rvo-05-validation-ticked-no-value.png" /></p>
+<p>A value that is not a valid timestamp is refused the same way, and the message shows what you typed:</p>
+<p><img alt="Bad format" src="../images/rvo-09-validation-bad-format.png" /></p>
+<p>This check matters more than it looks. Nothing downstream validates these values — the engine
+substitutes them <strong>verbatim</strong> — so <code>not-a-timestamp</code> would reach whatever SQL or comparison finally
+consumes the variable. Best case that is a step failure with a confusing message. Worst case the
+comparison simply matches nothing, the job loads no rows, and the run reports success.</p>
+<h3 id="6-press-run">6. Press Run<a class="headerlink" href="#6-press-run" title="Permanent link">&para;</a></h3>
+<p><img alt="Ready to run" src="../images/rvo-06-ready-to-run.png" /></p>
+<h3 id="7-the-run-uses-the-seeded-values-and-only-those">7. The run uses the seeded values, and only those<a class="headerlink" href="#7-the-run-uses-the-seeded-values-and-only-those" title="Permanent link">&para;</a></h3>
+<p>Only the variables you set are changed. Everything else is computed exactly as normal — note below
+that <code>$BATCH_START_DATA_VALIDITY_TIMESTAMP</code> is the seeded <code>2026-01-15</code>, while
+<code>$BATCH_CUTOFF_HOUR_START_TS</code>, <code>$BATCH_CUTOFF_DAY_START_TS</code> and the rest are still their real
+computed values.</p>
+<p><img alt="Console output" src="../images/rvo-07-console-result.png" /></p>
+<hr />
+<h2 id="what-the-engine-does-with-it">What the engine does with it<a class="headerlink" href="#what-the-engine-does-with-it" title="Permanent link">&para;</a></h2>
+<p>The client writes <code>$MAESTRO_TMP_DIR/&lt;JOB_NAME&gt;.var.json</code> on the target server immediately before
+requesting the run number. The engine reads it during <code>initializeEngine</code>, applies the values,
+<strong>deletes the file</strong>, and logs what it did:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>(VariableOverrides) *** 2 RUN-HISTORY VARIABLE(S) MANUALLY OVERRIDDEN for job [MMS_VAR_ALL15] ***
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>(VariableOverrides) source: /data/iserver/transient/staging/MMS_VAR_ALL15.var.json, set by: integrator
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>(VariableOverrides)     $BATCH_CUTOFF_DAY_START_TS = 2026-02-20 06:30:00
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>(VariableOverrides)     $BATCH_START_DATA_VALIDITY_TIMESTAMP = 2026-01-15 00:00:00
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>(VariableOverrides) This applies to THIS RUN ONLY -- the file is now deleted and the next run computes normally.
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>(VariableOverrides) consumed and deleted /data/iserver/transient/staging/MMS_VAR_ALL15.var.json
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>(VariableOverrides) OVERRIDDEN $BATCH_START_DATA_VALIDITY_TIMESTAMP: computed [2026-09-05 03:50:00] -&gt; using [2026-01-15 00:00:00] (from ..., set by integrator)
+</code></pre></div>
+<p>Those lines are written at <strong>warning volume on purpose</strong>. A run whose watermarks were set by hand
+must not read as an ordinary run to whoever inspects the log later asking why data was re-loaded or
+skipped.</p>
+<h3 id="it-is-genuinely-one-shot">It is genuinely one-shot<a class="headerlink" href="#it-is-genuinely-one-shot" title="Permanent link">&para;</a></h3>
+<p>The next run of the same workflow recomputes normally. Verified: the run immediately after an
+overridden one logged no <code>VariableOverrides</code> lines at all and echoed the real computed values.</p>
+<h3 id="interaction-with-step-scope">Interaction with step scope<a class="headerlink" href="#interaction-with-step-scope" title="Permanent link">&para;</a></h3>
+<p>Step scope (the first-run backfill for a newly-added step) <strong>stands down</strong> when overrides are
+active, and says so:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Step: SQLSCRIPT (echo_all_15) Step scope suppressed: run-history variables were manually
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>overridden for this run (...). The override wins.
+</code></pre></div>
+<p>Both features exist to control the same window. If both applied, the result would depend on
+ordering. The explicit instruction wins.</p>
+<hr />
+<h2 id="the-file-format">The file format<a class="headerlink" href="#the-file-format" title="Permanent link">&para;</a></h2>
+<p>You can also write the file by hand — the engine does not care who produced it.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">"version"</span><span class="w">    </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">"jobName"</span><span class="w">    </span><span class="p">:</span><span class="w"> </span><span class="s2">"MMS_VAR_ALL15"</span><span class="p">,</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">"createdBy"</span><span class="w">  </span><span class="p">:</span><span class="w"> </span><span class="s2">"integrator"</span><span class="p">,</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">"createdUtc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-09-05T09:01:13Z"</span><span class="p">,</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="nt">"expiresUtc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-09-05T09:31:13Z"</span><span class="p">,</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="nt">"overrides"</span><span class="w">  </span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nt">"$BATCH_START_DATA_VALIDITY_TIMESTAMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-01-15 00:00:00"</span><span class="p">,</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="nt">"$BATCH_CUTOFF_DAY_START_TS"</span><span class="w">          </span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-02-20 06:30:00"</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="p">}</span>
+</code></pre></div>
 <table>
 <thead>
 <tr>
-<th>Path</th>
-<th>What's in it</th>
+<th>Field</th>
+<th>Meaning</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>server/pgsql/data/</code></td>
-<td>The audit DB (<code>sqlmaestro</code>). Migrations bundled in the new tarball are applied on top of it.</td>
+<td><code>version</code></td>
+<td>File format. A version newer than the engine understands is refused, not guessed at.</td>
 </tr>
 <tr>
-<td><code>data/workflow/</code></td>
-<td>Deployed jobs.</td>
+<td><code>jobName</code></td>
+<td>Must match the running job. Stops a file copied from another job retargeting itself.</td>
 </tr>
 <tr>
-<td><code>data/log/</code></td>
-<td>Historical logs.</td>
+<td><code>expiresUtc</code></td>
+<td>Hard stop. The file is keyed on job name, not run number, so a run that never started must not leave a landmine. The client sets 30 minutes.</td>
 </tr>
 <tr>
-<td><code>transient/</code></td>
-<td>PID files, staging area.</td>
-</tr>
-<tr>
-<td><code>server/keystore.jks</code></td>
-<td>TLS certificate (generated with this host's SAN at first install).</td>
-</tr>
-<tr>
-<td><code>tools/{spark,hadoop}/</code></td>
-<td>Apache binaries downloaded at first install. Rarely change between releases.</td>
-</tr>
-<tr>
-<td><code>~/.env_integrator</code></td>
-<td>Operator-tuned environment file.</td>
-</tr>
-<tr>
-<td><code>~/.env_integrator.paths</code></td>
-<td>Distro-specific <code>JAVA_HOME</code> / <code>PGBIN</code> set at first install.</td>
+<td><code>overrides</code></td>
+<td>Variable name → value. <strong>Names must include the leading <code>$</code>.</strong></td>
 </tr>
 </tbody>
 </table>
-<h2 id="what-is-replaced">What is replaced<a class="headerlink" href="#what-is-replaced" title="Permanent link">&para;</a></h2>
-<p>Overwritten by the new tarball:</p>
-<table>
-<thead>
-<tr>
-<th>Path</th>
-<th>What's in it</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>server/engine/{*.jar, lib/}</code></td>
-<td>Spring Boot meta-service jar + engine CLI jar + their lib dependencies.</td>
-</tr>
-<tr>
-<td><code>server/webserver/admin/</code></td>
-<td>Contents of the source-tree <code>admin.commands/</code> dir (<code>mstart-*</code>, <code>mstop-*</code>, ...) — <code>publish.sh</code> copies <code>admin.commands/*</code> into this deployed location.</td>
-</tr>
-<tr>
-<td><code>server/utils/</code></td>
-<td>SOAP <code>ADMIN_*</code> utilities invoked by <code>MaestroMeta</code>.</td>
-</tr>
-<tr>
-<td><code>server/pgsql.factory/</code></td>
-<td><code>initdb.sql</code>, metadata, migrations, hive-metastore schema.</td>
-</tr>
-<tr>
-<td><code>bin/</code></td>
-<td><code>install.sh</code>, <code>update-server.sh</code>, lib modules.</td>
-</tr>
-<tr>
-<td><code>library/JDBC/</code></td>
-<td>All bundled JDBC drivers.</td>
-</tr>
-</tbody>
-</table>
-<p>After the swap, any newly-bundled <code>migrations/*.sql</code> is applied against the live audit DB, idempotently via the <code>schema_version</code> tracking table (same pattern as the Docker entrypoint).</p>
-<h2 id="before-you-upgrade">Before you upgrade<a class="headerlink" href="#before-you-upgrade" title="Permanent link">&para;</a></h2>
-<p>Take a one-off backup of the host so you have a clean rollback target. See BACKUP.md § One-off manual backup — <code>vzdump --mode stop</code> is the canonical recipe for the host VM. If you only care about the audit DB + workflows + keystore, the in-place <code>update-server.sh</code> already preserves them (see "What is preserved" above), so a full VM snapshot is the belt-and-braces option.</p>
-<h2 id="procedure">Procedure<a class="headerlink" href="#procedure" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>su<span class="w"> </span>-<span class="w"> </span>maestro
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>.<span class="w"> </span>~/.env_integrator
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>/data/iserver/bin/update-server.sh<span class="w"> </span>/path/to/eltm-portable-&lt;NEW-VERSION&gt;.tar.gz
+<h3 id="overridable-variables">Overridable variables<a class="headerlink" href="#overridable-variables" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>$BATCH_START_DATA_VALIDITY_TIMESTAMP     $BATCH_END_DATA_VALIDITY_TIMESTAMP
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>$BATCH_DATA_VALIDITY_PERIOD
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>$BATCH_LAST_SUCCESS_RUN_TS               $JOB_LAST_SUCCESS_RUN_TS
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>$BATCH_CUTOFF_HOUR_START_TS              $JOB_CUTOFF_HOUR_START_TS
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>$BATCH_CUTOFF_DAY_START_TS               $JOB_CUTOFF_DAY_START_TS
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>$BATCH_CUTOFF_WEEK_START_TS              $JOB_CUTOFF_WEEK_START_TS
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>$BATCH_CUTOFF_MONTH_START_TS             $JOB_CUTOFF_MONTH_START_TS
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>$BATCH_CUTOFF_QUARTER_START_TS           $JOB_CUTOFF_QUARTER_START_TS
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>$BATCH_CUTOFF_YEAR_START_TS              $JOB_CUTOFF_YEAR_START_TS
 </code></pre></div>
-<p>The script will:</p>
-<ol>
-<li>Source <code>~/.env_integrator</code> and refuse to run if it's missing (you must have an existing install)</li>
-<li>Stop all running services via <code>mstop-all</code> (Postgres, meta-service, engine, ...)</li>
-<li>Wait briefly (3 s) for processes to settle</li>
-<li>Extract the new tarball into a <code>mktemp -d</code> staging area</li>
-<li><code>rsync</code>-style swap of the "replaced" paths from the staging tree into <code>/data/iserver/</code></li>
-<li><strong>Refresh the runtime integrator metadata</strong> — copy the new <code>metadata/integrators</code> into <code>$PGDIR/metadata</code> (the engine reads the <strong>runtime</strong> copy, not the factory), so updated <code>system.cfg</code> / new <code>$SYSTEM_*</code> vars take effect instead of stale config surviving the upgrade</li>
-<li>Restart Postgres alone</li>
-<li>Apply any newly-bundled migrations from <code>server/pgsql.factory/migrations/</code></li>
-<li>Start the rest of the stack via <code>mstart-all</code></li>
-<li>Clean up the staging dir</li>
-</ol>
-<p>Approximate downtime: 30 s - 2 min, depending on how many migrations are pending and how fast the host's disk is.</p>
-<h2 id="rollback">Rollback<a class="headerlink" href="#rollback" title="Permanent link">&para;</a></h2>
-<p>There is no automatic rollback. If a release is bad:</p>
-<ol>
-<li><code>mstop-all</code></li>
-<li>Re-run <code>update-server.sh</code> with the prior tarball — the audit DB is preserved across runs, so any data created since the bad upgrade stays. If the bad release added migrations that the old jars don't understand, you may need to revert those rows in <code>schema_version</code> first.</li>
-</ol>
-<p>Recommended practice: keep the last 2-3 tarballs in a shared location (e.g. <code>/data/releases/</code>) so you can downgrade quickly without re-downloading from Jenkins.</p>
-<h2 id="verifying-the-upgrade-succeeded">Verifying the upgrade succeeded<a class="headerlink" href="#verifying-the-upgrade-succeeded" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>.<span class="w"> </span>~/.env_integrator
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>show-mprocess
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>cat<span class="w"> </span>/data/iserver/VERSION<span class="w">                     </span><span class="c1"># tarball metadata: VERSION, BUILT_AT, GIT_SHA</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>curl<span class="w"> </span>-k<span class="w"> </span>https://localhost:8181/MaestroMetaDataProviderService/MaestroMetaService?wsdl
-</code></pre></div>
-<p>The <code>VERSION</code> file is replaced on every upgrade; the <code>GIT_SHA</code> line is the canonical "what's running here" answer.</p>
-<h2 id="major-upgrade-from-a-legacy-install">Major upgrade from a legacy install<a class="headerlink" href="#major-upgrade-from-a-legacy-install" title="Permanent link">&para;</a></h2>
-<p><code>update-server.sh</code> is the right tool when the legacy and modern installs share the same host and the same <code>/data/iserver/</code> tree. <strong>It is not the right tool</strong> when you're cutting over to a fresh host — typical major-version scenarios:</p>
+<p>Anything else in the file is <strong>skipped with a logged reason</strong>, not silently dropped. A name written
+without its <code>$</code> is skipped too, and the message tells you the spelling to use — being lenient there
+would let a typo look like it had been honoured, in a file whose entire job is to change watermarks
+by hand.</p>
+<hr />
+<h2 id="safety-properties">Safety properties<a class="headerlink" href="#safety-properties" title="Permanent link">&para;</a></h2>
+<p>These were design requirements, not accidents:</p>
 <ul>
-<li>legacy install on a GlassFish-era VM (Java 8, asadmin / <code>domain1</code>) → new host on the Spring Boot stack (Java 21 + embedded Jetty 12)</li>
-<li>legacy install on an older OS (RHEL 7, Ubuntu 18.04) past distro EOL → new host on a supported OS</li>
-<li>legacy install in a customer datacenter → new install in cloud (or vice versa)</li>
+<li><strong>Absent file == today's behaviour, exactly.</strong> No file means an empty map and every call site
+  returns what it computed. Existing workflows and schedules are untouched.</li>
+<li><strong>Never fatal.</strong> A malformed, expired, wrong-job or unreadable file is logged, deleted and
+  ignored. A development convenience that can break a production run is worse than no feature.</li>
+<li><strong>Always consumed.</strong> Even a file the engine <em>refused</em> is deleted, so it cannot be retried on the
+  next run.</li>
+<li><strong>Scheduled runs are unaffected.</strong> Only the Run dialog writes the file, and only for the run it
+  is starting.</li>
+<li><strong>If the file cannot be written, the client asks first.</strong> You get a Yes/No rather than a run that
+  silently ignores what you typed.</li>
 </ul>
-<p>In those cases the audit DB on the new host is <strong>freshly seeded by <code>initdb.sql</code></strong> — it has the modern schema but no operator content. To carry forward the operator's investment (jobs, schedules, connections, watermarks) you copy the job-meta rows by SQL from old to new.</p>
-<h3 id="what-to-copy">What to copy<a class="headerlink" href="#what-to-copy" title="Permanent link">&para;</a></h3>
-<p>The <code>t_job_meta</code> schema is stable across versions (see SHARED.md for the migration-stability policy), so this is a <strong>data-only</strong> copy. If a legacy column was renamed/dropped between versions, transform during INSERT.</p>
-<p>Tables to copy, in dependency order (referenced data first, referring data last):</p>
-<table>
-<thead>
-<tr>
-<th>#</th>
-<th>Table</th>
-<th>What's in it</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td><code>t_jdbc</code></td>
-<td>JDBC connection definitions (URL, driver class, user, base64 password)</td>
-<td>Passwords are base64-encoded in <code>password64</code>; carry as-is. Jobs reference these by <code>connection_name</code>.</td>
-</tr>
-<tr>
-<td>2</td>
-<td><code>t_connection_general</code></td>
-<td>Cloud / SSH / SMTP connection params</td>
-<td>Same handling as <code>t_jdbc</code> (compound base64 in <code>connection_parameters</code>).</td>
-</tr>
-<tr>
-<td>3</td>
-<td><code>t_job_meta</code></td>
-<td>Live job definitions</td>
-<td>The core artifact.</td>
-</tr>
-<tr>
-<td>4</td>
-<td><code>t_job_meta_history</code></td>
-<td>Version history per job</td>
-<td>Optional but recommended for audit continuity. <code>version_key</code> is from <code>seq_job_version_id</code> — preserve the sequence high-water mark (see below).</td>
-</tr>
-<tr>
-<td>5</td>
-<td><code>t_job_alert_setting</code></td>
-<td>Per-job alerting</td>
-<td>Optional; copy only if alerts are configured.</td>
-</tr>
-<tr>
-<td>6</td>
-<td><code>t_job_permissions</code></td>
-<td>Per-job RBAC</td>
-<td>Required only if <code>t_user</code> rows are also migrated.</td>
-</tr>
-<tr>
-<td>7</td>
-<td><code>t_workflow_item</code></td>
-<td>Workflow assembly (jobs grouped into batches)</td>
-<td>Copy if workflows are used.</td>
-</tr>
-<tr>
-<td>8</td>
-<td><code>t_step_watermark</code></td>
-<td>Incremental-load high-water marks</td>
-<td><strong>Critical for upsert / SCD2 jobs</strong> — losing watermarks restarts every incremental load from zero.</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Do not copy:</strong></p>
+<hr />
+<h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>t_workflow_state_history</code>, <code>t_step_run_detail</code>, <code>t_step_status</code>, <code>t_service_audit</code> — runtime / audit rows. The new install starts clean. If you need run history for compliance, snapshot them as CSV from the legacy host before retiring it.</li>
-<li>The discovered-schema cache (<code>t_jdbc_database</code>, <code>t_jdbc_schema</code>, <code>t_jdbc_table</code>, <code>t_jdbc_column</code>) — repopulated by the first <code>CONTROL_SYNC_CONNECTION</code> against each <code>t_jdbc</code> row after cutover.</li>
-<li><code>t_user.password_md5</code> — these are MD5 hashes (see <code>mset-password-md5</code>). Re-issue passwords on the new host rather than carrying hashes across a major upgrade.</li>
-</ul>
-<h3 id="procedure_1">Procedure<a class="headerlink" href="#procedure_1" title="Permanent link">&para;</a></h3>
-<p>On the legacy host, dump the listed tables (one <code>pg_dump --data-only --table=...</code> per table, in dependency order):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># legacy host, as the postgres owner of the sqlmaestro DB</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>.<span class="w"> </span>~/.env_integrator
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nv">OUT</span><span class="o">=</span>/tmp/job-meta-export-<span class="k">$(</span>date<span class="w"> </span>+%Y%m%d<span class="k">)</span>.sql
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>&gt;<span class="w"> </span><span class="s2">"</span><span class="nv">$OUT</span><span class="s2">"</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="k">for</span><span class="w"> </span>T<span class="w"> </span><span class="k">in</span><span class="w"> </span>t_jdbc<span class="w"> </span>t_connection_general<span class="w"> </span>t_job_meta<span class="w"> </span>t_job_meta_history<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">         </span>t_job_alert_setting<span class="w"> </span>t_job_permissions<span class="w"> </span>t_workflow_item<span class="w"> </span>t_step_watermark<span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span>pg_dump<span class="w"> </span>--data-only<span class="w"> </span>--column-inserts<span class="w"> </span>--table<span class="o">=</span>public.<span class="nv">$T</span><span class="w"> </span>sqlmaestro<span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">"</span><span class="nv">$OUT</span><span class="s2">"</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="k">done</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="c1"># also capture the sequence so version_key doesn't collide on the new host</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>psql<span class="w"> </span>sqlmaestro<span class="w"> </span>-tAc<span class="w"> </span><span class="s2">"SELECT 'SELECT setval(''public.seq_job_version_id'', '</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="s2">                          || last_value || ', '</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="s2">                          || is_called || ');'</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="s2">                       FROM public.seq_job_version_id"</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">"</span><span class="nv">$OUT</span><span class="s2">"</span>
-</code></pre></div>
-<p><code>--column-inserts</code> (rather than the default <code>COPY</code>) is verbose but tolerates minor column-order drift between legacy and modern schemas — INSERT names each column explicitly. For very large <code>t_job_meta_history</code> tables, fall back to <code>COPY</code> and accept the constraint that the schemas must match column-for-column.</p>
-<p>Transfer <code>$OUT</code> to the new host (<code>scp</code>, S3, USB, whatever fits the threat model — the file contains base64 passwords).</p>
-<p>On the modern host, with the new install already running on a fresh DB:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># new host, as the same unprivileged user that owns the install</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>.<span class="w"> </span>~/.env_integrator
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>mstop-all<span class="w">                                </span><span class="c1"># quiesce engine + meta-service; Postgres stays up</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>psql<span class="w"> </span>sqlmaestro<span class="w"> </span>-f<span class="w"> </span>/path/to/job-meta-export-YYYYMMDD.sql
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>mstart-all
-</code></pre></div>
-<p>The meta-service rebuilds its in-memory caches on startup, so the freshly inserted jobs appear in the WPF after the next login. Trigger <code>CONTROL_SYNC_CONNECTION</code> once per JDBC connection (from the WPF Admin tab, or <code>mpsql</code> calling the SOAP op) to repopulate the discovered-schema cache.</p>
-<h3 id="verifying-the-copy">Verifying the copy<a class="headerlink" href="#verifying-the-copy" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>.<span class="w"> </span>~/.env_integrator
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># row count parity</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>psql<span class="w"> </span>sqlmaestro<span class="w"> </span>-tAc<span class="w"> </span><span class="s2">"SELECT 't_job_meta', count(*) FROM public.t_job_meta</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="s2">                      UNION ALL SELECT 't_jdbc', count(*) FROM public.t_jdbc</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="s2">                      UNION ALL SELECT 't_step_watermark', count(*) FROM public.t_step_watermark"</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1"># spot-check that watermarks weren't reset</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>psql<span class="w"> </span>sqlmaestro<span class="w"> </span>-tAc<span class="w"> </span><span class="s2">"SELECT job_name, step_name, watermark_value</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="s2">                      FROM public.t_step_watermark</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="s2">                      WHERE watermark_value &lt;&gt; ''</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="s2">                      ORDER BY job_name LIMIT 20"</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="c1"># version_key sequence is past the highest historical row</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>psql<span class="w"> </span>sqlmaestro<span class="w"> </span>-tAc<span class="w"> </span><span class="s2">"SELECT last_value FROM public.seq_job_version_id;</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="s2">                      SELECT max(version_key) FROM public.t_job_meta_history"</span>
-</code></pre></div>
-<p>Counts on both hosts should match for every table you copied. If <code>seq_job_version_id.last_value</code> is <strong>lower</strong> than <code>max(version_key)</code> in <code>t_job_meta_history</code>, the next save from the WPF will fail on duplicate-PK; re-run the <code>setval</code> line from <code>$OUT</code>.</p>
-<h3 id="gotchas">Gotchas<a class="headerlink" href="#gotchas" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>Connection-test ordering.</strong> Test one JDBC connection from the WPF before running any job — the password round-trip exercises <code>Crypt.decodeStr</code> against the carried-over base64 (see SHARED.md on Crypt). A silent decode failure on the new host means the JVM is missing the unlimited-strength JCE jars or a different Java vendor.</li>
-<li><strong>Watermarks must be present before the first run.</strong> If you start jobs with empty watermarks on the new host, incremental loads degrade to full reloads — and on large fact tables that's a costly mistake to discover after the fact.</li>
-<li><strong>Legacy schema drift.</strong> If the legacy <code>t_job_meta</code> has columns the modern schema doesn't, <code>pg_dump --column-inserts</code> will produce INSERTs that reference missing columns. Edit <code>$OUT</code> to drop those columns before loading; or run the dump through <code>sed -E 's/, *legacy_column//; s/, *NULL//'</code> patterns targeted at the offending columns. There is no general-purpose translator — this is one-off, per-legacy-version work.</li>
-<li><strong>Custom Postgres functions</strong> (<code>lock_job</code>, <code>clear_lock</code>, <code>set_job_run_status</code>, etc., all in <code>initdb.sql</code>) are re-seeded by the new install's <code>initdb.sql</code> — do <strong>not</strong> dump them from legacy. Dumping legacy function bodies risks pinning the new install to an old definition.</li>
+<li>One override file per job name at a time. Two people overriding the same workflow simultaneously
+  will collide — the second write wins and the first run consumes whatever is there. This is a
+  development feature; coordinate.</li>
+<li>Format is enforced by the <strong>dialog</strong>, not the engine. A file written by hand is not checked —
+  the engine will accept and substitute whatever a hand-edited <code>overrides</code> block contains.</li>
+<li>The check is on shape, not sense. <code>2026-02-30 00:00:00</code> is rejected (no such date), but a
+  well-formed timestamp pointing at the wrong window is accepted and will happily reload years of
+  data. The dialog cannot tell you what you <em>meant</em>.</li>
 </ul>
 
 
