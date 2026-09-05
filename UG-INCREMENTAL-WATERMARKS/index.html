@@ -1561,6 +1561,9 @@ easy to miss.</p>
 <p>The engine now detects a step that has never reached COMPLETE and gives it first-run values, so its
 first execution reads from the epoch and backfills. Every later run uses the normal window. This is
 automatic and there is nothing to configure.</p>
+<p>What it looks like in <strong>Latest Console Output</strong> — one line at the step's initialisation, then the
+runtime-variables block with every START bound at the epoch:</p>
+<p><img alt="Console output: &quot;Step has never completed in an earlier run of this job: resolving the run-history variables to their FIRST-RUN values…&quot;, followed by INITIALIZED and a Runtime variables block in which $BATCH_START_DATA_VALIDITY_TIMESTAMP and every $BATCH_CUTOFF_*_START_TS read 1970-01-01 00:00:00" src="../images/stepscope-console-first-run.png" /></p>
 <p><em>In server patch <code>e45c8bfc5</code> (5 September 2026) — see <a href="../VARIABLES/#step-scope--a-never-run-step-backfills">Runtime variables</a>.</em></p>
 <hr />
 <h2 id="7-time-zones--check-this-first-when-nothing-loads">7. Time zones — check this first when nothing loads<a class="headerlink" href="#7-time-zones--check-this-first-when-nothing-loads" title="Permanent link">&para;</a></h2>

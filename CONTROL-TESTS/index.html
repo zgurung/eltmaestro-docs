@@ -1628,6 +1628,7 @@ most confusing thing about this feature.</p>
 </tr>
 </tbody>
 </table>
+<p><img alt="Manage Control Tests window listing tests with their Type and Tolerance columns: B rows with 99.00, C rows with 2.00 / 5.00 / 50.00 / 100.00, L rows with 2.00" src="../images/control-test-manager-types.png" /></p>
 <p><code>P</code> and <code>S</code> are not unsupported comparison types — they are the tree. Their colour is computed from
 their children by <a href="#the-rollup"><code>rollup_controls2</code></a>, they carry no tolerance, and they are never
 evaluated against one. On dev1 the eight <code>P</code> rows are <code>Sales Fact</code>, <code>Customer Dimension</code>,
@@ -1640,6 +1641,10 @@ than reported as a missing test.</p>
 <p>Tolerance used to be an <strong>absolute</strong> difference in whatever units the test measured. It is now a
 <strong>percentage of the expected value</strong>: <code>2.00</code> means 2 %, <code>0.02</code> means two hundredths of one percent.
 (That also settles the question MMS asked on 30 July — 2 % is written <code>2.00</code>.)</p>
+<p>The editor says so where the value is typed — the field is labelled <strong>Tolerance %</strong> and its tooltip
+reads <em>"Tolerance as a PERCENTAGE of the expected value. 2.00 means 2%. 0 requires an exact match.
+Ignored for Boolean tests."</em>:</p>
+<p><img alt="Control Test editor for MMS_CT_PCT_WITHIN: Tolerance % field holding 2.00, Type C, and the tooltip text explaining the percentage rule" src="../images/control-test-editor-tolerance-pct.png" /></p>
 <p>One function decides every comparison:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">control_test_passes</span><span class="p">(</span><span class="k">type</span><span class="p">,</span><span class="w"> </span><span class="n">expected</span><span class="p">,</span><span class="w"> </span><span class="n">actual</span><span class="p">,</span><span class="w"> </span><span class="n">tolerance_pct</span><span class="p">)</span><span class="w"> </span><span class="k">RETURNS</span><span class="w"> </span><span class="nb">boolean</span>
 </code></pre></div>

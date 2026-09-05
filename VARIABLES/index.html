@@ -1992,6 +1992,9 @@ Three different values used to mean "never ran": <code>1969-12-31</code>, <code>
 depending on which path produced it, so code comparing against one of them silently missed the
 others. They are now one value, with <code>Helper.isFirstRunDataValidityTs()</code> recognising the legacy
 spelling for anything already stored.</p>
+<p>What a never-run job's variables look like in the console — <code>$JOB_LAST_SUCCESS_RUN_TS</code> and every
+<code>$JOB_CUTOFF_*_START_TS</code> at the epoch, the <code>*_END_TS</code> values current:</p>
+<p><img alt="Console output for a job on its first run: $JOB_LAST_SUCCESS_RUN_TS and all $JOB_CUTOFF_*_START_TS read 1970-01-01 00:00:00 while the END timestamps carry current period boundaries" src="../images/sentinel-console-new-job-vars.png" /></p>
 <p><strong>The sentinel is owned by the database functions, not the jar.</strong> <code>initdb.sql</code> runs only on a fresh
 install, so an installation that has not had the watermark function patch applied still returns the
 old values however new its engine is. Check with
@@ -2296,6 +2299,7 @@ the epoch and backfills. Every later run uses the normal batch window.</p>
 run is the correct default, not an opt-in.</p>
 <p>Step scope is the first entry in the resolution chain, so it beats batch scope for those fifteen
 names and nothing else changes.</p>
+<p><img alt="Latest Console Output showing the step-scope line at step initialisation and the runtime-variables block with all START bounds at 1970-01-01" src="../images/stepscope-console-first-run.png" /></p>
 <p><strong>It stands down when <a href="#run-variable-overrides--one-shot-manual-seeding">run variable overrides</a> are
 active</strong>, and says so in the log:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Step scope suppressed: run-history variables were manually overridden for this run (...). The override wins.
