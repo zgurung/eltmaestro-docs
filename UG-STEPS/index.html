@@ -3362,17 +3362,38 @@ without first running the pre-flight assessment — see
 <td>SCD1</td>
 <td><code>SCD1</code></td>
 <td><strong>Slowly Changing Dimension Type-1</strong> — upserts into a target dimension, <strong>overwriting</strong> changed attributes in place (no history, unlike <code>SCD2</code>). Set target catalog / schema / table and mark each column <strong>Match</strong> / <strong>Change</strong> / <strong>Ignore</strong>. 1 input.</td>
-<td>All MPP <strong>except ClickHouse</strong></td>
+<td>All MPP (ClickHouse included)</td>
 </tr>
 <tr>
 <td>🟢</td>
 <td>SCD2</td>
 <td><code>SCD2</code></td>
-<td><strong>Slowly Changing Dimension Type-2</strong> — keeps history via <strong>effective/expiration timestamps</strong> (current row's exp_ts = <code>9999-12-31</code>). Mark each column <strong>M</strong> (match/identity) · <strong>C</strong> (track change) · <strong>X</strong> (ignore), and designate the dim-id / eff-ts / exp-ts columns. On a change it expires the old row and inserts a new current row.</td>
+<td><strong>Slowly Changing Dimension Type-2</strong> — keeps history via <strong>effective/expiration timestamps</strong> (current row's exp_ts = <code>9999-12-31</code>; <strong>on ClickHouse <code>2099-12-31</code></strong>, because its <code>DateTime</code> type ends in 2106 — by design). Mark each column <strong>M</strong> (match/identity) · <strong>C</strong> (track change) · <strong>X</strong> (loaded but <em>not</em> compared — an X column never triggers a new version), and designate the dim-id / eff-ts / exp-ts columns. On a change it expires the old row and inserts a new current row.</td>
 <td>All MPP (ClickHouse included)</td>
 </tr>
 </tbody>
 </table>
+<blockquote>
+<p><strong>SCD2 on ClickHouse — three things that differ from the other platforms.</strong> The dimension key is derived
+from the record hash (<code>sipHash64</code>), so the <em>Initial Dimension Key Value</em> box is disabled there. The
+<em>Change TS Is Watermark</em> setting is honoured on ClickHouse (it filters the incoming rows to those newer
+than the last loaded change timestamp); on the other platforms it currently has no effect. And the
+change-detection hash: a <strong>new</strong> SCD2 step created in client 2.5.7 or later uses a per-column,
+delimiter-safe formula (<code>hashVersion</code> 2) that cannot confuse <code>('ab','c')</code> with <code>('a','bc')</code> or a NULL
+with a <code>'-'</code>; a step saved by an earlier client keeps the original formula <strong>on purpose</strong>, because the
+target's history ledger (<code>&lt;schema&gt;_&lt;table&gt;_h</code>) holds hashes computed that way and changing it would make
+every current row look new. To move an existing step to the safe formula, rebuild its target and ledger.
+The run log states which formula is in use (<code>Change-detection hash formula: version 1|2</code>). The rewrite
+of the target now <strong>waits for its delete to finish</strong> (<code>mutations_sync = 2</code>) before inserting, so a
+reader can no longer see the old and the new version of a key side by side mid-run.</p>
+<p><strong>Two changes for the same business key with the same change timestamp</strong> cannot be ordered, so the
+resulting zero-length version is removed at cleanup. The run log names the affected keys and says so
+(<code>*** WARNING: n SCD2 version(s) have identical effective and expiry timestamps … Affected
+RECORD_KEY_HASH values: …</code>); set a <em>Version Order Expression</em> on the step to break the tie. Two changes
+for the same key <strong>at different timestamps</strong> in one batch are versioned normally and do not warn.</p>
+<p><strong>Initial Dimension Key Value</strong> (all platforms except ClickHouse) is the offset the surrogate keys
+start <em>after</em>: with the default <code>10001</code>, the first key issued to an empty target is <code>10002</code>.</p>
+</blockquote>
 <hr />
 <h2 id="platform-specific-steps">Platform-specific steps<a class="headerlink" href="#platform-specific-steps" title="Permanent link">&para;</a></h2>
 <p>Each platform has its own <strong>load target</strong> (<code>JdbcTarget&lt;Platform&gt;</code>) and, in some cases, a staging/file step. Same <em>pattern</em>, per-platform implementation.</p>

@@ -1823,7 +1823,7 @@ omitted, and secrets (password / private-key / token) are never printed.</p>
 </tr>
 <tr>
 <td><code>$BATCH_HIGHDATE</code></td>
-<td>Sentinel far-future date <code>9999-12-31</code> (SCD2 open-ended end date).</td>
+<td>Sentinel far-future date <code>9999-12-31</code> (SCD2 open-ended end date). The variable is <code>9999-12-31</code> on every platform; the <strong>ClickHouse</strong> SCD2 step nevertheless stamps its current rows <code>2099-12-31 23:59:59</code>, because ClickHouse <code>DateTime</code> ends in 2106 — see <a href="../UG-STEPS/#mpp-common-steps">SCD2</a>.</td>
 </tr>
 </tbody>
 </table>

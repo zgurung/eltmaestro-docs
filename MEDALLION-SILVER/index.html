@@ -1537,7 +1537,7 @@
 </tr>
 </tbody>
 </table>
-<p>SCD steps detect change via the platform's hash template (<code>$HASH_TEMPLATE</code> / <code>$HASH_RETURNS</code> / <code>$HASH_EXPRESSION</code>, e.g. <code>NVL(MD5($ARG::TEXT),'')</code>) — only rows whose hash changed are versioned, so reruns are stable.</p>
+<p>SCD steps detect change via the platform's hash template (<code>$HASH_TEMPLATE</code> / <code>$HASH_RETURNS</code> / <code>$HASH_EXPRESSION</code>, e.g. <code>NVL(MD5($ARG::TEXT),'')</code>) — only rows whose hash changed are versioned, so reruns are stable. ClickHouse is the exception: its SCD2 hashes with its own per-column MD5 formula, versioned per step (<code>hashVersion</code>), and keeps a history ledger beside the target — see the ClickHouse note under <a href="../UG-STEPS/#mpp-common-steps">SCD2 in the step reference</a>.</p>
 <h2 id="upsert--merge-into-silver">Upsert / merge into Silver<a class="headerlink" href="#upsert--merge-into-silver" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
