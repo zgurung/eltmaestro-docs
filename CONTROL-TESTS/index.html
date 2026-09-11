@@ -1232,6 +1232,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#a-dropped-connection-is-retried-once" class="md-nav__link">
+    <span class="md-ellipsis">
+      A dropped connection is retried once
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#code-map" class="md-nav__link">
     <span class="md-ellipsis">
       Code map
@@ -1531,6 +1540,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#a-dropped-connection-is-retried-once" class="md-nav__link">
+    <span class="md-ellipsis">
+      A dropped connection is retried once
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#code-map" class="md-nav__link">
     <span class="md-ellipsis">
       Code map
@@ -1814,6 +1832,28 @@ call these functions by name.</p>
 <p>For the rollup, the honest test is a parent whose children are only partly evaluated: it must come
 back <code>NULL</code>, not green, and its <code>expected_value</code> must equal the number of <strong>declared</strong> children.</p>
 <hr />
+<h2 id="a-dropped-connection-is-retried-once">A dropped connection is retried once<a class="headerlink" href="#a-dropped-connection-is-retried-once" title="Permanent link">&para;</a></h2>
+<p>Both MMS control-test failures of September 2026 (2 Sept: a test failed between two that passed
+on the same connection in the same second; 10 Sept: a test wrote its expected value and never
+wrote the actual, and the batch hung for three hours) were the pooled Redshift connection
+failing <strong>under</strong> the query, not the query. Since 2026-09-11 (<code>runControlTest</code>):</p>
+<ul>
+<li>a control-test query that dies of a transport-level failure marks the connection broken,
+  closes it, re-connects and runs the same query <strong>once more</strong>, logging
+  <code>Control test query failed on a dropped connection; re-connecting and retrying once</code>;</li>
+<li>any other failure (bad SQL, permissions, no rows) is not retried and fails the step as before;</li>
+<li>the step holds its connection for <strong>both</strong> the expected and the actual query and releases it
+  once, in its own <code>finally</code> — the earlier release inside <code>runControlTest</code> is gone. That inner
+  release was the double-release that let a parallel step onto the same socket (see
+  ENGINE.md, <em>JDBC socket timeout and broken-connection handling</em>).</li>
+</ul>
+<p>Variables in control-test SQL: the expected and actual queries go through the same
+<code>getVarData</code> resolution as every other SQL step, so <code>$BATCH_START_DATA_VALIDITY_TIMESTAMP</code>,
+<code>$BATCH_END_DATA_VALIDITY_TIMESTAMP</code> and the other run-history variables (VARIABLES.md) can
+be used directly — quote them, they resolve to bare <code>yyyy-MM-dd HH:mm:ss</code> text. They are set
+once per run, so a source count bounded with <code>&lt; '$BATCH_END_DATA_VALIDITY_TIMESTAMP'</code> sees the
+same window the extract used, even if rows arrived in the source after the pull. The editor's
+<strong>Test</strong> button sends the raw SQL and will fail on a variable; the runtime resolves it.</p>
 <h2 id="code-map">Code map<a class="headerlink" href="#code-map" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

@@ -1553,6 +1553,35 @@
 <li><strong>Connection type</strong> — pick the storage/provider type: <strong>Aws S3</strong>, <strong>Azure Blob</strong>, <strong>HDFS</strong>, <strong>LocalFS</strong>, or <strong>JDBC</strong>. The type drives the parameter rows below.</li>
 <li><strong>Parameters</strong> — fill the type-specific name/value rows.</li>
 </ol>
+<p><strong>Edit</strong> opens the same editor on an existing connection. The type is fixed; the parameters and,
+since client 2.5.7, the <strong>name</strong> can be changed.</p>
+<h3 id="renaming-a-cloud-connection">Renaming a cloud connection<a class="headerlink" href="#renaming-a-cloud-connection" title="Permanent link">&para;</a></h3>
+<p>Unlike a database connection, which jobs reference by an internal id, a cloud connection is
+referenced <strong>by its name</strong> — in the S3 connection argument of Redshift loader steps, in the
+connection element of Spark export/loader steps, and in every <code>$cloud.&lt;NAME&gt;.&lt;param&gt;</code> variable
+written into job SQL. The name is also the key of the permission rows that decide who sees the
+connection. So a rename is a cascade, and the editor does it for you:</p>
+<ol>
+<li>It reads every deployed workflow and lists the ones that reference the old name, with the
+   step and the kind of reference for each, and the number of permission rows that will move.</li>
+<li>You confirm. Nothing has been changed yet.</li>
+<li>The referencing workflows are rewritten and re-saved (each gets a change-history comment
+   naming the rename), <strong>then</strong> the connection row is renamed, <strong>then</strong> the permission rows are
+   moved. Workflows first, on purpose: if anything stops part-way, the connection still exists
+   under its old name and every workflow points at a name that resolves. Rename again to finish;
+   the scan only finds what is left.</li>
+</ol>
+<p>The rename is refused up front if the new name already exists, or if any referencing workflow
+is open (locked) in another session — close it there first.</p>
+<p><strong>Why rename at all:</strong> to give the same connection the same Maestro name in Dev, QA and Prod
+while each points at its own bucket. With identical names, workflow XML promotes between
+environments unchanged (see CICD-WORKFLOW-PROMOTION-PROPOSAL.md).</p>
+<blockquote>
+<p><strong>Pinned names.</strong> <code>S3_CONNECTION</code>, <code>BLOB_CONNECTION</code> and <code>ELTM_SPARK_DRIVER</code> may be named in
+the server's integrator <code>system.cfg</code> (<code>$OBJECT_STORAGE</code>, the Spark driver). Steps that do not
+name a connection explicitly fall back to that value. The editor warns when you rename one of
+these; update the server config in the same change, or the fallback stops resolving.</p>
+</blockquote>
 <h3 id="setting-up-an-aws-s3-connection">Setting up an Aws S3 connection<a class="headerlink" href="#setting-up-an-aws-s3-connection" title="Permanent link">&para;</a></h3>
 <p>Go to <strong>Administration ▸ General/Cloud Config ▸ Create</strong>, then:</p>
 <ol>

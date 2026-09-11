@@ -1473,6 +1473,7 @@ order; each is idempotent.</p>
 </tr>
 </tbody>
 </table>
+<p>| <code>c4d7af4de</code> | 2026-09-11 | <a href="https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-connection-hang-c4d7af4de.zip">https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-connection-hang-c4d7af4de.zip</a> | 1,213,792 | <code>ef3ebe931383b2aa9914725f3aaa4fc6</code> | A dropped/desynced MPP connection <strong>fails the step instead of hanging the batch</strong>: connection lock ownership, broken-connection eviction, fatal catalog-lookup failure, one control-test retry, <code>ELTM_JDBC_SOCKET_TIMEOUT_SECONDS</code>, nested "still waiting" report. Engine jar only; set the environment variable (README). |</p>
 <blockquote>
 <p>The <code>e45c8bfc5</code> patch re-issues the watermark functions with the new sentinel, so it supersedes the
 database half of <code>6bf74adb4-r2</code>. Read each kit's <code>README.md</code> <strong>before</strong> scheduling — both turn
