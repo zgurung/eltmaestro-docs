@@ -2980,6 +2980,20 @@ without first running the pre-flight assessment — see
 <p><strong>An expected value of zero requires an exact match</strong>, because a percentage of zero is undefined.</p>
 </blockquote>
 <p>Because the Expected and Actual values each carry their <strong>own connection</strong>, one test can reconcile <em>across systems</em> — e.g. a source database against the target warehouse.</p>
+<p><strong>Test names are unique.</strong> The manager refuses to save a test whose name another test already
+carries (<code>A control test named '…' already exists. Pick a different name.</code>), so a test can always
+be identified by name in a step, in the Step Status grid and in the run history. (Client <code>2.5.7</code>;
+before that two tests could share a name.)</p>
+<p><strong>Attaching a test to a workflow.</strong> Drop a <strong>Control Test</strong> step on the canvas and open it: the
+dialog lists every defined test on the left, the step's selected tests on the right — <strong>Add</strong> /
+<strong>Remove</strong> move them across. The dialog and both lists resize with the window, so long test names
+read in full. On <strong>OK</strong> the step takes the <strong>name of the selected test</strong> (the first name plus a
+count when several are selected, e.g. <code>MMS_CT_B_DIFFER_PLUS_2</code>) instead of staying <code>CONTROLTEST</code>, so
+the canvas says what each control-test step checks. Tick <strong>Abort on failure</strong> to fail the workflow
+when a test fails; otherwise the result is recorded and the workflow continues. Variables such as
+<code>$BATCH_END_DATA_VALIDITY_TIMESTAMP</code> resolve inside the test's SQL at run time (see
+<a href="../CONTROL-TESTS/#a-dropped-connection-is-retried-once">CONTROL-TESTS.md</a>); the editor's <strong>Test</strong>
+button does not substitute them.</p>
 <h4 id="meta-profile">Meta Profile<a class="headerlink" href="#meta-profile" title="Permanent link">&para;</a></h4>
 <p><strong>Type</strong> <code>METAPROFILE</code> · <strong>WPF</strong> <code>Steps/CommonTransform/MetaProfile.cs</code> → <code>ColumnProfiler.xaml</code> ("ColumnProfiler")</p>
 <p>Profiles the <strong>columns</strong> of one or more tables — running a set of aggregate <strong>metrics</strong> over every column and recording the results for <strong>data observability</strong> (spotting nulls, blanks, skew, unexpected types, or value drift over time). The step dialog has two tabs.</p>

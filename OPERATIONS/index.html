@@ -1240,6 +1240,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#a-batch-sits-running-for-hours-and-the-console-log-only-repeats-still-waiting" class="md-nav__link">
+    <span class="md-ellipsis">
+      A batch sits RUNNING for hours and the console log only repeats "Still waiting"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#upgrade-left-services-down" class="md-nav__link">
     <span class="md-ellipsis">
       Upgrade left services down
@@ -1721,6 +1730,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#a-batch-sits-running-for-hours-and-the-console-log-only-repeats-still-waiting" class="md-nav__link">
+    <span class="md-ellipsis">
+      A batch sits RUNNING for hours and the console log only repeats "Still waiting"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#upgrade-left-services-down" class="md-nav__link">
     <span class="md-ellipsis">
       Upgrade left services down
@@ -2089,6 +2107,32 @@ $MAESTRO_CONSOLE_LOG_DIR/meta-service.log</code>. If the textbox is empty:
 1. <strong>Reader present?</strong> <code>which show-webserver-log</code> from inside the service process's environment. Lives in <code>MAESTRO_UTILS_DIR</code> (= <code>…/server/utils/</code>), which <code>env_integrator</code> appends to <code>PATH</code>. If missing, the service was launched without sourcing <code>env_integrator</code>.
 2. <strong>Writer and reader agree?</strong> Verify <code>$MAESTRO_CONSOLE_LOG_DIR/meta-service.log</code> is the file Spring Boot is actually writing to. On bare-metal <code>mstart-domain</code> redirects to that exact path. On Docker <code>start-meta-service.sh</code> exports <code>LOGGING_FILE_NAME=$MAESTRO_CONSOLE_LOG_DIR/meta-service.log</code> (08e2f3093 — older images hard-coded <code>/opt/iserver/data/log/meta-service.log</code>, missing the <code>console/</code> subdir, which made the reader exit 1 silently).
 3. <strong>File exists and non-empty?</strong> <code>docker exec eltmaestro ls -la /opt/iserver/data/log/console/meta-service.log</code> (Docker) or <code>ls -la $MAESTRO_CONSOLE_LOG_DIR/meta-service.log</code> (bare-metal). If the file is missing, the launcher didn't set <code>LOGGING_FILE_NAME</code> or the directory wasn't created — see <code>MaestroMeta.ADMIN_SHOW_WEBSERVER_LOG</code> which now surfaces stderr to the WPF caller on empty stdout (08e2f3093), so future drift of the same shape shows the diagnostic in the textbox itself.</p>
+<h3 id="a-batch-sits-running-for-hours-and-the-console-log-only-repeats-still-waiting">A batch sits RUNNING for hours and the console log only repeats "Still waiting"<a class="headerlink" href="#a-batch-sits-running-for-hours-and-the-console-log-only-repeats-still-waiting" title="Permanent link">&para;</a></h3>
+<p>Almost always a database connection that died under a statement — the socket was dropped or the
+wire protocol desynced (Redshift: <code>Unexpected packet type: 0</code>, <code>An I/O error occurred while sending
+to the backend</code>) and the driver is waiting for bytes that will never come. Since server patch
+<code>c4d7af4de</code> (11 Sept 2026) the engine marks such a connection broken and fails the step instead of
+reusing it, control tests retry once on a fresh connection, and the five-minute
+<code>Still waiting for job … Unfinished steps:</code> block names the <strong>inner</strong> step (<code>in &lt;child job&gt;: …</code>), not
+only the <code>JOBSTEP</code> wrapper. What stays in your hands:</p>
+<ol>
+<li><strong>Set <code>ELTM_JDBC_SOCKET_TIMEOUT_SECONDS</code></strong> in the batch user's <code>~/.env_integrator</code> (Docker: inside
+   the container). It puts <code>socketTimeout</code> + <code>tcpKeepAlive</code> on every PostgreSQL-wire connection
+   (Redshift, PostgreSQL, Yellowbrick) and a JDBC network timeout where the driver supports it, so a
+   silent connection fails after N seconds with <code>Read timed out</code>. Unset or <code>0</code> = driver default =
+   wait forever. <strong>Choose it above the longest statement the platform legitimately runs silently</strong>
+   (a large <code>COPY</code> or CTAS sends nothing until it finishes) — 1800 is a sensible starting point for a
+   ten-minute batch. It must be in the file: every launcher sources <code>~/.env_integrator</code>, so a value
+   exported in a shell is overwritten. The Integrator Config tab (above) can edit the file too.
+   Each batch JVM reads it at start; nothing restarts. The first connection of a run logs
+   <code>JDBC socket timeout is &lt;n&gt;s (ELTM_JDBC_SOCKET_TIMEOUT_SECONDS)</code> so you can see it took.</li>
+<li><strong>A batch already wedged</strong> by a run that predates the patch is not rescued by it: stop it from the
+   client (Run ▸ Stop, or the batch's Stop) — the stop matches the batch id in the log — then re-run.</li>
+<li>If you ever see <code>****** JDBC ******: refusing to release connection … locked by [thread]</code> the
+   batch is still correct, but a code path tried to release a connection owned by another thread;
+   send the log — that is the bug class that produced the shared socket.</li>
+</ol>
+<p>Engine detail: ENGINE.md — JDBC socket timeout and broken-connection handling.</p>
 <h3 id="upgrade-left-services-down">Upgrade left services down<a class="headerlink" href="#upgrade-left-services-down" title="Permanent link">&para;</a></h3>
 <p><code>update-server.sh</code> runs <code>mstop-all</code> then <code>mstart-all</code>. If the start phase failed, services stay down. Look at:
 - <code>tail -n 500 /data/iserver/data/log/console/*.log</code>
