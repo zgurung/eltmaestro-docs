@@ -1559,6 +1559,10 @@
 <td>Apache binaries downloaded at first install. Rarely change between releases.</td>
 </tr>
 <tr>
+<td><code>server/pgsql/metadata/integrators/</code></td>
+<td><strong>Your integrator configuration</strong> (<code>system.cfg</code> per platform: <code>$SYSTEM_DEFAULT_DATABASE</code>, <code>$OBJECT_STORAGE</code>, SQL templates …). Since the first release after 17.0.4.451: files you have are kept, files new in the release are added, the previous tree is snapshotted under <code>.backup-&lt;stamp&gt;/.upgrade-&lt;stamp&gt;/</code>, and the upgrade prints every file that differs from the factory and, for <code>system.cfg</code>, each differing key. Before that release this tree was deleted and re-copied from the factory with no backup.</td>
+</tr>
+<tr>
 <td><code>~/.env_integrator</code></td>
 <td>Operator-tuned environment file.</td>
 </tr>
@@ -1619,7 +1623,7 @@
 <li>Wait briefly (3 s) for processes to settle</li>
 <li>Extract the new tarball into a <code>mktemp -d</code> staging area</li>
 <li><code>rsync</code>-style swap of the "replaced" paths from the staging tree into <code>/data/iserver/</code></li>
-<li><strong>Refresh the runtime integrator metadata</strong> — copy the new <code>metadata/integrators</code> into <code>$PGDIR/metadata</code> (the engine reads the <strong>runtime</strong> copy, not the factory), so updated <code>system.cfg</code> / new <code>$SYSTEM_*</code> vars take effect instead of stale config surviving the upgrade</li>
+<li><strong>Merge the runtime integrator metadata</strong> — SQL templates and other non-config files under <code>$PGDIR/metadata</code> are refreshed; <code>integrators/</code> is merged: site files kept, new files added, a snapshot taken first, differences printed (<code>[config]</code> block). New <code>$SYSTEM_*</code> keys the release introduces are <strong>reported, not injected</strong> — add them to your <code>system.cfg</code> if you need them.</li>
 <li>Restart Postgres alone</li>
 <li>Apply any newly-bundled migrations from <code>server/pgsql.factory/migrations/</code></li>
 <li>Start the rest of the stack via <code>mstart-all</code></li>

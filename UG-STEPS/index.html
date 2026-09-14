@@ -3385,6 +3385,13 @@ button does not substitute them.</p>
 <td><strong>Slowly Changing Dimension Type-2</strong> — keeps history via <strong>effective/expiration timestamps</strong> (current row's exp_ts = <code>9999-12-31</code>; <strong>on ClickHouse <code>2099-12-31</code></strong>, because its <code>DateTime</code> type ends in 2106 — by design). Mark each column <strong>M</strong> (match/identity) · <strong>C</strong> (track change) · <strong>X</strong> (loaded but <em>not</em> compared — an X column never triggers a new version), and designate the dim-id / eff-ts / exp-ts columns. On a change it expires the old row and inserts a new current row.</td>
 <td>All MPP (ClickHouse included)</td>
 </tr>
+<tr>
+<td>🟢</td>
+<td>SCD4</td>
+<td><code>SCD4</code></td>
+<td><strong>Slowly Changing Dimension Type-4</strong> — the <code>SCD2</code> step plus a <strong>current table</strong>: every version goes to the <strong>history</strong> table exactly as SCD2 writes it, then the <strong>current</strong> table (same columns) is refreshed to hold one row per business key — the version whose expiry is the high date. Configure it exactly like SCD2; a second dialog then asks for the current table and whether to rebuild it in full on every run (an empty current table is always built in full; otherwise only the keys each run changes are refreshed; a no-change run leaves it alone). The two writes are not one transaction — a run that dies between them leaves the current table one run behind, and the next run repairs it. Available on the platforms SCD2 runs on, ClickHouse included (high date <code>2099-12-31</code> there, as for SCD2). Client 2.5.8 + the matching engine.</td>
+<td></td>
+</tr>
 </tbody>
 </table>
 <blockquote>
@@ -3677,7 +3684,7 @@ start <em>after</em>: with the default <code>10001</code>, the first key issued 
 </tr>
 <tr>
 <td><strong>Historize dimensions</strong></td>
-<td><code>SCD1</code>, <code>SCD2</code></td>
+<td><code>SCD1</code>, <code>SCD2</code>, <code>SCD4</code> (SCD2 history + a current table)</td>
 </tr>
 <tr>
 <td><strong>Quality gate</strong> (Bronze→Silver)</td>
