@@ -1545,6 +1545,61 @@
 <p><img alt="The SSH Connection editor for jenkins@192.168.1.201 with the RSA Private Key File Path set to &quot;null&quot; and an &quot;SSH Test SUCCESS&quot; confirmation — for a password connection the key path must hold a sentinel, not be left blank" src="../images/ssh-connection-test-null.png" /></p>
 <p><strong>An error when you click Save.</strong> Save validates the form first — the <strong>port must be numeric</strong>, and <strong>connection name, host, user, and port are required</strong> (password too, unless <em>Use PEM key</em> is checked). If validation passes but the save still errors, it's almost always a <strong>duplicate connection name</strong> or a server/DB error; the message names the cause. Pick a unique name or fix the flagged field.</p>
 <p><strong>Test appears to hang.</strong> Test <strong>saves the connection, then performs a real SSH/SFTP login from the Maestro server</strong> to the host. If the host is unreachable or the port is blocked, the call <strong>waits until it times out</strong>, so it can look like nothing is happening — give it a few seconds for <strong>SSH Test SUCCESS</strong> or <strong>SSH Test Failed</strong>. If it still fails, confirm from the <strong>Maestro server</strong> (not your workstation) that it can reach the host:port (firewall/routing), that the credentials or key are correct, and — for key auth — that the server's public key is in the remote's <code>authorized_keys</code>.</p>
+<h2 id="migrating-workflows-between-environments-export--import">Migrating workflows between environments (Export / Import)<a class="headerlink" href="#migrating-workflows-between-environments-export--import" title="Permanent link">&para;</a></h2>
+<p><strong>Administration ▸ Migration ▸ Export Workflow(s)</strong> writes a <code>.eltmx</code> file; <strong>Import Workflow(s)</strong>
+on the target server reads it. Pick the workflows; every workflow they call through a JOBSTEP is
+added automatically. The file carries:</p>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>What</th>
+<th>On import</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Workflows</td>
+<td>the deployed job XML</td>
+<td><strong>replaced</strong></td>
+</tr>
+<tr>
+<td>Job metadata</td>
+<td>type, description, platform</td>
+<td>skipped if the job already exists</td>
+</tr>
+<tr>
+<td>JDBC, SSH and cloud connections</td>
+<td>every connection in the source environment, by name</td>
+<td>skipped if a connection of that name exists — the target's own hosts and credentials stay; a new one arrives with the <em>source's</em> values and must be edited</td>
+</tr>
+<tr>
+<td><strong>Control tests</strong></td>
+<td>every test a CONTROLTEST step in the exported workflows refers to, plus its parents in the control-test tree</td>
+<td><strong>upserted by name</strong> — an existing test's definition, queries, tolerance and connections are replaced, its id and run history kept; a missing test is created with a <strong>local</strong> id</td>
+</tr>
+<tr>
+<td>Control-test tree edges</td>
+<td>parent → child, by name</td>
+<td>created if missing</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Control tests are matched by name, never by id.</strong> Each server draws control-test ids from its
+own sequence, so the same test carries different ids in Dev, QA and Prod. A CONTROLTEST step
+stores both the id and the name; the import rewrites every step's id to the local id of the test
+named beside it, <em>after</em> the tests themselves have been written, and the report lists each
+rewrite (<code>control test 'X': step id 77018 -&gt; local id 2003</code>). Before this (client 2.5.8 / the
+matching server patch) control tests did not travel at all: the promoted job either failed every
+control-test step with <em>At least 1 control test failed to execute</em>, or — if the id happened to
+exist on the target — silently ran a different test and reported green.</p>
+<p><strong>Run the check first.</strong> <em>Check</em> performs the whole import without writing anything and prints
+the same report; an <code>ERROR:</code> line names a step whose test neither exists on the target nor is in
+the file, or a test name that matches more than one row there. Since the expected and actual
+queries name their <strong>connections by name</strong>, a test resolves on the target as long as a connection
+of that name exists — which the connection sections make true, subject to the caveat above.</p>
+<p>Requirements: the importing user must be an administrator; test names must be unique on the
+target (the client refuses duplicates since 2.5.7, but older duplicates may exist).</p>
 <h2 id="general--cloud-connections-s3">General / Cloud connections (S3)<a class="headerlink" href="#general--cloud-connections-s3" title="Permanent link">&para;</a></h2>
 <p>Tab: <strong>General/Cloud Config</strong>. Toolbar: <strong>Create</strong>, <strong>Edit</strong>, <strong>Delete</strong>. This is where object-storage / cloud endpoints live — e.g. the <strong>S3 connection</strong> the Redshift file loader stages to.</p>
 <p><strong>Create</strong> opens the Cloud connection editor:</p>

@@ -1240,6 +1240,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#alerting-without-smtp--the-post-alert-script-and-running-too-long" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alerting without SMTP — the post-alert script, and "running too long"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#a-batch-sits-running-for-hours-and-the-console-log-only-repeats-still-waiting" class="md-nav__link">
     <span class="md-ellipsis">
       A batch sits RUNNING for hours and the console log only repeats "Still waiting"
@@ -1730,6 +1739,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#alerting-without-smtp--the-post-alert-script-and-running-too-long" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alerting without SMTP — the post-alert script, and "running too long"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#a-batch-sits-running-for-hours-and-the-console-log-only-repeats-still-waiting" class="md-nav__link">
     <span class="md-ellipsis">
       A batch sits RUNNING for hours and the console log only repeats "Still waiting"
@@ -2107,6 +2125,35 @@ $MAESTRO_CONSOLE_LOG_DIR/meta-service.log</code>. If the textbox is empty:
 1. <strong>Reader present?</strong> <code>which show-webserver-log</code> from inside the service process's environment. Lives in <code>MAESTRO_UTILS_DIR</code> (= <code>…/server/utils/</code>), which <code>env_integrator</code> appends to <code>PATH</code>. If missing, the service was launched without sourcing <code>env_integrator</code>.
 2. <strong>Writer and reader agree?</strong> Verify <code>$MAESTRO_CONSOLE_LOG_DIR/meta-service.log</code> is the file Spring Boot is actually writing to. On bare-metal <code>mstart-domain</code> redirects to that exact path. On Docker <code>start-meta-service.sh</code> exports <code>LOGGING_FILE_NAME=$MAESTRO_CONSOLE_LOG_DIR/meta-service.log</code> (08e2f3093 — older images hard-coded <code>/opt/iserver/data/log/meta-service.log</code>, missing the <code>console/</code> subdir, which made the reader exit 1 silently).
 3. <strong>File exists and non-empty?</strong> <code>docker exec eltmaestro ls -la /opt/iserver/data/log/console/meta-service.log</code> (Docker) or <code>ls -la $MAESTRO_CONSOLE_LOG_DIR/meta-service.log</code> (bare-metal). If the file is missing, the launcher didn't set <code>LOGGING_FILE_NAME</code> or the directory wasn't created — see <code>MaestroMeta.ADMIN_SHOW_WEBSERVER_LOG</code> which now surfaces stderr to the WPF caller on empty stdout (08e2f3093), so future drift of the same shape shows the diagnostic in the textbox itself.</p>
+<h3 id="alerting-without-smtp--the-post-alert-script-and-running-too-long">Alerting without SMTP — the post-alert script, and "running too long"<a class="headerlink" href="#alerting-without-smtp--the-post-alert-script-and-running-too-long" title="Permanent link">&para;</a></h3>
+<p>Every master batch ends by raising its alert through one path, in this order of precedence: a
+<strong>Bell</strong> step in the workflow, else an SMTP alert row for the job (Administration ▸ Workflow
+Configuration ▸ Email Alerts), else the script named by <strong><code>ELTM_POST_ALERT_SCRIPT</code></strong> in the
+batch user's <code>~/.env_integrator</code>. Adding a Bell step or an SMTP alert setting to a workflow
+therefore silently disables the script for that workflow.</p>
+<p>The script is called with three positional arguments and nothing else:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>$ELTM_POST_ALERT_SCRIPT  &lt;BATCH_NAME&gt;  &lt;BATCH_RUN_NUMBER&gt;  &lt;STATUS&gt;
+</code></pre></div>
+<ul>
+<li><code>BATCH_NAME</code> is the <strong>deployed file name</strong>, not the <code>&lt;jobName&gt;</code> inside the XML.</li>
+<li><code>BATCH_RUN_NUMBER</code> joins to <code>batch_run_num</code> in <code>v_batch_run_status</code>, so the script can look
+  up which step failed.</li>
+<li><code>STATUS</code> is one of <code>COMPLETE</code>, <code>COMPLETE_OVERRIDE</code>, <code>FAILED</code>, <code>SKIPPED</code>, <code>TERMINATED</code>, …, or
+  <strong><code>RUNNING_TOO_LONG</code></strong> (below). <code>COMPLETE_OVERRIDE</code> is a success: match <code>*COMPLETE*</code>, never
+  <code>== COMPLETE</code>, or you raise false incidents.</li>
+<li><strong>The script must <code>exit 0</code>.</strong> On any other exit code the engine discards everything the script
+  printed and writes a Java stack trace into the workflow console log instead. Side effects made
+  before the exit still happen.</li>
+<li>Its stdout lands in the workflow console log, so the alert is visible under Runtime &amp; Logs
+  without a mail server. Child workflows inside a JOBSTEP spine do not fire it; the spine does.</li>
+</ul>
+<p><strong>Running too long.</strong> Set <strong><code>ELTM_BATCH_RUNNING_ALERT_MINUTES</code></strong> (same file) above the batch's
+normal duration with headroom — 60 for a ten-minute batch. When a batch has been RUNNING longer
+than that, the engine raises the alert path above <strong>once</strong>, with status <code>RUNNING_TOO_LONG</code>, and
+the batch keeps running; the console log carries the unfinished steps at that moment. Unset or
+<code>0</code> is off. An SMTP alert row set to fail-only or all-states sends the mail; the script sees the
+status and can page whoever is on call. The first batch after the change logs nothing new unless
+it actually runs long — there is no per-run confirmation line for this setting.</p>
 <h3 id="a-batch-sits-running-for-hours-and-the-console-log-only-repeats-still-waiting">A batch sits RUNNING for hours and the console log only repeats "Still waiting"<a class="headerlink" href="#a-batch-sits-running-for-hours-and-the-console-log-only-repeats-still-waiting" title="Permanent link">&para;</a></h3>
 <p>Almost always a database connection that died under a statement — the socket was dropped or the
 wire protocol desynced (Redshift: <code>Unexpected packet type: 0</code>, <code>An I/O error occurred while sending

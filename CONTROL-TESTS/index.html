@@ -1241,6 +1241,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#control-tests-travel-with-the-workflows-migration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Control tests travel with the workflows (migration)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#code-map" class="md-nav__link">
     <span class="md-ellipsis">
       Code map
@@ -1543,6 +1552,15 @@
   <a href="#a-dropped-connection-is-retried-once" class="md-nav__link">
     <span class="md-ellipsis">
       A dropped connection is retried once
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#control-tests-travel-with-the-workflows-migration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Control tests travel with the workflows (migration)
     </span>
   </a>
   
@@ -1854,6 +1872,21 @@ be used directly — quote them, they resolve to bare <code>yyyy-MM-dd HH:mm:ss<
 once per run, so a source count bounded with <code>&lt; '$BATCH_END_DATA_VALIDITY_TIMESTAMP'</code> sees the
 same window the extract used, even if rows arrived in the source after the pull. The editor's
 <strong>Test</strong> button sends the raw SQL and will fail on a variable; the runtime resolves it.</p>
+<h2 id="control-tests-travel-with-the-workflows-migration">Control tests travel with the workflows (migration)<a class="headerlink" href="#control-tests-travel-with-the-workflows-migration" title="Permanent link">&para;</a></h2>
+<p>Since 2026-09-14 the Migration Export collects every test a CONTROLTEST step refers to (plus its
+parents in the tree) and the Import upserts them <strong>by name</strong>, creating missing ones with a local
+id and rewriting each step's <code>&lt;controlTestId&gt;</code> to that local id. Two facts drove the design:</p>
+<ul>
+<li><strong>Ids are per environment.</strong> <code>seq_control_test_id</code> starts at 2001 everywhere, so an exported id
+  is meaningless on the target and can collide with an unrelated test — which would then run the
+  wrong queries under the right name and report green. The name is what the engine already uses
+  for every result write (<code>set_expected_test_value_by_test_nm</code>, <code>get_control_test_status_by_nm</code>);
+  only <code>ControlTestStepMeta.initialize()</code> looks the definition up by id, hence the rewrite.</li>
+<li><strong>The query columns hold base64.</strong> The client encodes <code>expected_value_query</code> /
+  <code>actual_value_query</code> on save and the engine decodes on run; the export carries them decoded, so
+  the import re-encodes. Storing them plain makes every migrated test <em>record NO result rows</em>.</li>
+</ul>
+<p>Details for operators: <a href="../UG-ADMIN/#migrating-workflows-between-environments-export--import">UG-ADMIN.md — Migrating workflows between environments</a>.</p>
 <h2 id="code-map">Code map<a class="headerlink" href="#code-map" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
