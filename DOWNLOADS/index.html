@@ -1390,8 +1390,8 @@ Migration Export collects every test a CONTROLTEST step refers to (plus its pare
 and Import on the target writes them by name, issues local ids and rewrites the step ids to match — the
 walkthrough is in <a href="../UG-ADMIN/#migrating-workflows-between-environments-export--import">Administration</a>. It also
 adds the <strong>SCD4</strong> step (SCD2 history table plus a current table, one step; see <a href="../UG-STEPS/">Steps</a>). Needs
-server patch <code>604cecae4</code> (below) for the import side and the SCD4 engine half; SCD4 on Redshift is a preview
-until the live-cluster pass is confirmed.</p>
+server patch <code>604cecae4</code> (below) for the import side and the SCD4 engine half. SCD4 is verified end to end on
+ClickHouse and Redshift.</p>
 <p><strong>Desktop client <code>2.5.7.20260911</code></strong> (11 September 2026) lets an administrator <strong>rename a cloud / S3
 connection</strong> — the editor rewrites every workflow that references the old name, then renames the row and
 moves its permission rows, so the same connection can carry the same Maestro name in Dev, QA and Prod and
@@ -1489,7 +1489,7 @@ order; each is idempotent.</p>
 </tbody>
 </table>
 <p>| <code>c4d7af4de</code> | 2026-09-11 | <a href="https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-connection-hang-c4d7af4de.zip">https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-connection-hang-c4d7af4de.zip</a> | 1,213,792 | <code>ef3ebe931383b2aa9914725f3aaa4fc6</code> | A dropped/desynced MPP connection <strong>fails the step instead of hanging the batch</strong>: connection lock ownership, broken-connection eviction, fatal catalog-lookup failure, one control-test retry, <code>ELTM_JDBC_SOCKET_TIMEOUT_SECONDS</code>, nested "still waiting" report. Engine jar only; set the environment variable (README). |
-| <code>604cecae4</code> | 2026-09-15 | <a href="https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-migration-alert-scd4-604cecae4.zip">https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-migration-alert-scd4-604cecae4.zip</a> | 44,592,617 | <code>24e6e589b7da5fcf609569bfa59a197f</code> | <strong>Control tests migrate with the workflows</strong> (meta-service import half — pair with client 2.5.8), the <strong>"running too long" alert</strong> (<code>ELTM_BATCH_RUNNING_ALERT_MINUTES</code>, status <code>RUNNING_TOO_LONG</code>), the <strong>SCD4</strong> step (engine half; Redshift flavour a preview), the migration importer fix for empty <em>created by</em>, and everything in <code>c4d7af4de</code>. Engine + meta-service jars; <strong><code>apply.sh</code> restarts the meta-service</strong> (~5 s). |</p>
+| <code>604cecae4</code> | 2026-09-15 | <a href="https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-migration-alert-scd4-604cecae4.zip">https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-migration-alert-scd4-604cecae4.zip</a> | 44,592,617 | <code>24e6e589b7da5fcf609569bfa59a197f</code> | <strong>Control tests migrate with the workflows</strong> (meta-service import half — pair with client 2.5.8), the <strong>"running too long" alert</strong> (<code>ELTM_BATCH_RUNNING_ALERT_MINUTES</code>, status <code>RUNNING_TOO_LONG</code>), the <strong>SCD4</strong> step (engine half; verified on ClickHouse and Redshift), the migration importer fix for empty <em>created by</em>, and everything in <code>c4d7af4de</code>. Engine + meta-service jars; <strong><code>apply.sh</code> restarts the meta-service</strong> (~5 s). |</p>
 <blockquote>
 <p>The <code>e45c8bfc5</code> patch re-issues the watermark functions with the new sentinel, so it supersedes the
 database half of <code>6bf74adb4-r2</code>. Read each kit's <code>README.md</code> <strong>before</strong> scheduling — both turn
