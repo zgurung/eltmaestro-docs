@@ -1546,9 +1546,46 @@
 <p><strong>An error when you click Save.</strong> Save validates the form first — the <strong>port must be numeric</strong>, and <strong>connection name, host, user, and port are required</strong> (password too, unless <em>Use PEM key</em> is checked). If validation passes but the save still errors, it's almost always a <strong>duplicate connection name</strong> or a server/DB error; the message names the cause. Pick a unique name or fix the flagged field.</p>
 <p><strong>Test appears to hang.</strong> Test <strong>saves the connection, then performs a real SSH/SFTP login from the Maestro server</strong> to the host. If the host is unreachable or the port is blocked, the call <strong>waits until it times out</strong>, so it can look like nothing is happening — give it a few seconds for <strong>SSH Test SUCCESS</strong> or <strong>SSH Test Failed</strong>. If it still fails, confirm from the <strong>Maestro server</strong> (not your workstation) that it can reach the host:port (firewall/routing), that the credentials or key are correct, and — for key auth — that the server's public key is in the remote's <code>authorized_keys</code>.</p>
 <h2 id="migrating-workflows-between-environments-export--import">Migrating workflows between environments (Export / Import)<a class="headerlink" href="#migrating-workflows-between-environments-export--import" title="Permanent link">&para;</a></h2>
-<p><strong>Administration ▸ Migration ▸ Export Workflow(s)</strong> writes a <code>.eltmx</code> file; <strong>Import Workflow(s)</strong>
-on the target server reads it. Pick the workflows; every workflow they call through a JOBSTEP is
-added automatically. The file carries:</p>
+<p>Workflows move between servers — Dev to QA, QA to Prod, one client site to another — through one
+file. <strong>Administration ▸ Migration ▸ Export Workflow(s)</strong> on the source writes a <code>.eltmx</code>;
+<strong>Administration ▸ Migration ▸ Import Workflow(s)</strong> on the target reads it. Since client 2.5.8 and
+server patch <code>604cecae4</code> the file also carries the <strong>control tests</strong> the exported workflows use, so
+a promoted workflow's CONTROLTEST steps run the same tests on the target. Requirements: client
+2.5.8 or later on the exporting workstation, the matching meta-service on the importing server,
+and an administrator login for the import.</p>
+<h3 id="step-by-step">Step by step<a class="headerlink" href="#step-by-step" title="Permanent link">&para;</a></h3>
+<p><strong>On the source server</strong></p>
+<ol>
+<li>Log in with the client and open <strong>Administration ▸ Migration ▸ Export Workflow(s)</strong>.</li>
+<li><em>Browse..</em> opens <em>Select Workflow(s)</em>. Type part of a name in the search box, select one or
+   more workflows, <em>Add</em>, then <em>OK</em>. Every workflow they call through a JOBSTEP is added
+   automatically.</li>
+<li>The export window now has one tab per section. <strong>Workflows</strong> lists what will be written;
+   <strong>Control Tests</strong> lists every test a CONTROLTEST step in those workflows refers to, plus its
+   parents in the control-test tree; <strong>JDBC</strong>, <strong>SSH</strong> and <strong>General/Cloud</strong> list <em>every</em>
+   connection of the source (there is no per-connection pick); <strong>Job Metadata</strong> the workflow
+   descriptions. If the Control Tests tab is empty although a step uses a test, the client is older
+   than 2.5.8.</li>
+<li><em>Export</em> and save the <code>.eltmx</code>. The confirmation counts what went in:
+   <code>1 workflow(s) / 13 jdbc connection(s) / 2 control test(s) / …</code>.</li>
+</ol>
+<p><strong>On the target server</strong></p>
+<ol>
+<li>Log in to the target with the same client and open <strong>Administration ▸ Migration ▸ Import
+   Workflow(s)</strong>. <em>Browse..</em> the <code>.eltmx</code>; the tabs show what the file holds.</li>
+<li><strong>Run Migration Check.</strong> This performs the whole import without writing anything and shows the
+   report (below). Read it to the end. Fix every <code>ERROR:</code> line before going on.</li>
+<li><strong>Import.</strong> The same report appears with <code>Migration SUCCESSFUL</code> per object. An
+   <code>ATTENTION: ERROR line(s) above</code> footer means at least one object did not migrate — find the
+   <code>ERROR:</code> lines.</li>
+<li>Open each JDBC connection the report marked <code>does not exist → migrate</code> and point it at the
+   <strong>target's</strong> host, database and credentials. A connection the target did not have arrives with
+   the <em>source's</em> values; one the target already had is skipped and keeps its own.</li>
+<li>Run the workflow once and look in its console log for <code>Written Expected Value</code> and
+   <code>Written Actual Value</code> for each test. Results start collecting on the target from this run;
+   run history does not travel.</li>
+</ol>
+<h3 id="what-the-file-carries">What the file carries<a class="headerlink" href="#what-the-file-carries" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -1561,22 +1598,22 @@ added automatically. The file carries:</p>
 <tr>
 <td>Workflows</td>
 <td>the deployed job XML</td>
-<td><strong>replaced</strong></td>
+<td><strong>replaced</strong> (the report says <code>exists → replace</code>)</td>
 </tr>
 <tr>
 <td>Job metadata</td>
 <td>type, description, platform</td>
-<td>skipped if the job already exists</td>
+<td>skipped if the workflow already exists</td>
 </tr>
 <tr>
 <td>JDBC, SSH and cloud connections</td>
 <td>every connection in the source environment, by name</td>
-<td>skipped if a connection of that name exists — the target's own hosts and credentials stay; a new one arrives with the <em>source's</em> values and must be edited</td>
+<td>skipped if a connection of that name exists — the target's own hosts and credentials stay; a new one arrives with the <em>source's</em> values and must be edited (step 8)</td>
 </tr>
 <tr>
 <td><strong>Control tests</strong></td>
-<td>every test a CONTROLTEST step in the exported workflows refers to, plus its parents in the control-test tree</td>
-<td><strong>upserted by name</strong> — an existing test's definition, queries, tolerance and connections are replaced, its id and run history kept; a missing test is created with a <strong>local</strong> id</td>
+<td>every test a CONTROLTEST step in the exported workflows refers to, plus its parents in the tree</td>
+<td><strong>written by name</strong> — an existing test's definition, queries, tolerance and connections are replaced, its id and run history kept; a missing test is created with a <strong>local</strong> id</td>
 </tr>
 <tr>
 <td>Control-test tree edges</td>
@@ -1585,21 +1622,76 @@ added automatically. The file carries:</p>
 </tr>
 </tbody>
 </table>
-<p><strong>Control tests are matched by name, never by id.</strong> Each server draws control-test ids from its
-own sequence, so the same test carries different ids in Dev, QA and Prod. A CONTROLTEST step
-stores both the id and the name; the import rewrites every step's id to the local id of the test
-named beside it, <em>after</em> the tests themselves have been written, and the report lists each
-rewrite (<code>control test 'X': step id 77018 -&gt; local id 2003</code>). Before this (client 2.5.8 / the
-matching server patch) control tests did not travel at all: the promoted job either failed every
-control-test step with <em>At least 1 control test failed to execute</em>, or — if the id happened to
-exist on the target — silently ran a different test and reported green.</p>
-<p><strong>Run the check first.</strong> <em>Check</em> performs the whole import without writing anything and prints
-the same report; an <code>ERROR:</code> line names a step whose test neither exists on the target nor is in
-the file, or a test name that matches more than one row there. Since the expected and actual
-queries name their <strong>connections by name</strong>, a test resolves on the target as long as a connection
-of that name exists — which the connection sections make true, subject to the caveat above.</p>
-<p>Requirements: the importing user must be an administrator; test names must be unique on the
-target (the client refuses duplicates since 2.5.7, but older duplicates may exist).</p>
+<h3 id="control-tests-are-matched-by-name-never-by-id">Control tests are matched by name, never by id<a class="headerlink" href="#control-tests-are-matched-by-name-never-by-id" title="Permanent link">&para;</a></h3>
+<p>Each server draws control-test ids from its own sequence (<code>seq_control_test_id</code>, starting at 2001
+everywhere), so the same test is 2004 on Dev and 2002 on QA. A CONTROLTEST step stores both the
+id and the name; the import writes the tests first, then rewrites every step's id to the local id
+of the test named beside it, and the report lists each rewrite. Before this, control tests did not
+travel at all: the promoted workflow either failed every control-test step with <em>At least 1
+control test failed to execute</em>, or — if the id happened to exist on the target — silently ran a
+different test and reported green.</p>
+<p>A test travels only if a CONTROLTEST step in an exported workflow refers to it, or it is a parent
+of such a test. A test on no step is not in the file; create it on the target by hand.</p>
+<h3 id="reading-the-report">Reading the report<a class="headerlink" href="#reading-the-report" title="Permanent link">&para;</a></h3>
+<p>Under <em>Control Test(s)</em>, per test:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[MIG_UI_USERCOUNT]
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>-does not exist
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>-migration mode : migrate (new local id from seq_control_test_id)
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>-post migration action : verify the expected/actual CONNECTION names exist here: MMS_E2E / MMS_E2E
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>-Migration SUCCESSFUL (created local id 2002)
+</code></pre></div>
+<p>or, when the target already has a test of that name:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>-exists (local id 2002)
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>-migration mode : replace (definition, queries, tolerance, connections; id and run history kept)
+</code></pre></div>
+<p>Under <em>Workflow(s)</em>, per workflow, one line per control-test step and a total:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>-control test 'MIG_UI_USERCOUNT': step id 2004 -&gt; local id 2002
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>-control-test steps: 2 id(s) rewritten, 0 already local, 0 unresolved
+</code></pre></div>
+<p><code>already local</code> counts steps whose id is already right for this server (re-importing a workflow
+that came from here). <code>unresolved</code> must be 0. The check phrases the same lines as
+<code>step id 2004 -&gt; a new local id (the test is created by this migration)</code> and <code>would be rewritten</code>.</p>
+<p><code>ERROR:</code> lines and what they mean:</p>
+<table>
+<thead>
+<tr>
+<th>Line</th>
+<th>Cause</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>control test 'X' (step id N) does not exist here -- export it with the workflow or create it first</code></td>
+<td>the step names a test that is not on the target and not in the file: deleted on the source after the export, or the file came from a client older than 2.5.8</td>
+<td>create the test on the target, or re-export with 2.5.8</td>
+</tr>
+<tr>
+<td><code>more than one control test named 'X' exists here -- rename one of them, then migrate again</code> (and, on the step, <code>matches MORE THAN ONE test here</code>)</td>
+<td>duplicate names on the target (older clients allowed them)</td>
+<td>rename one of them on the target, migrate again</td>
+</tr>
+<tr>
+<td><code>tree edge P -&gt; C: parent not found here (or ambiguous); edge skipped</code></td>
+<td>same causes, for the tree</td>
+<td>as above; the tests themselves still migrated</td>
+</tr>
+</tbody>
+</table>
+<h3 id="things-to-know">Things to know<a class="headerlink" href="#things-to-know" title="Permanent link">&para;</a></h3>
+<ul>
+<li>The connection sections make the <em>names</em> the tests refer to exist on the target, which is what
+  a test needs to resolve; the <em>values</em> behind a new connection are the source's until you edit
+  them (step 8). The <code>post migration action</code> line on each test reminds you which two names to check.</li>
+<li>Older client + new server: everything works as before, but only client 2.5.8 puts control tests
+  in the file. New client + old server: the import ignores the control-test section and the tests
+  do not arrive — patch the server first.</li>
+<li>Test names must be unique on the target. The client refuses duplicates since 2.5.7; older
+  duplicates make the check report the name as ambiguous.</li>
+<li>Verified between two servers on 2026-09-15 (tests built in the client on one server, exported,
+  imported on a second where the sequence issued different ids, the workflow run there with both
+  tests writing results — TEST-LOG in the engine test harness).</li>
+</ul>
 <h2 id="general--cloud-connections-s3">General / Cloud connections (S3)<a class="headerlink" href="#general--cloud-connections-s3" title="Permanent link">&para;</a></h2>
 <p>Tab: <strong>General/Cloud Config</strong>. Toolbar: <strong>Create</strong>, <strong>Edit</strong>, <strong>Delete</strong>. This is where object-storage / cloud endpoints live — e.g. the <strong>S3 connection</strong> the Redshift file loader stages to.</p>
 <p><strong>Create</strong> opens the Cloud connection editor:</p>

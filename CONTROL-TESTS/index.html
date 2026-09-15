@@ -1873,9 +1873,38 @@ once per run, so a source count bounded with <code>&lt; '$BATCH_END_DATA_VALIDIT
 same window the extract used, even if rows arrived in the source after the pull. The editor's
 <strong>Test</strong> button sends the raw SQL and will fail on a variable; the runtime resolves it.</p>
 <h2 id="control-tests-travel-with-the-workflows-migration">Control tests travel with the workflows (migration)<a class="headerlink" href="#control-tests-travel-with-the-workflows-migration" title="Permanent link">&para;</a></h2>
-<p>Since 2026-09-14 the Migration Export collects every test a CONTROLTEST step refers to (plus its
-parents in the tree) and the Import upserts them <strong>by name</strong>, creating missing ones with a local
-id and rewriting each step's <code>&lt;controlTestId&gt;</code> to that local id. Two facts drove the design:</p>
+<p>To move control tests from one environment to another, export the <strong>workflows that use them</strong>:
+<strong>Administration ▸ Migration ▸ Export Workflow(s)</strong> (client 2.5.8 or later) collects every test a
+CONTROLTEST step in the exported workflows refers to, plus its parents in the control-test tree, and
+writes them into the <code>.eltmx</code> next to the workflows. <strong>Import Workflow(s)</strong> on the target (server
+patch <code>604cecae4</code> or later) writes the tests <strong>by name</strong>, creating missing ones with a local id and
+replacing existing ones in place, then rewrites each step's <code>&lt;controlTestId&gt;</code> to that local id.
+The operator walkthrough, the report lines and the error table are in
+<a href="../UG-ADMIN/#migrating-workflows-between-environments-export--import">UG-ADMIN.md — Migrating workflows between environments</a>.</p>
+<p>What travels and what does not:</p>
+<table>
+<thead>
+<tr>
+<th>Travels</th>
+<th>Does not travel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>definition, category, type, tolerance, expected and actual queries, the two connection <em>names</em></td>
+<td>run history (<code>control_test_run</code>) — the target starts fresh</td>
+</tr>
+<tr>
+<td>tree edges between tests that travel</td>
+<td>a test no exported step refers to (create it on the target by hand)</td>
+</tr>
+<tr>
+<td>the id <strong>as a hint only</strong> — the target issues its own</td>
+<td>the values behind a connection the target already has (they are kept)</td>
+</tr>
+</tbody>
+</table>
+<p>Two facts drove the design:</p>
 <ul>
 <li><strong>Ids are per environment.</strong> <code>seq_control_test_id</code> starts at 2001 everywhere, so an exported id
   is meaningless on the target and can collide with an unrelated test — which would then run the
@@ -1886,7 +1915,9 @@ id and rewriting each step's <code>&lt;controlTestId&gt;</code> to that local id
   <code>actual_value_query</code> on save and the engine decodes on run; the export carries them decoded, so
   the import re-encodes. Storing them plain makes every migrated test <em>record NO result rows</em>.</li>
 </ul>
-<p>Details for operators: <a href="../UG-ADMIN/#migrating-workflows-between-environments-export--import">UG-ADMIN.md — Migrating workflows between environments</a>.</p>
+<p>Verified between two servers on 2026-09-15: tests built in the client on dev1 (ids 2004/2005),
+exported, imported on a second server where they became 2002/2003, the workflow run there with both
+tests writing results.</p>
 <h2 id="code-map">Code map<a class="headerlink" href="#code-map" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
