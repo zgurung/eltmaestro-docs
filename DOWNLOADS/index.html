@@ -1486,11 +1486,36 @@ order; each is idempotent.</p>
 <td><code>4bb23f5c57cef51ffb60a6544b48f569</code></td>
 <td>Variable-scope fix, <strong>step scope</strong> (never-run step backfills), <strong>run variable overrides</strong> (engine half), first-run sentinel → <code>1970-01-01</code>, control-test rollup fix; tolerance-as-percentage <strong>gated</strong> behind <code>apply-tolerance.sh</code>. Engine jar only — nothing restarts.</td>
 </tr>
+<tr>
+<td><code>c4d7af4de</code></td>
+<td>2026-09-11</td>
+<td><a href="https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-connection-hang-c4d7af4de.zip">https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-connection-hang-c4d7af4de.zip</a></td>
+<td>1,213,792</td>
+<td><code>ef3ebe931383b2aa9914725f3aaa4fc6</code></td>
+<td>A dropped/desynced MPP connection <strong>fails the step instead of hanging the batch</strong>: connection lock ownership, broken-connection eviction, fatal catalog-lookup failure, one control-test retry, <code>ELTM_JDBC_SOCKET_TIMEOUT_SECONDS</code>, nested "still waiting" report. Engine jar only; set the environment variable (README).</td>
+</tr>
+<tr>
+<td><code>604cecae4</code></td>
+<td>2026-09-15</td>
+<td><a href="https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-migration-alert-scd4-604cecae4.zip">https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-migration-alert-scd4-604cecae4.zip</a></td>
+<td>44,592,617</td>
+<td><code>24e6e589b7da5fcf609569bfa59a197f</code></td>
+<td><strong>Control tests migrate with the workflows</strong> (meta-service import half — pair with client 2.5.8), the <strong>"running too long" alert</strong> (<code>ELTM_BATCH_RUNNING_ALERT_MINUTES</code>, status <code>RUNNING_TOO_LONG</code>), the <strong>SCD4</strong> step (engine half; verified on ClickHouse and Redshift), the migration importer fix for empty <em>created by</em>, and everything in <code>c4d7af4de</code>. Engine + meta-service jars; <strong><code>apply.sh</code> restarts the meta-service</strong> (~5 s).</td>
+</tr>
+<tr>
+<td><code>5fc297e46</code></td>
+<td>2026-09-18</td>
+<td><a href="https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-extract-header-5fc297e46.zip">https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-extract-header-5fc297e46.zip</a></td>
+<td>1,219,438</td>
+<td><code>07d22effe48994cd14075e0cd980811e</code></td>
+<td><strong>Stops a large extract silently dropping rows.</strong> The staging files are written in parts (a new part every <code>sizeMB</code>, default 1 GB) but only the first carried a column header, while the folder is read back header-first — so the first data row of every later part was swallowed, roughly <strong>one row per gigabyte</strong>, with every step COMPLETE. Every part now carries its own header. Also adds a <strong>staged row-count check</strong>: the rows the extract read are compared with the rows that reach staging and the step <strong>fails</strong> on a mismatch instead of loading short. Affects parquet / HDFS / Synapse targets. Engine jar only — nothing restarts.</td>
+</tr>
 </tbody>
 </table>
-<p>| <code>c4d7af4de</code> | 2026-09-11 | <a href="https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-connection-hang-c4d7af4de.zip">https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-connection-hang-c4d7af4de.zip</a> | 1,213,792 | <code>ef3ebe931383b2aa9914725f3aaa4fc6</code> | A dropped/desynced MPP connection <strong>fails the step instead of hanging the batch</strong>: connection lock ownership, broken-connection eviction, fatal catalog-lookup failure, one control-test retry, <code>ELTM_JDBC_SOCKET_TIMEOUT_SECONDS</code>, nested "still waiting" report. Engine jar only; set the environment variable (README). |
-| <code>604cecae4</code> | 2026-09-15 | <a href="https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-migration-alert-scd4-604cecae4.zip">https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-migration-alert-scd4-604cecae4.zip</a> | 44,592,617 | <code>24e6e589b7da5fcf609569bfa59a197f</code> | <strong>Control tests migrate with the workflows</strong> (meta-service import half — pair with client 2.5.8), the <strong>"running too long" alert</strong> (<code>ELTM_BATCH_RUNNING_ALERT_MINUTES</code>, status <code>RUNNING_TOO_LONG</code>), the <strong>SCD4</strong> step (engine half; verified on ClickHouse and Redshift), the migration importer fix for empty <em>created by</em>, and everything in <code>c4d7af4de</code>. Engine + meta-service jars; <strong><code>apply.sh</code> restarts the meta-service</strong> (~5 s). |</p>
 <blockquote>
+<p><strong><code>5fc297e46</code> can turn a previously "green" job red.</strong> That is the new row-count check reporting a
+loss that was already happening silently. Keep the message — it names both counts — and raise it
+rather than rolling back.</p>
 <p>The <code>e45c8bfc5</code> patch re-issues the watermark functions with the new sentinel, so it supersedes the
 database half of <code>6bf74adb4-r2</code>. Read each kit's <code>README.md</code> <strong>before</strong> scheduling — both turn
 silent wrong answers into visible failures, and <code>e45c8bfc5</code> will backfill any step that has never
