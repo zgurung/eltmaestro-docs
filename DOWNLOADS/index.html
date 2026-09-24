@@ -1520,8 +1520,9 @@ order; each is idempotent.</p>
 </tr>
 </tbody>
 </table>
+<p>| <code>a4deee1a3</code> | 2026-09-24 | <a href="https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-batch-resilience-a4deee1a3.zip">https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-batch-resilience-a4deee1a3.zip</a> | 44,590,188 | <code>ed5b259f96e2ec18017147e993402823</code> | <strong>Batch resilience.</strong> (1) A step asking for a connection's definition could die because the pooled metadata connection had been closed under it — one step, then its job, then the whole batch; that lookup is now <strong>retried once</strong> on a fresh connection. (2) A step that <strong>cannot be built</strong> when the workflow opens now FAILS the job by name instead of being silently skipped while the job reported COMPLETE. (3) New per-JOBSTEP <strong><code>&lt;continueOnFailure&gt;</code></strong> — a failed job no longer abandons the rest of the batch; the batch is still FAILED. Off by default. (4) A meta-service <strong>login fix</strong>. Engine + meta-service jars; <strong><code>apply.sh</code> restarts the meta-service</strong> (~5 s). |</p>
 <blockquote>
-<p><strong><code>5fc297e46</code> can turn a previously "green" job red.</strong> That is the new row-count check reporting a
+<p><strong><code>5fc297e46</code> and <code>a4deee1a3</code> can turn a previously "green" job red.</strong> That is the new row-count check reporting a
 loss that was already happening silently. Keep the message — it names both counts — and raise it
 rather than rolling back.</p>
 <p>The <code>e45c8bfc5</code> patch re-issues the watermark functions with the new sentinel, so it supersedes the
