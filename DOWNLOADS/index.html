@@ -1510,6 +1510,14 @@ order; each is idempotent.</p>
 <td><code>07d22effe48994cd14075e0cd980811e</code></td>
 <td><strong>Stops a large extract silently dropping rows.</strong> The staging files are written in parts (a new part every <code>sizeMB</code>, default 1 GB) but only the first carried a column header, while the folder is read back header-first — so the first data row of every later part was swallowed, roughly <strong>one row per gigabyte</strong>, with every step COMPLETE. Every part now carries its own header. Also adds a <strong>staged row-count check</strong>: the rows the extract read are compared with the rows that reach staging and the step <strong>fails</strong> on a mismatch instead of loading short. Affects parquet / HDFS / Synapse targets. Engine jar only — nothing restarts.</td>
 </tr>
+<tr>
+<td><code>d02fd13c1</code></td>
+<td>2026-09-24</td>
+<td><a href="https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-wm-timing-d02fd13c1.zip">https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-wm-timing-d02fd13c1.zip</a></td>
+<td>1,218,964</td>
+<td><code>2fdd0772d2e08342f5e5bdfda91e4901</code></td>
+<td><strong>The S3 import stops loading the previous run's folder.</strong> Where a workflow exports to S3 and copies into the warehouse in the <em>same</em> run, the copy step resolved its <code>$WM{…}</code> folder while the workflow was being opened — before the push step had written this run's marker — so it copied the folder the last run left behind: real data, one run stale, every step COMPLETE. It now resolves when the step runs. Also fixes a <strong>first-run failure</strong>: a brand-new export-then-import workflow could not succeed the first time, because the marker does not exist until the push step in that same run creates it. Split export/import workflows were never affected. Engine jar only — nothing restarts.</td>
+</tr>
 </tbody>
 </table>
 <blockquote>
