@@ -1519,18 +1519,18 @@ order; each is idempotent.</p>
 <td><strong>The S3 import stops loading the previous run's folder.</strong> Where a workflow exports to S3 and copies into the warehouse in the <em>same</em> run, the copy step resolved its <code>$WM{…}</code> folder while the workflow was being opened — before the push step had written this run's marker — so it copied the folder the last run left behind: real data, one run stale, every step COMPLETE. It now resolves when the step runs. Also fixes a <strong>first-run failure</strong>: a brand-new export-then-import workflow could not succeed the first time, because the marker does not exist until the push step in that same run creates it. Split export/import workflows were never affected. Engine jar only — nothing restarts.</td>
 </tr>
 <tr>
-<td><code>a4deee1a3</code></td>
+<td><code>ace871799</code></td>
 <td>2026-09-24</td>
-<td><a href="https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-batch-resilience-a4deee1a3.zip">https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-batch-resilience-a4deee1a3.zip</a></td>
-<td>44,590,188</td>
-<td><code>ed5b259f96e2ec18017147e993402823</code></td>
-<td><strong>Batch resilience.</strong> (1) A step asking for a connection's definition could die because the pooled metadata connection had been closed under it — one step, then its job, then the whole batch; that lookup is now <strong>retried once</strong> on a fresh connection. (2) A step that <strong>cannot be built</strong> when the workflow opens now FAILS the job by name instead of being silently skipped while the job reported COMPLETE. (3) New per-JOBSTEP <strong><code>&lt;continueOnFailure&gt;</code></strong> — a failed job no longer abandons the rest of the batch; the batch is still FAILED. Off by default. (4) A meta-service <strong>login fix</strong>. Engine + meta-service jars; <strong><code>apply.sh</code> restarts the meta-service</strong> (~5 s).</td>
+<td><a href="https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-batch-resilience-ace871799.zip">https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-batch-resilience-ace871799.zip</a></td>
+<td>44,593,203</td>
+<td><code>9c5a08265a9adf0af219686be854c6a4</code></td>
+<td><strong>Batch resilience.</strong> (1) A step asking for a connection's definition could die because the pooled metadata connection had been closed under it — one step, then its job, then the whole batch; that lookup is now <strong>retried once</strong> on a fresh connection. (2) A step that <strong>cannot be built</strong> when the workflow opens now FAILS the job by name instead of being silently skipped while the job reported COMPLETE. (3) New per-JOBSTEP <strong><code>&lt;continueOnFailure&gt;</code></strong> — a failed job no longer abandons the rest of the batch; the batch is still FAILED. Off by default. (4) <strong>An added source column no longer breaks an S3 import</strong> — the COPY now names its columns in the parquet's own order, so <code>Spectrum Scan Error / 15007 / incompatible Parquet schema</code> no longer follows a schema change. (5) A meta-service <strong>login fix</strong>. Engine + meta-service jars; <strong><code>apply.sh</code> restarts the meta-service</strong> (~5 s).</td>
 </tr>
 </tbody>
 </table>
 <blockquote>
-<p><strong><code>5fc297e46</code> and <code>a4deee1a3</code> can each turn a previously "green" job red.</strong> <code>5fc297e46</code> adds a
-row-count check that reports a loss which was already happening silently; <code>a4deee1a3</code> refuses to run a
+<p><strong><code>5fc297e46</code> and <code>ace871799</code> can each turn a previously "green" job red.</strong> <code>5fc297e46</code> adds a
+row-count check that reports a loss which was already happening silently; <code>ace871799</code> refuses to run a
 job containing a step that cannot be built, where before that step — and everything after it — was
 skipped while the job reported COMPLETE. In both cases the job was already broken. Keep the message,
 which names the step or the counts, and raise it rather than rolling back.</p>
