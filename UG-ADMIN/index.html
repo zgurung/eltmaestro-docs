@@ -1380,7 +1380,7 @@
 <h1 id="connections--create-these-first">Connections — create these first<a class="headerlink" href="#connections--create-these-first" title="Permanent link">&para;</a></h1>
 <p>Three connection types, one tab each. All follow the same <strong>Create / Edit / Delete</strong> pattern; once saved, a connection is selectable by name in the Job editor.</p>
 <h2 id="database-connections-jdbc">Database connections (JDBC)<a class="headerlink" href="#database-connections-jdbc" title="Permanent link">&para;</a></h2>
-<p>Tab: <strong>Database Connections</strong>. Toolbar: <strong>Create</strong>, <strong>Edit</strong>, <strong>Duplicate</strong>, <strong>Delete</strong>.</p>
+<p>Tab: <strong>Database Connections</strong>. Toolbar: <strong>Create</strong>, <strong>Edit</strong>, <strong>Duplicate</strong>, <strong>Rename</strong>, <strong>Delete</strong>.</p>
 <p><img alt="The Administration window's Database Connections tab — a JDBC Connections grid (columns CONNECTIONID, CONNECTIONNAME, JDBCDRIVER_NAME, JDBCDRIVER_JAR) listing connections like ADVENTUREWORKS, AUDIT_DATABASE, CLICKHOUSE, HIVE_EMBEDDED, and REDSHIFT, with Duplicate / Edit / Delete / Create buttons" src="../images/database-connections-tab.png" /></p>
 <p>Click <strong>Create</strong> to open the JDBC connection editor:</p>
 <table>
@@ -1474,13 +1474,73 @@
 </tr>
 </tbody>
 </table>
-<p><strong>The connection's name is embedded in each job's XML</strong> — jobs reference the connection <em>by name</em>, so renaming or deleting a connection that jobs use will break those jobs.</p>
+<p><strong>The connection's name is embedded in each job's XML</strong> — jobs reference the connection <em>by name</em>, so <strong>deleting</strong> a connection that jobs use will break those jobs. To change a name, use <strong>Rename</strong> (below), which moves every reference with it. Do not retype the name in the Edit dialog; the name box is read-only there for exactly this reason.</p>
 </blockquote>
 <p>Saved to the audit DB (<code>t_jdbc</code>).</p>
 <ul>
 <li><strong>Duplicate</strong> copies the selected connection (handy for dev/prod variants).</li>
 </ul>
+<h3 id="naming-a-connection">Naming a connection<a class="headerlink" href="#naming-a-connection" title="Permanent link">&para;</a></h3>
+<p>The same rule applies wherever a connection is named — Create, Duplicate, Edit and Rename:</p>
+<table>
+<thead>
+<tr>
+<th>Character</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>'</code> <code>"</code> <code>\</code> <code>,</code> and line breaks</td>
+<td><strong>Refused.</strong> The name is written into the connection row, into step arguments stored as <code>key,value</code> one per line, and into job XML. A comma truncates an argument and a quote breaks the row.</td>
+</tr>
+<tr>
+<td>Space</td>
+<td><strong>Allowed, with a warning.</strong> The connection works and steps that name it directly are unaffected, but the generated variables <code>$cloud.&lt;NAME&gt;.&lt;parameter&gt;</code> and <code>$jdbc.&lt;NAME&gt;.&lt;parameter&gt;</code> will not resolve, because the name is read up to the next space. An underscore avoids this.</td>
+</tr>
+</tbody>
+</table>
+<p>Letters, digits, underscore and hyphen are always safe. Names are stored upper-case and trimmed.</p>
+<h3 id="renaming-a-database-connection">Renaming a database connection<a class="headerlink" href="#renaming-a-database-connection" title="Permanent link">&para;</a></h3>
+<p>Select the connection and click <strong>Rename</strong>. Jobs reference a database connection <strong>by name</strong> — in
+<code>&lt;sourceConnection&gt;</code>, in the job's own <code>&lt;platformID&gt;</code> target platform, in the connection arguments of
+loader steps, and in <code>$jdbc.&lt;NAME&gt;.&lt;param&gt;</code> variables — so a rename is a cascade, and the client
+performs it for you.</p>
+<ol>
+<li>It scans <strong>every deployed workflow</strong> and lists the ones that reference the old name, naming the
+   step and the kind of reference for each; the permission rows keyed on the name; and the metadata
+   that lives outside the workflows — control tests, job alert settings, onstage metadata, column
+   caches and profile results.</li>
+<li>You confirm. <strong>Nothing has been changed yet.</strong></li>
+<li>Workflows are rewritten and re-saved first (each gets a change-history comment naming the
+   rename), <strong>then</strong> the connection row, <strong>then</strong> the permission and metadata rows. Workflows first
+   on purpose: if anything stops part-way the connection still exists under its old name and every
+   workflow points at a name that resolves. Rename again to finish — the scan only picks up what is
+   left.</li>
+</ol>
+<p>The rename is refused if the new name already exists, if the <em>old</em> name is shared by more than one
+database connection (the scan could not tell which workflow meant which), if the name is also used
+by a cloud or SSH connection, or if it is a reserved name (<code>ABC</code>, <code>LOCAL</code>, <code>LOCALHOST</code>, <code>SELF</code>, …).</p>
+<p>Three things the confirmation will tell you that are worth reading:</p>
+<ul>
+<li><strong>Files that are not registered workflows</strong> — anything deployed by hand, plus the <code>.bak</code> copies
+  the server writes on every save. These are <strong>not</strong> rewritten, because saving one would register it
+  as a workflow. A hand-deployed file will keep pointing at the old name; open and save it in the
+  client first, then rename.</li>
+<li><strong>Profile names</strong> — a profile key like <code>MYJOB.MYCONN.mydb.myschema.mytable</code> contains the
+  connection name but is a <strong>lookup key</strong>, matched against stored load history. It is deliberately
+  left alone: rewriting one side of that match would break it. Nothing resolves a connection from
+  it, so this is cosmetic only.</li>
+<li><strong>Server config that pins the name</strong> — see below.</li>
+</ul>
 <blockquote>
+<p><strong>Config files are reported, not rewritten.</strong> The server's integrator config can pin a connection
+name as a value — <code>$OBJECT_STORAGE</code>, <code>$SYSTEM_DEFAULT_SSH_CONNECTION</code>, <code>$HIVE_CONNECTION</code>,
+<code>$ENGINE_CONNECTION</code> — and steps that do not name a connection explicitly fall back to it. The
+confirmation lists every <code>system.cfg</code> line that names the connection, with its file and key. These
+files are operator-owned and outside the rename's transaction, so <strong>edit them by hand in the same
+change</strong>, or the fallback stops resolving. If the config cannot be read, the dialog says so
+explicitly rather than reporting "none found".</p>
 <p>Platform-specific setup (drivers, quirks, prerequisites) lives in the per-platform guides — e.g. <a href="../REDSHIFT-SETUP/">REDSHIFT-SETUP.md</a>, <a href="../CLICKHOUSE-AUTH/">CLICKHOUSE-AUTH.md</a>.</p>
 </blockquote>
 <h2 id="ssh-connections">SSH connections<a class="headerlink" href="#ssh-connections" title="Permanent link">&para;</a></h2>
@@ -1703,11 +1763,10 @@ that came from here). <code>unresolved</code> must be 0. The check phrases the s
 <p><strong>Edit</strong> opens the same editor on an existing connection. The type is fixed; the parameters and,
 since client 2.5.7, the <strong>name</strong> can be changed.</p>
 <h3 id="renaming-a-cloud-connection">Renaming a cloud connection<a class="headerlink" href="#renaming-a-cloud-connection" title="Permanent link">&para;</a></h3>
-<p>Unlike a database connection, which jobs reference by an internal id, a cloud connection is
-referenced <strong>by its name</strong> — in the S3 connection argument of Redshift loader steps, in the
-connection element of Spark export/loader steps, and in every <code>$cloud.&lt;NAME&gt;.&lt;param&gt;</code> variable
-written into job SQL. The name is also the key of the permission rows that decide who sees the
-connection. So a rename is a cascade, and the editor does it for you:</p>
+<p>A cloud connection is referenced <strong>by its name</strong> — in the S3 connection argument of Redshift loader
+steps, in the connection element of Spark export/loader steps, and in every <code>$cloud.&lt;NAME&gt;.&lt;param&gt;</code>
+variable written into job SQL. The name is also the key of the permission rows that decide who sees
+the connection. So a rename is a cascade, and the editor does it for you:</p>
 <ol>
 <li>It reads every deployed workflow and lists the ones that reference the old name, with the
    step and the kind of reference for each, and the number of permission rows that will move.</li>
@@ -1723,11 +1782,21 @@ is open (locked) in another session — close it there first.</p>
 <p><strong>Why rename at all:</strong> to give the same connection the same Maestro name in Dev, QA and Prod
 while each points at its own bucket. With identical names, workflow XML promotes between
 environments unchanged (see CICD-WORKFLOW-PROMOTION-PROPOSAL.md).</p>
+<p>This is the same engine as <a href="#renaming-a-database-connection">Renaming a database connection</a>, so the
+naming rule, the refusals, the unregistered-file and profile-name notes, and the server-config
+reporting all apply here too — read that section as well.</p>
 <blockquote>
-<p><strong>Pinned names.</strong> <code>S3_CONNECTION</code>, <code>BLOB_CONNECTION</code> and <code>ELTM_SPARK_DRIVER</code> may be named in
-the server's integrator <code>system.cfg</code> (<code>$OBJECT_STORAGE</code>, the Spark driver). Steps that do not
-name a connection explicitly fall back to that value. The editor warns when you rename one of
-these; update the server config in the same change, or the fallback stops resolving.</p>
+<p><strong>Config files are reported, not rewritten.</strong> The confirmation scans the server's integrator
+<code>system.cfg</code> files and lists every line whose <strong>value</strong> is the connection being renamed —
+<code>$OBJECT_STORAGE</code>, <code>$SYSTEM_DEFAULT_SSH_CONNECTION</code>, <code>$HIVE_CONNECTION</code>, <code>$ENGINE_CONNECTION</code>.
+Steps that do not name a connection explicitly fall back to those values, so edit each one by hand
+in the same change or the fallback stops resolving. Earlier clients only warned about the three
+default names <code>S3_CONNECTION</code>, <code>BLOB_CONNECTION</code> and <code>ELTM_SPARK_DRIVER</code>, so a site using its own
+naming was told nothing; the check now reads the real files.</p>
+<p>A connection's own <strong>parameters</strong> can also point at another connection — the HDFS/Spark connection
+carries <code>thrift.hive2.connection.name</code>, naming the Hive metastore connection. That pointer is
+stored encoded, where no plain search would find it. The rename follows it and reports how many
+connections were repointed.</p>
 </blockquote>
 <h3 id="setting-up-an-aws-s3-connection">Setting up an Aws S3 connection<a class="headerlink" href="#setting-up-an-aws-s3-connection" title="Permanent link">&para;</a></h3>
 <p>Go to <strong>Administration ▸ General/Cloud Config ▸ Create</strong>, then:</p>

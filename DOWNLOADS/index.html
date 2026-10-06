@@ -1437,9 +1437,9 @@ the release notes; the override walkthrough is
 </tr>
 <tr>
 <td><strong>Windows desktop client</strong></td>
-<td><a href="https://eltmaestro.s3.amazonaws.com/docker/ELTMAESTRO-2.5.8.20260915-portable-win-x64.zip">https://eltmaestro.s3.amazonaws.com/docker/ELTMAESTRO-2.5.8.20260915-portable-win-x64.zip</a></td>
+<td><a href="https://eltmaestro.s3.amazonaws.com/docker/ELTMAESTRO-2.5.9.20261006-portable-win-x64.zip">https://eltmaestro.s3.amazonaws.com/docker/ELTMAESTRO-2.5.9.20261006-portable-win-x64.zip</a></td>
 <td>~81 MB</td>
-<td><code>5d5ed264f93c5c85b1759182c9ca85db</code></td>
+<td><code>85b40b3e10ef66d1d894e61c9287bf13</code></td>
 <td>The desktop client used to connect to an ELTMaestro server. EV code-signed (IQ Associates, DigiCert-timestamped).</td>
 </tr>
 </tbody>
@@ -1526,6 +1526,14 @@ order; each is idempotent.</p>
 <td><code>9c5a08265a9adf0af219686be854c6a4</code></td>
 <td><strong>Batch resilience.</strong> (1) A step asking for a connection's definition could die because the pooled metadata connection had been closed under it — one step, then its job, then the whole batch; that lookup is now <strong>retried once</strong> on a fresh connection. (2) A step that <strong>cannot be built</strong> when the workflow opens now FAILS the job by name instead of being silently skipped while the job reported COMPLETE. (3) New per-JOBSTEP <strong><code>&lt;continueOnFailure&gt;</code></strong> — a failed job no longer abandons the rest of the batch; the batch is still FAILED. Off by default. (4) <strong>An added source column no longer breaks an S3 import</strong> — the COPY now names its columns in the parquet's own order, so <code>Spectrum Scan Error / 15007 / incompatible Parquet schema</code> no longer follows a schema change. (5) A meta-service <strong>login fix</strong>. Engine + meta-service jars; <strong><code>apply.sh</code> restarts the meta-service</strong> (~5 s).</td>
 </tr>
+<tr>
+<td><code>9c5e5d8d8</code></td>
+<td>2026-10-05</td>
+<td><a href="https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-all-9c5e5d8d8.zip">https://eltmaestro.s3.amazonaws.com/docker/eltm-server-patch-all-9c5e5d8d8.zip</a></td>
+<td>44,596,202</td>
+<td><code>0b8908df8dfbad0640e00d14f30e3323</code></td>
+<td><strong>Everything in one package; replaces the 1 October patch.</strong> (1) <strong>The meta-service could lock up and still look healthy</strong> — two locks taken in opposite orders by a login and a workflow save; the port stays open and health checks pass while nobody can log in, and it does not recover on its own. Another customer lost seventeen hours to it. (2) A source extract no longer pulls a whole table into memory (MySQL streaming is opt-in via <code>ELTM_JDBC_MYSQL_STREAMING=true</code>). (3) A step whose thread dies now FAILS instead of leaving the batch waiting forever. (4) <strong>Three loaders reported success after failing</strong> — a bulk load, a merge, and an S3 upload the AWS CLI refused. (5) <strong>Characters were being deleted from your data</strong> — apostrophes, quotes, commas and forward slashes, and on the other setting every non-ASCII character. (6) Column encoding now works on the extract path that actually runs. Engine + meta-service jars; <code>apply.sh</code> restarts the meta-service (~5 s). <strong>Three behaviour changes — read the README before applying.</strong></td>
+</tr>
 </tbody>
 </table>
 <blockquote>
@@ -1546,7 +1554,7 @@ completed.</p>
 </ul>
 <blockquote>
 <p>Tip: the server (Docker image / Linux installer, version <code>17.0.4</code>) and the
-Windows client (version <code>2.5.6</code>) are versioned separately — that's expected.</p>
+Windows client (version <code>2.5.9</code>) are versioned separately — that's expected.</p>
 </blockquote>
 
 
