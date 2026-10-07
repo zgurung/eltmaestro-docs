@@ -1,0 +1,2184 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="User documentation for the ELTMaestro ELT/data-pipeline platform.">
+      
+      
+      
+        <link rel="canonical" href="https://zgurung.github.io/eltmaestro-docs/SNOWFLAKE-SETUP/">
+      
+      
+        <link rel="prev" href="../MEDALLION-GOLD/">
+      
+      
+        <link rel="next" href="../REDSHIFT-SETUP/">
+      
+      
+      <link rel="icon" href="../assets/elt-maestro-logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>Snowflake - ELTMaestro Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#snowflake-integrator-setup" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ELTMaestro Documentation" class="md-header__button md-logo" aria-label="ELTMaestro Documentation" data-md-component="logo">
+      
+  <img src="../assets/elt-maestro-logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ELTMaestro Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Snowflake
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ELTMaestro Documentation" class="md-nav__button md-logo" aria-label="ELTMaestro Documentation" data-md-component="logo">
+      
+  <img src="../assets/elt-maestro-logo.png" alt="logo">
+
+    </a>
+    ELTMaestro Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DOWNLOADS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Downloads
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Getting started
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Getting started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../USER-GUIDE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-GETTING-STARTED/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-MENUS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Menus
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Admin & connections
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Admin & connections
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-ADMIN/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Administration & setup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Workflows & steps
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Workflows & steps
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-WORKFLOWS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Workflows
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-STEPS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Step reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-INCREMENTAL-WATERMARKS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Incremental loads & watermarks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UG-RUN-VARIABLE-OVERRIDES/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Run variable overrides
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PARQUET-TO-REDSHIFT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    S3 Parquet → Redshift
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Medallion design
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Medallion design
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION-BRONZE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bronze
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION-SILVER/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Silver
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MEDALLION-GOLD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Gold
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Platform setup
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Platform setup
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Snowflake
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Snowflake
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#at-a-glance--what-you-need" class="md-nav__link">
+    <span class="md-ellipsis">
+      At a glance — what you need
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-create-the-snowflake-jdbc-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Create the Snowflake JDBC connection
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-pair-jwt-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key-pair (JWT) authentication
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key-pair (JWT) authentication">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-generate-an-rsa-key-pair" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Generate an RSA key pair
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-assign-the-public-key-to-the-snowflake-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Assign the public key to the Snowflake user
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-place-the-private-key-on-the-hosts" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Place the private key on the hosts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-reference-the-key-from-the-connection-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Reference the key from the connection string
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hardening--jvm-flags-jaxb-and-snowsql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hardening — JVM flags, JAXB, and snowsql
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hardening — JVM flags, JAXB, and snowsql">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1---add-opens-for-the-arrow-result-reader--every-jvm-that-runs-a-snowflake-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. --add-opens for the Arrow result reader — every JVM that runs a Snowflake job
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-jaxb-api-javax-namespace-on-the-classpath--key-pair-jdbc-on-java-9" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. jaxb-api (javax namespace) on the classpath — key-pair JDBC on Java 9+
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-snowsql-key-pair-for-the-internal-stage-put-corelli-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. snowsql key-pair for the internal-stage PUT (Corelli pipeline)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-the-object_storage-connection-must-actually-exist" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. The $OBJECT_STORAGE connection must actually exist
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#base64-decode-native-no-udf" class="md-nav__link">
+    <span class="md-ellipsis">
+      base64 decode (native, no UDF)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#query-attribution-query_tag" class="md-nav__link">
+    <span class="md-ellipsis">
+      Query attribution (QUERY_TAG)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Query attribution (QUERY_TAG)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reading-it-back" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reading it back
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scope-and-behaviour" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scope and behaviour
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integrator-config-systemcfg" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integrator config (system.cfg)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verify" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verify
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Verify">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-failures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common failures
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../REDSHIFT-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redshift
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPARKSQL-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SparkSQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CLICKHOUSE-AUTH/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ClickHouse auth
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MPP-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MPP prerequisites
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Install & operations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Install & operations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INSTALL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Install
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DOCKER-INSTALL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker image install
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EDGE-NODE-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Edge node setup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UPGRADE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Upgrade
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../OPERATIONS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Operations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ARCHITECTURE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../VARIABLES/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Runtime variables
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CONTROL-TESTS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Control tests
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SCHEMA-PROFILE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Schema profile
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DATA-MODEL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data model — tables & views
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DATA-MODEL-SPINE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data model — execution spine
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Proposals
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Proposals
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CICD-WORKFLOW-PROMOTION-PROPOSAL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Workflow promotion (CI/CD)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#at-a-glance--what-you-need" class="md-nav__link">
+    <span class="md-ellipsis">
+      At a glance — what you need
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-create-the-snowflake-jdbc-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Create the Snowflake JDBC connection
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-pair-jwt-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key-pair (JWT) authentication
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key-pair (JWT) authentication">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-generate-an-rsa-key-pair" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Generate an RSA key pair
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-assign-the-public-key-to-the-snowflake-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Assign the public key to the Snowflake user
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-place-the-private-key-on-the-hosts" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Place the private key on the hosts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-reference-the-key-from-the-connection-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Reference the key from the connection string
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hardening--jvm-flags-jaxb-and-snowsql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hardening — JVM flags, JAXB, and snowsql
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hardening — JVM flags, JAXB, and snowsql">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1---add-opens-for-the-arrow-result-reader--every-jvm-that-runs-a-snowflake-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. --add-opens for the Arrow result reader — every JVM that runs a Snowflake job
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-jaxb-api-javax-namespace-on-the-classpath--key-pair-jdbc-on-java-9" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. jaxb-api (javax namespace) on the classpath — key-pair JDBC on Java 9+
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-snowsql-key-pair-for-the-internal-stage-put-corelli-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. snowsql key-pair for the internal-stage PUT (Corelli pipeline)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-the-object_storage-connection-must-actually-exist" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. The $OBJECT_STORAGE connection must actually exist
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#base64-decode-native-no-udf" class="md-nav__link">
+    <span class="md-ellipsis">
+      base64 decode (native, no UDF)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#query-attribution-query_tag" class="md-nav__link">
+    <span class="md-ellipsis">
+      Query attribution (QUERY_TAG)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Query attribution (QUERY_TAG)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reading-it-back" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reading it back
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scope-and-behaviour" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scope and behaviour
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integrator-config-systemcfg" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integrator config (system.cfg)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verify" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verify
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Verify">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-failures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common failures
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="snowflake-integrator-setup">Snowflake integrator setup<a class="headerlink" href="#snowflake-integrator-setup" title="Permanent link">&para;</a></h1>
+<p>Operator setup for a <strong>Snowflake</strong> target in ELTMaestro — the JDBC connection and,
+the focus of this doc, <strong>key-pair (JWT) authentication</strong>. Companion to
+<a href="../REDSHIFT-SETUP/">REDSHIFT-SETUP.md</a> and <a href="../MPP-SETUP/">MPP-SETUP.md</a>; same
+operator-doc shape. Snowflake is one of the catalog-backed cloud platforms; loads
+go <strong>flat file → S3 stage → Snowflake</strong> (the S3 + <code>system.cfg</code> wiring is shared with
+the other MPP integrators — see <a href="../MPP-SETUP/">MPP-SETUP.md</a>).</p>
+<h2 id="at-a-glance--what-you-need">At a glance — what you need<a class="headerlink" href="#at-a-glance--what-you-need" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Prerequisite</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Snowflake account</td>
+<td>Reachable from the engine host; a database + schema + warehouse for the integrator.</td>
+</tr>
+<tr>
+<td>Snowflake JDBC driver</td>
+<td><code>snowflake-jdbc-3.17.1.jar</code> (also shipped as <code>MPP_Driver_SnowFlake_JDBC.jar</code>) under <code>$MAESTRO_ENGINE_HOME/library/JDBC/</code>; driver class <strong><code>net.snowflake.client.jdbc.SnowflakeDriver</code></strong>.</td>
+</tr>
+<tr>
+<td>Auth</td>
+<td><strong>Password</strong> (user + password) <strong>or</strong> <strong>key-pair / JWT</strong> (a private key file referenced from the connection string — see <a href="#key-pair-jwt-authentication">Key-pair authentication</a>).</td>
+</tr>
+<tr>
+<td>Object storage</td>
+<td>An <code>S3_CONNECTION</code> (or equivalent) for staging — same as the other MPP integrators (<a href="../MPP-SETUP/">MPP-SETUP.md</a>).</td>
+</tr>
+<tr>
+<td>base64 decode</td>
+<td><strong>Native — no UDF.</strong> <code>$B64EXPRESSION</code> uses Snowflake <code>base64_decode_string(…)</code>.</td>
+</tr>
+<tr>
+<td>JVM + classpath</td>
+<td><strong><code>--add-opens=java.base/java.nio=ALL-UNNAMED</code></strong> (Arrow result reader, Java 17+) <strong>and</strong> <strong><code>jaxb-api-2.3.1.jar</code></strong> (javax namespace, key-pair PEM parse on Java 9+) on every engine/meta-service launch — see <a href="#hardening--jvm-flags-jaxb-and-snowsql">Hardening</a>.</td>
+</tr>
+<tr>
+<td>Integrator metadata</td>
+<td><code>system.cfg</code> (defines <code>$SYSTEM_TOKEN_ENCLOSER</code>, <code>$OBJECT_STORAGE</code>, <code>$B64EXPRESSION</code>, drop/view queries) deployed at <code>$PGDIR/metadata/integrators/snowflake/</code>; laid down by the installer — <strong>must also be present on slave/edge nodes</strong>, else generated DDL carries unsubstituted <code>$SYSTEM_*</code> tokens.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="1-create-the-snowflake-jdbc-connection">1. Create the Snowflake JDBC connection<a class="headerlink" href="#1-create-the-snowflake-jdbc-connection" title="Permanent link">&para;</a></h2>
+<p>In the WPF client, navigate <strong>Administration ▸ Configure Maestro Server</strong> to open the
+<a href="../UG-ADMIN/#opening-the-admin-interface">Admin Interface</a> (admin-role users only),
+select the <strong><a href="../UG-ADMIN/#database-connections-jdbc">Database Connections</a></strong> tab, then
+<strong>Create</strong> (or <strong>Edit</strong> a row) to open the JDBC connection editor (<code>SysJdbcSetting</code>).
+The connection is persisted to <code>t_jdbc</code> (<code>connection_name</code>, <code>connection_string</code>,
+<code>jdbc_driver_name</code>, <code>user_name</code>, <code>password64</code> (base64), <code>jdbc_driver_jar</code>).</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Driver jar</td>
+<td><code>MPP_Driver_SnowFlake_JDBC.jar</code> (or <code>snowflake-jdbc-3.17.1.jar</code>)</td>
+</tr>
+<tr>
+<td>Driver class</td>
+<td><code>net.snowflake.client.jdbc.SnowflakeDriver</code></td>
+</tr>
+<tr>
+<td>Connection string</td>
+<td><code>jdbc:snowflake://&lt;account&gt;.snowflakecomputing.com/?db=&lt;DB&gt;&amp;schema=&lt;SCHEMA&gt;&amp;warehouse=&lt;WH&gt;</code></td>
+</tr>
+<tr>
+<td>User</td>
+<td>the Snowflake login name</td>
+</tr>
+<tr>
+<td>Password</td>
+<td>required for password auth; <strong>ignored when a key is supplied</strong> (see below)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="key-pair-jwt-authentication">Key-pair (JWT) authentication<a class="headerlink" href="#key-pair-jwt-authentication" title="Permanent link">&para;</a></h2>
+<p>ELTMaestro prioritizes key-pair auth for Snowflake: <strong>when the connection string
+contains <code>private_key_file</code>, the connection authenticates with the key (JWT) and the
+password is ignored, even if one is set.</strong> This applies to both the batch engine and
+the SOAP meta-service (the connection <code>Test</code> button), so both behave the same way.</p>
+<h3 id="1-generate-an-rsa-key-pair">1. Generate an RSA key pair<a class="headerlink" href="#1-generate-an-rsa-key-pair" title="Permanent link">&para;</a></h3>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># unencrypted private key (PKCS#8)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>openssl<span class="w"> </span>genrsa<span class="w"> </span><span class="m">2048</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>openssl<span class="w"> </span>pkcs8<span class="w"> </span>-topk8<span class="w"> </span>-inform<span class="w"> </span>PEM<span class="w"> </span>-out<span class="w"> </span>rsa_key.p8<span class="w"> </span>-nocrypt
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># public key</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>openssl<span class="w"> </span>rsa<span class="w"> </span>-in<span class="w"> </span>rsa_key.p8<span class="w"> </span>-pubout<span class="w"> </span>-out<span class="w"> </span>rsa_key.pub
+</code></pre></div>
+For an <strong>encrypted</strong> key, drop <code>-nocrypt</code> (you'll set a passphrase) and supply it via
+<code>private_key_file_pwd</code> in the connection string (below).</p>
+<h3 id="2-assign-the-public-key-to-the-snowflake-user">2. Assign the public key to the Snowflake user<a class="headerlink" href="#2-assign-the-public-key-to-the-snowflake-user" title="Permanent link">&para;</a></h3>
+<p>In Snowflake (strip the <code>-----BEGIN/END PUBLIC KEY-----</code> lines and newlines):
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">ALTER</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="o">&lt;</span><span class="n">login</span><span class="o">&gt;</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">RSA_PUBLIC_KEY</span><span class="o">=</span><span class="s1">'MIIBIjANBgkq...'</span><span class="p">;</span>
+</code></pre></div></p>
+<h3 id="3-place-the-private-key-on-the-hosts">3. Place the private key on the hosts<a class="headerlink" href="#3-place-the-private-key-on-the-hosts" title="Permanent link">&para;</a></h3>
+<p>The private key file must exist and be <strong>readable by the engine's OS user on every
+host that opens the connection</strong> — the engine host <strong>and</strong> the meta-service. In the
+Docker deploy that means the key inside the <code>eltmaestro</code> container at the path you
+reference (e.g. <code>/opt/iserver/secrets/rsa_key.p8</code>). Protect it: <code>chmod 600</code>.</p>
+<h3 id="4-reference-the-key-from-the-connection-string">4. Reference the key from the connection string<a class="headerlink" href="#4-reference-the-key-from-the-connection-string" title="Permanent link">&para;</a></h3>
+<p>Append the Snowflake JDBC key-pair parameters to the connection string:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>private_key_file=/opt/iserver/secrets/rsa_key.p8</code></td>
+<td>path to the PKCS#8 private key (<strong>presence of this triggers key auth</strong>)</td>
+</tr>
+<tr>
+<td><code>private_key_file_pwd=&lt;passphrase&gt;</code></td>
+<td>only for an <strong>encrypted</strong> key</td>
+</tr>
+<tr>
+<td><code>authenticator=snowflake_jwt</code></td>
+<td>optional — ELTMaestro <strong>auto-adds this when absent</strong>, so you normally don't need it</td>
+</tr>
+</tbody>
+</table>
+<p>Example:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>jdbc:snowflake://&lt;account&gt;.snowflakecomputing.com/?db=&lt;DB&gt;&amp;schema=&lt;SCHEMA&gt;&amp;warehouse=&lt;WH&gt;&amp;private_key_file=/opt/iserver/secrets/rsa_key.p8
+</code></pre></div></p>
+<p>With that connection string, leave the password blank or set — either way it is <strong>not</strong>
+used. To switch back to password auth, remove <code>private_key_file</code> from the connection
+string.</p>
+<blockquote>
+<p><strong>Why the password is ignored:</strong> the connection object detects <code>private_key_file</code>
+in the string and opens the connection with key-pair properties only (user +
+<code>authenticator=snowflake_jwt</code>), never passing the password to the driver. The
+Snowflake JDBC driver reads <code>private_key_file</code> (and <code>private_key_file_pwd</code>) straight
+from the connection string, so ELTMaestro does not load or parse the key itself.</p>
+</blockquote>
+<h2 id="hardening--jvm-flags-jaxb-and-snowsql">Hardening — JVM flags, JAXB, and snowsql<a class="headerlink" href="#hardening--jvm-flags-jaxb-and-snowsql" title="Permanent link">&para;</a></h2>
+<p>Three host-level prerequisites that a <strong>fresh / edge / JDK-upgraded</strong> install must
+satisfy. All three are baked into the standard installer + Docker image; the failures
+below look like Snowflake/auth problems but are really JVM-module or classpath gaps —
+<strong>verify them after any manual install, edge node, or Java upgrade.</strong></p>
+<blockquote>
+<p><strong>Remote <code>--server</code> / slave nodes run a separate ELTMaestro install</strong> and need every item
+here applied <em>locally</em> — the private key file, <code>--add-opens</code>, javax <code>jaxb-api</code>, the
+integrator metadata, <strong>and an NTP-synced clock</strong> (a skewed clock makes Snowflake reject the
+time-bounded JWT). The master's fixes do <strong>not</strong> propagate to them. Full per-node checklist +
+a verify-and-remediate script: <strong>SNOWFLAKE-SLAVE-REMEDIATION.md</strong>.</p>
+</blockquote>
+<h3 id="1---add-opens-for-the-arrow-result-reader--every-jvm-that-runs-a-snowflake-job">1. <code>--add-opens</code> for the Arrow result reader — every JVM that runs a Snowflake job<a class="headerlink" href="#1---add-opens-for-the-arrow-result-reader--every-jvm-that-runs-a-snowflake-job" title="Permanent link">&para;</a></h3>
+<p>The driver fetches result sets via Apache Arrow, which on <strong>Java 17+</strong> needs deep
+reflective access to <code>java.nio</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>--add-opens=java.base/java.nio=ALL-UNNAMED
+</code></pre></div>
+<p>Without it the <strong>connect succeeds but the first result fetch throws</strong> (so it looks like
+a query/driver bug, not a JVM one):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  `--add-opens=java.base/java.nio=ALL-UNNAMED`?
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>Caused by: java.lang.reflect.InaccessibleObjectException: Unable to make field
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  long java.nio.Buffer.address accessible …
+</code></pre></div>
+<p>The flag must be present on <strong>every</strong> path that launches the engine — a gap on any one
+of these silently fails just that path:</p>
+<table>
+<thead>
+<tr>
+<th>Launch path</th>
+<th>Where the flag lives</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>env_integrator</code></td>
+<td><code>export MAESTRO_ENGINE_OPTS="--add-opens=java.base/java.nio=ALL-UNNAMED"</code> (sourced by all launches)</td>
+</tr>
+<tr>
+<td>Local / meta-service batch</td>
+<td><code>MaestroMeta</code> builds <code>java $MAESTRO_ENGINE_OPTS -jar sqlm.jar …</code></td>
+</tr>
+<tr>
+<td><strong>cron-scheduled</strong> jobs</td>
+<td>the crontab line <strong>must</strong> read <code>java $MAESTRO_ENGINE_OPTS -jar …</code>. The WPF <strong>CronScheduler now emits it</strong>, but an <strong>older crontab hand-edited to <code>java -jar …</code> (no opts) silently fails every scheduled Snowflake job</strong> — fix the launch line.</td>
+</tr>
+<tr>
+<td><strong>slave-dispatched</strong> jobs (<code>--server &lt;host&gt;</code>)</td>
+<td><code>BatchThread</code> passes <code>$MAESTRO_ENGINE_OPTS</code> to the remote <code>--slave</code> JVM; the <strong>slave's own <code>env_integrator</code> must define it too</strong>.</td>
+</tr>
+<tr>
+<td>meta-service WAR (connection <code>Test</code>)</td>
+<td>the WAR launch includes the same <code>--add-opens</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-jaxb-api-javax-namespace-on-the-classpath--key-pair-jdbc-on-java-9">2. <code>jaxb-api</code> (javax namespace) on the classpath — key-pair JDBC on Java 9+<a class="headerlink" href="#2-jaxb-api-javax-namespace-on-the-classpath--key-pair-jdbc-on-java-9" title="Permanent link">&para;</a></h3>
+<p>The driver parses the PKCS#8 private key with <code>javax.xml.bind.DatatypeConverter</code>, which
+was <strong>removed from the JDK in Java 11+</strong>. The engine ships <strong><code>jaxb-api-2.3.1.jar</code></strong> (the
+<strong>javax</strong> namespace) under <code>library/JDBC/</code> / <code>engine/lib/</code>. If only the <strong>jakarta</strong>
+namespace (<code>jakarta.xml.bind-*</code>) is present — the wrong package — key-pair auth fails
+<em>even though the key and Snowflake user are correct</em>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>net.snowflake.client.jdbc.SnowflakeSQLLoggedException:
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  Private key provided is invalid or not supported: /path/rsa_key.p8
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>Caused by: java.lang.ClassNotFoundException: javax.xml.bind.DatatypeConverter
+</code></pre></div>
+<p>Fix: put <code>jaxb-api-2.3.1.jar</code> on the engine <strong>and</strong> meta-service classpath (already there
+in the standard install; add it by hand on an edge/upgraded host). Note <code>jakarta.xml.bind</code>
+does <strong>not</strong> substitute — the driver references the legacy <code>javax.*</code> class by name.</p>
+<h3 id="3-snowsql-key-pair-for-the-internal-stage-put-corelli-pipeline">3. snowsql key-pair for the internal-stage PUT (Corelli pipeline)<a class="headerlink" href="#3-snowsql-key-pair-for-the-internal-stage-put-corelli-pipeline" title="Permanent link">&para;</a></h3>
+<p>The Corelli streaming pipeline (e.g. <strong>Salesforce → Snowflake</strong>) stages part-files
+through a Snowflake <strong>internal</strong> stage using the <code>snowsql</code> CLI (<code>get_corelli_put_script</code>),
+<em>separately</em> from the JDBC <code>COPY</code>. This is <strong>automatic</strong>: the engine (Job.java SNOWFLAKE
+block) sets <strong><code>$CURRENT_PRIVATE_KEY_FILE</code></strong> from the connection string's <code>private_key_file</code>,
+and <code>get_corelli_put_script</code> picks the matching auth — <strong><code>--private-key-path</code></strong> when it's
+set, otherwise password (<code>--authenticator snowflake</code> + base64-decoded <code>SNOWSQL_PWD</code>):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"</span><span class="nv">$CURRENT_PRIVATE_KEY_FILE</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nv">SNOWSQL_AUTH</span><span class="o">=</span><span class="s2">"--private-key-path </span><span class="nv">$CURRENT_PRIVATE_KEY_FILE</span><span class="s2">"</span><span class="w">   </span><span class="c1"># key-pair / JWT</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">else</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span><span class="nb">export</span><span class="w"> </span><span class="nv">SNOWSQL_PWD</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$CURRENT_PASSWORD_ENCODED</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d<span class="sb">`</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">  </span><span class="nv">SNOWSQL_AUTH</span><span class="o">=</span><span class="s2">"--authenticator snowflake"</span><span class="w">                     </span><span class="c1"># password</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="k">fi</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>snowsql<span class="w"> </span>-a<span class="w"> </span><span class="nv">$CURRENT_ACCOUNT</span><span class="w"> </span>-u<span class="w"> </span><span class="nv">$CURRENT_USER</span><span class="w"> </span>…<span class="w"> </span><span class="nv">$SNOWSQL_AUTH</span><span class="w"> </span>-q<span class="w"> </span><span class="s2">"</span><span class="nv">$PUTFILE_COMMAND</span><span class="s2">"</span>
+</code></pre></div>
+<p>No per-host edit, it matches whatever the JDBC connection uses, and it <strong>survives a
+reseeding/destructive deploy</strong> (both the engine var and the put script ship from source).
+Before this, a password-only put script against a key-pair user failed the PUT with
+<code>Incorrect username or password</code> while the JDBC side authenticated fine.</p>
+<h3 id="4-the-object_storage-connection-must-actually-exist">4. The <code>$OBJECT_STORAGE</code> connection must actually exist<a class="headerlink" href="#4-the-object_storage-connection-must-actually-exist" title="Permanent link">&para;</a></h3>
+<p>S3-staged loads (ONSTAGEGROUP / bulk loaders) resolve their stage from
+<code>$OBJECT_STORAGE</code> in <code>system.cfg</code> (e.g. <code>S3_CONNECTION</code>). On a fresh box that <strong>named
+cloud connection often doesn't exist yet</strong> in <code>connection2</code>, so those loads fail to
+resolve a stage. Create the object-storage connection and make its <strong>name match</strong>
+<code>$OBJECT_STORAGE</code> (mismatches also bite after a destructive deploy reseeds <code>system.cfg</code>
+from the image default). The Corelli/internal-stage path above does <strong>not</strong> need it.</p>
+<h2 id="base64-decode-native-no-udf">base64 decode (native, no UDF)<a class="headerlink" href="#base64-decode-native-no-udf" title="Permanent link">&para;</a></h2>
+<p><code>$B64EXPRESSION=base64_decode_string($COLUMN)::$DATATYPE</code> — used by the pipeline's
+decoder view to base64-decode columns the source encoded (e.g. the Salesforce
+encoded-extract). No UDF to install. See <a href="../REDSHIFT-SETUP/#3-base64-decode-native-no-udf">REDSHIFT-SETUP.md</a>
+for the cross-vendor picture.</p>
+<p>On the Salesforce extract side, encoding is <strong>driven by the SF field type</strong>: every
+field is base64-encoded (to preserve whitespace/special characters) <strong>except</strong> the
+no-encode types — <code>id</code>, <code>boolean</code>, <code>int</code>, <code>double</code>, <code>currency</code>, <code>percent</code>, <code>date</code>,
+<code>datetime</code>, <code>time</code>, <code>phone</code> — which are written raw. (The raw SF field type is carried
+through the extract, so <code>currency</code>/<code>percent</code>/<code>time</code>/<code>phone</code> — which map to a SQL
+VARCHAR but aren't free text — stay raw rather than being needlessly encoded.) Encoding
+is active only when the target vendor defines <code>$B64EXPRESSION</code>.</p>
+<p><strong>Staging is sized by measurement, not estimate</strong> (Snowflake): the transient internal
+"volt" staging table that receives the base64 COPY is created with its encoded columns
+at the dialect <strong>max</strong> <code>VARCHAR(16777216)</code> — it is dropped right after the load, so the
+width is free and the COPY can never overflow regardless of how large a value inflates.
+The decoded target columns are then widened from the <strong>actual</strong> decoded data (a single
+<code>MAX(LENGTH())</code> pass over the decoder view), so a column is exactly as wide as the data
+requires with no guessing.</p>
+<h2 id="query-attribution-query_tag">Query attribution (<code>QUERY_TAG</code>)<a class="headerlink" href="#query-attribution-query_tag" title="Permanent link">&para;</a></h2>
+<p>Every Snowflake session the engine opens is tagged, so queries can be attributed back to
+the batch that issued them from Snowflake's own query history instead of only from engine
+logs. Nothing to configure — it is automatic for any connection using an <code>MPP_*Snowflake*</code>
+driver jar.</p>
+<p>The tag is a JSON object, set once per physical connection via
+<code>ALTER SESSION SET QUERY_TAG</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span><span class="nt">"batch"</span><span class="p">:</span><span class="s2">"12345"</span><span class="p">,</span><span class="nt">"batchName"</span><span class="p">:</span><span class="s2">"MY_BATCH"</span><span class="p">,</span><span class="nt">"run"</span><span class="p">:</span><span class="s2">"7"</span><span class="p">,</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w"> </span><span class="nt">"ACCOUNT"</span><span class="p">:</span><span class="s2">"xy12345.eu-west-1"</span><span class="p">,</span><span class="nt">"WAREHOUSE"</span><span class="p">:</span><span class="s2">"COMPUTE_WH"</span><span class="p">,</span><span class="nt">"ROLE"</span><span class="p">:</span><span class="s2">"ETL_ROLE"</span><span class="p">,</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w"> </span><span class="nt">"DATABASE"</span><span class="p">:</span><span class="s2">"ANALYTICS"</span><span class="p">,</span><span class="nt">"SCHEMA"</span><span class="p">:</span><span class="s2">"STAGING"</span><span class="p">,</span><span class="nt">"USERNAME"</span><span class="p">:</span><span class="s2">"maestro_svc"</span><span class="p">,</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w"> </span><span class="nt">"CONNECTIONNAME"</span><span class="p">:</span><span class="s2">"SNOWFLAKE_PROD"</span><span class="p">}</span>
+</code></pre></div>
+<p><code>batch</code> / <code>batchName</code> / <code>run</code> come from the batch's runtime variables (<code>$BATCH_ID</code>,
+<code>$BATCH_NAME</code>, <code>$BATCH_RUN_NUMBER</code>); the upper-case keys are properties parsed from the
+JDBC connection string.</p>
+<p><strong>Only an allowlist of connection properties is published.</strong> Credentials that appear in a
+connection URL — <code>password</code>, <code>PWD</code>, private keys, tokens — are never included. This matters
+because <code>QUERY_TAG</code> lands in <code>SNOWFLAKE.ACCOUNT_USAGE.QUERY_HISTORY</code>, which is readable by
+monitoring and <code>ACCOUNTADMIN</code> roles, retained for about a year, and cannot be purged by the
+engine. To publish an additional property, add it to the allowlist in
+<code>JdbcConnection.TAG_SAFE_PROPS</code> — never widen it to include a secret.</p>
+<h3 id="reading-it-back">Reading it back<a class="headerlink" href="#reading-it-back" title="Permanent link">&para;</a></h3>
+<p>Use <code>INFORMATION_SCHEMA.QUERY_HISTORY()</code> while testing — it is near-real-time, whereas
+<code>ACCOUNT_USAGE.QUERY_HISTORY</code> can lag up to ~45 minutes:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">select</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="n">parse_json</span><span class="p">(</span><span class="n">query_tag</span><span class="p">):</span><span class="n">batchName</span><span class="p">::</span><span class="n">string</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">batch_name</span><span class="p">,</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="n">parse_json</span><span class="p">(</span><span class="n">query_tag</span><span class="p">):</span><span class="n">batch</span><span class="p">::</span><span class="n">string</span><span class="w">     </span><span class="k">as</span><span class="w"> </span><span class="n">batch_id</span><span class="p">,</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="n">parse_json</span><span class="p">(</span><span class="n">query_tag</span><span class="p">):</span><span class="n">run</span><span class="p">::</span><span class="n">string</span><span class="w">       </span><span class="k">as</span><span class="w"> </span><span class="n">run_number</span><span class="p">,</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w">                                </span><span class="k">as</span><span class="w"> </span><span class="n">queries</span><span class="p">,</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="k">sum</span><span class="p">(</span><span class="n">credits_used_cloud_services</span><span class="p">)</span><span class="w">        </span><span class="k">as</span><span class="w"> </span><span class="n">cloud_credits</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="k">from</span><span class="w"> </span><span class="k">table</span><span class="p">(</span><span class="n">information_schema</span><span class="p">.</span><span class="n">query_history</span><span class="p">())</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="k">where</span><span class="w"> </span><span class="n">query_tag</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">queries</span><span class="w"> </span><span class="k">desc</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="scope-and-behaviour">Scope and behaviour<a class="headerlink" href="#scope-and-behaviour" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Batch-level, not step-level.</strong> Engine connections are pooled and reused across steps
+  within a batch, so one session serves many steps; the tag identifies the batch and run,
+  not the individual step.</li>
+<li><strong>Query text is never modified.</strong> Attribution is carried in session state rather than
+  inline SQL comments, precisely so Snowflake's result cache (which keys on exact query
+  text) keeps working.</li>
+<li><strong>Best-effort.</strong> If tagging fails for any reason it is silently skipped — it can never
+  fail a job or block a connection.</li>
+<li><strong>Oversized tags degrade gracefully.</strong> <code>QUERY_TAG</code> is capped at 2000 characters; if the
+  payload would exceed it the connection properties are dropped and the batch identity is
+  kept, so the value stays valid JSON.</li>
+<li><strong>Snowflake only.</strong> Other vendors have no equivalent session tag wired up. Redshift's
+  nearest equivalent (<code>query_group</code>) is deliberately not enabled — it is capped at 30
+  characters and doubles as a WLM routing key, so setting it could silently move queries
+  to a different queue.</li>
+</ul>
+<h2 id="integrator-config-systemcfg">Integrator config (<code>system.cfg</code>)<a class="headerlink" href="#integrator-config-systemcfg" title="Permanent link">&para;</a></h2>
+<p>Shared with the other MPP integrators — object storage (<code>$OBJECT_STORAGE</code>), drop/view
+queries, and <code>$B64EXPRESSION</code> above. See <a href="../MPP-SETUP/">MPP-SETUP.md</a>.</p>
+<h2 id="verify">Verify<a class="headerlink" href="#verify" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Connection test:</strong> in the JDBC connection editor, click <strong>Test</strong> — the meta-service
+   opens the connection. With <code>private_key_file</code> set it should succeed via JWT (no
+   password prompt/error).</li>
+<li><strong>Run a job:</strong> execute a small pipeline targeting Snowflake; confirm
+   <code>select current_warehouse()</code> resolves (the engine reads it post-connect) and the
+   load completes.</li>
+<li><strong>Query attribution:</strong> after that job, run the <code>information_schema.query_history()</code>
+   query in <a href="#query-attribution-query_tag">Query attribution</a> — the batch name and run
+   number should appear against the queries the job issued.</li>
+</ol>
+<h3 id="common-failures">Common failures<a class="headerlink" href="#common-failures" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Cause / fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>JWT token is invalid</code></td>
+<td>Public key not assigned/mismatched on the Snowflake user, <strong>or host clock skew</strong> — the JWT is time-bounded, so a clock off by &gt;~1 min is rejected even with a valid key (the usual cause on a slave whose NTP is off). Re-run <code>ALTER USER … SET RSA_PUBLIC_KEY</code>; sync the clock (<code>chronyd</code>/<code>ntpd</code>, then <code>chronyc makestep</code>). Remote nodes: SNOWFLAKE-SLAVE-REMEDIATION.md.</td>
+</tr>
+<tr>
+<td>DDL fails with literal <code>$SYSTEM_TOKEN_ENCLOSER</code> / unsubstituted <code>$SYSTEM_*</code> tokens (e.g. <code>create table … ($SYSTEM_TOKEN_ENCLOSERCol$SYSTEM_TOKEN_ENCLOSER …)</code>)</td>
+<td>The integrator <strong>metadata isn't installed</strong> at <code>$PGDIR/metadata/integrators</code> — the engine reads <code>system.cfg</code> (which defines <code>$SYSTEM_TOKEN_ENCLOSER</code>, <code>$OBJECT_STORAGE</code>, <code>$QUERY_*</code>, <code>$B64EXPRESSION</code>) from there. The installer now deploys it on server/edge/upgrade (<a href="../INSTALL/">INSTALL.md</a> / <a href="../EDGE-NODE-SETUP/">EDGE-NODE-SETUP.md</a>); on a <strong>stale node</strong> re-run the installer or copy the metadata tree. Most common on remote <code>--server</code> slaves — see SNOWFLAKE-SLAVE-REMEDIATION.md.</td>
+</tr>
+<tr>
+<td><code>Private key file not found</code> / permission denied</td>
+<td>The path in <code>private_key_file</code> doesn't exist or isn't readable by the engine/meta-service OS user. Place the key on <strong>both</strong> hosts and <code>chmod 600</code>.</td>
+</tr>
+<tr>
+<td>Encrypted-key decrypt error</td>
+<td>Missing/incorrect <code>private_key_file_pwd</code> for an encrypted <code>.p8</code>.</td>
+</tr>
+<tr>
+<td>Still authenticating by password</td>
+<td><code>private_key_file</code> not actually present in the connection string (check spelling/case).</td>
+</tr>
+<tr>
+<td><code>Failed to initialize MemoryUtil … --add-opens</code> / <code>InaccessibleObjectException: … java.nio.Buffer.address</code></td>
+<td>Missing <code>--add-opens=java.base/java.nio=ALL-UNNAMED</code> on that launch path (Java 17+ Arrow). See <a href="#1-add-opens-for-the-arrow-result-reader--every-jvm-that-runs-a-snowflake-job">Hardening §1</a> — check <code>env_integrator</code>, the <strong>crontab line</strong>, and slave hosts.</td>
+</tr>
+<tr>
+<td><code>Private key provided is invalid or not supported</code> + <code>ClassNotFoundException: javax.xml.bind.DatatypeConverter</code></td>
+<td>Missing <code>jaxb-api-2.3.1.jar</code> (javax) on the classpath — <em>not</em> an actual key problem. See <a href="#2-jaxb-api-javax-namespace-on-the-classpath--key-pair-jdbc-on-java-9">Hardening §2</a>.</td>
+</tr>
+<tr>
+<td>snowsql PUT <code>Incorrect username or password</code> (JDBC works)</td>
+<td>An <strong>old</strong> <code>get_corelli_put_script</code> that predates auto-select is hardcoding password auth against a key-pair user. The current script chooses via <code>$CURRENT_PRIVATE_KEY_FILE</code> — update to it. See <a href="#3-snowsql-key-pair-for-the-internal-stage-put-corelli-pipeline">Hardening §3</a>.</td>
+</tr>
+<tr>
+<td>S3-staged load can't find the stage / <code>$OBJECT_STORAGE</code> unresolved</td>
+<td>The named object-storage connection (e.g. <code>S3_CONNECTION</code>) doesn't exist or its name ≠ <code>$OBJECT_STORAGE</code>. See <a href="#4-the-object_storage-connection-must-actually-exist">Hardening §4</a>.</td>
+</tr>
+<tr>
+<td>COPY: <code>User character length limit (N) exceeded</code> on a base64 column</td>
+<td>Should no longer occur: the transient volt staging now creates base64 columns at the dialect <strong>max</strong> <code>VARCHAR(16777216)</code> (dropped after load → free, can't overflow). If you see this on an older engine, upgrade — earlier builds sized the staging from an estimate (the SF-declared width × 4⁄3) and a longer-than-declared value (rich-text/HTML, compound address fields) could still overflow.</td>
+</tr>
+<tr>
+<td>Decoded value <code>String … is too long and would be truncated</code> into the target <code>_STAGE</code> table</td>
+<td>The decoded value exceeds the target column width. The engine now <strong>measures</strong> <code>MAX(LENGTH())</code> of each decoded column over the decoder view and <code>ALTER</code>s the target columns to fit before the insert, so this self-corrects. On Snowflake the cap is 16 MB; a single value beyond that genuinely can't be stored.</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top", "navigation.instant", "navigation.tracking", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+    
+  </body>
+</html>

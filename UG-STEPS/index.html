@@ -1366,6 +1366,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../SNOWFLAKE-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Snowflake
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../REDSHIFT-SETUP/" class="md-nav__link">
         
   
@@ -1641,6 +1662,27 @@
             Reference
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ARCHITECTURE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -2723,7 +2765,7 @@ After each run the engine stores that run's <code>PERIOD</code> (<code>…23:59:
 <p>The dedicated <strong>Salesforce</strong> source step. Like <a href="#jdbcsource"><code>Jdbcsource</code></a>, it only <strong>extracts and stages</strong> — it pulls one Salesforce <strong>SObject</strong> (e.g. <code>Case</code>, <code>Account</code>) into staged flat files, and you wire it to a platform-specific <strong><code>JdbcTarget…</code></strong> step that loads them (<a href="#snowflake"><code>JdbcTargetSnowflake</code></a>, <code>JdbcTargetRedshift</code>, <code>JdbcTargetClickhouse</code>, …). It's a specialization of <code>Datasource</code> (the engine's "requires a <code>Jdbcsource</code> or <code>Datasource</code> provider" rule is satisfied), so <strong>any <code>JdbcTarget</code> accepts it</strong> and the arrow-drawing whitelist needs no special case.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>SFSOURCE  ──▶  JdbcTarget&lt;Platform&gt;   (── ▶  optional SQLSCRIPT for delete policy)
 </code></pre></div>
-<p>It reads through a <strong>Salesforce <em>general/cloud connection</em></strong> (<code>ConnectForce</code>, the SOAP Partner API; set one up under <a href="../UG-ADMIN/">Admin ▸ Connections</a>). Extracted values are <strong>base64-encoded per SF field type</strong> so special characters survive the flat file; the target decodes them with the platform's base64 function (same mechanism as the <code>Jdbcsource</code> Encode list — see the Snowflake setup notes).</p>
+<p>It reads through a <strong>Salesforce <em>general/cloud connection</em></strong> (<code>ConnectForce</code>, the SOAP Partner API; set one up under <a href="../UG-ADMIN/">Admin ▸ Connections</a>). Extracted values are <strong>base64-encoded per SF field type</strong> so special characters survive the flat file; the target decodes them with the platform's base64 function (same mechanism as the <code>Jdbcsource</code> Encode list — see the <a href="../SNOWFLAKE-SETUP/">Snowflake setup notes</a>).</p>
 <p><img alt="A Salesforce pipeline — the SFSOURCE step (SF.Case) feeding a Snowflake target (STAGING.CASES_ZG) and a downstream reconcile, with an optional SQLSCRIPT for delete policy" src="../images/step-sfsource-dag.png" /></p>
 <h5 id="always-on-delete-flag--_sf_is_deleted">Always-on delete flag — <code>_sf_is_deleted</code><a class="headerlink" href="#always-on-delete-flag--_sf_is_deleted" title="Permanent link">&para;</a></h5>
 <p>Every SFSOURCE extract — full <strong>or</strong> delta — runs Salesforce <strong><code>queryAll()</code></strong>, so rows still in the <strong>Recycle Bin</strong> are returned, and the step surfaces the SF <code>IsDeleted</code> field to the target as a normalized flag column <strong><code>_sf_is_deleted</code></strong> (<code>true</code>/<code>false</code>). There is <strong>no toggle</strong> for this — it is unconditional. The step itself applies <strong>no delete policy</strong>; what happens to flagged rows is decided by <em>your</em> SQL after the load (see <a href="#handling-deleted-records-downstream">Handling deleted records</a> below). The name is lowercase on purpose — it sidesteps Snowflake's upper-casing of the mixed-case <code>IsDeleted</code>.</p>

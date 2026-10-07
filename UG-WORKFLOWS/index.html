@@ -1021,6 +1021,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../SNOWFLAKE-SETUP/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Snowflake
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../REDSHIFT-SETUP/" class="md-nav__link">
         
   
@@ -1296,6 +1317,27 @@
             Reference
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ARCHITECTURE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -2008,7 +2050,7 @@ tab: <code>N step(s) were saved at positions outside the canvas and could not be
 <ul>
 <li><strong>The job must be deployed</strong> (saved to the server) — the scheduler lists deployed workflows only.</li>
 <li><strong>A cron daemon must be running</strong> on the server for entries to fire. The Docker install supervises cron; on a bare host, confirm <code>cron</code>/<code>crond</code> is active.</li>
-<li><strong><code>$MAESTRO_ENGINE_OPTS</code> must be set</strong> in the server's <code>~/.env_integrator</code>. The scheduler emits it so scheduled runs get the same JVM flags as interactive runs — an older crontab hand-edited to a bare <code>java -jar …</code> (no opts) will <strong>silently fail</strong> scheduled Snowflake jobs (the Arrow <code>--add-opens</code> flag is missing). See SNOWFLAKE-SETUP.md.</li>
+<li><strong><code>$MAESTRO_ENGINE_OPTS</code> must be set</strong> in the server's <code>~/.env_integrator</code>. The scheduler emits it so scheduled runs get the same JVM flags as interactive runs — an older crontab hand-edited to a bare <code>java -jar …</code> (no opts) will <strong>silently fail</strong> scheduled Snowflake jobs (the Arrow <code>--add-opens</code> flag is missing). See <a href="../SNOWFLAKE-SETUP/">SNOWFLAKE-SETUP.md</a>.</li>
 <li><strong>Don't edit inside the managed block</strong> — keep your own cron lines outside the <code>#BEGIN/#END_MAESTRO_MANAGED_SCHEDULE</code> markers.</li>
 </ul>
 <h2 id="tying-it-together">Tying it together<a class="headerlink" href="#tying-it-together" title="Permanent link">&para;</a></h2>

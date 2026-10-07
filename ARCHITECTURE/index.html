@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://zgurung.github.io/eltmaestro-docs/MPP-SETUP/">
+        <link rel="canonical" href="https://zgurung.github.io/eltmaestro-docs/ARCHITECTURE/">
       
       
-        <link rel="prev" href="../CLICKHOUSE-AUTH/">
+        <link rel="prev" href="../OPERATIONS/">
       
       
-        <link rel="next" href="../INSTALL/">
+        <link rel="next" href="../VARIABLES/">
       
       
       <link rel="icon" href="../assets/elt-maestro-logo.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>MPP prerequisites - ELTMaestro Documentation</title>
+        <title>Architecture - ELTMaestro Documentation</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#mpp-integrator-setup--systemcfg-adoption" class="md-skip">
+        <a href="#architecture" class="md-skip">
           Skip to content
         </a>
       
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              MPP prerequisites
+              Architecture
             
           </span>
         </div>
@@ -729,8 +729,6 @@
       
   
   
-    
-  
   
   
     
@@ -742,11 +740,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
         
           
           <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
@@ -760,7 +758,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             Platform setup
@@ -855,30 +853,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    MPP prerequisites
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../MPP-SETUP/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -887,131 +865,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1-mpp-prerequisites-every-mpp-integrator" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. MPP prerequisites (every MPP integrator)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-polished-systemcfg--the-diff" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Polished system.cfg — the diff
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-where-each-variable-is-consumed-post-migration" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Where each variable is consumed (post-migration)
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. Where each variable is consumed (post-migration)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#a-cloud-connection-variable--object_storage--engine--wpf-shipped" class="md-nav__link">
-    <span class="md-ellipsis">
-      A. Cloud-connection variable → $OBJECT_STORAGE — engine + WPF (shipped)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#b-aws_credentials_file_output_command-removed--wpf-shipped" class="md-nav__link">
-    <span class="md-ellipsis">
-      B. $AWS_CREDENTIALS_FILE_OUTPUT_COMMAND removed — WPF (shipped)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#c-schema-maestro-integratorintegrator-db-odyssey-devdev--data-only" class="md-nav__link">
-    <span class="md-ellipsis">
-      C. Schema maestro-integrator→integrator, db odyssey-dev→dev — data only
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#d-b64expression--native-varbyte-decode--no-install-asset" class="md-nav__link">
-    <span class="md-ellipsis">
-      D. $B64EXPRESSION → native VARBYTE decode — no install asset
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#e-system_name-integratorredshift--safe" class="md-nav__link">
-    <span class="md-ellipsis">
-      E. $SYSTEM_NAME INTEGRATOR→REDSHIFT — safe
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#f-wpf-cloud-connection-name--s3_connection--blob_connection" class="md-nav__link">
-    <span class="md-ellipsis">
-      F. WPF cloud connection name — S3_CONNECTION / BLOB_CONNECTION
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#not-affected" class="md-nav__link">
-    <span class="md-ellipsis">
-      Not affected
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-rollout-checklist--complete" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Rollout checklist — complete
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1180,8 +1033,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -1191,11 +1046,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
         
           
           <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
@@ -1209,7 +1064,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             Reference
@@ -1220,10 +1075,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../ARCHITECTURE/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Architecture
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -1232,6 +1107,89 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-pieces" class="md-nav__link">
+    <span class="md-ellipsis">
+      The pieces
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-flow-at-runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data flow at runtime
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recent-migrations-worth-knowing-about" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recent migrations worth knowing about
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-state-lives" class="md-nav__link">
+    <span class="md-ellipsis">
+      Where state lives
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cross-side-mirroring-the-duplication-tax" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cross-side mirroring (the duplication tax)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-do-i-add-my-change" class="md-nav__link">
+    <span class="md-ellipsis">
+      "Where do I add my change?"
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adjacent-docs--source-of-truth-pointers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adjacent docs / source-of-truth pointers
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1444,105 +1402,63 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-mpp-prerequisites-every-mpp-integrator" class="md-nav__link">
+  <a href="#the-pieces" class="md-nav__link">
     <span class="md-ellipsis">
-      1. MPP prerequisites (every MPP integrator)
+      The pieces
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-polished-systemcfg--the-diff" class="md-nav__link">
+  <a href="#data-flow-at-runtime" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Polished system.cfg — the diff
+      Data flow at runtime
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-where-each-variable-is-consumed-post-migration" class="md-nav__link">
+  <a href="#recent-migrations-worth-knowing-about" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Where each variable is consumed (post-migration)
+      Recent migrations worth knowing about
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="3. Where each variable is consumed (post-migration)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#a-cloud-connection-variable--object_storage--engine--wpf-shipped" class="md-nav__link">
-    <span class="md-ellipsis">
-      A. Cloud-connection variable → $OBJECT_STORAGE — engine + WPF (shipped)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#b-aws_credentials_file_output_command-removed--wpf-shipped" class="md-nav__link">
-    <span class="md-ellipsis">
-      B. $AWS_CREDENTIALS_FILE_OUTPUT_COMMAND removed — WPF (shipped)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#c-schema-maestro-integratorintegrator-db-odyssey-devdev--data-only" class="md-nav__link">
-    <span class="md-ellipsis">
-      C. Schema maestro-integrator→integrator, db odyssey-dev→dev — data only
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#d-b64expression--native-varbyte-decode--no-install-asset" class="md-nav__link">
-    <span class="md-ellipsis">
-      D. $B64EXPRESSION → native VARBYTE decode — no install asset
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#e-system_name-integratorredshift--safe" class="md-nav__link">
-    <span class="md-ellipsis">
-      E. $SYSTEM_NAME INTEGRATOR→REDSHIFT — safe
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#f-wpf-cloud-connection-name--s3_connection--blob_connection" class="md-nav__link">
-    <span class="md-ellipsis">
-      F. WPF cloud connection name — S3_CONNECTION / BLOB_CONNECTION
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#not-affected" class="md-nav__link">
-    <span class="md-ellipsis">
-      Not affected
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-rollout-checklist--complete" class="md-nav__link">
+  <a href="#where-state-lives" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Rollout checklist — complete
+      Where state lives
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cross-side-mirroring-the-duplication-tax" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cross-side mirroring (the duplication tax)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-do-i-add-my-change" class="md-nav__link">
+    <span class="md-ellipsis">
+      "Where do I add my change?"
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adjacent-docs--source-of-truth-pointers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adjacent docs / source-of-truth pointers
     </span>
   </a>
   
@@ -1563,105 +1479,316 @@
                   
 
 
-<h1 id="mpp-integrator-setup--systemcfg-adoption">MPP integrator setup + <code>system.cfg</code> adoption<a class="headerlink" href="#mpp-integrator-setup--systemcfg-adoption" title="Permanent link">&para;</a></h1>
-<p>How to stand up an MPP target (Redshift / Synapse / Snowflake / …) end to end, <strong>plus</strong> the polished <code>system.cfg</code> standard (<code>$OBJECT_STORAGE</code> etc.) and where the engine / WPF read each variable.</p>
-<blockquote>
-<p><strong>Status (2026-05-30): shipped.</strong> The <code>$OBJECT_STORAGE</code> standard is live — engine + WPF read <code>$OBJECT_STORAGE</code> with a <code>$CORELLI_CONNECTION</code> fallback (code <code>e011b0611</code>, hotswapped via build #294/#295), and <strong>all four MPP integrators' <code>system.cfg</code> have migrated</strong> (<code>redshift</code> <code>61fbc7805</code>, <code>sparksql</code> <code>68251f540</code>, <code>snowflake</code>+<code>synapse</code> <code>f940cc04a</code>). No integrator defines <code>$CORELLI_CONNECTION</code> anymore, so the fallback is now defensive-only (custom / un-migrated deploys). Connection-name standard: <strong><code>S3_CONNECTION</code></strong> for the S3 integrators (redshift / sparksql / snowflake) and <strong><code>BLOB_CONNECTION</code></strong> for synapse (Azure Blob). §2–§3 below document the diff and where each variable is consumed; §4 is the (now-complete) rollout checklist for reference.</p>
-</blockquote>
-<h2 id="1-mpp-prerequisites-every-mpp-integrator">1. MPP prerequisites (every MPP integrator)<a class="headerlink" href="#1-mpp-prerequisites-every-mpp-integrator" title="Permanent link">&para;</a></h2>
-<p>A working MPP integrator needs all of:</p>
-<ul>
-<li><strong>A JDBC service account</strong> (example: <code>rsadmin</code>) with:</li>
-<li><strong>Read + write to the default object-storage bucket</strong> (S3 for Redshift, Blob for Synapse) — the staging area for <strong>load and unload</strong> files.</li>
-<li><strong>A schema where temp tables can be dynamically created and dropped</strong> (example: <code>integrator</code>). The engine creates/drops <code>TEMP_TABLE</code> objects here every run.</li>
-<li><strong>Read + write on the other schema objects</strong> it touches while ingesting, transforming, and building data marts (medallion: bronze → silver → gold).</li>
-<li><strong>WPF connections</strong> (<a href="../UG-ADMIN/">Administration &amp; Setup</a>):</li>
-<li>A <strong>JDBC connection</strong> using the platform's <strong><code>MPP_Driver_*</code> jar</strong> (<a href="../UG-ADMIN/#database-connections-jdbc">why</a>) and connection string, authenticated as the service account (<code>rsadmin</code>).</li>
-<li>A <strong>cloud connection</strong> (<a href="../UG-ADMIN/#setting-up-an-aws-s3-connection">setup</a>) pointing at the default bucket, named to match the integrator's <code>$OBJECT_STORAGE</code>: <strong><code>S3_CONNECTION</code></strong> for the AWS-S3 integrators (Redshift / SparkSQL / Snowflake) and <strong><code>BLOB_CONNECTION</code></strong> for Synapse (Azure Blob). Firebolt is out of scope.</li>
-<li><strong>On the Maestro engine server:</strong> the <strong>AWS CLI must be installed and configured</strong> — run <code>aws configure</code> for the OS user the engine runs as (access key / secret / default region), then verify with <code>aws s3 ls</code>. The loader stages to object storage with <code>aws s3 cp</code> / <code>aws s3 rm</code> shell commands that run on this server, so they fail if the CLI isn't configured. Walk-through with screenshots: <a href="../REDSHIFT-SETUP/#2-create-the-s3-connection--aws-credentials">REDSHIFT-SETUP.md</a>.</li>
-<li><strong>base64 decode is native</strong> on Redshift — <code>$B64EXPRESSION=FROM_VARBYTE(TO_VARBYTE($COLUMN,'base64'),'utf-8')::$DATATYPE</code>, so there is <strong>no Python UDF to install</strong> (<a href="../REDSHIFT-SETUP/#3-base64-decode-native-no-udf">REDSHIFT-SETUP §3</a>).</li>
-</ul>
-<h2 id="2-polished-systemcfg--the-diff">2. Polished <code>system.cfg</code> — the diff<a class="headerlink" href="#2-polished-systemcfg--the-diff" title="Permanent link">&para;</a></h2>
-<p><code>redshift/system.cfg</code> (legacy → shipped polished). The other integrators took the same <code>$OBJECT_STORAGE</code> change (synapse uses <code>BLOB_CONNECTION</code>):</p>
+<h1 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h1>
+<p>ELTMaestro is a metadata-driven ELT/data-integration platform. A Windows
+WPF client lets users build pipelines visually; those pipelines are
+persisted as job XML in a PostgreSQL audit/metadata database and executed
+by a Java batch engine that pushes work into cloud data warehouses
+(Snowflake, Redshift, Synapse, ClickHouse, Greenplum, Netezza,
+Yellowbrick, Databricks, Spark, ...).</p>
+<p>This doc is the <strong>one-pager for newcomers</strong>: what each piece is, how they
+connect, what's changed recently. Each component has its own deep-dive
+file linked from the table.</p>
+<h2 id="the-pieces">The pieces<a class="headerlink" href="#the-pieces" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Variable</th>
-<th>Legacy</th>
-<th>Shipped</th>
-<th>Kind</th>
+<th>Component</th>
+<th>Subdir</th>
+<th>Stack</th>
+<th>Role</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>$SYSTEM_DEFAULT_DATABASE</code></td>
-<td><code>odyssey-dev</code></td>
-<td><code>dev</code></td>
-<td>data</td>
+<td>WPF client</td>
+<td><code>source/root-win-client/</code></td>
+<td>.NET / WPF / XAML (Windows)</td>
+<td>The visual designer + operator UI. Users build jobs, browse metadata, run/monitor batches. Talks to the meta-service over SOAP. Out of scope for this doc set today — its docs will land here later.</td>
 </tr>
 <tr>
-<td><code>$SYSTEM_DEFAULT_SCHEMA</code></td>
-<td><code>maestro-integrator</code></td>
-<td><code>integrator</code></td>
-<td>data</td>
+<td>Meta-service</td>
+<td><code>source/root-engine-service/MaestroMetaDataProviderService/</code></td>
+<td>Spring Boot 3.3.5 + Java 21 + embedded Jetty 12 + Eclipse Metro 4 (JAX-WS RI)</td>
+<td>Single <code>@WebService</code> class (<code>MaestroMeta</code>, ~5,000 lines, ~165 SOAP operations — every public method is exposed in JAX-WS implicit mode). Handles authentication, metadata CRUD, admin commands, audit, file fetches. See SERVICE.md.</td>
 </tr>
 <tr>
-<td><code>$B64EXPRESSION</code></td>
-<td><code>"maestro-integrator".b64_decode(...)</code></td>
-<td><code>FROM_VARBYTE(TO_VARBYTE(…,'base64'),'utf-8')::$DATATYPE</code> (native)</td>
-<td>data</td>
+<td>Batch engine</td>
+<td><code>source/root-engine-core/</code></td>
+<td>Java 21 + Spark 4.1.1 + Scala 2.13</td>
+<td>Reads job XML, builds a step DAG, launches each step as a thread, drives them to completion. Each step is a <code>BaseStep</code> subclass; the catalog is wired through <code>StepProvider</code>. See ENGINE.md.</td>
 </tr>
 <tr>
-<td><strong>cloud connection var</strong></td>
-<td><code>$S3_CONNECTION=CORELLI_S3_CONNECTION</code> + <code>$CORELLI_CONNECTION=CORELLI_S3_CONNECTION</code></td>
-<td><strong><code>$OBJECT_STORAGE=S3_CONNECTION</code></strong></td>
-<td><strong>rename (code shipped)</strong></td>
+<td>Shared lib</td>
+<td><code>source/root-engine-shared/</code></td>
+<td>Java 21</td>
+<td>A tiny module that holds the two <code>org.maestro.share.*</code> classes safely shareable between engine + service (<code>Crypt</code>, <code>MaestroCompressor</code>). The rest of <code>share/</code> is deliberately duplicated. See SHARED.md.</td>
 </tr>
 <tr>
-<td><code>$AWS_CREDENTIALS_FILE_OUTPUT_COMMAND</code></td>
-<td><code>cat ~/.aws/credentials</code></td>
-<td><strong>removed</strong></td>
-<td><strong>removal (code shipped)</strong></td>
+<td>Install + deploy</td>
+<td><code>source/root-engine-install/</code></td>
+<td>Bash / SQL / Dockerfile</td>
+<td>One source of truth for both <strong>Docker image build</strong> (via the Dockerfile) and <strong>portable bare-metal install</strong> (via <code>install.sh</code>). Holds <code>initdb.sql</code>, metadata seeds, migrations, JDBC driver list, admin commands (<code>mstart-*</code>, <code>mstop-*</code>), entrypoint scripts. See <a href="../INSTALL/">INSTALL.md</a> for the operator view; the dev view lives in this file.</td>
 </tr>
 <tr>
-<td><code>$SYSTEM_NAME</code></td>
-<td><code>INTEGRATOR</code></td>
-<td><code>REDSHIFT</code></td>
-<td>cosmetic</td>
+<td>Audit / metadata DB</td>
+<td><code>source/root-engine-install/db/initdb.sql</code></td>
+<td>PostgreSQL 16</td>
+<td>The <code>sqlmaestro</code> control-plane DB — 83 tables + 30 views holding the <strong>catalog</strong> (jobs, connections, control tests, config; owned by the meta-service) and the <strong>execution record</strong> (runs, per-step status, logs, metrics; written by the engine). Job definitions themselves are XML files on disk, not rows. See <a href="../DATA-MODEL/">DATA-MODEL.md</a> and the column-level <a href="../DATA-MODEL-SPINE/">DATA-MODEL-SPINE.md</a>.</td>
+</tr>
+<tr>
+<td>CI</td>
+<td><code>source/Jenkinsfile</code></td>
+<td>Declarative Jenkins pipeline</td>
+<td>Builds both Java artifacts, builds + pushes the Docker image, optionally deploys, prunes the registry, publishes installer tarballs. See CI-CD.md.</td>
+</tr>
+<tr>
+<td>Reactor pom</td>
+<td><code>source/pom.xml</code></td>
+<td>Maven aggregator</td>
+<td>Builds engine-shared → engine-core + service in dependency order from <code>source/</code>. Added 2026-05-26 to remove the manual <code>mvn install ../root-engine-shared first</code> footgun.</td>
 </tr>
 </tbody>
 </table>
-<h2 id="3-where-each-variable-is-consumed-post-migration">3. Where each variable is consumed (post-migration)<a class="headerlink" href="#3-where-each-variable-is-consumed-post-migration" title="Permanent link">&para;</a></h2>
-<h3 id="a-cloud-connection-variable--object_storage--engine--wpf-shipped">A. Cloud-connection variable → <code>$OBJECT_STORAGE</code> — <strong>engine + WPF (shipped)</strong><a class="headerlink" href="#a-cloud-connection-variable--object_storage--engine--wpf-shipped" title="Permanent link">&para;</a></h3>
-<p>The S3/Blob connection is now resolved through <strong><code>BaseStep.getObjectStorageConnectionName()</code></strong> (<code>root-engine-core/.../core/parts/BaseStep.java:678</code>), which reads <code>$OBJECT_STORAGE</code> and falls back to <code>$CORELLI_CONNECTION</code> when an integrator hasn't migrated. <code>getVarData</code> passes an undefined variable through unchanged, so an unresolved <code>$OBJECT_STORAGE</code> still starts with <code>$</code> — that's the fallback sentinel.</p>
+<h2 id="data-flow-at-runtime">Data flow at runtime<a class="headerlink" href="#data-flow-at-runtime" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>                          .--- WPF client (Windows) ---.
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>                          |                            |
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>                          | designer / operator UI     |
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>                          '-----------+----------------'
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>                                      | SOAP/HTTPS  (port 8181)
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>                                      |   WSDL @ /MaestroMetaDataProviderService/MaestroMetaService
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>                                      v
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>                          .--- Spring Boot meta-service (Linux/Docker or bare metal) ---.
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>                          |  - authenticates users (t_user)                              |
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>                          |  - reads/writes job XML, connections, metadata               |
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>                          |  - shells out to admin scripts (Runtime.exec)                |
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>                          |  - audit (auditPerformanceMetricsStart/Stop)                 |
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>                          '---------+----------------------+---------------------------'
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>                                    | JDBC                 | spawns (mstart-*) / fork+exec
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>                                    v                      v
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>                          .--- PostgreSQL ---.   .--- Engine batches (sqlm.jar, per-job JVM) ---.
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>                          |  sqlmaestro DB    |   |  RunBatch.main(--batch job.xml ...)         |
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>                          |  ~109 tables      |&lt;--+  reads jobs/connections/watermarks via JDBC  |
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>                          |  audit + meta     |   |  builds step DAG, launches step threads      |
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>                          '-------------------'   |  pushes work into target warehouses          |
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>                                                  '-+--------+-----------+----------------------'
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>                                                    |        |           |
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>                                                    v        v           v
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>                                              Snowflake  Redshift   ClickHouse  ... (any target with a JDBC driver,
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>                                                                                     or S3 / Azure Blob via SDK)
+</code></pre></div>
+<p>Two distinct JVMs at runtime:</p>
 <ul>
-<li><strong>engine-core</strong> — <code>getObjectStorageConnectionName()</code> at the active sites:</li>
-<li><code>steps/pipeline/core/JdbcTargetRedShift.java:135</code></li>
-<li><code>parallel/steps/ParallelJdbcProcessorNode.java:249, 532, 644</code></li>
-<li><strong>WPF</strong> — same <code>$OBJECT_STORAGE</code>-then-<code>$CORELLI_CONNECTION</code> fallback in <code>Steps/Spark/SparkGroupLoader.cs</code> and the <code>Steps/Pipeline/JdbcTargetRedShiftWindow.xaml</code> header label.</li>
-<li><strong>Cross-integrator:</strong> because every consumer falls back, an integrator migrates by editing only its own <code>system.cfg</code> — no code change. All four are already migrated.</li>
+<li><strong>Long-running:</strong> the Spring Boot meta-service (one process, serves SOAP).</li>
+<li><strong>Short-lived per batch:</strong> each batch run is its own <code>java -jar sqlm.jar --batch ...</code> invocation, spawned by <code>mstart-*</code> admin scripts that the meta-service calls via <code>Runtime.exec</code>. The engine doesn't run inside the service JVM.</li>
 </ul>
-<h3 id="b-aws_credentials_file_output_command-removed--wpf-shipped">B. <code>$AWS_CREDENTIALS_FILE_OUTPUT_COMMAND</code> removed — <strong>WPF (shipped)</strong><a class="headerlink" href="#b-aws_credentials_file_output_command-removed--wpf-shipped" title="Permanent link">&para;</a></h3>
-<p><code>Steps/Redshift/RSFileLoaderWindow.xaml.cs</code> previously aborted the loader dialog when this variable was empty. It now reads it <strong>best-effort inside a try/catch and no longer aborts</strong> (<code>:361-364</code>): if the variable is absent the credentials box just stays empty and the dialog remains usable. The engine stages to object storage via the host's configured AWS CLI / IAM role instead of parsing <code>~/.aws/credentials</code>. (engine <code>core/parts/Job.java:226</code> reference was already commented out.)</p>
-<h3 id="c-schema-maestro-integratorintegrator-db-odyssey-devdev--data-only">C. Schema <code>maestro-integrator</code>→<code>integrator</code>, db <code>odyssey-dev</code>→<code>dev</code> — <strong>data only</strong><a class="headerlink" href="#c-schema-maestro-integratorintegrator-db-odyssey-devdev--data-only" title="Permanent link">&para;</a></h3>
-<p>Data-driven through <code>$SYSTEM_DEFAULT_SCHEMA</code>/<code>$SYSTEM_DEFAULT_DATABASE</code> (feed the <code>get_*</code> introspection templates' <code>$SCHEMA</code>/<code>$DATABASE</code> and temp-table creation). Operational only: the <code>integrator</code> schema must exist with create/drop temp-table rights.</p>
-<h3 id="d-b64expression--native-varbyte-decode--no-install-asset">D. <code>$B64EXPRESSION</code> → native VARBYTE decode — <strong>no install asset</strong><a class="headerlink" href="#d-b64expression--native-varbyte-decode--no-install-asset" title="Permanent link">&para;</a></h3>
-<p>Redshift decodes base64 natively (<code>FROM_VARBYTE(TO_VARBYTE($COLUMN,'base64'),'utf-8')::$DATATYPE</code>) — no Python UDF, so there's nothing to install on the cluster. See <a href="../REDSHIFT-SETUP/#3-base64-decode-native-no-udf">REDSHIFT-SETUP §3</a>.</p>
-<h3 id="e-system_name-integratorredshift--safe">E. <code>$SYSTEM_NAME</code> INTEGRATOR→REDSHIFT — <strong>safe</strong><a class="headerlink" href="#e-system_name-integratorredshift--safe" title="Permanent link">&para;</a></h3>
-<p>Defined in every integrator's <code>system.cfg</code> but <strong>read by no engine / service / WPF code</strong> (grep clean). Cosmetic. (After a destructive redeploy, the live server is reseeded from the image, so its <code>system.cfg</code>s match the repo — no drift.)</p>
-<h3 id="f-wpf-cloud-connection-name--s3_connection--blob_connection">F. WPF cloud connection name — <strong><code>S3_CONNECTION</code> / <code>BLOB_CONNECTION</code></strong><a class="headerlink" href="#f-wpf-cloud-connection-name--s3_connection--blob_connection" title="Permanent link">&para;</a></h3>
-<p><code>$OBJECT_STORAGE=S3_CONNECTION</code> and <code>RedshiftStage.{java,cs}</code> default <code>connection = "S3_CONNECTION"</code>, so the AWS-S3 General/Cloud connection must be named exactly <code>S3_CONNECTION</code>. Synapse stages to Azure Blob, so its connection must be named <strong><code>BLOB_CONNECTION</code></strong> (<code>$OBJECT_STORAGE=BLOB_CONNECTION</code>).</p>
-<h3 id="not-affected">Not affected<a class="headerlink" href="#not-affected" title="Permanent link">&para;</a></h3>
+<h2 id="recent-migrations-worth-knowing-about">Recent migrations worth knowing about<a class="headerlink" href="#recent-migrations-worth-knowing-about" title="Permanent link">&para;</a></h2>
+<p>Anyone reading code from before 2026-05 will see references to a different stack. Quick orientation:</p>
+<table>
+<thead>
+<tr>
+<th>What</th>
+<th>Was</th>
+<th>Is</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Java</td>
+<td>1.8</td>
+<td><strong>21</strong> (LTS through Sep 2031)</td>
+<td>2026-05-22</td>
+</tr>
+<tr>
+<td>Spark</td>
+<td>3.5.3 (Scala 2.12)</td>
+<td><strong>4.1.1</strong> (Scala 2.13)</td>
+<td>2026-05-22</td>
+</tr>
+<tr>
+<td>Servlet container</td>
+<td>GlassFish 4.1.2 (asadmin / domain1)</td>
+<td><strong>Spring Boot 3.3.5 + embedded Jetty 12</strong></td>
+<td>2026-05-25</td>
+</tr>
+<tr>
+<td>Meta-service packaging</td>
+<td><code>.war</code></td>
+<td><strong>Executable Spring Boot fat-jar</strong></td>
+<td>2026-05-25</td>
+</tr>
+<tr>
+<td>Source-side CDC (Oracle LogMiner)</td>
+<td>Present (engine: <code>miner/extract</code>, <code>miner/replay</code>, <code>RunReplicator</code>, <code>BenchLogminerOraEvents</code>, <code>MinerWatermark</code>; service: <code>org.maestro.logminer.LogScanner</code> + <code>MaestroMeta.minerGetFileContent</code> SOAP op; WPF: <code>LogMinerMain</code>, <code>LogMinerSourceEditor</code>, <code>LogMinerTargetEditor</code>, <code>OracleCdcConfiguration</code>, <code>AddLogminerReplicationWindow</code>, <code>AddModifyReplayTable</code>; install: <code>mstart-logminer</code> / <code>mstop-logminer</code> admin scripts, <code>db/initdb.sql</code> <code>logminer.*</code> schema with 9 tables, <code>db/metadata/integrators/logminer/</code> config templates)</td>
+<td><strong>Fully removed across all four code subdirs + docs</strong> (engine <code>9a9dadc1a</code>, service <code>232aa9274</code>, WPF <code>6946ee14f</code>, install <code>0d0ac26b0</code>)</td>
+<td>2026-05-26</td>
+</tr>
+<tr>
+<td>Shared share/ classes</td>
+<td>Duplicated between engine + service</td>
+<td><strong>Extracted <code>engine-shared</code> for <code>Crypt</code> + <code>MaestroCompressor</code></strong>; rest still duplicated (intentional drift)</td>
+<td>2026-05-26</td>
+</tr>
+<tr>
+<td>Maven build flow</td>
+<td>Each module built standalone (<code>mvn -f &lt;child&gt;/pom.xml</code>)</td>
+<td><strong>Reactor at <code>source/pom.xml</code></strong> builds all three in dependency order; used by Jenkins (<code>a009ee1ce</code>), Dockerfile builder stages (<code>a009ee1ce</code>), and <code>bin/publish.sh</code> (<code>f667e13a3</code>)</td>
+<td>2026-05-26</td>
+</tr>
+<tr>
+<td>Jenkins polling on <code>master-claude-base</code></td>
+<td><code>H/5 * * * *</code></td>
+<td><strong>Manual builds only</strong> (parallel Claude sessions made polled builds noisy)</td>
+<td>2026-05-26</td>
+</tr>
+<tr>
+<td>JDBC driver catalog</td>
+<td>17 + 12 = 29 driver/copy entries; MySQL 8.0.11, MariaDB 2.7.2, Snowflake 3.13.28, Firebolt 3.4.0, DB2 jcc 11.5.9.0, jt400 marked manual, plus 3 legacy/orphan entries (<code>ojdbc6.jar</code>, <code>db2jcc.jar</code> JDBC-3, <code>exasol-jdbc-7.1.11.jar</code>). Redshift driver class seed had stale legacy class name <code>com.amazon.redshift.jdbc41.Driver</code> that no longer exists in the shipped 2.x jar. <code>t_mpp_system</code> seed COPY block silently failed every destructive deploy (3-col header, 2-col data, NOT NULL no-default column).</td>
+<td><strong>14 + 12 = 26 entries at the time — now 28 (15 + 13) as of 2026-06-09</strong> (added <code>hive-jdbc-3.1.3-standalone</code> + <code>jaxb-api 2.3.1</code> Java-11 companion); all Maven-sourced drivers at current latest: PostgreSQL 42.7.11, MySQL <code>com.mysql:mysql-connector-j:9.3.0</code> (artifact migration), MariaDB 3.5.3, Snowflake 3.17.1, Redshift 2.1.0.33, Firebolt 3.6.5, DB2 jcc 12.1.0.0, jt400 21.0.4 (now on Maven), Exasol 25.2.5, mssql-jdbc 12.10.0.jre11, clickhouse4j 1.4.4 (pinned). Orphans dropped. Redshift driver class seed fixed to <code>com.amazon.redshift.Driver</code>. <code>t_mpp_system</code> schema given <code>DEFAULT ''::character varying</code> on <code>platform_license_string</code> + COPY trimmed to 2 cols (commits <code>e423a81d2</code> <code>c3db57cab</code> <code>3064076d5</code> <code>411032303</code>). Live as of image <code>eltmaestro:17.0.4.268</code>.</td>
+<td>2026-05-27</td>
+</tr>
+</tbody>
+</table>
+<p>Things that <strong>look</strong> like they were touched but stayed:</p>
 <ul>
-<li><strong>Meta-service</strong> (<code>root-engine-service</code>) — zero references to any of the renamed/removed variables.</li>
+<li>The <code>isCDC</code> / <code>$QUERY_CDC_DELETE</code> / <code>$QUERY_CDC_INSERT</code> pattern in the engine is <strong>not</strong> LogMiner CDC. Despite the name, it's the engine's generic upsert primitive (delete-then-insert by key), used by SCD1/SCD2/Table/Onstage merge. Preserved.</li>
+<li>The <code>Helper</code>, <code>JdbcConnection</code>, <code>JdbcConnectionManager</code>, <code>JdbcConnectionTracker</code>, <code>PG</code> files in <code>org.maestro.share.*</code> are still duplicated between engine and service. Heavy drift (thousands of lines) between batch-runtime and SOAP-runtime needs; unifying would mean rewriting both sides to agree. See SHARED.md for the audit numbers.</li>
 </ul>
-<h2 id="4-rollout-checklist--complete">4. Rollout checklist — <strong>complete</strong><a class="headerlink" href="#4-rollout-checklist--complete" title="Permanent link">&para;</a></h2>
+<h2 id="where-state-lives">Where state lives<a class="headerlink" href="#where-state-lives" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Location</th>
+<th>Lifecycle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Job definitions</td>
+<td><code>t_job_meta</code> etc. in <code>sqlmaestro</code> Postgres</td>
+<td>Persisted across upgrades. Edited via the WPF client; consumed by the engine.</td>
+</tr>
+<tr>
+<td>Job XML (per-run material)</td>
+<td>Written under <code>data/workflow/</code> by the meta-service before each <code>RunBatch</code></td>
+<td>Recreated each run.</td>
+</tr>
+<tr>
+<td>Audit / batch run history</td>
+<td><code>sqlmaestro</code> Postgres</td>
+<td>Persisted across upgrades.</td>
+</tr>
+<tr>
+<td>Connection definitions</td>
+<td><code>t_jdbc</code> etc. in <code>sqlmaestro</code></td>
+<td>Persisted.</td>
+</tr>
+<tr>
+<td>Watermarks (incremental loads)</td>
+<td><code>t_high_watermark</code> etc.</td>
+<td>Persisted. Read/written by the engine.</td>
+</tr>
+<tr>
+<td>Halt files</td>
+<td><code>EngineState.haltFile</code> on disk under the install dir</td>
+<td>Per-run; created to terminate a running batch.</td>
+</tr>
+<tr>
+<td>Container volumes (Docker deploy)</td>
+<td><code>pgdata</code> (audit DB), <code>hdfs</code> (Spark warehouse), <code>data</code> (workflows + logs)</td>
+<td>Named docker volumes. Survive container restarts; wiped only on <code>DESTRUCTIVE=true</code> deploys.</td>
+</tr>
+<tr>
+<td>Bare-metal layout</td>
+<td><code>/data/iserver/</code> (see <a href="../OPERATIONS/">OPERATIONS.md</a> for the full tree)</td>
+<td>Audit DB + workflows + keystore preserved across upgrades; binaries and <code>pgsql.factory/</code> are replaced.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="cross-side-mirroring-the-duplication-tax">Cross-side mirroring (the duplication tax)<a class="headerlink" href="#cross-side-mirroring-the-duplication-tax" title="Permanent link">&para;</a></h2>
+<p>The five <code>org.maestro.share.*</code> files (<code>Helper</code>, <code>JdbcConnection</code>,
+<code>JdbcConnectionManager</code>, <code>JdbcConnectionTracker</code>, <code>PG</code>) are duplicated
+between the engine and the service. The drift is <strong>intentional</strong> — the
+service has SOAP-runtime concerns (audit metrics, token validation,
+table-maintenance methods) the engine doesn't, and the engine has
+batch-runtime concerns (<code>BaseStep</code>-typed signatures, dialect templates,
+script execution) the service doesn't.</p>
+<p>Implication for any change to those five files: <strong>check whether the
+same code path exists on the other side and whether the same fix is
+needed there too.</strong> SHARED.md has the full audit (LOC
+drift, javap public-API comparison, side-by-side behavioral examples)
+and a checklist for bug-fix mirroring.</p>
+<p><code>Crypt</code> and <code>MaestroCompressor</code> are the only <code>share/</code> classes actually
+shared via the <code>engine-shared</code> Maven module. Everything else is paid
+duplicates.</p>
+<h2 id="where-do-i-add-my-change">"Where do I add my change?"<a class="headerlink" href="#where-do-i-add-my-change" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Goal</th>
+<th>Subdir</th>
+<th>Key file</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>New job/step type</td>
+<td><code>source/root-engine-core/src/main/java/org/maestro/engine/steps/...</code></td>
+<td>Register in <code>StepProvider.getBaseStep(...)</code></td>
+</tr>
+<tr>
+<td>New SOAP method</td>
+<td><code>source/root-engine-service/.../MaestroMeta.java</code></td>
+<td>Add a <code>public</code> method on <code>MaestroMeta</code>; Metro picks it up at startup</td>
+</tr>
+<tr>
+<td>New cloud-warehouse target</td>
+<td><code>engine/steps/&lt;backend&gt;/core/</code> + <code>pipeline/core/JdbcTarget&lt;Backend&gt;.java</code></td>
+<td>Cross-reference an existing backend</td>
+</tr>
+<tr>
+<td>Bug fix in shared <code>Helper.java</code> / <code>PG.java</code> / <code>JdbcConnection.java</code></td>
+<td><strong>Both</strong> engine + service copies (they're duplicated; see SHARED.md)</td>
+<td>—</td>
+</tr>
+<tr>
+<td>New environment variable read at runtime</td>
+<td>Engine: <code>Helper.getEnvironmentValue("X")</code>. Service: same Helper plus a <code>MaestroLifecycle</code> hook if it needs init-time setup.</td>
+<td>—</td>
+</tr>
+<tr>
+<td>New admin command</td>
+<td><code>source/root-engine-install/admin.commands/mfoo</code> + register on PATH via <code>env_integrator</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>New DB schema change</td>
+<td><code>source/root-engine-install/db/migrations/NNNN_description.sql</code></td>
+<td>Tracked in <code>schema_version</code>; applied by both Docker entrypoint and bare-metal <code>update-server.sh</code>. Never edit a migration that's already shipped.</td>
+</tr>
+<tr>
+<td>New JDBC driver</td>
+<td><code>source/root-engine-install/jdbc_list.json</code> (URL + filename); <code>fetch-jdbc-drivers.sh</code> downloads it at build time</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Adjust the Docker image build</td>
+<td><code>source/root-engine-install/docker/Dockerfile</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>Adjust the Jenkins pipeline</td>
+<td><code>source/Jenkinsfile</code></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h2 id="adjacent-docs--source-of-truth-pointers">Adjacent docs / source-of-truth pointers<a class="headerlink" href="#adjacent-docs--source-of-truth-pointers" title="Permanent link">&para;</a></h2>
 <ul>
-<li>[x] <strong>engine-core</strong>: <code>$OBJECT_STORAGE</code> resolver <code>BaseStep.getObjectStorageConnectionName()</code> with <code>$CORELLI_CONNECTION</code> fallback; all call sites updated (<code>e011b0611</code>).</li>
-<li>[x] <strong>WPF</strong>: same fallback in <code>SparkGroupLoader.cs</code>, <code>JdbcTargetRedShiftWindow.xaml</code>; <code>RSFileLoaderWindow</code> no longer hard-requires <code>$AWS_CREDENTIALS_FILE_OUTPUT_COMMAND</code>.</li>
-<li>[x] <strong>install</strong>: <code>$OBJECT_STORAGE</code> rolled into all four integrators' <code>system.cfg</code> (<code>61fbc7805</code> / <code>68251f540</code> / <code>f940cc04a</code>). (base64 decode is native — no UDF asset.)</li>
-<li>[x] <strong>build/deploy</strong>: engine-core jar hotswapped (#294/#295); WPF rebuilt via <code>build-portable</code>. Meta-service unaffected.</li>
-<li>[ ] <strong>operator (per environment)</strong>: create the <code>S3_CONNECTION</code> (or <code>BLOB_CONNECTION</code>) cloud connection, the <code>integrator</code> schema (create/drop temp-table rights), and push the live <code>system.cfg</code> via the WPF Integrator Config admin tab. (The live redshift cfg push is still operator-driven — <code>system.cfg</code> has no hotswap path.)</li>
+<li>BookStack wiki at <code>http://wiki.lan/books/developer-guide-engine-server-postgres-factory</code> — LAN-only, deeper internals of <code>root-engine-install</code>. The BookStack chapter content still references pre-migration paths (<code>root-engine-server/</code>, GlassFish, <code>asadmin</code>); use this <code>docs-md/</code> tree as the more current source until that wiki sweep happens.</li>
+<li><code>source/root-engine-core/CLAUDE.md</code> — instructions used by Claude Code sessions when working in this repo. Doubles as a brief tour of the engine.</li>
 </ul>
 
 
