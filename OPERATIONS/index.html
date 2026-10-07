@@ -2215,12 +2215,59 @@ only the <code>JOBSTEP</code> wrapper. What stays in your hands:</p>
    exported in a shell is overwritten. The Integrator Config tab (above) can edit the file too.
    Each batch JVM reads it at start; nothing restarts. The first connection of a run logs
    <code>JDBC socket timeout is &lt;n&gt;s (ELTM_JDBC_SOCKET_TIMEOUT_SECONDS)</code> so you can see it took.</li>
-<li><strong>A batch already wedged</strong> by a run that predates the patch is not rescued by it: stop it from the
-   client (Run ▸ Stop, or the batch's Stop) — the stop matches the batch id in the log — then re-run.</li>
-<li>If you ever see <code>****** JDBC ******: refusing to release connection … locked by [thread]</code> the
-   batch is still correct, but a code path tried to release a connection owned by another thread;
-   send the log — that is the bug class that produced the shared socket.</li>
+<li><strong>If a source extract runs out of memory, check the driver before raising the heap.</strong> Until
+   <code>24e96f84b</code> (5 Oct 2026) the fetch size was applied after the query had already run, which on
+   MariaDB and MySQL meant the driver had already buffered the whole table. On a patched engine
+   MariaDB streams on whatever positive fetch size the step already has — nothing to set. <strong>MySQL
+   needs <code>ELTM_JDBC_MYSQL_STREAMING=true</code></strong> in the same <code>~/.env_integrator</code>, because row-by-row
+   streaming on Connector/J also makes the driver throw if anything else runs on that connection
+   before the result set is drained. Off by default; turn it on only for a site whose MySQL extracts
+   are big enough to threaten the heap, and confirm it took from the step log line
+   <code>Fetch Size: streaming (MySQL Connector/J, row by row; ELTM_JDBC_MYSQL_STREAMING=true)</code>.
+   A fetch size of 10 or less still means "driver default". What the setting does per driver:</li>
 </ol>
+<table>
+<thead>
+<tr>
+<th>Driver</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MariaDB Connector/J</strong></td>
+<td>Any positive fetch size streams in batches of that size. <strong>On by default</strong> — nothing to set.</td>
+</tr>
+<tr>
+<td><strong>MySQL Connector/J</strong></td>
+<td>Streams row by row only with <code>ELTM_JDBC_MYSQL_STREAMING=true</code>, and then <strong>throws if anything else runs on that connection before the result set is drained</strong>. Opt-in for that reason.</td>
+</tr>
+<tr>
+<td>Oracle, PostgreSQL, Netezza, Redshift, …</td>
+<td>The positive size is the normal prefetch hint, unchanged.</td>
+</tr>
+<tr>
+<td>3. <strong>A batch already wedged</strong> by a run that predates the patch is not rescued by it: stop it from the</td>
+<td></td>
+</tr>
+<tr>
+<td>client (Run ▸ Stop, or the batch's Stop) — the stop matches the batch id in the log — then re-run.</td>
+<td></td>
+</tr>
+<tr>
+<td>4. If you ever see <code>****** JDBC ******: refusing to release connection … locked by [thread]</code> the</td>
+<td></td>
+</tr>
+<tr>
+<td>batch is still correct, but a code path tried to release a connection owned by another thread;</td>
+<td></td>
+</tr>
+<tr>
+<td>send the log — that is the bug class that produced the shared socket.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <p>Engine detail: ENGINE.md — JDBC socket timeout and broken-connection handling.</p>
 <h3 id="upgrade-left-services-down">Upgrade left services down<a class="headerlink" href="#upgrade-left-services-down" title="Permanent link">&para;</a></h3>
 <p><code>update-server.sh</code> runs <code>mstop-all</code> then <code>mstart-all</code>. If the start phase failed, services stay down. Look at:

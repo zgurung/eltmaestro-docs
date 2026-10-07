@@ -588,6 +588,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#what-the-extract-does-to-your-text" class="md-nav__link">
+    <span class="md-ellipsis">
+      What the extract does to your text
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#incremental-extract-with-the-data-validity-variables" class="md-nav__link">
     <span class="md-ellipsis">
       Incremental extract with the data-validity variables
@@ -1921,6 +1930,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#what-the-extract-does-to-your-text" class="md-nav__link">
+    <span class="md-ellipsis">
+      What the extract does to your text
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#incremental-extract-with-the-data-validity-variables" class="md-nav__link">
     <span class="md-ellipsis">
       Incremental extract with the data-validity variables
@@ -2519,7 +2537,7 @@
 <ul>
 <li><strong>Auto Partitioning Reference tab</strong> — for very large tables where MIN/MAX is slow, point partition sampling at a smaller reference table; leave "ref table same as source" checked if not needed.</li>
 <li><strong>Manual Partitions tab</strong> — when <strong>Manual</strong> partitioning is selected you <strong>must</strong> supply the extraction-criteria conditions here (the per-bucket <code>WHERE</code> expressions — one partition per condition); in Auto mode, any expressions added here override the auto-partitioning logic.</li>
-<li><strong>Performance &amp; Quality tab</strong> — date/timestamp formats, fetch size, optional SAP zero-padding, <strong>Standardize Data</strong> (strip CR/LF/delimiter/quotes), and an <strong>Encode</strong> list that <strong>base64-encodes</strong> selected columns so special characters survive the flat file — the target decodes them with the platform's base64 function.</li>
+<li><strong>Performance &amp; Quality tab</strong> — date/timestamp formats, fetch size, optional SAP zero-padding, <strong>Standardize Data</strong>, and an <strong>Encode</strong> column list. Both of the last two are explained under <a href="#what-the-extract-does-to-your-text">What the extract does to your text</a> below; on an engine older than <code>9c5e5d8d8</code> they do not behave as described there.</li>
 <li>
 <p><strong>Read Uncommitted</strong> — when checked, the extract runs its <code>SELECT</code> at the <strong>READ UNCOMMITTED</strong> isolation level (the session-level equivalent of SQL Server's <code>WITH (NOLOCK)</code>) so it neither blocks, nor is blocked by, writers on the source. On by default for new steps — the default is set org-wide by the <strong><code>onstage_read_uncommitted</code></strong> <a href="../UG-ADMIN/#system">System Setting</a>. It is applied only where the source database supports it (e.g. SQL Server, MySQL, DB2) and safely skipped where it doesn't (e.g. Oracle).</p>
 <div class="admonition note">
@@ -2529,6 +2547,53 @@
 </li>
 </ul>
 <p><img alt="Jdbcsource — Performance &amp; Quality tab: formats, Standardize Data, and the base64 Encode column list" src="../images/step-jdbcsource-quality.png" /></p>
+<h5 id="what-the-extract-does-to-your-text">What the extract does to your text<a class="headerlink" href="#what-the-extract-does-to-your-text" title="Permanent link">&para;</a></h5>
+<p>The staged file this step writes uses <strong>one delimiter and no quoting</strong>. Only three things can
+actually break such a file: a <strong>line break</strong>, a <strong>backslash</strong>, and the <strong>delimiter itself</strong>. That is
+the whole list.</p>
+<p><strong>Standardize Data</strong> replaces exactly those — CR, LF, backslash, and the delimiter configured on
+this step — with an underscore. Everything else in your data is left alone.</p>
+<blockquote>
+<p><strong>This changed in engine <code>9c5e5d8d8</code> (5 October 2026), and the old behaviour was destroying data.</strong>
+Before it, the cleaner also removed apostrophes, double quotes and commas, so Steve's <code>What's</code>
+arrived as <code>Whats</code>, and <strong>forward slashes</strong>, so a date held as text, <code>01/02/2026</code>, arrived as
+<code>01_02_2026</code>. The other setting stripped <strong>every non-ASCII character</strong>, silently removing accents
+from every name and address that passed through. It also removed both the pipe and the comma
+regardless of which delimiter was actually configured. None of that protected the file.</p>
+<p><strong>What to expect on a patched engine:</strong> text now arrives intact, so values can be <em>longer</em> than
+they used to be, and a target column that was sized while text was being trimmed by deletion may
+now be too narrow. That is the one failure this fix can cause, and it means the data is finally
+correct. <strong>It cannot repair what is already loaded</strong> — re-extract the affected tables to put
+existing rows right.</p>
+</blockquote>
+<p><strong>Encode</strong> names columns to <strong>base64-encode</strong> on the way into the flat file; the target builds a
+decoder view and decodes them server-side as it inserts, so nothing downstream sees base64. Use it
+for a column whose content you do not want touched at all.</p>
+<p>Two column types are encoded <strong>automatically</strong>, without being named:</p>
+<table>
+<thead>
+<tr>
+<th>Source type</th>
+<th>What arrives</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CLOB</code> / <code>NCLOB</code></td>
+<td>base64-encoded on extract, decoded by the target — previously it went through a plain string conversion and arrived as whatever the driver produced</td>
+</tr>
+<tr>
+<td><code>BLOB</code> / true binary</td>
+<td><strong>blank</strong>, rather than the driver's string rendering of raw bytes</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Also fixed in <code>9c5e5d8d8</code>.</strong> The encoding feature existed but sat on an extract path that is not
+the one that runs, so naming columns in <strong>Encode</strong> did nothing at all. If a target column currently
+holds driver noise from a binary column, it will change — that is the fix landing, not a
+regression.</p>
+</blockquote>
 <h5 id="incremental-extract-with-the-data-validity-variables">Incremental extract with the data-validity variables<a class="headerlink" href="#incremental-extract-with-the-data-validity-variables" title="Permanent link">&para;</a></h5>
 <p>Instead of the <a href="#jdbc-target-redshift">Delta Watermark</a> (which drives incrementals off the <em>target's</em> <code>MAX(column)</code>), you can extract <strong>fixed calendar windows</strong> using the batch <strong>data-validity</strong> runtime variables. Set the workflow's batch cycle type to the cadence you want — e.g. <strong><code>DAILY</code></strong> — via <strong>right-click ▸ Action(s) ▸ <a href="../UG-WORKFLOWS/#change-batch-cycle-type">Change Batch Cycle Type</a></strong> (without it the job runs as <code>ONREQ</code>, a 5-minute window). Then filter on a modified-date column in the <strong>Source SQL</strong>.</p>
 <p>Three variables are set once per run (<a href="../VARIABLES/#batch-cycle-type--the-data-validity-window">full reference</a>):</p>
@@ -3337,6 +3402,21 @@ button does not substitute them.</p>
 </tbody>
 </table>
 <p><img alt="Run Workflow (Job) — select a job, ACTION, UNTIL state, Max Run Count + Sleep Interval" src="../images/step-jobstep.png" /></p>
+<p><strong>Let the batch carry on if this job fails</strong> — the checkbox below the recovery options
+(<code>&lt;continueOnFailure&gt;</code> in the job XML; engine <code>ace871799</code> or later, client 2.5.9 or later).</p>
+<p>By default a failed Job Step stops everything downstream of it: nothing that depends on it runs, and
+the rest of the batch is abandoned. Tick this and a failure of <strong>this</strong> job no longer holds back the
+steps waiting on it — they run. <strong>The batch is still reported FAILED</strong>, and the job that failed is
+still FAILED; the only thing that changes is whether the work after it is attempted.</p>
+<p>Use it for a job that is genuinely optional to the rest of the run — a supplementary feed, a
+notification, a nice-to-have refresh — where you would rather have the other twenty loads than lose
+them all to one source being down. Do <strong>not</strong> use it where downstream steps read what this job
+writes: they will run against stale or missing data and report success.</p>
+<blockquote>
+<p><strong>Off by default, and nothing changes on an existing workflow</strong> until somebody ticks it. The
+setting is per Job Step, so one optional feed can carry on while the rest of the batch keeps the
+strict behaviour. MMS asked for this on 17 September 2026.</p>
+</blockquote>
 <h3 id="export">Export<a class="headerlink" href="#export" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
