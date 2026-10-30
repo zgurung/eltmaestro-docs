@@ -1279,6 +1279,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#a-pipeline-added-to-a-batch-loads-only-a-delta-not-its-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      A pipeline added to a batch loads only a delta, not its history
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#upgrade-left-services-down" class="md-nav__link">
     <span class="md-ellipsis">
       Upgrade left services down
@@ -1799,6 +1808,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#a-pipeline-added-to-a-batch-loads-only-a-delta-not-its-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      A pipeline added to a batch loads only a delta, not its history
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#upgrade-left-services-down" class="md-nav__link">
     <span class="md-ellipsis">
       Upgrade left services down
@@ -2269,6 +2287,34 @@ only the <code>JOBSTEP</code> wrapper. What stays in your hands:</p>
 </tbody>
 </table>
 <p>Engine detail: ENGINE.md — JDBC socket timeout and broken-connection handling.</p>
+<h3 id="a-pipeline-added-to-a-batch-loads-only-a-delta-not-its-history">A pipeline added to a batch loads only a delta, not its history<a class="headerlink" href="#a-pipeline-added-to-a-batch-loads-only-a-delta-not-its-history" title="Permanent link">&para;</a></h3>
+<p>A <em>step</em> added to a job backfills on its first run; a whole <em>pipeline</em> added to a batch does not,
+because step scope is per step and stops at the job step. The steps that carry the window predicate
+live inside the called job and keep the batch window.</p>
+<p>Two ways through, depending on whether you want it once or always:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Once, for one pipeline</strong></td>
+<td>Run that pipeline <strong>on its own</strong> (not via the parent batch) from the client, tick <em>Override run-history variables for this run</em>, and set <code>$BATCH_START_DATA_VALIDITY_TIMESTAMP</code> to <code>1970-01-01 00:00:00</code>. Applied at engine level, so it reaches every step inside every called pipeline. One-shot; nothing to undo. See <a href="../UG-RUN-VARIABLE-OVERRIDES/">Run Variable Overrides</a>.</td>
+</tr>
+<tr>
+<td><strong>Always</strong></td>
+<td><code>ELTM_STEP_SCOPE_THROUGH_JOBSTEP=true</code> in the batch user's <code>~/.env_integrator</code>. A job step that is new to its batch then hands its first-run values to every step inside the job it calls, recursively.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Before enabling the second one</strong>, check the targets: a full-history pull into a loader that
+appends rather than merges duplicates rows instead of backfilling. Defaulted off for that reason.</p>
+<p>Note that <strong>clearing a target table does not reset run history</strong> — "has this ever run" comes from
+<code>t_step_status</code>, never from row counts — so truncate-and-rerun gives you the same delta as before.
+Full detail: <a href="../VARIABLES/#step-scope--a-never-run-step-backfills">Runtime variables ▸ Step scope</a>.</p>
 <h3 id="upgrade-left-services-down">Upgrade left services down<a class="headerlink" href="#upgrade-left-services-down" title="Permanent link">&para;</a></h3>
 <p><code>update-server.sh</code> runs <code>mstop-all</code> then <code>mstart-all</code>. If the start phase failed, services stay down. Look at:
 - <code>tail -n 500 /data/iserver/data/log/console/*.log</code>

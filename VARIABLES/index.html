@@ -1256,6 +1256,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Step scope — a never-run step backfills">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#it-stops-at-a-job-step-unless-you-let-it-through" class="md-nav__link">
+    <span class="md-ellipsis">
+      It stops at a job step, unless you let it through
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1659,6 +1674,21 @@
       Step scope — a never-run step backfills
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Step scope — a never-run step backfills">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#it-stops-at-a-job-step-unless-you-let-it-through" class="md-nav__link">
+    <span class="md-ellipsis">
+      It stops at a job step, unless you let it through
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2348,14 +2378,45 @@ active</strong>, and says so in the log:</p>
 </code></pre></div>
 <p>Both features exist to control the same window; if both applied the result would depend on ordering,
 so the explicit instruction wins.</p>
-<p>Built in <code>916147345</code>; test coverage in <code>b4eaca2ae</code> and <code>0a3e4db58</code>. Shipped in server patch <code>e45c8bfc5</code> (5 September 2026); not yet in a numbered server image.</p>
+<h3 id="it-stops-at-a-job-step-unless-you-let-it-through">It stops at a job step, unless you let it through<a class="headerlink" href="#it-stops-at-a-job-step-unless-you-let-it-through" title="Permanent link">&para;</a></h3>
+<p>Step scope is <strong>per step</strong>. When the new thing is a <em>job step</em> — a whole pipeline added to a batch —
+the first-run values land on the job step itself. The steps that actually carry the window predicate
+live inside the called job, are different steps with no step scope of their own, and resolve the
+ordinary batch window. So on a workflow shaped</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>batch  -&gt;  JOBSTEP (new)  -&gt;  pipeline  -&gt;  leaf steps   &lt;- these hold the WHERE ... BETWEEN
+</code></pre></div>
+<p>the called pipeline loads its usual delta, and the job step's log line still says a full history pull
+was going to happen. The log now says plainly that the values stop there, and names the two ways
+through.</p>
+<p>Set <strong><code>ELTM_STEP_SCOPE_THROUGH_JOBSTEP=true</code></strong> in the batch user's <code>~/.env_integrator</code> and the job
+step hands its first-run values down to every step inside the job it calls, recursively. The log
+records each one:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Step scope inherited from the job step that called this job: the calling step is new to its batch,
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>so this step resolves the run-history variables to their FIRST-RUN values and extracts its full
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>history. $BATCH_START_DATA_VALIDITY_TIMESTAMP=[1970-01-01 00:00:00.000]. Enabled by
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>ELTM_STEP_SCOPE_THROUGH_JOBSTEP; THIS RUN only.
+</code></pre></div>
+<p><strong>Defaulted off, and deliberately so.</strong> Turning it on can convert a quiet nightly delta into a
+full-history pull on every nested pipeline that is new to its batch, and a full pull into a loader
+that <em>appends</em> rather than merges duplicates rows instead of backfilling it. Check the loaders
+before enabling it on an estate you have not audited. Anything other than <code>true</code>/<code>yes</code>/<code>1</code>/<code>on</code> —
+including a typo — leaves it off rather than guessing.</p>
+<blockquote>
+<p><strong>Clearing a target does not reset run history.</strong> The engine decides "has this ever run" from
+<code>t_step_status</code>, never from row counts, so truncating a table and re-running gives you the same
+delta as before. To reload history deliberately, use
+<a href="#run-variable-overrides--one-shot-manual-seeding">run variable overrides</a> — which, unlike step
+scope, is applied at engine level into global scope and therefore <em>does</em> reach every step inside
+every called pipeline.</p>
+</blockquote>
+<p>Built in <code>916147345</code>; test coverage in <code>b4eaca2ae</code> and <code>0a3e4db58</code>. Shipped in server patch <code>e45c8bfc5</code> (5 September 2026); not yet in a numbered server image. Job-step propagation and the <code>ELTM_STEP_SCOPE_THROUGH_JOBSTEP</code> gate added October 2026 (open-defects #57, reported by MMS).</p>
 <hr />
 <h2 id="run-variable-overrides--one-shot-manual-seeding">Run variable overrides — one-shot manual seeding<a class="headerlink" href="#run-variable-overrides--one-shot-manual-seeding" title="Permanent link">&para;</a></h2>
 <p>The run-history variables are <em>derived</em>, so during development there is no way to ask "what would
 this load if the batch had last succeeded in January?" short of editing the audit database by hand.</p>
 <p>A developer can seed them for a <strong>single run</strong> from the client's Run dialog (<strong>Run Variable Overrides
 (this run only)</strong>), or by dropping the file the dialog writes:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$MAESTRO_TMP_DIR/&lt;JOB_NAME&gt;.var.json
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>$MAESTRO_TMP_DIR/&lt;JOB_NAME&gt;.var.json
 </code></pre></div>
 <p>The engine loads it during <code>initializeEngine</code>, applies the values, <strong>deletes the file</strong>, and logs
 each substitution as <code>computed [...] -&gt; using [...]</code>. The next run computes normally.</p>
