@@ -2348,7 +2348,8 @@ addressable by name. Namespaced by connection type:</p>
 install's <code>env_integrator</code>.)</p>
 <h2 id="job-scope--user-defined">Job scope — user-defined<a class="headerlink" href="#job-scope--user-defined" title="Permanent link">&para;</a></h2>
 <p><code>&lt;jobVariable&gt;</code> elements in the job document become job variables. The <code>$var_&lt;name&gt;</code> convention is
-the client's default naming (<code>CreateJob.xaml.cs</code> seeds <code>$VAR_0</code>…<code>$VAR_4</code>); it carries <strong>no special
+the client's default naming (a new workflow is seeded with <code>$STRLEN</code>, <code>$CHARLEN</code>, <code>$PRECISION</code>, <code>$SCALE</code>, then
+<code>$VAR_4</code>…<code>$VAR_8</code> = <code>NULL</code>, numbered from the list position: <code>CreateJob.xaml.cs</code>, web Create Workflow); it carries <strong>no special
 resolution behaviour</strong>. It used to short-circuit the whole chain to job scope, which is the defect
 described under <a href="#how-resolution-works">How resolution works</a>.</p>
 <blockquote>

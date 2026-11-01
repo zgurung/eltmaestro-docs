@@ -3152,7 +3152,7 @@ button does not substitute them.</p>
 <td>🟢</td>
 <td><a href="#set-variable">Set Variable</a></td>
 <td><code>SETVARIABLE</code></td>
-<td>Sets a job variable (<code>$VAR_n</code>) from a <strong>Fixed</strong> value, a <strong>SQL</strong> query result, or the <strong>first line</strong> of a <strong>Shell</strong> script's output.</td>
+<td>Sets a job variable (<code>$VAR_n</code>) from a <strong>Fixed</strong> value, a <strong>SQL</strong> query result, or the <strong>first word</strong> of a <strong>Shell</strong> script's output.</td>
 </tr>
 <tr>
 <td>🟢</td>
@@ -3215,7 +3215,7 @@ button does not substitute them.</p>
 <p>Sets a job <strong>variable</strong> (<code>$VAR_n</code>) from one of three <strong>Value Type</strong> sources:
 - <strong>Fixed</strong> — a static value (or another variable);
 - <strong>SQL</strong> — the result of a SQL query on a connection (e.g. <code>SELECT current_timestamp::date</code>);
-- <strong>Shell</strong> — the <strong>first line</strong> of a shell script's output.</p>
+- <strong>Shell</strong> — the <strong>first word</strong> of the script's first output line (<code>echo "2026 10 31"</code> sets <code>2026</code>; with no stdout, the first word of stderr). Print a single token, or join the parts, e.g. <code>date +%Y-%m-%d</code>.</p>
 <p><img alt="Set Variable — SQL mode setting $VAR_5 to SELECT current_timestamp::date" src="../images/step-setvariable.png" /></p>
 <h4 id="file-watch">File Watch<a class="headerlink" href="#file-watch" title="Permanent link">&para;</a></h4>
 <p><strong>Type</strong> <code>FILEWATCH</code> · <strong>WPF</strong> <code>Steps/Common/FileWatch.cs</code> → <code>FileWatchWindow.xaml</code> ("File Watch") ·</p>
@@ -3350,7 +3350,7 @@ button does not substitute them.</p>
 </blockquote>
 <h4 id="ssh">Ssh<a class="headerlink" href="#ssh" title="Permanent link">&para;</a></h4>
 <p><strong>Type</strong> <code>SSH</code> · <strong>WPF</strong> <code>Steps/Common/SSH.cs</code> → <code>SSHWindow.xaml</code> ("Execute Shell Command (SSH)") ·</p>
-<p>Runs a <strong>shell script</strong> on an SSH connection — you can invoke bash, Python, Ruby, Perl, etc. (Maestro writes the script to a temporary <code>.sh</code> file and runs it with <code>bash</code>).
+<p>Runs a <strong>shell script</strong> on an SSH connection — you can invoke bash, Python, Ruby, Perl, etc. (the script text is sent as the command of an SSH exec channel and run by the remote user's login shell; no temporary file is written. A <code>LOCAL</code> / <code>LOCALHOST</code> / <code>SELF</code> connection runs it on the engine host with <code>bash -c</code>). To use another interpreter, call it explicitly, e.g. <code>python3 /opt/jobs/load.py</code>.
 - <strong>Shell Script tab</strong> — the SSH <strong>Connection</strong> and the script.
 - <strong>Exit Status tab</strong> — how the step decides success:
   - <strong>Use script return value</strong> — exit code <code>0</code> = success, non-zero = failure;
@@ -3490,7 +3490,7 @@ strict behaviour. MMS asked for this on 17 September 2026.</p>
 <td>🟢</td>
 <td>Write File</td>
 <td><code>WRITEFILE</code></td>
-<td>Exports a <strong>SQL query result</strong> (on the platform connection) to <strong>delimited flat files</strong> on the server — set the <strong>SQL</strong>, output <strong>directory</strong>, file <strong>prefix</strong> / <strong>extension</strong> (default <code>.psv</code>), <strong>delimiter</strong> (<code>\|</code>), per-file <strong>size MB</strong> (split, default 128), <strong>gzip</strong>, <strong>auto-clean</strong>, <strong>sanitize</strong>, and <strong>fetch size</strong>.</td>
+<td>Exports a <strong>SQL query result</strong> (on the platform connection) to <strong>delimited flat files</strong> on the server — set the <strong>SQL</strong>, output <strong>directory</strong>, file <strong>prefix</strong> / <strong>extension</strong> (default <code>.psv</code>), <strong>delimiter</strong> (<code>\|</code>), <strong>gzip</strong>, <strong>auto-clean</strong>, <strong>sanitize</strong>, and <strong>fetch size</strong>. It always writes <strong>one file</strong>: the <strong>size MB</strong> field is saved but the engine never splits on it. <strong>Sanitize</strong> is on for a step saved by the client; a step whose XML has no <code>sanitize</code> element writes raw values. ⚠️ An error other than a failed download (e.g. a bad directory) ends the step <strong>SKIPPED</strong>, not FAILED, so downstream steps are skipped quietly.</td>
 <td>Export</td>
 </tr>
 <tr>
